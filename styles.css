@@ -1,0 +1,124 @@
+/* Paleta vintage/autumn - Dark Theme más otoñal */
+:root {
+  --bg: #2b2b27;            /* Fondo oscuro con un toque cálido */
+  --text: #dcd2c7;          /* Texto claro con matiz cálido */
+  --accent: #cc5500;        /* Naranja quemado intenso */
+  --accent-dark: #a33d00;     /* Variante más oscura para acentos */
+  --header-bg: #322f2b;      /* Fondo del header en marrón oscuro */
+  --aside-bg: #3d3833;       /* Fondo del panel lateral en marrón medio oscuro */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+footer {
+  font-family: 'Georgia', serif;
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+footer a {
+  text-decoration: none; /* Quita el subrayado */
+  color: var(--text);    /* Usa el mismo color del texto */
+  display: flex;
+  align-items: center;
+}
+
+footer a .github-button {
+  margin-right: 0.5rem; /* Espacio entre el ícono y el texto */
+}
+
+
+body {
+  font-family: 'Georgia', serif;
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+header {
+  background-color: var(--header-bg);
+  padding: 1rem 0;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+nav li {
+  font-weight: bold;
+  color: var(--text);
+  cursor: pointer;
+}
+
+nav .active {
+  color: var(--accent);
+  border-bottom: 2px solid var(--accent-dark);
+}
+
+main {
+  width: 90vw;
+  margin: 0 auto;
+  display: flex;
+  gap: 2rem;
+}
+
+aside#toc {
+  width: 20%;
+  background-color: var(--aside-bg);
+  padding: 1rem;
+  border-radius: 8px;
+  height: fit-content;
+  position: sticky;
+  top: 1rem;
+}
+
+aside#toc a {
+  display: block;
+  color: var(--text);
+  text-decoration: none;
+  margin-bottom: 0.5rem;
+  padding-left: 0.5rem;
+  border-left: 3px solid transparent;
+  transition: all 0.3s ease;
+}
+
+aside#toc a:hover {
+  border-left: 3px solid var(--accent);
+  color: var(--accent-dark);
+}
+
+aside#toc a.h1 {
+  font-weight: bold;
+}
+
+aside#toc a.h2 {
+  margin-left: 1rem;
+}
+
+aside#toc a.h3 {
+  margin-left: 2rem;
+  font-style: italic;
+}
+
+section#content {
+  width: 75%;
+}
+
+h1, h2, h3 {
+  margin-top: 1.5rem;
+  color: var(--accent-dark);
+}

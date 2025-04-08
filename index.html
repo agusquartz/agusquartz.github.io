@@ -1,93 +1,328 @@
 <!DOCTYPE html>
-<html>
-  <head>
-  <link rel="stylesheet" href="style.css">
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Huffman Compressing Algorithm</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
-<nav class="navbar navbar-expand-lg navbar-light bg-white py-3 shadow-sm">
-  <a href="#" class="navbar-brand font-weight-bold d-block d-lg-none">MegaMenu</a>
-  <button type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbars" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler">
-          <span class="navbar-toggler-icon"></span>
-      </button>
-  <div id="navbarContent" class="collapse navbar-collapse">
-    <ul class="navbar-nav mx-auto">
-      <!-- Megamenu-->
-      <li class="nav-item dropdown megamenu"><a id="megamneu" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle font-weight-bold text-uppercase">Mega Menu</a>
-        <div aria-labelledby="megamneu" class="dropdown-menu border-0 p-0 m-0">
-          <div class="container">
-            <div class="row bg-white rounded-0 m-0 shadow-sm">
-              <div class="col-lg-7 col-xl-8">
-                <div class="p-4">
-                  <div class="row">
-                    <div class="col-lg-6 mb-4">
-                      <h6 class="font-weight-bold text-uppercase">MegaMenu heading</h6>
-                      <ul class="list-unstyled">
-                        <li class="nav-item"><a href="" class="nav-link text-small pb-0">Unique Features</a></li>
-                        <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Image Responsive</a></li>
-                        <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Auto Carousel</a></li>
-                        <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Newsletter Form</a></li>
-                      </ul>
-                    </div>
-                    <div class="col-lg-6 mb-4">
-                      <h6 class="font-weight-bold text-uppercase">MegaMenu heading</h6>
-                      <ul class="list-unstyled">
-                        <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Unique Features</a></li>
-                        <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Image Responsive</a></li>
-                        <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Auto Carousel</a></li>
-                        <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Newsletter Form</a></li>
-                      </ul>
-                    </div>
-                    <div class="col-lg-6 mb-4">
-                      <h6 class="font-weight-bold text-uppercase">MegaMenu heading</h6>
-                      <ul class="list-unstyled">
-                        <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Unique Features</a></li>
-                        <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Image Responsive</a></li>
-                        <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Auto Carousel</a></li>
-                        <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Newsletter Form</a></li>
-                      </ul>
-                    </div>
-                    <div class="col-lg-6 mb-4">
-                      <h6 class="font-weight-bold text-uppercase">MegaMenu heading</h6>
-                      <ul class="list-unstyled">
-                        <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Unique Features</a></li>
-                        <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Image Responsive</a></li>
-                        <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Auto Carousel</a></li>
-                        <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Newsletter Form</a></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-5 col-xl-4 px-0 d-none d-lg-block" style="background: center center url(https://bootstrapious.com/i/snippets/sn-megamenu/mega.png)no-repeat; background-size: cover;"></div>
-            </div>
-          </div>
-        </div>
-      </li>
-      <li class="nav-item"><a href="" class="nav-link font-weight-bold text-uppercase">About</a></li>
-      <li class="nav-item"><a href="" class="nav-link font-weight-bold text-uppercase">Services</a></li>
-      <li class="nav-item"><a href="" class="nav-link font-weight-bold text-uppercase">Contact</a></li>
-    </ul>
-  </div>
-</nav>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li class="active">Projects</li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <aside id="toc">
+      <!-- Índice (TOC) autogenerado a partir de los headings -->
+    </aside>
+
+    <section id="content">
+      <h1>Huffman Compressing Algorithm</h1>
+      <p>Este documento explica el algoritmo de compresión de Huffman, sus conceptos básicos y los procesos involucrados tanto en la compresión como en la descompresión de archivos.</p>
+      
+      <!-- Nueva sección: Campobit y aritmética de bits -->
+      <h2>Campobit: Operaciones de Bajo Nivel y Aritmética de Bits</h2>
+      <p>
+        En muchos algoritmos de compresión (como el de Huffman) se requiere manipular datos a nivel de bits para optimizar el espacio. Un <strong>campobit</strong> es una estructura que nos permite almacenar una secuencia de bits en una variable numérica y realizar operaciones sobre ellos.
+      </p>
+      <p>
+        La operación básica que veremos es <code>bits_agregar</code>, que añade un bit (0 o 1) al final de nuestro campo de bits. Para entenderla, pensemos en el concepto de <em>desplazamiento de bits</em>: mover un bit a la izquierda o a la derecha. En este caso, usamos el desplazamiento para posicionar el nuevo bit en el lugar correcto.
+      </p>
+      <p>
+        Por ejemplo, supongamos que tenemos una estructura <code>campobits</code> con:
+      </p>
+      <pre><code>
+bits->bits  = 0001 1000 1000   (en binario)
+bits->tamano = 12
+      </code></pre>
+      <p>
+        Y queremos agregar un bit <strong>1</strong>:
+      </p>
+      <ol>
+        <li>
+          <strong>Incremento del tamaño:</strong>  
+          Se incrementa <code>bits->tamano</code> de 12 a 13, ya que se añade un bit más.
+        </li>
+        <li>
+          <strong>Cálculo de la máscara:</strong>  
+          Se calcula <code>0x1 << (bits->tamano - 1)</code>, lo que equivale a <code>0x1 << 12</code>. Esto genera una máscara en binario:
+          <br>
+          <code>0001 0000 0000 0000</code>
+        </li>
+        <li>
+          <strong>Actualización del campo de bits:</strong>  
+          Se utiliza la operación OR (|) para combinar el valor actual de <code>bits->bits</code> con la máscara, de forma que se agrega el bit 1 en la posición correcta sin alterar los otros bits:
+          <br>
+          <code>
+bits->bits  =  0000 0001 1000 1000  
+          OR   =  0001 0000 0000 0000  
+          ------------------------------
+Resultado  =  0001 0001 1000 1000
+          </code>
+        </li>
+      </ol>
+      <p>
+        Si en lugar de un 1 se quisiera agregar un 0, no es necesario modificar <code>bits->bits</code> (ya que se asume que sus posiciones están en 0) y solo se incrementa <code>bits->tamano</code>.
+      </p>
+      <pre><code>
+/**
+ * Función: bits_agregar
+ *
+ * Descripción:
+ *   Esta función añade un bit (0 o 1) al final del campo de bits de la estructura 'campobits'.
+ *   Se utiliza aritmética de bits para posicionar el nuevo bit en la ubicación correcta. El campo
+ *   'tamano' de la estructura indica cuántos bits se han almacenado hasta el momento y se usa para
+ *   calcular la posición en la que se debe agregar el nuevo bit.
+ *
+ * Parámetros:
+ *   - campobits* bits: Puntero a la estructura que contiene:
+ *         • bits->bits: El valor numérico que almacena los bits. Se asume que está inicializado a 0.
+ *         • bits->tamano: La cantidad actual de bits que se han agregado.
+ *   - int bit: Valor del bit a agregar (debe ser 0 o 1).
+ *
+ * Funcionamiento:
+ *   1. **Verificación de seguridad:** Se confirma que el puntero 'bits' no sea nulo y que
+ *      aún exista espacio para agregar otro bit, comparando 'bits->tamano' con el máximo número
+ *      de bits que puede almacenar 'bits->bits'.
+ *
+ *   2. **Incremento del tamaño:** Se incrementa 'bits->tamano' en 1, ya que se está añadiendo un nuevo bit.
+ *
+ *   3. **Cálculo de la máscara y actualización:**
+ *      - Si el bit a agregar es 1, se crea una máscara para posicionarlo correctamente. La máscara se
+ *        calcula como:
+ *
+ *            0x1 << (bits->tamano - 1)
+ *
+ *        Esto desplaza el número 1 a la izquierda tantas posiciones como el número de bits ya agregados,
+ *        ubicando el nuevo 1 en la posición adecuada.
+ *
+ *      - Se actualiza 'bits->bits' aplicando la operación OR (|) entre el valor actual y la máscara.
+ *        Esto coloca el bit 1 en su posición sin alterar los otros bits.
+ *
+ *      - Si el bit es 0, no es necesario modificar 'bits->bits' ya que se asume que todas sus posiciones
+ *        están inicialmente a 0; simplemente se incrementa 'bits->tamano'.
+ *
+ * Ejemplo detallado:
+ *   Supongamos que tenemos una variable de tipo 'campobits' inicializada de la siguiente forma:
+ *
+ *       bits->bits  = 0001 1000 1000   (en binario)
+ *       bits->tamano = 12
+ *
+ *   Y queremos agregar un bit 1:
+ *
+ *   a) **Incremento del tamaño:**  
+ *      - Nuevo valor: bits->tamano pasa de 12 a 13.
+ *
+ *   b) **Cálculo de la máscara:**  
+ *      - Se calcula: 0x1 << (13 - 1) = 0x1 << 12  
+ *      - Esto coloca un 1 en la posición 12 (contando desde 0), lo que equivale a la representación:
+ *
+ *            0001 0000 0000 0000  (en binario)
+ *
+ *   c) **Actualización del campo de bits:**  
+ *      - Se realiza la operación OR:
+ *
+ *            bits->bits  =  0000 0001 1000 1000
+ *          | máscara     =  0001 0000 0000 0000
+ *          -------------------------------------
+ *            Resultado   =  0001 0001 1000 1000
+ *
+ * Nota:
+ *   Se asume que 'bits->bits' está inicialmente en 0, por lo que agregar un bit 0 no requiere modificar
+ *   su valor, solo se incrementa 'bits->tamano'.
+ */
+      </code></pre>
+
+      <h2>¿Qué es el algoritmo de Huffman?</h2>
+      <p>El algoritmo de Huffman es un método de compresión sin pérdida que asigna códigos de longitud variable a los caracteres, de tal forma que los caracteres más frecuentes tienen códigos más cortos. Esto permite reducir el tamaño total del archivo comprimido.</p>
+      
+      <h2>Procesos en la compresión</h2>
+      <p>La compresión con Huffman se realiza a través de varios pasos fundamentales:</p>
+      
+      <h3>1. Calcular Frecuencias</h3>
+      <p>Se analiza el archivo de entrada para determinar la frecuencia de cada carácter. El proceso consiste en:</p>
+      <ul>
+        <li>Leer el archivo carácter por carácter.</li>
+        <li>Contar las ocurrencias de cada uno y almacenarlas en un arreglo de tamaño 256 (para caracteres ASCII).</li>
+      </ul>
+      <pre><code>
+// Ejemplo de función en C para calcular frecuencias:
+static int calcular_frecuencias(int* frecuencias, char* entrada) {
+  // Inicializa el arreglo de frecuencias en 0.
+  for (int i = 0; i < 256; i++) {
+    frecuencias[i] = 0;
+  }
+  // Lee el archivo y cuenta ocurrencias...
+}
+      </code></pre>
+      
+      <h3>2. Construir el Árbol de Huffman</h3>
+      <p>Utilizando las frecuencias obtenidas:</p>
+      <ul>
+        <li>Se almacena cada par (carácter, frecuencia) en un nodo y se inserta en una cola de prioridad (heap), que ordena los nodos por frecuencia.</li>
+        <li>Se extraen los dos nodos con menor frecuencia, se crea un nodo padre cuya frecuencia es la suma de los dos, y se reinserta el nodo resultante en la cola.</li>
+        <li>Este proceso se repite hasta obtener un único nodo, que representa la raíz del árbol de Huffman.</li>
+      </ul>
+      <pre><code>
+// Ejemplo de uso del heap para construir el árbol:
+static Arbol crear_huffman(int* frecuencias) {
+  PQ pq = pq_create();
+  // Insertar cada carácter con su frecuencia en el heap...
+  // Combinar nodos hasta obtener el árbol completo.
+}
+      </code></pre>
+      
+      <h3>3. Codificar y Escribir el Árbol</h3>
+      <p>Una vez construido el árbol, el siguiente paso es:</p>
+      <ul>
+        <li>Recorrer el árbol en preorden para generar los códigos para cada carácter (0 para izquierda, 1 para derecha).</li>
+        <li>Escribir la estructura del árbol en el archivo comprimido. Esto permite su reconstrucción durante la descompresión.</li>
+        <li>Leer nuevamente el archivo de entrada y, utilizando una tabla de códigos (mapa de caracteres a secuencias de bits), escribir la representación codificada en el archivo de salida.</li>
+      </ul>
+      <pre><code>
+// Ejemplo de función para codificar:
+static int codificar(Arbol T, char* entrada, char* salida) {
+  // Escribir el árbol de Huffman en el archivo...
+  // Recorrer el archivo y escribir el código correspondiente a cada carácter.
+}
+      </code></pre>
+      
+      <h3>4. Crear Tabla de Códigos y Gestión del Campo de Bits</h3>
+      <p>Para generar la tabla de códigos se recorre el árbol de Huffman. En cada llamada recursiva se agrega un bit (0 para el subárbol izquierdo y 1 para el derecho) al <code>campobits</code> acumulado. Se pueden utilizar dos enfoques:</p>
+      <ul>
+        <li>
+          <strong>Copias Locales:</strong> Se crea una copia del <code>campobits</code> actual para cada rama. Esto permite que cada llamada recursiva tenga su propio estado, evitando modificar la variable original.  
+          <pre><code>
+campobits copia = actual;
+bits_agregar(&copia, 0);
+crear_tabla(nodo->izq, tabla, copia);
+          </code></pre>
+        </li>
+        <li>
+          <strong>Modificación In Situ con <code>bits_remove_last</code>:</strong> Se modifica el mismo objeto y, al regresar de la recursión, se quita el último bit para restaurar el estado.
+          <pre><code>
+bits_agregar(&actual, 0);
+crear_tabla(nodo->izq, tabla, actual);
+bits_remove_last(&actual);
+          </code></pre>
+        </li>
+      </ul>
+      
+      <h4>¿Qué hace <code>bits_remove_last</code>?</h4>
+      <p>Esta función elimina el último bit del <code>campobits</code> decrementando el contador de <em>tamano</em> y limpiando el bit correspondiente mediante una máscara. Esto es especialmente útil en recorridos recursivos donde se necesita retroceder el estado del código.</p>
+      <pre><code>
+/**
+ * Función: bits_remove_last
+ *
+ * Descripción:
+ *   Elimina el último bit añadido al campo de bits, reduciendo 'tamano' en uno
+ *   y limpiando esa posición en 'bits->bits' mediante una máscara.
+ *
+ * Funcionamiento:
+ *   1. Se decrementa 'bits->tamano' en 1.
+ *   2. Se crea una máscara: ~(0x1 << bits->tamano) para poner a 0 el bit eliminado.
+ *   3. Se actualiza 'bits->bits' aplicando la operación AND con la máscara.
+ */
+static int bits_remove_last(campobits* bits) {
+    if (!bits || bits->tamano <= 0){
+        return -1; // Error: No bits to remove
+    }
+    int last_bit = (bits->bits >> (bits->tamano - 1)) & 0x1;
+    bits->tamano--;
+    bits->bits &= ~(0x1 << bits->tamano);
+    return last_bit;
+}
+      </code></pre>
+      <p><strong>Comparación:</strong></p>
+      <ul>
+        <li>
+          <strong>Copias locales:</strong> Permiten mantener cada estado independientemente, reduciendo el riesgo de errores durante el retroceso y simplificando el código recursivo.
+        </li>
+        <li>
+          <strong>Modificación in situ + <code>bits_remove_last</code>:</strong> Evita copiar la estructura en cada llamada, pero requiere una gestión cuidadosa del estado para eliminar el bit agregado al volver de la recursión.
+        </li>
+      </ul>
+      <p>
+		  <strong>Resumen:</strong> Usar copias locales resulta en un código más seguro y fácil de mantener, minimizando errores en entornos recursivos. Aunque esto implica un mayor uso de memoria, el impacto es limitado: en el peor de los casos, el uso máximo será el tamaño del <code>campobit</code> multiplicado por la profundidad del árbol. Incluso con <em>n</em> nodos, esta profundidad rara vez supera los 100 niveles debido a la distribución balanceada del árbol de Huffman. Por otro lado, modificar in situ con <code>bits_remove_last</code> puede ahorrar memoria pero incrementa la complejidad y el riesgo de errores. La elección depende del balance entre legibilidad, seguridad y eficiencia, siendo el enfoque con copias una opción más robusta y mantenible en la práctica.
+		</p>
 
 
-<!-- For demo purpose -->
-<section class="py-5 text-white">
-  <div class="container py-4">
-    <div class="row">
-      <div class="col-lg-8 mx-auto text-center">
-        <h1 class="display-4">Bootstrap 4 megamenu</h1>
-        <p class="lead mb-0">A very simple way to create Bootstrap 4 megamneu. </p>
-        <p class="lead">Snippet by <a href="https://bootstrapious.com/snippets" class='text-white'><u>Bootstrapious</u></a>. </p>
-      </div>
-    </div>
-    <div class="row pt-5">
-      <div class="col-lg-10 mx-auto">
-        <p class="lead">Use the default Bootstrap's dropdown menu to hold your megamneu.</p>
-        <p class="lead">Set the <code>.dropdown</code> position to <code>static</code> instead of <code>absolute</code>.</p>
-        <p class="lead">We use the class <code>.megamenu</code> to hold this <code>static</code> position.</p>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- End -->
+      <h2>Procesos en la descompresión</h2>
+      <p>La descompresión utiliza el archivo comprimido y el árbol previamente almacenado para restaurar el contenido original. El proceso involucra:</p>
+      
+      <h3>1. Lectura y Reconstrucción del Árbol</h3>
+      <p>Se lee el árbol que fue escrito en el archivo comprimido:</p>
+      <ul>
+        <li>Se utiliza un método de lectura en preorden para reconstruir el árbol.</li>
+        <li>Se detecta si un nodo es hoja (representado con un bit 1 y el carácter) o interno (bit 0).</li>
+      </ul>
+      <pre><code>
+// Ejemplo de función para leer el árbol:
+static Arbol leer_arbol(BitStream bs) {
+  // Reconstruir el árbol a partir de los bits leídos.
+}
+      </code></pre>
+      
+      <h3>2. Decodificar el Archivo</h3>
+      <p>Con el árbol reconstruido, se procede a decodificar la secuencia de bits:</p>
+      <ul>
+        <li>Se empieza desde la raíz del árbol y se lee bit a bit para navegar por él.</li>
+        <li>Al llegar a una hoja se obtiene el carácter correspondiente, que se escribe en el archivo de salida.</li>
+        <li>Este proceso se repite hasta que se procesen todos los bits restantes del archivo.</li>
+      </ul>
+      <pre><code>
+// Ejemplo de función para decodificar:
+static void decodificar(BitStream in, BitStream out, Arbol arbol) {
+  // Procesar el stream de bits y escribir el contenido decodificado.
+}
+      </code></pre>
+      
+      <h2>Resumen</h2>
+      <p>El algoritmo de Huffman, implementado en C, se fundamenta en:</p>
+      <ul>
+        <li>La identificación de la frecuencia de cada carácter.</li>
+        <li>El uso de un heap para construir el árbol de Huffman de forma eficiente.</li>
+        <li>La generación de una tabla de códigos para la compresión y la posterior reconstrucción para la descompresión.</li>
+      </ul>
+      <p>
+        Estos pasos aseguran que se logre una compresión sin pérdida, aprovechando la frecuencia de aparición de cada carácter para reducir el espacio necesario para almacenarlos.
+      </p>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <a href="https://github.com/agusquartz" target="_blank" class="github-link">
+      <span class="github-button">
+        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0 0 30 30">
+          <path d="M15,3C8.373,3,3,8.373,3,15c0,5.623,3.872,10.328,9.092,11.63C12.036,26.468,12,26.28,12,26.047v-2.051 c-0.487,0-1.303,0-1.508,0c-0.821,0-1.551-0.353-1.905-1.009c-0.393-0.729-0.461-1.844-1.435-2.526 c-0.289-0.227-0.069-0.486,0.264-0.451c0.615,0.174,1.125,0.596,1.605,1.222c0.478,0.627,0.703,0.769,1.596,0.769 c0.433,0,1.081-0.025,1.691-0.121c0.328-0.833,0.895-1.6,1.588-1.962c-3.996-0.411-5.903-2.399-5.903-5.098 c0-1.162,0.495-2.286,1.336-3.233C9.053,10.647,8.706,8.73,9.435,8c1.798,0,2.885,1.166,3.146,1.481C13.477,9.174,14.461,9,15.495,9 c1.036,0,2.024,0.174,2.922,0.483C18.675,9.17,19.763,8,21.565,8c0.732,0.731,0.381,2.656,0.102,3.594 c0.836,0.945,1.328,2.066,1.328,3.226c0,2.697-1.904,4.684-5.894,5.097C18.199,20.49,19,22.1,19,23.313v2.734 c0,0.104-0.023,0.179-0.035,0.268C23.641,24.676,27,20.236,27,15C27,8.373,21.627,3,15,3z"></path>
+        </svg>
+      </span>
+      <span class="footer-text">agusquartz</span>
+    </a>
+  </footer>
+
+  <script>
+    // Script para generar el índice (TOC) dinámicamente, basado en los headings h1, h2 y h3
+    const content = document.getElementById("content");
+    const toc = document.getElementById("toc");
+    const headings = content.querySelectorAll("h1, h2, h3");
+
+    headings.forEach((heading, i) => {
+      const anchor = `heading-${i}`;
+      heading.id = anchor;
+
+      const link = document.createElement("a");
+      link.href = `#${anchor}`;
+      link.textContent = heading.textContent;
+      link.className = heading.tagName.toLowerCase();
+
+      toc.appendChild(link);
+    });
+  </script>
+</body>
 </html>
