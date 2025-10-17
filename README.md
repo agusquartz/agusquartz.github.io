@@ -26,6 +26,9 @@ To fix it, download the site and run it locally
 ## Test Credentials
 - admin@minierp.com / test123456
 
+## Functionality proof
+![alt text](image.png)
+
 ## Mini-ERP Credits
 https://github.com/Piuliss/mini-erp
 

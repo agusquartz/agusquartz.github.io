@@ -9,71 +9,67 @@
         <main class="container">
             <h1>HW06-Git-Github-NodeJS-Deploy</h1>
 
-            <!-- Estado / mensajes -->
             <div id="status" class="status"></div>
 
-            <!-- Login -->
             <section id="login-section" class="card">
-            <h2>Autenticación</h2>
-            <form id="login-form">
-                <label>
-                Email
-                <input type="email" id="email" placeholder="admin@minierp.com" required />
-                </label>
-                <label>
-                Password
-                <input type="password" id="password" placeholder="••••••••" required />
-                </label>
-                <button type="submit">Iniciar sesión</button>
-            </form>
-            <p class="hint">Usa las credenciales de prueba si están habilitadas.</p>
-            </section>
+                <h2>Autenticacion</h2>
+                <form id="login-form">
+                    <label>
+                        Email
+                        <input type="email" id="email" placeholder="admin@minierp.com" required />
+                    </label>
+                    <label>
+                        Password
+                        <input type="password" id="password" placeholder="••••••••" required />
+                    </label>
+                    <button type="submit">Iniciar sesion</button>
+                </form>
+                <p class="hint">Usa las credenciales de prueba si estan habilitadas.</p>
+                </section>
 
-            <!-- Sesion activa -->
-            <section id="session-section" class="card hidden">
-            <h2>Sesion</h2>
-            <div class="row">
-                <div>
-                <div><strong>Usuario:</strong> <span id="user-name"></span></div>
-                <div><strong>Email:</strong> <span id="user-email"></span></div>
+                <!-- Sesion activa -->
+                <section id="session-section" class="card hidden">
+                <h2>Sesion</h2>
+                <div class="row">
+                    <div>
+                    <div><strong>Usuario:</strong> <span id="user-name"></span></div>
+                    <div><strong>Email:</strong> <span id="user-email"></span></div>
+                    </div>
+                    <div>
+                    <button id="btn-logout" class="secondary">Cerrar sesion</button>
+                    </div>
                 </div>
-                <div>
-                <button id="btn-logout" class="secondary">Cerrar sesion</button>
-                </div>
-            </div>
             </section>
 
             <!-- Productos -->
             <section id="products-section" class="card hidden">
-            <div class="row">
-                <h2>Productos</h2>
-                <div class="actions">
-                <button id="btn-refresh">Actualizar</button>
+                <div class="row">
+                    <h2>Productos</h2>
+                    <div class="actions">
+                        <button id="btn-refresh">Actualizar</button>
+                    </div>
                 </div>
-            </div>
-            <div class="table-wrapper">
-                <table id="products-table">
-                <thead>
-                    <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>SKU</th>
-                    <th>Precio</th>
-                    <th>Stock</th>
-                    </tr>
-                </thead>
-                <tbody id="products-body">
-                    <!-- Filas generadas por JS -->
-                </tbody>
-                </table>
-            </div>
+                <div class="table-wrapper">
+                    <table id="products-table">
+                        <thead>
+                            <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>SKU</th>
+                            <th>Precio</th>
+                            <th>Stock</th>
+                            </tr>
+                        </thead>
+                        <tbody id="products-body"></tbody>
+                    </table>
+                </div>
             </section>
 
             <footer class="footer">
-            <small>
-                HW06, DEMO de conexion para Mini ERP
-                <a href="#" id="api-link" target="_blank" rel="noopener">API</a>
-            </small>
+                <small>
+                    HW06, DEMO de conexion para Mini ERP
+                    <a href="#" id="api-link" target="_blank" rel="noopener">API</a>
+                </small>
             </footer>
         </main>
 
