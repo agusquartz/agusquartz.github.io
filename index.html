@@ -1,78 +1,669 @@
-<!doctype html>
-<html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>HW06-Git-Github-NodeJS-Deploy</title>
-        <link rel="stylesheet" href="styles.css" />
-    </head>
-    <body>
-        <main class="container">
-            <h1>HW06-Git-Github-NodeJS-Deploy</h1>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgusQuartz · Developer Portfolio</title>
+  <meta name="description" content="Página personal de Agustin Argüello — FullStack, Desktop y Cloud." />
+  <style>
+    :root {
+      --bg: #070a12;
+      --bg-soft: #0b1020;
+      --surface: rgba(15, 23, 42, 0.78);
+      --surface-strong: rgba(15, 23, 42, 0.96);
+      --border: rgba(148, 163, 184, 0.18);
+      --border-strong: rgba(148, 163, 184, 0.34);
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --muted-2: #64748b;
+      --primary: #7c3aed;
+      --primary-2: #22d3ee;
+      --success: #34d399;
+      --warning: #fbbf24;
+      --danger: #fb7185;
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.38);
+    }
 
-            <div id="status" class="status"></div>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-            <section id="login-section" class="card">
-                <h2>Autenticacion</h2>
-                <form id="login-form">
-                    <label>
-                        Email
-                        <input type="email" id="email" placeholder="admin@minierp.com" required />
-                    </label>
-                    <label>
-                        Password
-                        <input type="password" id="password" placeholder="••••••••" required />
-                    </label>
-                    <button type="submit">Iniciar sesion</button>
-                </form>
-                <p class="hint">Usa las credenciales de prueba si estan habilitadas.</p>
-                </section>
+    html {
+      scroll-behavior: smooth;
+    }
 
-                <!-- Sesion activa -->
-                <section id="session-section" class="card hidden">
-                <h2>Sesion</h2>
-                <div class="row">
-                    <div>
-                    <div><strong>Usuario:</strong> <span id="user-name"></span></div>
-                    <div><strong>Email:</strong> <span id="user-email"></span></div>
-                    </div>
-                    <div>
-                    <button id="btn-logout" class="secondary">Cerrar sesion</button>
-                    </div>
-                </div>
-            </section>
+    body {
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 12% 12%, rgba(124, 58, 237, 0.24), transparent 26%),
+        radial-gradient(circle at 88% 10%, rgba(34, 211, 238, 0.18), transparent 28%),
+        radial-gradient(circle at 50% 96%, rgba(16, 185, 129, 0.08), transparent 24%),
+        var(--bg);
+      color: var(--text);
+      padding: 22px;
+    }
 
-            <!-- Productos -->
-            <section id="products-section" class="card hidden">
-                <div class="row">
-                    <h2>Productos</h2>
-                    <div class="actions">
-                        <button id="btn-refresh">Actualizar</button>
-                    </div>
-                </div>
-                <div class="table-wrapper">
-                    <table id="products-table">
-                        <thead>
-                            <tr>
-                            <th>ID</th>
-                            <th>Nombre</th>
-                            <th>SKU</th>
-                            <th>Precio</th>
-                            <th>Stock</th>
-                            </tr>
-                        </thead>
-                        <tbody id="products-body"></tbody>
-                    </table>
-                </div>
-            </section>
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(circle at center, black 0%, transparent 74%);
+    }
 
-            <footer class="footer">
-                <small>
-                    HW06, DEMO de conexion para Mini ERP
-                    <a href="#" id="api-link" target="_blank" rel="noopener">API</a>
-                </small>
-            </footer>
-        </main>
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-        <script src="app.js"></script>
-    </body>
+    button, a.button {
+      border: 1px solid var(--border-strong);
+      background: rgba(15, 23, 42, 0.82);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-weight: 850;
+      cursor: pointer;
+      transition: 180ms ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+
+    button:hover, a.button:hover, .project-card:hover {
+      border-color: rgba(34, 211, 238, 0.52);
+      transform: translateY(-2px);
+    }
+
+    .shell {
+      position: relative;
+      z-index: 1;
+      width: min(1180px, 100%);
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 14px;
+      z-index: 40;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      padding: 10px;
+      border: 1px solid var(--border);
+      background: rgba(7, 10, 18, 0.72);
+      backdrop-filter: blur(18px);
+      border-radius: 999px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-left: 6px;
+      font-weight: 950;
+      letter-spacing: -0.03em;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      box-shadow: 0 10px 28px rgba(124, 58, 237, 0.32);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      flex: 0 0 auto;
+    }
+
+    .brand-avatar {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav a {
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 800;
+      padding: 9px 11px;
+      border-radius: 999px;
+      transition: 160ms ease;
+    }
+
+    .nav a:hover {
+      color: var(--text);
+      background: rgba(148, 163, 184, 0.1);
+    }
+
+    .hero {
+      min-height: calc(100vh - 112px);
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+      align-items: center;
+      gap: 28px;
+      padding: 56px 0 34px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      color: #67e8f9;
+      border: 1px solid rgba(34, 211, 238, 0.22);
+      background: rgba(34, 211, 238, 0.08);
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-size: 0.78rem;
+      font-weight: 950;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(3rem, 8vw, 6.8rem);
+      line-height: 0.88;
+      letter-spacing: -0.08em;
+      max-width: 860px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #ffffff 0%, #c4b5fd 42%, #67e8f9 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-text {
+      max-width: 680px;
+      color: var(--muted);
+      font-size: clamp(1rem, 2vw, 1.18rem);
+      line-height: 1.75;
+      margin-top: 22px;
+      font-weight: 580;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .primary {
+      border-color: rgba(124, 58, 237, 0.5) !important;
+      background: linear-gradient(135deg, var(--primary), #2563eb) !important;
+      box-shadow: 0 16px 38px rgba(37, 99, 235, 0.28);
+    }
+
+    .hero-card {
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.82), rgba(15, 23, 42, 0.54));
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      padding: 20px;
+      overflow: hidden;
+    }
+
+    .terminal-header {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 18px;
+    }
+
+    .terminal-dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: var(--danger);
+    }
+
+    .terminal-dot:nth-child(2) { background: var(--warning); }
+    .terminal-dot:nth-child(3) { background: var(--success); }
+
+    .terminal-body {
+      display: grid;
+      gap: 12px;
+      font-family: "JetBrains Mono", "Fira Code", Consolas, monospace;
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      line-height: 1.5;
+    }
+
+    .terminal-line {
+      display: grid;
+      grid-template-columns: 96px 1fr;
+      gap: 14px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+      padding-bottom: 10px;
+    }
+
+    .terminal-key {
+      color: #67e8f9;
+      font-weight: 900;
+    }
+
+    .terminal-value {
+      color: #e2e8f0;
+      word-break: break-word;
+    }
+
+    section {
+      padding: 34px 0;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .section-kicker {
+      color: var(--primary-2);
+      font-size: 0.78rem;
+      font-weight: 950;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      margin-bottom: 8px;
+    }
+
+    h2 {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      letter-spacing: -0.06em;
+      line-height: 1;
+    }
+
+    .section-desc {
+      max-width: 560px;
+      color: var(--muted);
+      line-height: 1.65;
+      font-weight: 600;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .project-card, .info-card {
+      position: relative;
+      border: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.64);
+      border-radius: var(--radius-lg);
+      padding: 18px;
+      min-height: 220px;
+      transition: 180ms ease;
+      overflow: hidden;
+    }
+
+    .project-card::before, .info-card::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      background: radial-gradient(circle at top right, rgba(34, 211, 238, 0.12), transparent 32%);
+      pointer-events: none;
+    }
+
+    .project-card > *, .info-card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+
+    .icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: rgba(124, 58, 237, 0.14);
+      border: 1px solid rgba(124, 58, 237, 0.28);
+      font-size: 1.25rem;
+    }
+
+    .tag {
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      background: rgba(148, 163, 184, 0.08);
+      color: #cbd5e1;
+      border-radius: 999px;
+      padding: 5px 8px;
+      font-size: 0.72rem;
+      font-weight: 900;
+    }
+
+    .project-card h3, .info-card h3 {
+      font-size: 1.2rem;
+      letter-spacing: -0.035em;
+      margin-bottom: 9px;
+    }
+
+    .project-card p, .info-card p {
+      color: var(--muted);
+      line-height: 1.6;
+      font-weight: 560;
+      margin-bottom: 18px;
+    }
+
+    .card-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: auto;
+    }
+
+    .mini-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #bae6fd;
+      border: 1px solid rgba(34, 211, 238, 0.18);
+      background: rgba(34, 211, 238, 0.06);
+      border-radius: 999px;
+      padding: 8px 10px;
+      font-size: 0.82rem;
+      font-weight: 900;
+      transition: 160ms ease;
+    }
+
+    .mini-link:hover {
+      background: rgba(34, 211, 238, 0.12);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 14px;
+    }
+
+    .stack-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .stack-list span {
+      color: #dbeafe;
+      background: rgba(37, 99, 235, 0.12);
+      border: 1px solid rgba(96, 165, 250, 0.18);
+      border-radius: 999px;
+      padding: 7px 9px;
+      font-size: 0.82rem;
+      font-weight: 850;
+    }
+
+    .footer {
+      margin-top: 26px;
+      padding: 22px 0 8px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      color: var(--muted-2);
+      font-weight: 700;
+      border-top: 1px solid var(--border);
+    }
+
+    .back-to-top {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border-color: rgba(34, 211, 238, 0.28);
+      background: rgba(15, 23, 42, 0.86);
+      backdrop-filter: blur(16px);
+      color: white;
+      box-shadow: 0 16px 34px rgba(0, 0, 0, 0.28);
+      z-index: 60;
+      padding: 0;
+      font-size: 1.1rem;
+    }
+
+    @media (max-width: 980px) {
+      .hero, .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+      }
+    }
+
+    @media (max-width: 720px) {
+      body {
+        padding: 14px;
+      }
+
+      .topbar {
+        position: static;
+        border-radius: 24px;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .nav {
+        justify-content: flex-start;
+      }
+
+      .section-header {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .terminal-line {
+        grid-template-columns: 1fr;
+        gap: 2px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell" id="top">
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="Ir al inicio">
+        <span class="brand-mark"><img class="brand-avatar" src="https://avatars.githubusercontent.com/u/98700005" alt="Foto de perfil de agusquartz" loading="lazy" referrerpolicy="no-referrer" /></span>
+        <span>agusquartz</span>
+      </a>
+
+      <nav class="nav" aria-label="Navegación principal">
+        <a href="#proyectos">Proyectos</a>
+        <a href="#teoria">Teoría</a>
+        <a href="#sobre-mi">Sobre mí</a>
+        <a href="https://github.com/agusquartz" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div>
+          <div class="eyebrow">FullStack · Desktop · Cloud</div>
+          <h1 id="hero-title"><span class="gradient-text">Agustin Argüello</span></h1>
+          <p class="hero-text">
+            Desarrollador enfocado en construir software útil, claro y mantenible: desde interfaces web y herramientas académicas hasta sistemas tipo ERP, servicios backend y experimentos de bajo nivel.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#proyectos">Ver proyectos</a>
+            <a class="button" href="./academic-progress/">Academic Progress</a>
+            <a class="button" href="https://github.com/agusquartz?tab=repositories" target="_blank" rel="noopener">Repositorios</a>
+          </div>
+        </div>
+
+        <aside class="hero-card" aria-label="Resumen técnico">
+          <div class="terminal-header" aria-hidden="true">
+            <span class="terminal-dot"></span>
+            <span class="terminal-dot"></span>
+            <span class="terminal-dot"></span>
+          </div>
+          <div class="terminal-body">
+            <div class="terminal-line"><span class="terminal-key">user</span><span class="terminal-value">agusquartz</span></div>
+            <div class="terminal-line"><span class="terminal-key">focus</span><span class="terminal-value">FullStack · Desktop · Cloud</span></div>
+            <div class="terminal-line"><span class="terminal-key">os</span><span class="terminal-value">Debian</span></div>
+            <div class="terminal-line"><span class="terminal-key">langs</span><span class="terminal-value">Java · C · Rust · JavaScript · Python</span></div>
+            <div class="terminal-line"><span class="terminal-key">tools</span><span class="terminal-value">SQL · Bash · Lua · HTML · CSS · JSON</span></div>
+          </div>
+        </aside>
+      </section>
+
+      <section id="proyectos" aria-labelledby="projects-title">
+        <div class="section-header">
+          <div>
+            <div class="section-kicker">Workspace</div>
+            <h2 id="projects-title">Proyectos principales</h2>
+          </div>
+        </div>
+
+        <div class="grid">
+          <article class="project-card">
+            <div class="card-top">
+              <div class="icon">🎓</div>
+              <span class="tag">Academic</span>
+            </div>
+            <h3>Academic Progress</h3>
+            <p>Tracker de avance académico con mallas, correlativas, progreso por materia y constructor visual de currículums.</p>
+            <div class="card-links">
+              <a class="mini-link" href="./academic-progress/">Abrir tracker →</a>
+              <a class="mini-link" href="./academic-progress/curriculum-builder/">Crear malla →</a>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="card-top">
+              <div class="icon">🧾</div>
+              <span class="tag">ERP</span>
+            </div>
+            <h3>MiniERP Client</h3>
+            <p>Cliente web para una demo tipo Mini ERP: autenticación, sesión y módulo de productos conectado a una API.</p>
+            <div class="card-links">
+              <a class="mini-link" href="./minierp-client/">Abrir cliente →</a>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="card-top">
+              <div class="icon">🧠</div>
+              <span class="tag">Theory</span>
+            </div>
+            <h3>Huffman</h3>
+            <p>Material de teoría de programación sobre compresión sin pérdida, árbol de Huffman, bits y procesos de codificación.</p>
+            <div class="card-links">
+              <a class="mini-link" href="./HUFFMAN/">Abrir teoría →</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="teoria" aria-labelledby="theory-title">
+        <div class="section-header">
+          <div>
+            <div class="section-kicker">Notas y aprendizaje</div>
+            <h2 id="theory-title">Teoría de programación</h2>
+          </div>
+          <p class="section-desc">Una zona para publicar explicaciones técnicas, apuntes visuales y materiales de estudio.</p>
+        </div>
+
+        <div class="about-grid">
+          <article class="info-card">
+            <h3>Actual</h3>
+            <p>Huffman explica compresión, descompresión, árbol, frecuencias, heap y manipulación de bits en C.</p>
+            <a class="mini-link" href="./HUFFMAN/">Leer Huffman →</a>
+          </article>
+          <article class="info-card">
+            <h3>Próximamente</h3>
+            <p>Espacio con temas como estructuras de datos, sistemas operativos, redes, compiladores, algoritmos y bases de datos.</p>
+            <div class="stack-list">
+              <span>Data Structures</span>
+              <span>Operating Systems</span>
+              <span>Networks</span>
+              <span>Compilers</span>
+              <span>Databases</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="sobre-mi" aria-labelledby="about-title">
+        <div class="section-header">
+          <div>
+            <div class="section-kicker">Perfil</div>
+            <h2 id="about-title">Sobre mí</h2>
+          </div>
+        </div>
+
+        <div class="about-grid">
+          <article class="info-card">
+            <h3>Qué construyo</h3>
+            <p>Soluciones web, backend, herramientas académicas, prototipos de sistemas empresariales y experimentos técnicos para aprender mejor construyendo.</p>
+          </article>
+          <article class="info-card">
+            <h3>Stack base</h3>
+            <div class="stack-list">
+              <span>JavaScript</span>
+              <span>Rust</span>
+              <span>Java</span>
+              <span>C</span>
+              <span>Python</span>
+              <span>SQL</span>
+              <span>Bash</span>
+              <span>HTML/CSS</span>
+              <span>Debian</span>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span><span id="year"></span> Agustin Argüello · agusquartz</span>
+    </footer>
+  </div>
+
+  <button class="back-to-top" type="button" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })" aria-label="Volver arriba">↑</button>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
 </html>

@@ -1,0 +1,2078 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Constructor de Mallas por Pasos</title>
+  <style>
+    :root {
+      --primary: #185BFF;
+      --primary-dark: #0f4ce0;
+      --primary-soft: #eff6ff;
+      --primary-border: #bfdbfe;
+      --surface: #ffffff;
+      --surface-soft: #f8fafc;
+      --background: #eef2ff;
+      --border: #e2e8f0;
+      --border-strong: #cbd5e1;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+      --radius-xl: 24px;
+      --radius-lg: 18px;
+      --radius-md: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Inter, Arial, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%);
+      color: var(--text-main);
+      padding: 24px;
+    }
+
+    .top-left-back {
+      position: fixed;
+      top: 18px;
+      left: 18px;
+      z-index: 120;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 12px;
+      border-radius: 999px;
+      border: 1px solid #dbeafe;
+      background: rgba(255, 255, 255, 0.94);
+      color: var(--primary);
+      font-size: 0.84rem;
+      font-weight: 950;
+      text-decoration: none;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.10);
+      backdrop-filter: blur(8px);
+      transition: 0.18s ease;
+    }
+
+    .top-left-back:hover {
+      background: #eff6ff;
+      border-color: var(--primary-border);
+      transform: translateY(-1px);
+    }
+
+    .header {
+      margin-top: 42px;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border: 1px solid var(--border-strong);
+      border-radius: 12px;
+      padding: 10px 12px;
+      background: white;
+      color: var(--text-main);
+      outline: none;
+      transition: 0.18s ease;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(24, 91, 255, 0.12);
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    button,
+    .file-button {
+      border: 1px solid var(--border-strong);
+      border-radius: 12px;
+      background: white;
+      color: #1e293b;
+      padding: 10px 14px;
+      font-weight: 850;
+      cursor: pointer;
+      transition: 0.18s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    button:hover,
+    .file-button:hover {
+      border-color: var(--primary);
+      background: #f8fafc;
+      transform: translateY(-1px);
+    }
+
+    button:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .primary-btn {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+      box-shadow: 0 8px 20px rgba(24, 91, 255, 0.2);
+    }
+
+    .primary-btn:hover {
+      background: var(--primary-dark);
+      border-color: var(--primary-dark);
+    }
+
+    .danger-btn {
+      color: #b91c1c;
+      border-color: #fecaca;
+    }
+
+    .danger-btn:hover {
+      background: #fef2f2;
+      border-color: var(--danger);
+    }
+
+    .ghost-btn {
+      background: transparent;
+      border-color: transparent;
+      color: var(--text-muted);
+      box-shadow: none;
+    }
+
+    .ghost-btn:hover {
+      background: #f1f5f9;
+      border-color: #e2e8f0;
+    }
+
+    .page-shell {
+      max-width: 1440px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 14px;
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid rgba(226, 232, 240, 0.96);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      padding: 14px 16px;
+    }
+
+    .eyebrow {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      color: var(--primary);
+      font-weight: 950;
+      letter-spacing: 0.08em;
+      margin-bottom: 4px;
+    }
+
+    h1 {
+      font-size: clamp(1.45rem, 2.4vw, 2rem);
+      line-height: 1.05;
+      margin-bottom: 5px;
+      letter-spacing: -0.04em;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      max-width: 720px;
+      line-height: 1.42;
+      font-weight: 560;
+      font-size: 0.92rem;
+    }
+
+    .header-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    .header-actions button,
+    .header-actions .file-button {
+      padding: 8px 10px;
+      border-radius: 10px;
+      font-size: 0.86rem;
+    }
+
+    .wizard-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(300px, 370px);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .main-flow,
+    .aside-flow {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .aside-flow {
+      position: sticky;
+      top: 18px;
+      max-height: calc(100vh - 36px);
+      overflow: visible;
+    }
+
+    #subjectsListCard {
+      display: flex;
+      flex-direction: column;
+      max-height: min(42vh, 470px);
+    }
+
+    #subjectsListCard .card-body {
+      min-height: 0;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      padding-right: 14px;
+    }
+
+    #subjectsListCard .card-body::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    #subjectsListCard .card-body::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 999px;
+    }
+
+    #subjectsListCard .card-body::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 999px;
+    }
+
+    .aside-flow .subject-list,
+    .aside-flow .candidate-list {
+      grid-template-columns: 1fr;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid rgba(226, 232, 240, 0.98);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .card-header {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      background: rgba(248, 250, 252, 0.62);
+    }
+
+    .step-title {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 0.98rem;
+      font-weight: 950;
+      color: #0f172a;
+    }
+
+    .step-number {
+      width: 28px;
+      height: 28px;
+      border-radius: 10px;
+      background: var(--primary);
+      color: white;
+      display: grid;
+      place-items: center;
+      font-weight: 950;
+      box-shadow: 0 8px 18px rgba(24, 91, 255, 0.2);
+      flex: 0 0 auto;
+      font-size: 0.88rem;
+    }
+
+    .card-body {
+      padding: 16px;
+    }
+
+    .section-note {
+      color: var(--text-muted);
+      line-height: 1.5;
+      font-weight: 650;
+      margin-bottom: 14px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .form-grid.three {
+      grid-template-columns: 1.2fr 0.8fr 0.8fr;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label,
+    .field-label {
+      font-size: 0.82rem;
+      font-weight: 950;
+      color: #334155;
+    }
+
+    .hint {
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      line-height: 1.45;
+      font-weight: 650;
+    }
+
+    .inline-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-top: 14px;
+    }
+
+    .period-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .period-card {
+      border: 1px solid var(--border);
+      background: white;
+      border-radius: 16px;
+      padding: 10px;
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .order-pill {
+      width: 42px;
+      height: 42px;
+      border-radius: 13px;
+      display: grid;
+      place-items: center;
+      background: #f1f5f9;
+      font-weight: 950;
+      color: #334155;
+      border: 1px solid #e2e8f0;
+    }
+
+    .subject-card,
+    .candidate-card {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: #fff;
+      padding: 12px;
+      display: grid;
+      gap: 10px;
+      transition: 0.18s ease;
+    }
+
+    .subject-card:hover,
+    .candidate-card:hover {
+      border-color: var(--primary-border);
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.04);
+    }
+
+    .subject-card.active {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(24, 91, 255, 0.1);
+    }
+
+    .subject-accordion {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .subject-accordion-summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 12px;
+    }
+
+    .subject-accordion-summary::-webkit-details-marker,
+    .period-group-title::-webkit-details-marker {
+      display: none;
+    }
+
+    .subject-accordion-summary::after {
+      content: 'Abrir detalles';
+      display: inline-flex;
+      margin-top: 8px;
+      color: var(--primary);
+      font-size: 0.78rem;
+      font-weight: 950;
+    }
+
+    .subject-accordion[open] .subject-accordion-summary::after {
+      content: 'Cerrar detalles';
+    }
+
+    .subject-accordion-body {
+      display: grid;
+      gap: 12px;
+      padding: 0 12px 12px;
+      border-top: 1px solid var(--border);
+      background: #ffffff;
+    }
+
+    .subject-detail-block {
+      display: grid;
+      gap: 7px;
+      padding-top: 12px;
+    }
+
+    .subject-top,
+    .candidate-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .subject-title,
+    .candidate-title {
+      font-weight: 950;
+      color: #0f172a;
+      line-height: 1.25;
+    }
+
+    .subject-meta,
+    .candidate-meta {
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      font-weight: 760;
+      margin-top: 4px;
+    }
+
+    .id-badge {
+      border-radius: 999px;
+      border: 1px solid #e0e7ff;
+      background: #eef2ff;
+      color: #3730a3;
+      padding: 4px 8px;
+      font-size: 0.74rem;
+      font-weight: 950;
+      white-space: nowrap;
+    }
+
+    .subject-list,
+    .candidate-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 10px;
+    }
+
+    .candidate-list {
+      margin-top: 12px;
+    }
+
+    .period-group {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.74);
+      overflow: hidden;
+      margin-top: 12px;
+    }
+
+    .period-group-title {
+      padding: 12px 14px;
+      background: #f8fafc;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      font-weight: 950;
+      color: #334155;
+      cursor: pointer;
+      list-style: none;
+    }
+
+    .period-group-title::before {
+      content: '▸';
+      color: var(--text-muted);
+      transition: transform 0.18s ease;
+    }
+
+    .period-group[open] .period-group-title::before {
+      transform: rotate(90deg);
+    }
+
+    .period-title-main {
+      flex: 1;
+    }
+
+    .period-group-body {
+      padding: 12px;
+    }
+
+    .row-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .mini-btn {
+      padding: 7px 9px;
+      border-radius: 10px;
+      font-size: 0.8rem;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip,
+    .tiny-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 850;
+      line-height: 1;
+    }
+
+    .chip {
+      border: 1px solid #dbeafe;
+      background: #eff6ff;
+      color: #1d4ed8;
+      padding: 7px 9px;
+    }
+
+    .chip button {
+      padding: 0;
+      width: 18px;
+      height: 18px;
+      min-width: 18px;
+      border-radius: 50%;
+      border-color: #bfdbfe;
+      color: #1d4ed8;
+      font-weight: 950;
+      background: white;
+      line-height: 1;
+    }
+
+    .tiny-chip {
+      border: 1px solid #e2e8f0;
+      background: #f8fafc;
+      color: #475569;
+      padding: 5px 8px;
+    }
+
+    .tiny-chip.none {
+      color: #64748b;
+      border-style: dashed;
+    }
+
+    .split-box {
+      display: grid;
+      grid-template-columns: minmax(260px, 0.75fr) minmax(0, 1.25fr);
+      gap: 14px;
+      align-items: start;
+    }
+
+    .panel-box {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: #f8fafc;
+      padding: 14px;
+    }
+
+    .empty-state {
+      color: var(--text-muted);
+      border: 1px dashed var(--border-strong);
+      background: #f8fafc;
+      border-radius: 16px;
+      padding: 18px;
+      line-height: 1.55;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 0;
+    }
+
+    .summary-card {
+      border: 1px solid var(--border);
+      background: #f8fafc;
+      border-radius: 13px;
+      padding: 8px 10px;
+      min-width: 0;
+    }
+
+    .summary-value {
+      font-size: 1.08rem;
+      font-weight: 950;
+      line-height: 1.05;
+    }
+
+    .summary-label {
+      color: var(--text-muted);
+      font-size: 0.7rem;
+      font-weight: 850;
+      margin-top: 3px;
+      line-height: 1.2;
+    }
+
+    .validation-list {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .validation-item {
+      border-radius: 11px;
+      padding: 8px 9px;
+      font-size: 0.76rem;
+      line-height: 1.32;
+      font-weight: 760;
+      border: 1px solid;
+    }
+
+    .validation-item.ok {
+      border-color: #a7f3d0;
+      background: #ecfdf5;
+      color: #047857;
+    }
+
+    .validation-item.error {
+      border-color: #fecaca;
+      background: #fef2f2;
+      color: #b91c1c;
+    }
+
+    .validation-item.warn {
+      border-color: #fed7aa;
+      background: #fff7ed;
+      color: #c2410c;
+    }
+
+
+    .compact-card .card-header {
+      padding: 10px 12px;
+    }
+
+    .compact-card .card-body {
+      padding: 12px;
+    }
+
+    .compact-card .hint {
+      font-size: 0.74rem;
+      margin-bottom: 8px !important;
+      line-height: 1.32;
+    }
+
+    .back-to-top {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border-color: #dbeafe;
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 16px 34px rgba(24, 91, 255, 0.28);
+      z-index: 105;
+      font-size: 1.2rem;
+      padding: 0;
+    }
+
+    .back-to-top:hover {
+      background: var(--primary-dark);
+      border-color: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.52);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 100;
+    }
+
+    .modal-backdrop.active {
+      display: flex;
+    }
+
+    .modal {
+      width: min(780px, 100%);
+      max-height: 86vh;
+      overflow: auto;
+      background: white;
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      box-shadow: 0 22px 80px rgba(15, 23, 42, 0.24);
+    }
+
+    .modal-header {
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .modal-title {
+      font-size: 1.1rem;
+      font-weight: 950;
+    }
+
+    .modal-body {
+      padding: 20px;
+      color: #334155;
+      line-height: 1.55;
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      padding: 16px 20px;
+      border-top: 1px solid var(--border);
+      background: #f8fafc;
+    }
+
+    pre {
+      white-space: pre-wrap;
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 14px;
+      border-radius: 16px;
+      overflow: auto;
+      margin: 12px 0;
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+
+    code {
+      background: #f1f5f9;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 2px 6px;
+      font-size: 0.86em;
+    }
+
+    .toast {
+      position: fixed;
+      right: 18px;
+      bottom: 82px;
+      background: #0f172a;
+      color: white;
+      border-radius: 16px;
+      padding: 12px 14px;
+      font-weight: 850;
+      box-shadow: 0 14px 44px rgba(15, 23, 42, 0.22);
+      transform: translateY(16px);
+      opacity: 0;
+      pointer-events: none;
+      transition: 0.2s ease;
+      z-index: 110;
+      max-width: min(420px, calc(100vw - 36px));
+      line-height: 1.35;
+    }
+
+    .toast.active {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    @media (max-width: 1100px) {
+      .wizard-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .aside-flow {
+        position: static;
+        max-height: none;
+        overflow: visible;
+      }
+
+      #subjectsListCard {
+        max-height: none;
+      }
+
+      #subjectsListCard .card-body {
+        overflow: visible;
+        padding-right: 18px;
+      }
+
+      .split-box {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      body {
+        padding: 14px;
+      }
+
+      .header {
+        flex-direction: column;
+        margin-top: 38px;
+      }
+
+      .top-left-back {
+        top: 12px;
+        left: 12px;
+        padding: 8px 10px;
+        font-size: 0.8rem;
+      }
+
+      .header-actions {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .form-grid,
+      .form-grid.three {
+        grid-template-columns: 1fr;
+      }
+
+      .subject-list,
+      .candidate-list,
+      .period-list {
+        grid-template-columns: 1fr;
+      }
+
+      .back-to-top {
+        right: 14px;
+        bottom: 14px;
+        width: 44px;
+        height: 44px;
+      }
+
+      .toast {
+        bottom: 72px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="top-left-back" href="../" aria-label="Volver a la página de progreso">← Ir atrás</a>
+
+  <div class="page-shell">
+    <header class="header">
+      <div>
+        <div class="eyebrow">Editor de carrera y correlativas</div>
+        <h1>Constructor de Mallas</h1>
+        <p class="subtitle">
+          Creá una malla paso a paso: primero los datos principales, luego los períodos, después las materias y al final las correlativas entre materias ya existentes.
+        </p>
+      </div>
+
+      <div class="header-actions">
+        <button type="button" class="ghost-btn" onclick="showFormatModal()">Formato CSV</button>
+        <button type="button" onclick="loadExampleCurriculum()">Usar plantilla 2016</button>
+        <label class="file-button">
+          Importar malla
+          <input type="file" id="curriculumUpload" accept=".csv,.txt" />
+        </label>
+        <button type="button" class="primary-btn" onclick="downloadCurriculumCsv()">Exportar malla</button>
+        <button type="button" class="danger-btn" onclick="askNewCurriculum()">Nueva</button>
+      </div>
+    </header>
+
+    <main class="wizard-grid">
+      <section class="main-flow">
+        <article class="card" id="mainDataCard">
+          <div class="card-header">
+            <div class="step-title"><span class="step-number">1</span> Datos principales y estructura</div>
+          </div>
+          <div class="card-body">
+            <p class="section-note">
+              Definí de qué carrera es la malla y si se organiza por semestres o por años. La cantidad que indiques genera automáticamente los períodos disponibles para elegir después.
+            </p>
+            <div class="form-grid">
+              <div class="field full">
+                <label for="careerName">Nombre de la carrera</label>
+                <input id="careerName" type="text" placeholder="Ej: Ingeniería Informática" />
+              </div>
+              <div class="field">
+                <label for="curriculumId">ID de malla</label>
+                <input id="curriculumId" type="text" placeholder="Ej: informatica-2016" />
+                <span class="hint">Usá un ID corto y estable.</span>
+              </div>
+              <div class="field">
+                <label for="curriculumYear">Año de la malla</label>
+                <input id="curriculumYear" type="number" min="1900" max="2100" placeholder="Ej: 2016" />
+              </div>
+            </div>
+
+            <div style="height: 16px"></div>
+
+            <div class="form-grid three">
+              <div class="field">
+                <label for="periodType">Tipo de organización</label>
+                <select id="periodType">
+                  <option value="semester">Por semestre</option>
+                  <option value="year">Por año</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="periodCount">Cantidad</label>
+                <input id="periodCount" type="number" min="1" max="20" placeholder="Ej: 10" />
+              </div>
+              <div class="field">
+                <label>&nbsp;</label>
+                <button type="button" class="primary-btn" onclick="generatePeriodsFromSettings()">Generar períodos</button>
+              </div>
+            </div>
+
+            <div id="periodList" class="period-list"></div>
+          </div>
+        </article>
+
+        <article class="card" id="subjectCard">
+          <div class="card-header">
+            <div class="step-title"><span class="step-number">2</span> Crear materias</div>
+            <button type="button" class="mini-btn ghost-btn" onclick="clearSubjectForm()">Limpiar</button>
+          </div>
+          <div class="card-body">
+            <p class="section-note">
+              Cargá cada materia con su ID o código real. El período se elige desde el dropdown generado en el paso anterior.
+            </p>
+            <div class="form-grid">
+              <div class="field">
+                <label for="subjectId">subject_id / código</label>
+                <input id="subjectId" type="text" placeholder="Ej: 314" />
+              </div>
+              <div class="field">
+                <label for="subjectPeriod">Período</label>
+                <select id="subjectPeriod"></select>
+              </div>
+              <div class="field full">
+                <label for="subjectName">Nombre de la materia</label>
+                <input id="subjectName" type="text" placeholder="Ej: Programación 1" />
+              </div>
+            </div>
+
+            <div class="inline-actions">
+              <button type="button" class="primary-btn" id="saveSubjectBtn" onclick="saveSubject()">Agregar materia</button>
+              <button type="button" onclick="clearSubjectForm()">Cancelar edición</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" id="correlativesCard">
+          <div class="card-header">
+            <div class="step-title"><span class="step-number">3</span> Agregar correlativas</div>
+          </div>
+          <div class="card-body">
+            <p class="section-note">
+              Elegí una materia ya creada y marcá cuáles materias existentes son requisito para ella. Solo aparecerán como opciones las materias de períodos anteriores.
+            </p>
+            <div class="split-box">
+              <div class="panel-box">
+                <div class="field">
+                  <label for="correlativeSubjectSelect">Materia a configurar</label>
+                  <select id="correlativeSubjectSelect" onchange="selectSubjectForCorrelatives(this.value)"></select>
+                </div>
+
+                <div style="height: 12px"></div>
+
+                <div class="field">
+                  <span class="field-label">Correlativas seleccionadas</span>
+                  <div id="selectedReqs" class="chips"></div>
+                </div>
+
+                <div class="inline-actions">
+                  <button type="button" class="primary-btn" onclick="saveCorrelatives()">Guardar correlativas</button>
+                  <button type="button" onclick="resetCorrelativeDraft()">Revertir</button>
+                </div>
+              </div>
+
+              <div>
+                <div class="field">
+                  <label for="correlativeSearch">Buscar materia existente</label>
+                  <input id="correlativeSearch" type="text" placeholder="Buscar entre materias de períodos anteriores..." oninput="renderCorrelationSection()" />
+                </div>
+                <div id="candidateList" class="candidate-list"></div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </section>
+
+      <aside class="aside-flow">
+        <article class="card" id="subjectsListCard">
+          <div class="card-header">
+            <div class="step-title"><span class="step-number">4</span> Materias cargadas</div>
+          </div>
+          <div class="card-body">
+            <div id="subjectGroups"></div>
+          </div>
+        </article>
+        <article class="card compact-card">
+          <div class="card-header">
+            <div class="step-title">⚡ Vista rápida</div>
+          </div>
+          <div class="card-body">
+            <div class="summary-grid">
+              <div class="summary-card">
+                <div id="summarySubjects" class="summary-value">0</div>
+                <div class="summary-label">Materias</div>
+              </div>
+              <div class="summary-card">
+                <div id="summaryPeriods" class="summary-value">0</div>
+                <div id="summaryPeriodsLabel" class="summary-label">Períodos</div>
+              </div>
+              <div class="summary-card">
+                <div id="summaryWithReqs" class="summary-value">0</div>
+                <div class="summary-label">Con correlativas</div>
+              </div>
+              <div class="summary-card">
+                <div id="summaryEdges" class="summary-value">0</div>
+                <div class="summary-label">Relaciones</div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="card compact-card">
+          <div class="card-header">
+            <div class="step-title">🛡️ Validación</div>
+          </div>
+          <div class="card-body">
+            <p class="hint" style="margin-bottom: 12px">Antes de exportar se revisan IDs duplicados, correlativas inexistentes, ciclos, períodos inválidos y que las correlativas sean de períodos anteriores.</p>
+            <div id="validationList" class="validation-list"></div>
+          </div>
+        </article>
+      </aside>
+    </main>
+  </div>
+
+  <div id="modalBackdrop" class="modal-backdrop" onclick="backdropClose(event)">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-header">
+        <div id="modalTitle" class="modal-title">Mensaje</div>
+        <button type="button" class="mini-btn ghost-btn" onclick="closeModal()">✕</button>
+      </div>
+      <div id="modalBody" class="modal-body"></div>
+      <div id="modalActions" class="modal-actions"></div>
+    </div>
+  </div>
+
+  <button type="button" class="back-to-top" onclick="scrollToTop()" aria-label="Volver arriba" title="Volver arriba">↑</button>
+
+  <div id="toast" class="toast"></div>
+
+  <script>
+    const exampleCurriculumCsv = "#malla,informatica-2016,Ingeniería Informática,2016,10,semester\nsemester_order,semester_name,subject_id,subject_name,requirements\n1,Primero,02,Calculo 1,\n1,Primero,03,Fisica 1,\n1,Primero,301,Comunicacion 1,\n1,Primero,302,Arquitectura y Componentes,\n1,Primero,314,Programacion 1,\n2,Segundo,010,Calculo 2,02\n2,Segundo,011,Fisica 2,03\n2,Segundo,304,Comunicacion 2,301\n2,Segundo,305,Matematica Discreta,\n2,Segundo,303,Programacion 2,314|02\n3,Tercero,014,Calculo 3,010\n3,Tercero,015,Fisica 3,010|011\n3,Tercero,309,Ingles 1,\n3,Tercero,307,Diseno Digital,302\n3,Tercero,331,Paradigmas de la Programacion,303\n4,Cuarto,017,Estadistica,010\n4,Cuarto,312,Contabilidad,\n4,Cuarto,311,Ingles 2,309\n4,Cuarto,318,Redes 1,302\n4,Cuarto,313,Administracion,\n4,Cuarto,308,Algoritmos 1,305|331|014\n5,Quinto,306,Tecnologias Emergentes,308|311\n5,Quinto,316,Economia,312\n5,Quinto,317,Ingles 3,311\n5,Quinto,310,Bases de Datos,308\n5,Quinto,320,Redes 2,303|318|015\n6,Sexto,321,Algoritmos 2,308\n6,Sexto,323,Ingles 4,317\n6,Sexto,322,Organizacion y Recursos Humanos,313\n6,Sexto,330,Sistemas Operativos,302|308\n6,Sexto,315,Sistemas de Gestion,310|306|316|313\n7,Septimo,324,Ingenieria de Software 1,315|322\n7,Septimo,327,Sistemas Web y Distribuidos,320|321|330\n7,Septimo,325,Electronica,015|302\n7,Septimo,009,Algebra Lineal,\n7,Septimo,336,Interaccion Hombre Maquina,308|330\n8,Octavo,328,Ingenieria de Software 2,324|321|327\n8,Octavo,332,Administracion Financiera,322|312\n8,Octavo,340,Seguridad Informatica,320|324|327\n8,Octavo,329,Microprocesadores y Lenguaje de Ensamblador,308|307\n8,Octavo,338,Procesamiento Digital de Imagenes,015|017|321|009\n9,Noveno,335,Auditoria,322|315\n9,Noveno,319,Marketing,313|306\n9,Noveno,337,Seminario de Trabajo Final de Grado,328|332|340|329|338\n9,Noveno,339,Electiva 1,\n9,Noveno,326,Inteligencia Artificial,321|009|017\n10,Decimo,340-ELECTIVA2,Electiva 2,\n10,Decimo,131,Aspectos Legales y Profesionales de la Informatica,\n10,Decimo,334,Diseno de Compiladores,329|331|321\n10,Decimo,333,Graficos por Computadora,321|009";
+
+    const numberWords = ['Primero', 'Segundo', 'Tercero', 'Cuarto', 'Quinto', 'Sexto', 'Septimo', 'Octavo', 'Noveno', 'Decimo', 'Undecimo', 'Duodecimo'];
+    let curriculum = createEmptyCurriculum();
+    let editingSubjectId = null;
+    let selectedForCorrelativesId = null;
+    let draftReqIds = [];
+    let toastTimeout = null;
+
+    function createEmptyCurriculum() {
+      return {
+        id: 'informatica-2016',
+        careerName: 'Ingeniería Informática',
+        year: '2016',
+        periodType: 'semester',
+        periods: buildDefaultPeriods(10, 'semester'),
+        subjects: []
+      };
+    }
+
+    function buildDefaultPeriods(count, type) {
+      return Array.from({ length: Number(count) || 0 }, (_, index) => ({
+        order: index + 1,
+        name: getDefaultPeriodName(index + 1, type)
+      }));
+    }
+
+    function getDefaultPeriodName(order, type) {
+      const word = numberWords[order - 1] || `${order}°`;
+      return type === 'year' ? `${word} Año` : word;
+    }
+
+    function getPeriodNoun(plural = false) {
+      if (curriculum.periodType === 'year') return plural ? 'años' : 'año';
+      return plural ? 'semestres' : 'semestre';
+    }
+
+    function normalizeId(value) {
+      return String(value ?? '').trim();
+    }
+
+    function normalizeSearch(value) {
+      return String(value ?? '')
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase()
+        .trim();
+    }
+
+    function syncMetadataFromInputs() {
+      curriculum.careerName = document.getElementById('careerName').value.trim();
+      curriculum.id = document.getElementById('curriculumId').value.trim();
+      curriculum.year = document.getElementById('curriculumYear').value.trim();
+      curriculum.periodType = document.getElementById('periodType').value;
+    }
+
+    function syncInputsFromState() {
+      document.getElementById('careerName').value = curriculum.careerName || '';
+      document.getElementById('curriculumId').value = curriculum.id || '';
+      document.getElementById('curriculumYear').value = curriculum.year || '';
+      document.getElementById('periodType').value = curriculum.periodType || 'semester';
+      document.getElementById('periodCount').value = curriculum.periods.length || '';
+    }
+
+    function bindTopInputs() {
+      ['careerName', 'curriculumId', 'curriculumYear', 'periodType', 'periodCount'].forEach(id => {
+        document.getElementById(id).addEventListener('input', () => {
+          if (id !== 'periodCount') syncMetadataFromInputs();
+          renderSummary();
+          renderValidation();
+        });
+      });
+    }
+
+    function generatePeriodsFromSettings() {
+      syncMetadataFromInputs();
+      const count = Number(document.getElementById('periodCount').value);
+      const type = document.getElementById('periodType').value;
+
+      if (!count || count < 1 || count > 20) {
+        showModal('Cantidad inválida', '<p>Indicá una cantidad entre 1 y 20.</p>');
+        return;
+      }
+
+      const maxUsedPeriod = curriculum.subjects.reduce((max, subject) => Math.max(max, Number(subject.periodOrder) || 0), 0);
+      if (count < maxUsedPeriod) {
+        showModal(
+          'No se pueden regenerar los períodos',
+          `<p>Ya existen materias cargadas en el período ${maxUsedPeriod}. Para reducir la cantidad a ${count}, primero mové o eliminá esas materias.</p>`
+        );
+        return;
+      }
+
+      const previousType = curriculum.periodType;
+      const previousPeriods = new Map(curriculum.periods.map(period => [Number(period.order), period]));
+      curriculum.periodType = type;
+      curriculum.periods = Array.from({ length: count }, (_, index) => {
+        const order = index + 1;
+        const previous = previousType === type ? previousPeriods.get(order) : null;
+        return {
+          order,
+          name: previous?.name || getDefaultPeriodName(order, type)
+        };
+      });
+
+      render();
+      showToast(`${capitalize(getPeriodNoun(true))} generados correctamente.`);
+    }
+
+    function updatePeriodName(order, value) {
+      const period = getPeriodByOrder(order);
+      if (!period) return;
+      period.name = value.trim() || getDefaultPeriodName(order, curriculum.periodType);
+      renderSubjectPeriodSelect();
+      renderSubjectGroups();
+      renderCorrelationSection();
+      renderValidation();
+    }
+
+    function getPeriodByOrder(order, curr = curriculum) {
+      return curr.periods.find(period => Number(period.order) === Number(order));
+    }
+
+    function getSubjectById(id, subjects = curriculum.subjects) {
+      const normalized = normalizeId(id);
+      return subjects.find(subject => normalizeId(subject.id) === normalized);
+    }
+
+    function getDependents(subjectId, subjects = curriculum.subjects) {
+      const normalized = normalizeId(subjectId);
+      return subjects.filter(subject => subject.reqs.some(req => normalizeId(req) === normalized));
+    }
+
+    function canUseAsRequirement(targetSubject, candidateSubject) {
+      if (!targetSubject || !candidateSubject) return false;
+      return Number(candidateSubject.periodOrder) < Number(targetSubject.periodOrder);
+    }
+
+    function sortSubjects(subjects = curriculum.subjects) {
+      return [...subjects].sort((a, b) => {
+        const periodDiff = Number(a.periodOrder) - Number(b.periodOrder);
+        if (periodDiff !== 0) return periodDiff;
+        return a.name.localeCompare(b.name, 'es');
+      });
+    }
+
+    function renderPeriods() {
+      const container = document.getElementById('periodList');
+      if (!curriculum.periods.length) {
+        container.innerHTML = `<div class="empty-state">Generá la cantidad de ${getPeriodNoun(true)} antes de crear materias.</div>`;
+        return;
+      }
+
+      container.innerHTML = curriculum.periods.map(period => {
+        const count = curriculum.subjects.filter(subject => Number(subject.periodOrder) === Number(period.order)).length;
+        return `
+          <div class="period-card">
+            <div class="order-pill">${period.order}</div>
+            <div class="field">
+              <label>${capitalize(getPeriodNoun())} ${period.order} · ${count} materia${count === 1 ? '' : 's'}</label>
+              <input type="text" value="${escapeHtml(period.name)}" onchange="updatePeriodName(${period.order}, this.value)" />
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderSubjectPeriodSelect() {
+      const select = document.getElementById('subjectPeriod');
+      if (!curriculum.periods.length) {
+        select.innerHTML = `<option value="">Generá ${getPeriodNoun(true)} primero</option>`;
+        select.disabled = true;
+        return;
+      }
+
+      const currentValue = select.value;
+      select.disabled = false;
+      select.innerHTML = curriculum.periods.map(period => {
+        return `<option value="${period.order}">${period.order}. ${escapeHtml(period.name)}</option>`;
+      }).join('');
+
+      if ([...select.options].some(option => option.value === currentValue)) {
+        select.value = currentValue;
+      }
+    }
+
+    function clearSubjectForm() {
+      editingSubjectId = null;
+      document.getElementById('subjectId').disabled = false;
+      document.getElementById('subjectId').value = '';
+      document.getElementById('subjectName').value = '';
+      if (curriculum.periods.length) document.getElementById('subjectPeriod').value = curriculum.periods[0].order;
+      document.getElementById('saveSubjectBtn').textContent = 'Agregar materia';
+    }
+
+    function saveSubject() {
+      syncMetadataFromInputs();
+      const id = normalizeId(document.getElementById('subjectId').value);
+      const name = document.getElementById('subjectName').value.trim();
+      const periodOrder = Number(document.getElementById('subjectPeriod').value);
+
+      if (!id || !name || !periodOrder) {
+        showModal('No se pudo guardar la materia', '<p>Completá <strong>subject_id/código</strong>, nombre y período.</p>');
+        return;
+      }
+
+      if (!getPeriodByOrder(periodOrder)) {
+        showModal('Período inválido', '<p>La materia debe pertenecer a un período existente.</p>');
+        return;
+      }
+
+      const duplicate = curriculum.subjects.find(subject => normalizeId(subject.id) === id && normalizeId(subject.id) !== normalizeId(editingSubjectId));
+      if (duplicate) {
+        showModal('subject_id duplicado', `<p>Ya existe una materia con el ID <strong>${escapeHtml(id)}</strong>: ${escapeHtml(duplicate.name)}.</p>`);
+        return;
+      }
+
+      const existing = editingSubjectId ? getSubjectById(editingSubjectId) : null;
+      if (existing) {
+        const oldId = existing.id;
+        existing.id = id;
+        existing.name = name;
+        existing.periodOrder = periodOrder;
+        curriculum.subjects.forEach(subject => {
+          subject.reqs = subject.reqs.map(req => normalizeId(req) === normalizeId(oldId) ? id : req);
+        });
+        if (selectedForCorrelativesId === oldId) selectedForCorrelativesId = id;
+        draftReqIds = draftReqIds.map(req => normalizeId(req) === normalizeId(oldId) ? id : req);
+        showToast('Materia actualizada.');
+      } else {
+        curriculum.subjects.push({ id, name, periodOrder, reqs: [] });
+        if (!selectedForCorrelativesId) {
+          selectedForCorrelativesId = id;
+          draftReqIds = [];
+        }
+        showToast('Materia agregada.');
+      }
+
+      clearSubjectForm();
+      render();
+    }
+
+    function editSubject(subjectId) {
+      const subject = getSubjectById(subjectId);
+      if (!subject) return;
+      editingSubjectId = subject.id;
+      document.getElementById('subjectId').value = subject.id;
+      document.getElementById('subjectName').value = subject.name;
+      document.getElementById('subjectPeriod').value = subject.periodOrder;
+      document.getElementById('saveSubjectBtn').textContent = 'Guardar cambios';
+      document.getElementById('subjectName').focus();
+    }
+
+    function deleteSubject(subjectId) {
+      const subject = getSubjectById(subjectId);
+      if (!subject) return;
+      const dependents = getDependents(subjectId);
+
+      if (dependents.length) {
+        showModal(
+          'No se puede eliminar la materia',
+          `<p><strong>${escapeHtml(subject.name)}</strong> está siendo usada como correlativa por:</p>${renderMiniListHtml(dependents)}`
+        );
+        return;
+      }
+
+      curriculum.subjects = curriculum.subjects.filter(item => normalizeId(item.id) !== normalizeId(subjectId));
+      if (selectedForCorrelativesId === subjectId) {
+        selectedForCorrelativesId = curriculum.subjects[0]?.id || null;
+        draftReqIds = selectedForCorrelativesId ? [...getSubjectById(selectedForCorrelativesId).reqs] : [];
+      }
+      if (editingSubjectId === subjectId) clearSubjectForm();
+      render();
+      showToast('Materia eliminada.');
+    }
+
+    function renderSubjectGroups() {
+      const container = document.getElementById('subjectGroups');
+
+      if (!curriculum.subjects.length) {
+        container.innerHTML = '<div class="empty-state">Todavía no cargaste materias. Creá la primera materia en el paso 2.</div>';
+        return;
+      }
+
+      const usedPeriods = curriculum.periods.filter(period => curriculum.subjects.some(subject => Number(subject.periodOrder) === Number(period.order)));
+      container.innerHTML = usedPeriods.map(period => {
+        const subjects = sortSubjects(curriculum.subjects.filter(subject => Number(subject.periodOrder) === Number(period.order)));
+        return `
+          <details class="period-group">
+            <summary class="period-group-title">
+              <span class="period-title-main">${period.order}. ${escapeHtml(period.name)}</span>
+              <span class="tiny-chip">${subjects.length} materia${subjects.length === 1 ? '' : 's'}</span>
+            </summary>
+            <div class="period-group-body">
+              <div class="subject-list">
+                ${subjects.map(subject => renderSubjectCard(subject)).join('')}
+              </div>
+            </div>
+          </details>
+        `;
+      }).join('');
+    }
+
+    function renderSubjectCard(subject) {
+      const period = getPeriodByOrder(subject.periodOrder);
+      const dependents = getDependents(subject.id);
+      const isActive = normalizeId(subject.id) === normalizeId(selectedForCorrelativesId);
+      const reqsHtml = subject.reqs.length
+        ? subject.reqs.map(req => {
+            const found = getSubjectById(req);
+            const reqPeriod = found ? getPeriodByOrder(found.periodOrder) : null;
+            return `<span class="tiny-chip">${escapeHtml(found ? found.name : req)}${reqPeriod ? ` · ${escapeHtml(reqPeriod.name)}` : ''}</span>`;
+          }).join('')
+        : '<span class="tiny-chip none">Sin correlativas</span>';
+      const dependentsHtml = dependents.length
+        ? dependents.map(item => {
+            const dependentPeriod = getPeriodByOrder(item.periodOrder);
+            return `<span class="tiny-chip">${escapeHtml(item.name)}${dependentPeriod ? ` · ${escapeHtml(dependentPeriod.name)}` : ''}</span>`;
+          }).join('')
+        : '<span class="tiny-chip none">No habilita materias todavía</span>';
+
+      return `
+        <details class="subject-card subject-accordion ${isActive ? 'active' : ''}">
+          <summary class="subject-accordion-summary">
+            <div class="subject-top">
+              <div>
+                <div class="subject-title">${escapeHtml(subject.name)}</div>
+                <div class="subject-meta">${period ? escapeHtml(period.name) : 'Sin período'} · ${subject.reqs.length} correlativa${subject.reqs.length === 1 ? '' : 's'} · habilita ${dependents.length}</div>
+              </div>
+              <span class="id-badge">${escapeHtml(subject.id)}</span>
+            </div>
+          </summary>
+          <div class="subject-accordion-body">
+            <div class="subject-detail-block">
+              <span class="field-label">Correlativas requeridas</span>
+              <div class="chips">${reqsHtml}</div>
+            </div>
+            <div class="subject-detail-block">
+              <span class="field-label">Materias que habilita</span>
+              <div class="chips">${dependentsHtml}</div>
+            </div>
+            <div class="row-actions">
+              <button type="button" class="mini-btn" onclick="selectSubjectForCorrelatives('${escapeJs(subject.id)}')">Configurar correlativas</button>
+              <button type="button" class="mini-btn" onclick="editSubject('${escapeJs(subject.id)}')">Editar</button>
+              <button type="button" class="mini-btn danger-btn" onclick="deleteSubject('${escapeJs(subject.id)}')">Eliminar</button>
+            </div>
+          </div>
+        </details>
+      `;
+    }
+
+    function selectSubjectForCorrelatives(subjectId) {
+      const subject = getSubjectById(subjectId);
+      selectedForCorrelativesId = subject ? subject.id : null;
+      draftReqIds = subject ? [...subject.reqs] : [];
+      renderCorrelationSection();
+      renderSubjectGroups();
+    }
+
+    function resetCorrelativeDraft() {
+      const subject = selectedForCorrelativesId ? getSubjectById(selectedForCorrelativesId) : null;
+      draftReqIds = subject ? [...subject.reqs] : [];
+      renderCorrelationSection();
+      showToast('Cambios de correlativas revertidos.');
+    }
+
+    function addDraftReq(subjectId) {
+      const normalized = normalizeId(subjectId);
+      if (!selectedForCorrelativesId) {
+        showModal('Seleccioná una materia', '<p>Primero elegí la materia a configurar.</p>');
+        return;
+      }
+      if (normalized === normalizeId(selectedForCorrelativesId)) {
+        showModal('Correlativa inválida', '<p>Una materia no puede requerirse a sí misma.</p>');
+        return;
+      }
+
+      const targetSubject = getSubjectById(selectedForCorrelativesId);
+      const candidateSubject = getSubjectById(normalized);
+      if (!canUseAsRequirement(targetSubject, candidateSubject)) {
+        const targetPeriod = targetSubject ? getPeriodByOrder(targetSubject.periodOrder) : null;
+        const candidatePeriod = candidateSubject ? getPeriodByOrder(candidateSubject.periodOrder) : null;
+        showModal(
+          'Correlativa inválida',
+          `<p>Solo podés agregar como correlativas materias de períodos anteriores.</p><p><strong>${escapeHtml(candidateSubject?.name || normalized)}</strong> pertenece a <strong>${escapeHtml(candidatePeriod?.name || 'un período no encontrado')}</strong>, pero la materia configurada pertenece a <strong>${escapeHtml(targetPeriod?.name || 'un período no encontrado')}</strong>.</p>`
+        );
+        return;
+      }
+
+      if (!draftReqIds.some(req => normalizeId(req) === normalized)) {
+        draftReqIds.push(normalized);
+      }
+      renderCorrelationSection();
+    }
+
+    function removeDraftReq(subjectId) {
+      const normalized = normalizeId(subjectId);
+      draftReqIds = draftReqIds.filter(req => normalizeId(req) !== normalized);
+      renderCorrelationSection();
+    }
+
+    function saveCorrelatives() {
+      const subject = selectedForCorrelativesId ? getSubjectById(selectedForCorrelativesId) : null;
+      if (!subject) {
+        showModal('Seleccioná una materia', '<p>No hay una materia seleccionada para configurar correlativas.</p>');
+        return;
+      }
+
+      const draftSubjects = curriculum.subjects.map(item => {
+        if (normalizeId(item.id) !== normalizeId(subject.id)) return { ...item, reqs: [...item.reqs] };
+        return { ...item, reqs: [...draftReqIds] };
+      });
+
+      const validation = validateCurriculum({ ...curriculum, subjects: draftSubjects });
+      if (validation.errors.length) {
+        showModal('No se pueden guardar las correlativas', `<p>La selección genera errores:</p>${renderIssuesHtml(validation.errors)}`);
+        return;
+      }
+
+      subject.reqs = [...draftReqIds];
+      render();
+      showToast('Correlativas guardadas.');
+    }
+
+    function renderCorrelationSection() {
+      const select = document.getElementById('correlativeSubjectSelect');
+      const selectedContainer = document.getElementById('selectedReqs');
+      const candidatesContainer = document.getElementById('candidateList');
+      const search = normalizeSearch(document.getElementById('correlativeSearch')?.value || '');
+
+      if (!curriculum.subjects.length) {
+        select.innerHTML = '<option value="">Primero cargá materias</option>';
+        select.disabled = true;
+        selectedContainer.innerHTML = '<span class="tiny-chip none">Sin materia seleccionada</span>';
+        candidatesContainer.innerHTML = '<div class="empty-state">Cuando crees materias, aparecerán aquí para usarlas como correlativas.</div>';
+        return;
+      }
+
+      if (!selectedForCorrelativesId || !getSubjectById(selectedForCorrelativesId)) {
+        selectedForCorrelativesId = sortSubjects()[0].id;
+        draftReqIds = [...getSubjectById(selectedForCorrelativesId).reqs];
+      }
+
+      select.disabled = false;
+      const current = selectedForCorrelativesId;
+      select.innerHTML = sortSubjects().map(subject => {
+        return `<option value="${escapeHtml(subject.id)}">${escapeHtml(subject.name)} · ${escapeHtml(subject.id)}</option>`;
+      }).join('');
+      select.value = current;
+
+      if (!draftReqIds.length) {
+        selectedContainer.innerHTML = '<span class="tiny-chip none">Sin correlativas seleccionadas</span>';
+      } else {
+        selectedContainer.innerHTML = draftReqIds.map(reqId => {
+          const subject = getSubjectById(reqId);
+          const label = subject ? `${subject.name} · ${subject.id}` : reqId;
+          return `<span class="chip">${escapeHtml(label)} <button type="button" onclick="removeDraftReq('${escapeJs(reqId)}')">×</button></span>`;
+        }).join('');
+      }
+
+      const targetSubject = getSubjectById(current);
+      let candidates = sortSubjects().filter(subject => {
+        if (normalizeId(subject.id) === normalizeId(current)) return false;
+        if (!canUseAsRequirement(targetSubject, subject)) return false;
+        if (draftReqIds.some(req => normalizeId(req) === normalizeId(subject.id))) return false;
+        if (!search) return true;
+        const period = getPeriodByOrder(subject.periodOrder);
+        const haystack = normalizeSearch(`${subject.id} ${subject.name} ${period?.name || ''}`);
+        return haystack.includes(search);
+      });
+
+      if (!candidates.length) {
+        const hasLowerPeriods = sortSubjects().some(subject => normalizeId(subject.id) !== normalizeId(current) && canUseAsRequirement(targetSubject, subject));
+        candidatesContainer.innerHTML = hasLowerPeriods
+          ? '<div class="empty-state">No hay materias disponibles para agregar como correlativa con ese filtro.</div>'
+          : '<div class="empty-state">Esta materia no tiene materias de períodos anteriores disponibles. Por regla, no puede tomar correlativas del mismo período ni de períodos posteriores.</div>';
+        return;
+      }
+
+      candidatesContainer.innerHTML = candidates.map(subject => {
+        const period = getPeriodByOrder(subject.periodOrder);
+        return `
+          <div class="candidate-card">
+            <div class="candidate-top">
+              <div>
+                <div class="candidate-title">${escapeHtml(subject.name)}</div>
+                <div class="candidate-meta">ID ${escapeHtml(subject.id)} · ${period ? escapeHtml(period.name) : 'Sin período'}</div>
+              </div>
+              <span class="id-badge">${escapeHtml(subject.id)}</span>
+            </div>
+            <div class="row-actions">
+              <button type="button" class="mini-btn" onclick="addDraftReq('${escapeJs(subject.id)}')">Agregar como correlativa</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderSummary() {
+      const totalSubjects = curriculum.subjects.length;
+      const totalPeriods = curriculum.periods.length;
+      const withReqs = curriculum.subjects.filter(subject => subject.reqs.length).length;
+      const edges = curriculum.subjects.reduce((sum, subject) => sum + subject.reqs.length, 0);
+
+      document.getElementById('summarySubjects').textContent = totalSubjects;
+      document.getElementById('summaryPeriods').textContent = totalPeriods;
+      document.getElementById('summaryPeriodsLabel').textContent = capitalize(getPeriodNoun(true));
+      document.getElementById('summaryWithReqs').textContent = withReqs;
+      document.getElementById('summaryEdges').textContent = edges;
+    }
+
+    function validateCurriculum(curr = curriculum) {
+      const errors = [];
+      const warnings = [];
+      const ids = new Map();
+      const periodOrders = new Set();
+
+      if (!curr.careerName?.trim()) warnings.push('Falta el nombre de la carrera.');
+      if (!curr.id?.trim()) warnings.push('Falta el ID de malla.');
+      if (!curr.year?.toString().trim()) warnings.push('Falta el año de la malla.');
+      if (!curr.periods.length) errors.push('La malla debe tener al menos un período.');
+      if (!curr.subjects.length) warnings.push('Todavía no hay materias cargadas.');
+
+      curr.periods.forEach(period => {
+        const order = Number(period.order);
+        if (!order || order < 1) errors.push(`Hay un período con orden inválido: ${period.order}.`);
+        if (periodOrders.has(order)) errors.push(`El período ${order} está repetido.`);
+        periodOrders.add(order);
+        if (!period.name?.trim()) errors.push(`El período ${period.order} no tiene nombre.`);
+      });
+
+      curr.subjects.forEach(subject => {
+        const id = normalizeId(subject.id);
+        if (!id) errors.push(`La materia "${subject.name || 'sin nombre'}" no tiene subject_id.`);
+        if (!subject.name?.trim()) errors.push(`La materia con ID "${id || 'sin ID'}" no tiene nombre.`);
+
+        if (ids.has(id)) {
+          errors.push(`El subject_id "${id}" está repetido en "${ids.get(id)}" y "${subject.name}".`);
+        } else if (id) {
+          ids.set(id, subject.name);
+        }
+
+        if (!curr.periods.some(period => Number(period.order) === Number(subject.periodOrder))) {
+          errors.push(`La materia "${subject.name}" apunta a un período inexistente: ${subject.periodOrder}.`);
+        }
+
+        subject.reqs.forEach(req => {
+          if (normalizeId(req) === id) errors.push(`La materia "${subject.name}" se tiene a sí misma como correlativa.`);
+          const reqSubject = curr.subjects.find(item => normalizeId(item.id) === normalizeId(req));
+          if (!reqSubject) {
+            errors.push(`La materia "${subject.name}" requiere el ID "${req}", pero esa materia no existe.`);
+          } else if (Number(reqSubject.periodOrder) >= Number(subject.periodOrder)) {
+            errors.push(`La materia "${subject.name}" solo puede tener correlativas de períodos anteriores. "${reqSubject.name}" no cumple esa regla.`);
+          }
+        });
+      });
+
+      const cycle = findCycle(curr.subjects);
+      if (cycle.length) errors.push(`Hay una correlativa circular: ${cycle.join(' → ')}.`);
+
+      return { errors, warnings };
+    }
+
+    function findCycle(subjects) {
+      const byId = new Map(subjects.map(subject => [normalizeId(subject.id), subject]));
+      const visiting = new Set();
+      const visited = new Set();
+      const stack = [];
+
+      function dfs(id) {
+        if (visiting.has(id)) {
+          const start = stack.indexOf(id);
+          return stack.slice(start).concat(id);
+        }
+        if (visited.has(id)) return [];
+
+        visiting.add(id);
+        stack.push(id);
+
+        const subject = byId.get(id);
+        if (subject) {
+          for (const req of subject.reqs) {
+            const reqId = normalizeId(req);
+            if (byId.has(reqId)) {
+              const cycle = dfs(reqId);
+              if (cycle.length) return cycle;
+            }
+          }
+        }
+
+        visiting.delete(id);
+        visited.add(id);
+        stack.pop();
+        return [];
+      }
+
+      for (const id of byId.keys()) {
+        const cycle = dfs(id);
+        if (cycle.length) return cycle;
+      }
+      return [];
+    }
+
+    function renderValidation() {
+      const container = document.getElementById('validationList');
+      const validation = validateCurriculum();
+
+      if (!validation.errors.length && !validation.warnings.length) {
+        container.innerHTML = '<div class="validation-item ok">Todo bien. La malla está lista para exportarse.</div>';
+        return;
+      }
+
+      const errors = validation.errors.map(issue => `<div class="validation-item error">${escapeHtml(issue)}</div>`).join('');
+      const warnings = validation.warnings.map(issue => `<div class="validation-item warn">${escapeHtml(issue)}</div>`).join('');
+      container.innerHTML = errors + warnings;
+    }
+
+    function renderIssuesHtml(issues) {
+      return `<div class="validation-list">${issues.map(issue => `<div class="validation-item error">${escapeHtml(issue)}</div>`).join('')}</div>`;
+    }
+
+    function renderMiniListHtml(subjects) {
+      return `<div class="validation-list">${subjects.map(subject => {
+        const period = getPeriodByOrder(subject.periodOrder);
+        return `<div class="validation-item warn">${escapeHtml(subject.name)} · ${period ? escapeHtml(period.name) : 'Sin período'}</div>`;
+      }).join('')}</div>`;
+    }
+
+    function downloadCurriculumCsv() {
+      syncMetadataFromInputs();
+      const validation = validateCurriculum();
+      if (validation.errors.length) {
+        showModal('La malla tiene errores', `<p>No se puede exportar todavía.</p>${renderIssuesHtml(validation.errors)}`);
+        return;
+      }
+
+      const csv = buildCurriculumCsv();
+      const safeId = sanitizeFileName(curriculum.id || curriculum.careerName || 'malla');
+      downloadText(csv, `malla_${safeId || 'curriculum'}.csv`);
+      showToast('CSV de malla descargado.');
+    }
+
+    function buildCurriculumCsv() {
+      const rows = [];
+      rows.push(['#malla', curriculum.id, curriculum.careerName, curriculum.year, String(curriculum.periods.length), curriculum.periodType]);
+      rows.push(['semester_order', 'semester_name', 'subject_id', 'subject_name', 'requirements']);
+
+      sortSubjects().forEach(subject => {
+        const period = getPeriodByOrder(subject.periodOrder);
+        rows.push([
+          String(subject.periodOrder),
+          period ? period.name : '',
+          subject.id,
+          subject.name,
+          subject.reqs.join('|')
+        ]);
+      });
+
+      return rows.map(row => row.map(csvEscape).join(',')).join('\n');
+    }
+
+    function csvEscape(value) {
+      const str = String(value ?? '');
+      if (/[",\n\r]/.test(str)) return `"${str.replace(/"/g, '""')}"`;
+      return str;
+    }
+
+    function downloadText(text, filename) {
+      const blob = new Blob([text], { type: 'text/csv;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function sanitizeFileName(value) {
+      return String(value ?? '')
+        .trim()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-zA-Z0-9_-]+/g, '_')
+        .replace(/^_+|_+$/g, '')
+        .slice(0, 70);
+    }
+
+    function parseCsv(text) {
+      const rows = [];
+      let current = '';
+      let row = [];
+      let inQuotes = false;
+
+      for (let i = 0; i < text.length; i++) {
+        const char = text[i];
+        const next = text[i + 1];
+
+        if (char === '"') {
+          if (inQuotes && next === '"') {
+            current += '"';
+            i++;
+          } else {
+            inQuotes = !inQuotes;
+          }
+        } else if (char === ',' && !inQuotes) {
+          row.push(current);
+          current = '';
+        } else if ((char === '\n' || char === '\r') && !inQuotes) {
+          if (char === '\r' && next === '\n') i++;
+          row.push(current);
+          if (row.some(cell => cell.trim() !== '')) rows.push(row);
+          row = [];
+          current = '';
+        } else {
+          current += char;
+        }
+      }
+
+      row.push(current);
+      if (row.some(cell => cell.trim() !== '')) rows.push(row);
+      return rows;
+    }
+
+    function importCurriculumCsv(text) {
+      const rows = parseCsv(text);
+      const metaRow = rows.find(row => normalizeId(row[0]) === '#malla');
+      const headerIndex = rows.findIndex(row => {
+        const normalized = row.map(cell => normalizeSearch(cell));
+        return normalized.includes('semester_order') && (normalized.includes('subject_id') || normalized.includes('subject_code'));
+      });
+
+      if (!metaRow || headerIndex < 0) {
+        throw new Error('El archivo no parece ser una malla válida. Debe tener una línea #malla y una cabecera con semester_order, semester_name, subject_id, subject_name, requirements.');
+      }
+
+      const header = rows[headerIndex].map(cell => normalizeSearch(cell));
+      const idx = name => header.indexOf(name);
+      const subjectIdIndex = idx('subject_id') >= 0 ? idx('subject_id') : idx('subject_code');
+      const dataRows = rows.slice(headerIndex + 1);
+      const periodsByOrder = new Map();
+      const subjects = [];
+
+      dataRows.forEach((row, index) => {
+        if (!row.some(cell => cell.trim() !== '')) return;
+        const periodOrder = Number(row[idx('semester_order')]?.trim());
+        const periodName = row[idx('semester_name')]?.trim();
+        const subjectId = row[subjectIdIndex]?.trim();
+        const subjectName = row[idx('subject_name')]?.trim();
+        const requirementsRaw = idx('requirements') >= 0 ? row[idx('requirements')] || '' : '';
+        const requirements = requirementsRaw.split('|').map(item => item.trim()).filter(Boolean);
+
+        if (!periodOrder || !periodName || !subjectId || !subjectName) {
+          throw new Error(`Fila ${headerIndex + index + 2}: faltan datos obligatorios de período o materia.`);
+        }
+
+        if (!periodsByOrder.has(periodOrder)) {
+          periodsByOrder.set(periodOrder, { order: periodOrder, name: periodName });
+        }
+
+        subjects.push({ id: subjectId, name: subjectName, periodOrder, reqs: requirements });
+      });
+
+      const periodType = normalizeSearch(metaRow[5]) === 'year' || normalizeSearch(metaRow[5]) === 'ano' || normalizeSearch(metaRow[5]) === 'año'
+        ? 'year'
+        : 'semester';
+
+      const imported = {
+        id: metaRow[1]?.trim() || '',
+        careerName: metaRow[2]?.trim() || '',
+        year: metaRow[3]?.trim() || '',
+        periodType,
+        periods: [...periodsByOrder.values()].sort((a, b) => a.order - b.order),
+        subjects
+      };
+
+      const expectedCount = Number(metaRow[4]);
+      if (expectedCount && imported.periods.length < expectedCount) {
+        for (let order = 1; order <= expectedCount; order++) {
+          if (!imported.periods.some(period => Number(period.order) === order)) {
+            imported.periods.push({ order, name: getDefaultPeriodName(order, periodType) });
+          }
+        }
+        imported.periods.sort((a, b) => a.order - b.order);
+      }
+
+      const validation = validateCurriculum(imported);
+      if (validation.errors.length) throw new Error(validation.errors.join('\n'));
+
+      curriculum = imported;
+      selectedForCorrelativesId = subjects[0]?.id || null;
+      draftReqIds = selectedForCorrelativesId ? [...getSubjectById(selectedForCorrelativesId, imported.subjects).reqs] : [];
+      editingSubjectId = null;
+      syncInputsFromState();
+      clearSubjectForm();
+      render();
+    }
+
+    function loadExampleCurriculum() {
+      try {
+        importCurriculumCsv(exampleCurriculumCsv);
+        showToast('Plantilla Ingeniería Informática 2016 cargada.');
+      } catch (error) {
+        showModal('No se pudo cargar la plantilla', `<pre>${escapeHtml(error.message)}</pre>`);
+      }
+    }
+
+    function askNewCurriculum() {
+      showModal(
+        'Crear una malla nueva',
+        '<p>Esto limpiará la malla actual de la pantalla. Si no la exportaste, los cambios se perderán.</p>',
+        [
+          { label: 'Cancelar', className: 'ghost-btn', action: closeModal },
+          { label: 'Crear nueva', className: 'danger-btn', action: () => {
+              curriculum = {
+                id: '',
+                careerName: '',
+                year: '',
+                periodType: 'semester',
+                periods: [],
+                subjects: []
+              };
+              editingSubjectId = null;
+              selectedForCorrelativesId = null;
+              draftReqIds = [];
+              syncInputsFromState();
+              clearSubjectForm();
+              render();
+              closeModal();
+              showToast('Nueva malla creada.');
+            }
+          }
+        ]
+      );
+    }
+
+    function showFormatModal() {
+      showModal(
+        'Formato para importar/exportar una malla',
+        `
+          <p>El constructor exporta un CSV compatible con el tracker. La primera línea guarda metadata y las siguientes líneas guardan las materias.</p>
+          <pre>#malla,informatica-2016,Ingeniería Informática,2016,10,semester
+semester_order,semester_name,subject_id,subject_name,requirements
+1,Primero,02,Calculo 1,
+1,Primero,314,Programacion 1,
+2,Segundo,010,Calculo 2,02
+2,Segundo,303,Programacion 2,314|02</pre>
+          <p>Si una carrera se organiza por años, el sexto valor de la línea <code>#malla</code> puede ser <code>year</code>. El tracker puede ignorar ese valor extra, porque los primeros campos siguen siendo los mismos.</p>
+          <p><strong>requirements</strong> usa IDs separados por <code>|</code>. Ejemplo: <code>314|02</code>.</p>
+        `
+      );
+    }
+
+    function showModal(title, bodyHtml, actions = [{ label: 'Entendido', className: 'primary-btn', action: closeModal }]) {
+      document.getElementById('modalTitle').textContent = title;
+      document.getElementById('modalBody').innerHTML = bodyHtml;
+      const actionsContainer = document.getElementById('modalActions');
+      actionsContainer.innerHTML = '';
+      actions.forEach(action => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.textContent = action.label;
+        button.className = action.className || '';
+        button.addEventListener('click', action.action || closeModal);
+        actionsContainer.appendChild(button);
+      });
+      document.getElementById('modalBackdrop').classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('modalBackdrop').classList.remove('active');
+    }
+
+    function backdropClose(event) {
+      if (event.target.id === 'modalBackdrop') closeModal();
+    }
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('active');
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => toast.classList.remove('active'), 2600);
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function escapeJs(value) {
+      return String(value ?? '')
+        .replace(/\\/g, '\\\\')
+        .replace(/'/g, "\\'")
+        .replace(/"/g, '&quot;')
+        .replace(/\n/g, '\\n')
+        .replace(/\r/g, '\\r');
+    }
+
+    function capitalize(value) {
+      const str = String(value ?? '');
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
+    function render() {
+      curriculum.periods.sort((a, b) => Number(a.order) - Number(b.order));
+      renderPeriods();
+      renderSubjectPeriodSelect();
+      renderSubjectGroups();
+      renderCorrelationSection();
+      renderSummary();
+      renderValidation();
+    }
+
+    document.getElementById('curriculumUpload').addEventListener('change', event => {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = e => {
+        try {
+          importCurriculumCsv(e.target.result);
+          showToast('Malla importada correctamente.');
+        } catch (error) {
+          showModal('No se pudo importar la malla', `<p>Revisá el archivo. Detalle:</p><pre>${escapeHtml(error.message)}</pre>`);
+        } finally {
+          event.target.value = '';
+        }
+      };
+      reader.readAsText(file);
+    });
+
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape') closeModal();
+      if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 's') {
+        event.preventDefault();
+        downloadCurriculumCsv();
+      }
+    });
+
+    bindTopInputs();
+    syncInputsFromState();
+    render();
+  </script>
+</body>
+</html>

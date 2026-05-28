@@ -1,0 +1,681 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Malla de Correlativas</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: Inter, Arial, sans-serif; }
+    body { background: #f8fafc; color: #1f2937; padding: 24px; }
+    h1 { font-size: 1.8rem; margin-bottom: 8px; }
+    button, .file-label, .name-input { background: white; border: 1px solid #d1d5db; border-radius: 12px; padding: 10px 14px; transition: .2s; font-weight: 700; font-size: .95rem; }
+    button, .file-label { cursor: pointer; }
+    button:hover, .file-label:hover { background: #f8fafc; border-color: #6366f1; }
+    input[type="file"] { display: none; }
+
+    .home-nav-link { position: fixed; top: 16px; left: 16px; z-index: 45; display: inline-flex; align-items: center; gap: 8px; background: white; border: 1px solid #d1d5db; color: #3730a3; border-radius: 999px; padding: 10px 14px; font-weight: 900; font-size: .9rem; text-decoration: none; box-shadow: 0 10px 26px rgba(15,23,42,.12); transition: .2s; }
+    .home-nav-link:hover { background: #eef2ff; border-color: #a5b4fc; transform: translateY(-1px); }
+    @media (min-width: 641px) { body { padding-top: 78px; } }
+    .subtitle, .footer { color: #6b7280; line-height: 1.5; }
+    .page-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; margin-bottom: 14px; }
+    .header-actions { display: flex; justify-content: flex-end; align-items: flex-start; gap: 10px; flex-wrap: wrap; }
+    .menu-dropdown { position: relative; }
+    .menu-dropdown[open] .menu-trigger { border-color: #a5b4fc; background: #eef2ff; color: #3730a3; }
+    .menu-trigger { list-style: none; display: inline-flex; flex-direction: column; align-items: flex-start; gap: 2px; min-width: 190px; background: white; border: 1px solid #d1d5db; border-radius: 14px; padding: 10px 14px; cursor: pointer; transition: .2s; box-shadow: 0 2px 10px rgba(15,23,42,.035); }
+    .menu-trigger::-webkit-details-marker { display: none; }
+    .menu-trigger:hover { border-color: #6366f1; background: #f8fafc; }
+    .menu-trigger-kicker { font-size: .72rem; font-weight: 950; letter-spacing: .05em; text-transform: uppercase; color: #6366f1; }
+    .menu-trigger-title { font-size: .92rem; font-weight: 900; line-height: 1.25; color: #111827; }
+    .menu-panel { position: absolute; right: 0; top: calc(100% + 8px); z-index: 40; width: 260px; background: white; border: 1px solid #e5e7eb; border-radius: 16px; padding: 8px; box-shadow: 0 18px 45px rgba(15,23,42,.16); }
+    .menu-item { width: 100%; display: flex; align-items: center; justify-content: flex-start; text-align: left; gap: 8px; border: 0; border-radius: 12px; padding: 10px 11px; background: transparent; color: #1f2937; font-weight: 850; font-size: .9rem; cursor: pointer; text-decoration: none; }
+    .menu-item:hover { background: #f3f4f6; border-color: transparent; }
+    .menu-item.muted { color: #4f46e5; }
+    .menu-file-label { cursor: pointer; }
+    .menu-current-info { border-bottom: 1px solid #e5e7eb; color: #6b7280; font-size: .8rem; line-height: 1.35; padding: 8px 10px 10px; margin-bottom: 4px; }
+    .malla-tabs { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; max-width: 560px; }
+    .malla-tab { display: inline-flex; flex-direction: column; align-items: flex-start; gap: 2px; min-width: 210px; border-radius: 14px; text-align: left; box-shadow: 0 2px 10px rgba(15,23,42,.035); }
+    .malla-tab.active { border-color: #a5b4fc; background: #eef2ff; color: #3730a3; }
+    .malla-tab.placeholder { color: #9ca3af; background: #f9fafb; cursor: not-allowed; box-shadow: none; }
+    .malla-tab-label { font-size: .72rem; font-weight: 900; letter-spacing: .04em; text-transform: uppercase; }
+    .malla-tab-name { font-size: .92rem; font-weight: 900; line-height: 1.25; }
+    .curriculum-summary, .topbar, .legend { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 18px; }
+    .curriculum-pill, .legend-item { display: inline-flex; align-items: center; gap: 7px; background: white; border: 1px solid #e5e7eb; border-radius: 999px; padding: 6px 10px; color: #4b5563; font-size: .84rem; font-weight: 750; }
+    .curriculum-pill strong { color: #111827; }
+    .name-input { min-width: 240px; font-weight: 500; cursor: text; }
+    .primary-action { background: #eef2ff; border-color: #c7d2fe; color: #3730a3; }
+    .secondary-action { background: #f8fafc; }
+    .format-note { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 12px; max-width: 1100px; margin-bottom: 18px; }
+    .format-card { background: white; border: 1px solid #e5e7eb; border-radius: 16px; padding: 14px; box-shadow: 0 2px 10px rgba(15,23,42,.035); }
+    .format-card-title { color: #3730a3; font-weight: 900; margin-bottom: 6px; }
+    .format-card-text { color: #6b7280; font-size: .87rem; line-height: 1.45; }
+    .code-block { display: block; white-space: pre-wrap; background: #111827; color: #f9fafb; border-radius: 14px; padding: 12px; margin-top: 8px; line-height: 1.45; overflow-x: auto; font-size: .8rem; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .approved { background: #10b981; } .available { background: #3b82f6; } .blocked { background: #ef4444; }
+    .page-layout { display: grid; grid-template-columns: minmax(0, 1100px) minmax(280px, 340px); gap: 20px; align-items: start; }
+    .grid { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+    .semester { background: white; border: 1px solid #e5e7eb; border-radius: 16px; box-shadow: 0 2px 10px rgba(15,23,42,.035); overflow: hidden; }
+    .semester[open] { border-color: #c7d2fe; }
+    .semester-summary { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 14px 16px; cursor: pointer; list-style: none; user-select: none; }
+    .semester-summary::-webkit-details-marker { display: none; }
+    .semester-title-area { display: flex; align-items: center; gap: 10px; min-width: 210px; }
+    .semester-arrow { color: #6b7280; font-size: .9rem; transition: transform .2s; }
+    .semester[open] .semester-arrow { transform: rotate(90deg); }
+    .semester-title { color: #3730a3; font-size: 1.05rem; font-weight: 900; }
+    .semester-count { color: #6b7280; font-size: .85rem; font-weight: 700; }
+    .semester-stats { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
+    .stat-pill { border: 1px solid #e5e7eb; border-radius: 999px; padding: 4px 9px; font-size: .78rem; font-weight: 800; white-space: nowrap; }
+    .approved-text { color: #047857; background: #ecfdf5; border-color: #a7f3d0; } .available-text { color: #1d4ed8; background: #eff6ff; border-color: #bfdbfe; } .blocked-text { color: #b91c1c; background: #fef2f2; border-color: #fecaca; }
+    .semester-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; padding: 0 16px 16px; }
+    .subject { background: white; border: 1px solid #e5e7eb; border-left-width: 5px; border-radius: 14px; padding: 12px; transition: .2s; }
+    .subject:hover { transform: translateY(-1px); box-shadow: 0 8px 18px rgba(15,23,42,.06); }
+    .selected-card { outline: 3px solid rgba(99,102,241,.18); border-color: #a5b4fc; }
+    .approved-card { border-left-color: #10b981; } .available-card { border-left-color: #3b82f6; } .blocked-card { border-left-color: #ef4444; }
+    .subject-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 10px; }
+    .subject-title { font-weight: 850; font-size: .98rem; }
+    .subject-code { display: inline-flex; width: fit-content; margin-top: 3px; border: 1px solid #e5e7eb; border-radius: 999px; padding: 2px 7px; color: #6b7280; background: #f9fafb; font-size: .7rem; font-weight: 900; letter-spacing: .03em; }
+    .status { font-size: .76rem; font-weight: 850; padding: 4px 9px; border: 1px solid transparent; border-radius: 999px; white-space: nowrap; }
+    .status.approved { background: #ecfdf5; border-color: #a7f3d0; color: #047857; }
+    .status.available { background: #eff6ff; border-color: #bfdbfe; color: #1d4ed8; }
+    .status.blocked { background: #fff7ed; border-color: #fed7aa; color: #c2410c; }
+    .reqs-label { display: block; color: #4b5563; margin-bottom: 8px; font-size: .85rem; font-weight: 800; }
+    .req-list, .dependency-list { display: flex; flex-direction: column; gap: 6px; margin-bottom: 10px; }
+    .req-chip { display: flex; justify-content: space-between; gap: 8px; border: 1px solid #e5e7eb; border-radius: 10px; padding: 6px 8px; background: #f9fafb; font-size: .82rem; line-height: 1.25; }
+    .req-name { color: #374151; font-weight: 750; } .req-semester, .empty-req { color: #6b7280; font-size: .84rem; }
+    .dependency-trigger { width: 100%; margin: 2px 0 8px; background: #f8fafc; color: #3730a3; border-color: #e0e7ff; }
+    .checkbox { display: flex; align-items: center; gap: 10px; margin-top: 8px; font-weight: 750; color: #374151; }
+    .checkbox.disabled { color: #9ca3af; cursor: not-allowed; }
+    .checkbox input:disabled { cursor: not-allowed; }
+    .dependency-panel { position: sticky; top: 18px; max-height: calc(100vh - 36px); overflow: auto; background: white; border: 1px solid #e5e7eb; border-radius: 18px; padding: 16px; box-shadow: 0 10px 30px rgba(15,23,42,.08); }
+    .dependency-kicker { color: #6366f1; font-size: .75rem; font-weight: 900; letter-spacing: .04em; text-transform: uppercase; margin-bottom: 6px; }
+    .dependency-title { color: #111827; font-size: 1rem; font-weight: 900; line-height: 1.25; margin-bottom: 6px; }
+    .dependency-subtitle { color: #6b7280; font-size: .86rem; line-height: 1.45; margin-bottom: 14px; }
+    .dependency-item { border: 1px solid #e5e7eb; border-radius: 14px; padding: 10px; background: #f9fafb; }
+    .dependency-item-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 5px; }
+    .dependency-subject-name { color: #1f2937; font-weight: 850; font-size: .9rem; line-height: 1.25; }
+    .dependency-semester { color: #6b7280; font-size: .78rem; font-weight: 750; }
+    .scroll-top { position: fixed; right: 22px; bottom: 22px; width: 48px; height: 48px; border-radius: 999px; background: #3730a3; color: white; border-color: #3730a3; box-shadow: 0 12px 28px rgba(55,48,163,.28); font-size: 1.15rem; z-index: 20; }
+    .footer { margin-top: 24px; font-size: .9rem; }
+    .modal-backdrop { position: fixed; inset: 0; z-index: 50; display: flex; align-items: center; justify-content: center; padding: 18px; background: rgba(15,23,42,.42); }
+    .modal-backdrop[hidden] { display: none; }
+    .modal-card { width: min(560px, 100%); background: white; border-radius: 20px; padding: 18px; border: 1px solid #e5e7eb; box-shadow: 0 24px 70px rgba(15,23,42,.24); }
+    .modal-kicker { color: #6366f1; font-size: .76rem; font-weight: 900; letter-spacing: .04em; text-transform: uppercase; margin-bottom: 6px; }
+    .modal-title { color: #111827; font-size: 1.1rem; font-weight: 900; margin-bottom: 8px; }
+    .modal-message { color: #4b5563; line-height: 1.5; font-size: .92rem; }
+    .modal-error-list { display: flex; flex-direction: column; gap: 6px; margin-top: 12px; max-height: 260px; overflow: auto; }
+    .modal-error-item { border: 1px solid #fecaca; background: #fef2f2; color: #991b1b; border-radius: 12px; padding: 8px 10px; font-size: .86rem; line-height: 1.35; }
+    .modal-actions { display: flex; justify-content: flex-end; margin-top: 16px; }
+    .modal-actions.spread { justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+    .modal-action-group { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+    .modal-input-label { display: block; margin-top: 14px; margin-bottom: 6px; color: #374151; font-size: .86rem; font-weight: 850; }
+    .modal-input { width: 100%; border: 1px solid #d1d5db; border-radius: 14px; padding: 11px 12px; color: #111827; font-size: .95rem; }
+    .modal-input:focus { outline: 3px solid rgba(99,102,241,.15); border-color: #6366f1; }
+    .large-modal-card { width: min(760px, 100%); }
+    .rich-modal-content { display: grid; gap: 12px; }
+    .rich-modal-content ul { padding-left: 20px; }
+    .rich-modal-content li { margin-bottom: 4px; }
+    .modal-code-block { display: block; white-space: pre-wrap; background: #111827; color: #f9fafb; border-radius: 14px; padding: 12px; line-height: 1.45; overflow-x: auto; font-size: .8rem; }
+    .dependency-control-bar { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 14px; }
+    .dependency-control-bar button { width: 100%; font-size: .84rem; padding: 9px 10px; }
+    @media (max-width: 960px) { .page-header { flex-direction: column; } .header-actions { justify-content: flex-start; width: 100%; } .menu-dropdown { flex: 1 1 220px; } .menu-trigger { width: 100%; min-width: 0; } .menu-panel { left: 0; right: auto; width: min(320px, calc(100vw - 32px)); } .page-layout { grid-template-columns: 1fr; } .dependency-panel { position: static; max-height: none; order: -1; } }
+    @media (max-width: 640px) { body { padding: 16px; } .semester-summary { align-items: flex-start; flex-direction: column; } .semester-stats { justify-content: flex-start; } .semester-content { grid-template-columns: 1fr; } .scroll-top { right: 16px; bottom: 16px; } }
+  </style>
+</head>
+<body>
+  <a class="home-nav-link" href="../" aria-label="Volver al inicio">← Inicio</a>
+  <header class="page-header">
+    <div>
+      <h1>Malla de Correlativas</h1>
+      <p class="subtitle">Gestioná tu progreso académico y cargá nuevas mallas desde archivos CSV.</p>
+    </div>
+
+    <div class="header-actions" aria-label="Acciones de archivos">
+      <details class="menu-dropdown" id="progressMenu">
+        <summary class="menu-trigger">
+          <span class="menu-trigger-kicker">Progreso</span>
+          <span class="menu-trigger-title">Importar / exportar</span>
+        </summary>
+        <div class="menu-panel">
+          <button type="button" class="menu-item" onclick="openProgressDownloadModal(); closeDropdowns();">Descargar progreso</button>
+          <label class="menu-item menu-file-label">Cargar progreso<input type="file" id="progressUpload" accept=".txt,.csv" /></label>
+          <button type="button" class="menu-item muted" onclick="openProgressFormatModal(); closeDropdowns();">Formato del progreso</button>
+        </div>
+      </details>
+
+      <details class="menu-dropdown" id="curriculumMenu">
+        <summary class="menu-trigger malla-current-trigger">
+          <span class="menu-trigger-kicker">Malla</span>
+          <span class="menu-trigger-title" id="currentMallaLabel">Ingeniería Informática 2016</span>
+        </summary>
+        <div class="menu-panel">
+          <div class="menu-current-info" id="currentMallaInfo">Malla actual</div>
+          <a class="menu-item" href="./curriculum-builder/">Crear malla</a>
+          <button type="button" class="menu-item" onclick="downloadCurriculum(); closeDropdowns();">Descargar malla</button>
+          <label class="menu-item menu-file-label">Cargar malla<input type="file" id="curriculumUpload" accept=".txt,.csv" /></label>
+          <button type="button" class="menu-item muted" onclick="openCurriculumFormatModal(); closeDropdowns();">Formato para cargar una malla</button>
+        </div>
+      </details>
+    </div>
+  </header>
+
+  <div class="legend">
+    <div class="legend-item"><div class="dot approved"></div><span>Aprobada</span></div>
+    <div class="legend-item"><div class="dot available"></div><span>Disponible para rendir</span></div>
+    <div class="legend-item"><div class="dot blocked"></div><span>Bloqueada por correlativas</span></div>
+  </div>
+
+  <main class="page-layout">
+    <section class="grid" id="grid"></section>
+    <aside class="dependency-panel" id="dependencyPanel" aria-live="polite"></aside>
+  </main>
+
+  <button class="scroll-top" type="button" onclick="scrollToPageTop()" aria-label="Volver al inicio de la página" title="Volver arriba">↑</button>
+
+  <div class="footer">
+    <strong>Malla actual:</strong> <span id="footerMallaLabel">Ingeniería Informática 2016</span>. Usá los menús de la esquina superior derecha para cargar/descargar progreso o cambiar la malla.
+  </div>
+
+  <div class="modal-backdrop" id="progressDownloadModal" hidden role="dialog" aria-modal="true" aria-labelledby="progressDownloadTitle">
+    <div class="modal-card">
+      <div class="modal-kicker">Descargar progreso</div>
+      <div class="modal-title" id="progressDownloadTitle">Personalizá el nombre del archivo</div>
+      <p class="modal-message">Podés agregar un nombre para identificar el archivo, o descargarlo directamente con el nombre automático de la malla actual.</p>
+      <label class="modal-input-label" for="progressDownloadName">Nombre opcional</label>
+      <input class="modal-input" id="progressDownloadName" type="text" placeholder="Ejemplo: John_Contreras" />
+      <div class="modal-actions spread">
+        <button type="button" class="secondary-action" onclick="closeProgressDownloadModal()">Cancelar</button>
+        <div class="modal-action-group">
+          <button type="button" class="secondary-action" onclick="downloadProgressDirect()">Descargar directo</button>
+          <button type="button" class="primary-action" onclick="downloadProgressWithCustomName()">Descargar con nombre</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="infoModal" hidden role="dialog" aria-modal="true" aria-labelledby="infoModalTitle">
+    <div class="modal-card large-modal-card">
+      <div class="modal-kicker" id="infoModalKicker">Formato</div>
+      <div class="modal-title" id="infoModalTitle">Información</div>
+      <div class="modal-message rich-modal-content" id="infoModalContent"></div>
+      <div class="modal-actions"><button class="modal-close" type="button" onclick="closeInfoModal()">Entendido</button></div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="alertModal" hidden role="dialog" aria-modal="true" aria-labelledby="alertModalTitle">
+    <div class="modal-card">
+      <div class="modal-kicker" id="alertModalKicker">Atención</div>
+      <div class="modal-title" id="alertModalTitle">Mensaje</div>
+      <p class="modal-message" id="alertModalMessage"></p>
+      <div class="modal-error-list" id="alertModalErrors"></div>
+      <div class="modal-actions"><button class="modal-close" type="button" onclick="closeAlertModal()">Entendido</button></div>
+    </div>
+  </div>
+
+  <script>
+    const DEFAULT_CURRICULUM = { id: 'informatica-2016', name: 'Ingeniería Informática', year: '2016', semestersCount: 10, exportVersion: 'v4-subject-id', warning: 'El CSV fuente tenía el ID 340 repetido; Electiva 2 usa subject_id 340-ELECTIVA2 para que el progreso sea unívoco.' };
+    const DEFAULT_SUBJECTS = [{"semesterOrder": 1, "semester": "Primero", "code": "02", "name": "Calculo 1", "reqs": []}, {"semesterOrder": 1, "semester": "Primero", "code": "03", "name": "Fisica 1", "reqs": []}, {"semesterOrder": 1, "semester": "Primero", "code": "301", "name": "Comunicacion 1", "reqs": []}, {"semesterOrder": 1, "semester": "Primero", "code": "302", "name": "Arquitectura y Componentes", "reqs": []}, {"semesterOrder": 1, "semester": "Primero", "code": "314", "name": "Programacion 1", "reqs": []}, {"semesterOrder": 2, "semester": "Segundo", "code": "010", "name": "Calculo 2", "reqs": ["02"]}, {"semesterOrder": 2, "semester": "Segundo", "code": "011", "name": "Fisica 2", "reqs": ["03"]}, {"semesterOrder": 2, "semester": "Segundo", "code": "304", "name": "Comunicacion 2", "reqs": ["301"]}, {"semesterOrder": 2, "semester": "Segundo", "code": "305", "name": "Matematica Discreta", "reqs": []}, {"semesterOrder": 2, "semester": "Segundo", "code": "303", "name": "Programacion 2", "reqs": ["314", "02"]}, {"semesterOrder": 3, "semester": "Tercero", "code": "014", "name": "Calculo 3", "reqs": ["010"]}, {"semesterOrder": 3, "semester": "Tercero", "code": "015", "name": "Fisica 3", "reqs": ["010", "011"]}, {"semesterOrder": 3, "semester": "Tercero", "code": "309", "name": "Ingles 1", "reqs": []}, {"semesterOrder": 3, "semester": "Tercero", "code": "307", "name": "Diseno Digital", "reqs": ["302"]}, {"semesterOrder": 3, "semester": "Tercero", "code": "331", "name": "Paradigmas de la Programacion", "reqs": ["303"]}, {"semesterOrder": 4, "semester": "Cuarto", "code": "017", "name": "Estadistica", "reqs": ["010"]}, {"semesterOrder": 4, "semester": "Cuarto", "code": "312", "name": "Contabilidad", "reqs": []}, {"semesterOrder": 4, "semester": "Cuarto", "code": "311", "name": "Ingles 2", "reqs": ["309"]}, {"semesterOrder": 4, "semester": "Cuarto", "code": "318", "name": "Redes 1", "reqs": ["302"]}, {"semesterOrder": 4, "semester": "Cuarto", "code": "313", "name": "Administracion", "reqs": []}, {"semesterOrder": 4, "semester": "Cuarto", "code": "308", "name": "Algoritmos 1", "reqs": ["305", "331", "014"]}, {"semesterOrder": 5, "semester": "Quinto", "code": "306", "name": "Tecnologias Emergentes", "reqs": ["308", "311"]}, {"semesterOrder": 5, "semester": "Quinto", "code": "316", "name": "Economia", "reqs": ["312"]}, {"semesterOrder": 5, "semester": "Quinto", "code": "317", "name": "Ingles 3", "reqs": ["311"]}, {"semesterOrder": 5, "semester": "Quinto", "code": "310", "name": "Bases de Datos", "reqs": ["308"]}, {"semesterOrder": 5, "semester": "Quinto", "code": "320", "name": "Redes 2", "reqs": ["303", "318", "015"]}, {"semesterOrder": 6, "semester": "Sexto", "code": "321", "name": "Algoritmos 2", "reqs": ["308"]}, {"semesterOrder": 6, "semester": "Sexto", "code": "323", "name": "Ingles 4", "reqs": ["317"]}, {"semesterOrder": 6, "semester": "Sexto", "code": "322", "name": "Organizacion y Recursos Humanos", "reqs": ["313"]}, {"semesterOrder": 6, "semester": "Sexto", "code": "330", "name": "Sistemas Operativos", "reqs": ["302", "308"]}, {"semesterOrder": 6, "semester": "Sexto", "code": "315", "name": "Sistemas de Gestion", "reqs": ["310", "306", "316", "313"]}, {"semesterOrder": 7, "semester": "Septimo", "code": "324", "name": "Ingenieria de Software 1", "reqs": ["315", "322"]}, {"semesterOrder": 7, "semester": "Septimo", "code": "327", "name": "Sistemas Web y Distribuidos", "reqs": ["320", "321", "330"]}, {"semesterOrder": 7, "semester": "Septimo", "code": "325", "name": "Electronica", "reqs": ["015", "302"]}, {"semesterOrder": 7, "semester": "Septimo", "code": "009", "name": "Algebra Lineal", "reqs": []}, {"semesterOrder": 7, "semester": "Septimo", "code": "336", "name": "Interaccion Hombre Maquina", "reqs": ["308", "330"]}, {"semesterOrder": 8, "semester": "Octavo", "code": "328", "name": "Ingenieria de Software 2", "reqs": ["324", "321", "327"]}, {"semesterOrder": 8, "semester": "Octavo", "code": "332", "name": "Administracion Financiera", "reqs": ["322", "312"]}, {"semesterOrder": 8, "semester": "Octavo", "code": "340", "name": "Seguridad Informatica", "reqs": ["320", "324", "327"]}, {"semesterOrder": 8, "semester": "Octavo", "code": "329", "name": "Microprocesadores y Lenguaje de Ensamblador", "reqs": ["308", "307"]}, {"semesterOrder": 8, "semester": "Octavo", "code": "338", "name": "Procesamiento Digital de Imagenes", "reqs": ["015", "017", "321", "009"]}, {"semesterOrder": 9, "semester": "Noveno", "code": "335", "name": "Auditoria", "reqs": ["322", "315"]}, {"semesterOrder": 9, "semester": "Noveno", "code": "319", "name": "Marketing", "reqs": ["313", "306"]}, {"semesterOrder": 9, "semester": "Noveno", "code": "337", "name": "Seminario de Trabajo Final de Grado", "reqs": ["328", "332", "340", "329", "338"]}, {"semesterOrder": 9, "semester": "Noveno", "code": "339", "name": "Electiva 1", "reqs": []}, {"semesterOrder": 9, "semester": "Noveno", "code": "326", "name": "Inteligencia Artificial", "reqs": ["321", "009", "017"]}, {"semesterOrder": 10, "semester": "Decimo", "code": "340-ELECTIVA2", "name": "Electiva 2", "reqs": []}, {"semesterOrder": 10, "semester": "Decimo", "code": "131", "name": "Aspectos Legales y Profesionales de la Informatica", "reqs": []}, {"semesterOrder": 10, "semester": "Decimo", "code": "334", "name": "Diseno de Compiladores", "reqs": ["329", "331", "321"]}, {"semesterOrder": 10, "semester": "Decimo", "code": "333", "name": "Graficos por Computadora", "reqs": ["321", "009"]}];
+
+    let currentCurriculum = { ...DEFAULT_CURRICULUM };
+    let subjects = cloneSubjects(DEFAULT_SUBJECTS);
+    let state = {};
+    const expandedSemesters = new Set();
+    let selectedSubjectCode = null;
+
+    function cloneSubjects(list) {
+      return list.map(subject => ({ semesterOrder: Number(subject.semesterOrder), semester: subject.semester, code: subject.code, name: subject.name, reqs: [...(subject.reqs || [])] }));
+    }
+
+    function resetState() {
+      state = {};
+      subjects.forEach(subject => { state[subject.code] = false; });
+    }
+
+    function normalize(str) {
+      return String(str || '').trim().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '').toLowerCase();
+    }
+
+    function escapeHtml(value) {
+      return String(value).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+    }
+
+    function parseCsvLine(line) {
+      const result = [];
+      let current = '';
+      let inQuotes = false;
+      for (let i = 0; i < line.length; i += 1) {
+        const char = line[i];
+        const next = line[i + 1];
+        if (char === '"') {
+          if (inQuotes && next === '"') { current += '"'; i += 1; }
+          else { inQuotes = !inQuotes; }
+        } else if (char === ',' && !inQuotes) {
+          result.push(current.trim()); current = '';
+        } else {
+          current += char;
+        }
+      }
+      result.push(current.trim());
+      return result;
+    }
+
+    function csvEscape(value) {
+      const text = String(value ?? '');
+      return /[",\n\r]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text;
+    }
+
+    function showAlertModal({ kicker = 'Atención', title, message, errors = [] }) {
+      const modal = document.getElementById('alertModal');
+      document.getElementById('alertModalKicker').textContent = kicker;
+      document.getElementById('alertModalTitle').textContent = title;
+      document.getElementById('alertModalMessage').textContent = message;
+      document.getElementById('alertModalErrors').innerHTML = errors.map(error => `<div class="modal-error-item">${escapeHtml(error)}</div>`).join('');
+      modal.hidden = false;
+    }
+
+    function closeAlertModal() { document.getElementById('alertModal').hidden = true; }
+
+    function closeDropdowns() {
+      document.querySelectorAll('.menu-dropdown[open]').forEach(dropdown => { dropdown.open = false; });
+    }
+
+    function showInfoModal({ kicker = 'Formato', title, contentHtml }) {
+      document.getElementById('infoModalKicker').textContent = kicker;
+      document.getElementById('infoModalTitle').textContent = title;
+      document.getElementById('infoModalContent').innerHTML = contentHtml;
+      document.getElementById('infoModal').hidden = false;
+    }
+
+    function closeInfoModal() { document.getElementById('infoModal').hidden = true; }
+
+    function openProgressFormatModal() {
+      showInfoModal({
+        kicker: 'Formato del progreso',
+        title: 'Archivo CSV de progreso',
+        contentHtml: `
+          <p>Este archivo guarda solamente qué materias están aprobadas para la malla actual.</p>
+          <ul>
+            <li>La página lee solo los dos primeros valores de cada línea: <strong>subject_id,is_approved</strong>.</li>
+            <li>Los valores extra se ignoran para mantener compatibilidad con futuras versiones.</li>
+            <li><strong>aprobada</strong> debe ser <strong>true</strong> o <strong>false</strong>.</li>
+            <li>Si el archivo intenta aprobar una materia bloqueada, no se carga y muestra el motivo.</li>
+          </ul>
+          <code class="modal-code-block">#progreso,informatica-2016,Ingeniería Informática,2016,v3\nCALC1,true,informatica-2016,Calculo 1,Primero\nCALC2,false,informatica-2016,Calculo 2,Segundo</code>
+          <p>También se aceptan archivos antiguos por nombre como:</p>
+          <code class="modal-code-block">Calculo1,true\nCalculo2,false</code>`
+      });
+    }
+
+    function openCurriculumFormatModal() {
+      showInfoModal({
+        kicker: 'Formato de malla',
+        title: 'Archivo CSV para cargar una malla',
+        contentHtml: `
+          <p>Este archivo define la estructura académica: carrera, año, semestres, materias y correlativas.</p>
+          <ul>
+            <li>La primera línea define metadata de la malla.</li>
+            <li>Cada materia debe tener un <strong>subject_id</strong> único.</li>
+            <li>Las correlativas van en <strong>requirements</strong> separadas por <strong>|</strong>.</li>
+            <li>Se recomienda usar <strong>subject_id</strong> en las correlativas para evitar problemas con tildes o nombres repetidos.</li>
+          </ul>
+          <code class="modal-code-block">#malla,informatica-2016,Ingeniería Informática,2016,10\nsemester_order,semester_name,subject_code,subject_name,requirements\n1,Primero,CALC1,Calculo 1,\n1,Primero,PROG1,Programacion 1,\n2,Segundo,CALC2,Calculo 2,CALC1\n2,Segundo,PROG2,Programacion 2,PROG1|CALC1</code>
+          <p>La página valida que no haya subject_id repetidos, correlativas inexistentes, autocorrelativas ni ciclos.</p>`
+      });
+    }
+
+    document.addEventListener('click', event => {
+      if (!event.target.closest('.menu-dropdown')) closeDropdowns();
+    });
+
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape') {
+        closeDropdowns();
+        closeInfoModal();
+        closeAlertModal();
+        closeProgressDownloadModal();
+      }
+    });
+    function getSubjectByCode(code) { return subjects.find(subject => subject.code === code); }
+
+    function findSubjectByIdentifier(identifier) {
+      const clean = normalize(identifier);
+      if (!clean) return { subject: null, ambiguous: false };
+      const exactCode = subjects.find(subject => normalize(subject.code) === clean);
+      if (exactCode) return { subject: exactCode, ambiguous: false };
+      const nameMatches = subjects.filter(subject => normalize(subject.name) === clean);
+      if (nameMatches.length === 1) return { subject: nameMatches[0], ambiguous: false };
+      if (nameMatches.length > 1) return { subject: null, ambiguous: true };
+      return { subject: null, ambiguous: false };
+    }
+
+    function getSubjectDisplay(subject) { return `${subject.name} (ID ${subject.code})`; }
+    function canTake(subject, sourceState = state) { return subject.reqs.every(reqCode => sourceState[reqCode]); }
+
+    function getStatus(subject) {
+      if (state[subject.code]) return { text: 'Aprobada', class: 'approved' };
+      if (canTake(subject)) return { text: 'Disponible', class: 'available' };
+      return { text: 'Bloqueada', class: 'blocked' };
+    }
+
+    function getMissingRequirementsForState(subject, sourceState) {
+      return subject.reqs.filter(reqCode => !sourceState[reqCode]).map(reqCode => getSubjectByCode(reqCode)).filter(Boolean).map(req => getSubjectDisplay(req));
+    }
+
+    function getDependencies(subjectCode) { return subjects.filter(subject => subject.reqs.includes(subjectCode)); }
+
+    function getOrderedSemesters() {
+      const map = new Map();
+      subjects.forEach(subject => {
+        const key = `${subject.semesterOrder}::${subject.semester}`;
+        if (!map.has(key)) map.set(key, { order: subject.semesterOrder, name: subject.semester });
+      });
+      return [...map.values()].sort((a, b) => a.order - b.order);
+    }
+
+    function getCurrentCurriculumDisplayName() {
+      return `${currentCurriculum.name}${currentCurriculum.year ? ` ${currentCurriculum.year}` : ''}`;
+    }
+
+    function renderCurriculumInfo() {
+      const semesters = getOrderedSemesters();
+      const currentLabel = getCurrentCurriculumDisplayName();
+      const labelEl = document.getElementById('currentMallaLabel');
+      const infoEl = document.getElementById('currentMallaInfo');
+      const footerEl = document.getElementById('footerMallaLabel');
+      if (labelEl) labelEl.textContent = currentLabel;
+      if (footerEl) footerEl.textContent = currentLabel;
+      if (infoEl) {
+        infoEl.innerHTML = `
+          <strong>${escapeHtml(currentLabel)}</strong><br />
+          ${semesters.length} semestres · ${subjects.length} materias<br />
+          ID: ${escapeHtml(currentCurriculum.id)}${currentCurriculum.warning ? `<br /><span style="color:#92400e; font-weight:800;">⚠ ${escapeHtml(currentCurriculum.warning)}</span>` : ''}`;
+      }
+    }
+
+    function getAccordionControlsHtml() {
+      return `
+        <div class="dependency-control-bar" aria-label="Controles de semestres">
+          <button type="button" onclick="expandAllSemesters()">Expandir semestres</button>
+          <button type="button" onclick="collapseAllSemesters()">Contraer semestres</button>
+        </div>`;
+    }
+
+    function renderDependencyPanel() {
+      const panel = document.getElementById('dependencyPanel');
+      const selectedSubject = selectedSubjectCode ? getSubjectByCode(selectedSubjectCode) : null;
+      if (!selectedSubject) {
+        panel.innerHTML = `${getAccordionControlsHtml()}<div class="dependency-kicker">Vista rápida</div><div class="dependency-title">Seleccioná una materia</div><p class="dependency-subtitle">Al tocar una card vas a ver de qué materias es correlativa, su semestre y su estado actual.</p>`;
+        return;
+      }
+      const dependencies = getDependencies(selectedSubject.code);
+      const dependencyListHtml = dependencies.length
+        ? `<div class="dependency-list">${dependencies.map(subject => {
+            const status = getStatus(subject);
+            return `<div class="dependency-item"><div class="dependency-item-top"><span class="dependency-subject-name">${escapeHtml(subject.name)}</span><span class="status ${status.class}">${status.text}</span></div><div class="dependency-semester">${escapeHtml(subject.semester)} semestre · ID ${escapeHtml(subject.code)}</div></div>`;
+          }).join('')}</div>`
+        : '<p class="dependency-subtitle">Esta materia no desbloquea otras materias en la malla cargada.</p>';
+      panel.innerHTML = `${getAccordionControlsHtml()}<div class="dependency-kicker">Materia seleccionada</div><div class="dependency-title">${escapeHtml(selectedSubject.name)}</div><p class="dependency-subtitle">${escapeHtml(selectedSubject.semester)} semestre · ID ${escapeHtml(selectedSubject.code)}<br />${dependencies.length ? `Es correlativa de ${dependencies.length} materia${dependencies.length === 1 ? '' : 's'}.` : 'No tiene materias dependientes registradas.'}</p>${dependencyListHtml}`;
+    }
+
+    function selectSubject(subjectCode) { selectedSubjectCode = subjectCode; render(); }
+    function scrollToPageTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+    function getReqsHtml(subject) {
+      if (!subject.reqs.length) return '<span class="empty-req">Ninguna</span>';
+      return `<div class="req-list">${subject.reqs.map(reqCode => {
+        const found = getSubjectByCode(reqCode);
+        return `<div class="req-chip"><span class="req-name">${escapeHtml(found ? found.name : reqCode)}</span><span class="req-semester">${escapeHtml(found ? `${found.semester} semestre` : 'Semestre no encontrado')}</span></div>`;
+      }).join('')}</div>`;
+    }
+
+    function getDependencyButtonHtml(subject) {
+      const dependencies = getDependencies(subject.code);
+      return `<button class="dependency-trigger" type="button">${dependencies.length ? `Ver ${dependencies.length} dependiente${dependencies.length === 1 ? '' : 's'}` : 'Ver dependencias'}</button>`;
+    }
+
+    function getSemesterStats(semesterSubjects) {
+      return semesterSubjects.reduce((acc, subject) => { acc[getStatus(subject).class] += 1; return acc; }, { approved: 0, available: 0, blocked: 0 });
+    }
+
+    function expandAllSemesters() { getOrderedSemesters().forEach(semester => expandedSemesters.add(semester.name)); render(); }
+    function collapseAllSemesters() { expandedSemesters.clear(); render(); }
+
+    function render() {
+      const grid = document.getElementById('grid');
+      grid.innerHTML = '';
+      renderCurriculumInfo();
+      getOrderedSemesters().forEach(semester => {
+        const semesterSubjects = subjects.filter(subject => subject.semester === semester.name);
+        const stats = getSemesterStats(semesterSubjects);
+        const wrapper = document.createElement('details');
+        wrapper.className = 'semester';
+        wrapper.open = expandedSemesters.has(semester.name);
+        wrapper.addEventListener('toggle', () => wrapper.open ? expandedSemesters.add(semester.name) : expandedSemesters.delete(semester.name));
+        const summary = document.createElement('summary');
+        summary.className = 'semester-summary';
+        summary.innerHTML = `<div class="semester-title-area"><span class="semester-arrow">▶</span><span class="semester-title">${escapeHtml(semester.name)} Semestre</span><span class="semester-count">${semesterSubjects.length} materias</span></div><div class="semester-stats"><span class="stat-pill approved-text">${stats.approved} aprobadas</span><span class="stat-pill available-text">${stats.available} disponibles</span><span class="stat-pill blocked-text">${stats.blocked} bloqueadas</span></div>`;
+        const content = document.createElement('div');
+        content.className = 'semester-content';
+        semesterSubjects.forEach(subject => {
+          const status = getStatus(subject);
+          const isLocked = !state[subject.code] && !canTake(subject);
+          const card = document.createElement('div');
+          card.className = `subject ${status.class}-card${selectedSubjectCode === subject.code ? ' selected-card' : ''}`;
+          card.innerHTML = `<div class="subject-header"><div><div class="subject-title">${escapeHtml(subject.name)}</div><span class="subject-code">ID ${escapeHtml(subject.code)}</span></div><div class="status ${status.class}">${status.text}</div></div><span class="reqs-label">Correlativas</span>${getReqsHtml(subject)}${getDependencyButtonHtml(subject)}<label class="checkbox ${isLocked ? 'disabled' : ''}" title="${isLocked ? 'Primero aprobá sus correlativas' : ''}"><input type="checkbox" ${state[subject.code] ? 'checked' : ''} ${isLocked ? 'disabled' : ''} />${isLocked ? 'Bloqueada por correlativas' : 'Marcar como aprobada'}</label>`;
+          const checkbox = card.querySelector('input');
+          const dependencyButton = card.querySelector('.dependency-trigger');
+          checkbox.addEventListener('change', event => {
+            const wantsToApprove = event.target.checked;
+            if (wantsToApprove && !canTake(subject)) {
+              event.target.checked = false;
+              showAlertModal({ kicker: 'Materia bloqueada', title: 'No podés marcar esta materia como aprobada', message: 'Primero tenés que aprobar sus correlativas. Por eso el cambio no fue aplicado.', errors: [`${getSubjectDisplay(subject)} requiere: ${getMissingRequirementsForState(subject, state).join(', ') || 'correlativas pendientes'}`] });
+              return;
+            }
+            state[subject.code] = wantsToApprove;
+            render();
+          });
+          dependencyButton.addEventListener('click', event => { event.stopPropagation(); selectSubject(subject.code); });
+          card.addEventListener('click', event => { if (event.target.closest('input') || event.target.closest('label') || event.target.closest('button')) return; selectSubject(subject.code); });
+          content.appendChild(card);
+        });
+        wrapper.appendChild(summary); wrapper.appendChild(content); grid.appendChild(wrapper);
+      });
+      renderDependencyPanel();
+    }
+
+    function sanitizeFileNamePart(value) {
+      return String(value || '').trim().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-zA-Z0-9_-]+/g, '_').replace(/^_+|_+$/g, '').slice(0, 60);
+    }
+
+    function downloadTextFile(content, fileName) {
+      const blob = new Blob([content], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = fileName; a.click(); URL.revokeObjectURL(url);
+    }
+
+    function getDownloadFileName(prefix, customName = '', extension = 'csv') {
+      const cleanName = sanitizeFileNamePart(customName);
+      const cleanCurriculum = sanitizeFileNamePart(currentCurriculum.id || currentCurriculum.name || 'malla');
+      return cleanName ? `${prefix}_${cleanCurriculum}_${cleanName}.${extension}` : `${prefix}_${cleanCurriculum}.${extension}`;
+    }
+
+    function buildProgressCsvContent() {
+      const header = `#progreso,${csvEscape(currentCurriculum.id)},${csvEscape(currentCurriculum.name)},${csvEscape(currentCurriculum.year)},${currentCurriculum.exportVersion}`;
+      const columns = 'subject_id,is_approved,curriculum_id,subject_name,semester';
+      const lines = subjects.map(subject => [subject.code, state[subject.code], currentCurriculum.id, subject.name, subject.semester].map(csvEscape).join(','));
+      return [header, columns, ...lines].join('\n');
+    }
+
+    function downloadProgress(customName = '') {
+      downloadTextFile(buildProgressCsvContent(), getDownloadFileName('progreso_malla', customName));
+    }
+
+    function openProgressDownloadModal() {
+      const input = document.getElementById('progressDownloadName');
+      if (input) input.value = '';
+      document.getElementById('progressDownloadModal').hidden = false;
+      setTimeout(() => input?.focus(), 0);
+    }
+
+    function closeProgressDownloadModal() { document.getElementById('progressDownloadModal').hidden = true; }
+    function downloadProgressDirect() { downloadProgress(''); closeProgressDownloadModal(); }
+    function downloadProgressWithCustomName() { downloadProgress(document.getElementById('progressDownloadName')?.value || ''); closeProgressDownloadModal(); }
+
+    function downloadCurriculum() {
+      const header = ['#malla', currentCurriculum.id, currentCurriculum.name, currentCurriculum.year || '', currentCurriculum.semestersCount || getOrderedSemesters().length].map(csvEscape).join(',');
+      const columns = 'semester_order,semester_name,subject_id,subject_name,requirements';
+      const rows = subjects.map(subject => [subject.semesterOrder, subject.semester, subject.code, subject.name, subject.reqs.join('|')].map(csvEscape).join(','));
+      downloadTextFile([header, columns, ...rows].join('\n'), getDownloadFileName('malla'));
+    }
+
+    function parseProgressFile(content) {
+      const proposedState = {};
+      const errors = [];
+      let recognizedRows = 0;
+      subjects.forEach(subject => { proposedState[subject.code] = false; });
+      content.split(/\r?\n/).forEach((line, index) => {
+        const lineNumber = index + 1;
+        const trimmedLine = line.trim();
+        if (!trimmedLine || trimmedLine.startsWith('#')) return;
+        const parts = parseCsvLine(trimmedLine);
+        const normalizedFirst = normalize(parts[0]);
+        if (['subject_id', 'subjectid', 'subjectcode', 'subject_code', 'materiaocodigo', 'materia', 'codigo'].includes(normalizedFirst)) return;
+        const [rawIdentifier, rawValue] = parts;
+        if (!rawIdentifier || rawValue === undefined) { errors.push(`Línea ${lineNumber}: se esperaba el formato subject_id,is_approved.`); return; }
+        const match = findSubjectByIdentifier(rawIdentifier);
+        if (match.ambiguous) { errors.push(`Línea ${lineNumber}: "${rawIdentifier}" coincide con más de una materia. Usá el subject_id de la materia.`); return; }
+        if (!match.subject) return;
+        const normalizedValue = rawValue.trim().toLowerCase();
+        if (!['true', 'false'].includes(normalizedValue)) { errors.push(`Línea ${lineNumber}: el valor de ${getSubjectDisplay(match.subject)} debe ser true o false.`); return; }
+        proposedState[match.subject.code] = normalizedValue === 'true';
+        recognizedRows += 1;
+      });
+      if (!recognizedRows) errors.push('No se reconoció ninguna materia de la malla cargada en el archivo de progreso.');
+      subjects.forEach(subject => {
+        if (!proposedState[subject.code]) return;
+        const missingReqs = getMissingRequirementsForState(subject, proposedState);
+        if (missingReqs.length) errors.push(`${getSubjectDisplay(subject)} está marcada como aprobada, pero le falta aprobar: ${missingReqs.join(', ')}.`);
+      });
+      return { valid: errors.length === 0, proposedState, errors };
+    }
+
+    function resolveRequirementToken(token, subjectByCode, subjectByName) {
+      const cleanToken = token.trim();
+      if (!cleanToken) return null;
+      const codeKey = normalize(cleanToken);
+      if (subjectByCode.has(codeKey)) return subjectByCode.get(codeKey).code;
+      const nameMatches = subjectByName.get(normalize(cleanToken)) || [];
+      if (nameMatches.length === 1) return nameMatches[0].code;
+      return { error: cleanToken, ambiguous: nameMatches.length > 1 };
+    }
+
+    function hasCycle(subjectList) {
+      const graph = new Map(subjectList.map(subject => [subject.code, subject.reqs]));
+      const visiting = new Set();
+      const visited = new Set();
+      function visit(code) {
+        if (visited.has(code)) return false;
+        if (visiting.has(code)) return true;
+        visiting.add(code);
+        for (const reqCode of graph.get(code) || []) if (visit(reqCode)) return true;
+        visiting.delete(code); visited.add(code); return false;
+      }
+      return subjectList.some(subject => visit(subject.code));
+    }
+
+    function parseCurriculumFile(content) {
+      const errors = [];
+      const rows = [];
+      const metadata = {};
+      content.split(/\r?\n/).forEach((line, index) => {
+        const lineNumber = index + 1;
+        const trimmedLine = line.trim();
+        if (!trimmedLine) return;
+        if (trimmedLine.startsWith('#')) {
+          const parts = parseCsvLine(trimmedLine.slice(1));
+          const key = normalize(parts[0]);
+          if (key === 'malla') { metadata.id = parts[1] || ''; metadata.name = parts[2] || ''; metadata.year = parts[3] || ''; metadata.semestersCount = parts[4] || ''; }
+          else if (['mallaid', 'id'].includes(key)) metadata.id = parts[1] || '';
+          else if (['careername', 'carrera', 'nombrecarrera', 'name'].includes(key)) metadata.name = parts[1] || '';
+          else if (['curriculumyear', 'ano', 'anio', 'year'].includes(key)) metadata.year = parts[1] || '';
+          else if (['semesterscount', 'cantidadsemestres', 'semestres'].includes(key)) metadata.semestersCount = parts[1] || '';
+          return;
+        }
+        const parts = parseCsvLine(trimmedLine);
+        const normalizedFirst = normalize(parts[0]);
+        if (normalizedFirst === 'semesterorder' || normalizedFirst === 'ordensemestre') return;
+        if (parts.length < 4) { errors.push(`Línea ${lineNumber}: se esperaba semester_order,semester_name,subject_id,subject_name,requirements.`); return; }
+        rows.push({ lineNumber, semesterOrder: Number(parts[0]), semester: parts[1], code: parts[2], name: parts[3], rawReqs: parts[4] || '' });
+      });
+      if (!metadata.id) errors.push('Falta metadata: #malla,id,nombre_carrera,año,cantidad_semestres.');
+      if (!metadata.name) errors.push('Falta el nombre de la carrera en la metadata de la malla.');
+      if (!metadata.year) errors.push('Falta el año de la malla en la metadata.');
+      if (!rows.length) errors.push('La malla no tiene materias cargadas.');
+      const codeKeys = new Set();
+      const subjectByCode = new Map();
+      const subjectByName = new Map();
+      const draftSubjects = [];
+      rows.forEach(row => {
+        if (!Number.isInteger(row.semesterOrder) || row.semesterOrder <= 0) errors.push(`Línea ${row.lineNumber}: el orden del semestre debe ser un número entero positivo.`);
+        if (!row.semester) errors.push(`Línea ${row.lineNumber}: falta el nombre del semestre.`);
+        if (!row.code) errors.push(`Línea ${row.lineNumber}: falta el subject_id de la materia.`);
+        if (!row.name) errors.push(`Línea ${row.lineNumber}: falta el nombre de la materia.`);
+        const codeKey = normalize(row.code);
+        if (codeKey && codeKeys.has(codeKey)) errors.push(`Línea ${row.lineNumber}: el subject_id ${row.code} está repetido.`);
+        codeKeys.add(codeKey);
+        const subject = { semesterOrder: row.semesterOrder, semester: row.semester, code: row.code, name: row.name, reqs: [], rawReqs: row.rawReqs, lineNumber: row.lineNumber };
+        draftSubjects.push(subject); subjectByCode.set(codeKey, subject);
+        const nameKey = normalize(row.name);
+        const current = subjectByName.get(nameKey) || [];
+        current.push(subject); subjectByName.set(nameKey, current);
+      });
+      draftSubjects.forEach(subject => {
+        const reqTokens = subject.rawReqs.split('|').map(req => req.trim()).filter(Boolean);
+        const resolvedReqs = [];
+        reqTokens.forEach(token => {
+          const resolved = resolveRequirementToken(token, subjectByCode, subjectByName);
+          if (!resolved) return;
+          if (typeof resolved === 'object' && resolved.error) {
+            errors.push(resolved.ambiguous ? `Línea ${subject.lineNumber}: la correlativa "${resolved.error}" es ambigua. Usá el código.` : `Línea ${subject.lineNumber}: la correlativa "${resolved.error}" no existe en la malla.`);
+            return;
+          }
+          if (resolved === subject.code) { errors.push(`Línea ${subject.lineNumber}: una materia no puede ser correlativa de sí misma.`); return; }
+          if (!resolvedReqs.includes(resolved)) resolvedReqs.push(resolved);
+        });
+        subject.reqs = resolvedReqs;
+      });
+      const finalSubjects = draftSubjects.map(({ rawReqs, lineNumber, ...subject }) => subject);
+      if (!errors.length && hasCycle(finalSubjects)) errors.push('La malla tiene una correlativa circular. Revisá los requisitos porque una cadena vuelve sobre sí misma.');
+      const semestersCount = Number(metadata.semestersCount) || new Set(finalSubjects.map(subject => subject.semester)).size;
+      return { valid: errors.length === 0, errors, curriculum: { id: metadata.id, name: metadata.name, year: metadata.year, semestersCount, exportVersion: 'v4-subject-id' }, subjects: finalSubjects.sort((a, b) => a.semesterOrder - b.semesterOrder || a.name.localeCompare(b.name)) };
+    }
+
+    document.getElementById('progressUpload').addEventListener('change', event => {
+      const file = event.target.files[0]; if (!file) return;
+      const reader = new FileReader();
+      reader.onload = e => {
+        const result = parseProgressFile(e.target.result);
+        if (!result.valid) { event.target.value = ''; showAlertModal({ kicker: 'Archivo no cargado', title: 'No se pudo cargar el progreso', message: 'El archivo intenta marcar materias como aprobadas sin que sus correlativas también estén aprobadas, o tiene datos inválidos. No se aplicó ningún cambio.', errors: result.errors }); return; }
+        state = result.proposedState; event.target.value = ''; render();
+        showAlertModal({ kicker: 'Progreso cargado', title: 'El progreso fue cargado correctamente', message: 'Se aplicaron las materias aprobadas sobre la malla actual.', errors: [] });
+      };
+      reader.readAsText(file);
+    });
+
+    document.getElementById('curriculumUpload').addEventListener('change', event => {
+      const file = event.target.files[0]; if (!file) return;
+      const reader = new FileReader();
+      reader.onload = e => {
+        const result = parseCurriculumFile(e.target.result);
+        if (!result.valid) { event.target.value = ''; showAlertModal({ kicker: 'Malla no cargada', title: 'No se pudo cargar la malla', message: 'El archivo de malla tiene datos incompletos o correlativas inválidas. No se reemplazó la malla actual.', errors: result.errors }); return; }
+        currentCurriculum = result.curriculum; subjects = result.subjects; selectedSubjectCode = null; expandedSemesters.clear(); resetState(); event.target.value = ''; render();
+        showAlertModal({ kicker: 'Malla cargada', title: 'La malla fue cargada correctamente', message: `${currentCurriculum.name} · Año ${currentCurriculum.year} · ${subjects.length} materias. El progreso fue reiniciado para evitar mezclar avances de otra malla.`, errors: [] });
+      };
+      reader.readAsText(file);
+    });
+
+    resetState();
+    render();
+  </script>
+</body>
+</html>
