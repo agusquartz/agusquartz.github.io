@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simon Says ASM 8086 · AgusQuartz</title>
+  <meta name="description" content="Simon Says desarrollado en Assembly 8086 para emu8086, con interfaz en modo texto usando servicios de video BIOS INT 10h." />
+  <style>
+    :root {
+      --bg: #070a12;
+      --bg-soft: #0b1020;
+      --surface: rgba(15, 23, 42, 0.74);
+      --surface-strong: rgba(15, 23, 42, 0.96);
+      --border: rgba(148, 163, 184, 0.18);
+      --border-strong: rgba(148, 163, 184, 0.34);
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --muted-2: #64748b;
+      --primary: #7c3aed;
+      --primary-2: #22d3ee;
+      --green: #34d399;
+      --yellow: #fbbf24;
+      --red: #fb7185;
+      --blue: #60a5fa;
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.38);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 12% 12%, rgba(124, 58, 237, 0.24), transparent 26%),
+        radial-gradient(circle at 88% 10%, rgba(34, 211, 238, 0.18), transparent 28%),
+        radial-gradient(circle at 50% 96%, rgba(16, 185, 129, 0.08), transparent 24%),
+        var(--bg);
+      color: var(--text);
+      padding: 22px;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(circle at center, black 0%, transparent 74%);
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    button, a.button {
+      border: 1px solid var(--border-strong);
+      background: rgba(15, 23, 42, 0.82);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-weight: 850;
+      cursor: pointer;
+      transition: 180ms ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+
+    button:hover, a.button:hover, .project-card:hover, .info-card:hover {
+      border-color: rgba(34, 211, 238, 0.52);
+      transform: translateY(-2px);
+    }
+
+    .shell {
+      position: relative;
+      z-index: 1;
+      width: min(1180px, 100%);
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 14px;
+      z-index: 40;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      padding: 10px;
+      border: 1px solid var(--border);
+      background: rgba(7, 10, 18, 0.72);
+      backdrop-filter: blur(18px);
+      border-radius: 999px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-left: 6px;
+      font-weight: 950;
+      letter-spacing: -0.03em;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      box-shadow: 0 10px 28px rgba(124, 58, 237, 0.32);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      flex: 0 0 auto;
+    }
+
+    .brand-avatar { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav a {
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 800;
+      padding: 9px 11px;
+      border-radius: 999px;
+      transition: 160ms ease;
+    }
+
+    .nav a:hover { color: var(--text); background: rgba(148, 163, 184, 0.1); }
+
+    .back-chip {
+      position: fixed;
+      left: 18px;
+      bottom: 18px;
+      z-index: 60;
+      box-shadow: 0 16px 34px rgba(0, 0, 0, 0.28);
+      backdrop-filter: blur(16px);
+    }
+
+    .hero {
+      min-height: calc(100vh - 112px);
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(300px, 0.95fr);
+      align-items: center;
+      gap: 28px;
+      padding: 56px 0 34px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      color: #67e8f9;
+      border: 1px solid rgba(34, 211, 238, 0.22);
+      background: rgba(34, 211, 238, 0.08);
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-size: 0.78rem;
+      font-weight: 950;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(3rem, 8vw, 6.8rem);
+      line-height: 0.88;
+      letter-spacing: -0.08em;
+      max-width: 860px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #ffffff 0%, #c4b5fd 42%, #67e8f9 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-text {
+      max-width: 700px;
+      color: var(--muted);
+      font-size: clamp(1rem, 2vw, 1.18rem);
+      line-height: 1.75;
+      margin-top: 22px;
+      font-weight: 580;
+    }
+
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+
+    .primary {
+      border-color: rgba(124, 58, 237, 0.5) !important;
+      background: linear-gradient(135deg, var(--primary), #2563eb) !important;
+      box-shadow: 0 16px 38px rgba(37, 99, 235, 0.28);
+    }
+
+    .hero-card, .mock-board, .project-card, .info-card {
+      border: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.64);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card {
+      border-radius: var(--radius-xl);
+      padding: 20px;
+      overflow: hidden;
+    }
+
+    .terminal-header { display: flex; align-items: center; gap: 7px; margin-bottom: 18px; }
+    .terminal-dot { width: 11px; height: 11px; border-radius: 50%; background: var(--red); }
+    .terminal-dot:nth-child(2) { background: var(--yellow); }
+    .terminal-dot:nth-child(3) { background: var(--green); }
+
+    .terminal-body {
+      display: grid;
+      gap: 12px;
+      font-family: "JetBrains Mono", "Fira Code", Consolas, monospace;
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      line-height: 1.5;
+    }
+
+    .terminal-line {
+      display: grid;
+      grid-template-columns: 112px 1fr;
+      gap: 14px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+      padding-bottom: 10px;
+    }
+
+    .terminal-key { color: #67e8f9; font-weight: 900; }
+    .terminal-value { color: #e2e8f0; word-break: break-word; }
+
+    .mock-board {
+      margin-top: 18px;
+      border-radius: 22px;
+      padding: 14px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      min-height: 230px;
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.82), rgba(15, 23, 42, 0.54));
+    }
+
+    .tile {
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      display: grid;
+      place-items: center;
+      font-weight: 950;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.76rem;
+      color: rgba(255, 255, 255, 0.82);
+    }
+
+    .tile.gray { background: linear-gradient(135deg, #475569, #94a3b8); }
+    .tile.blue { background: linear-gradient(135deg, #1d4ed8, #60a5fa); }
+    .tile.red { background: linear-gradient(135deg, #be123c, #fb7185); }
+    .tile.green { background: linear-gradient(135deg, #047857, #34d399); }
+
+    section { padding: 34px 0; }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .section-kicker {
+      color: var(--primary-2);
+      font-size: 0.78rem;
+      font-weight: 950;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      margin-bottom: 8px;
+    }
+
+    h2 { font-size: clamp(1.8rem, 4vw, 3rem); letter-spacing: -0.06em; line-height: 1; }
+    .section-desc { max-width: 560px; color: var(--muted); line-height: 1.65; font-weight: 600; }
+
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    .grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+    .project-card, .info-card {
+      position: relative;
+      border-radius: var(--radius-lg);
+      padding: 18px;
+      min-height: 220px;
+      transition: 180ms ease;
+      overflow: hidden;
+    }
+
+    .project-card::before, .info-card::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      background: radial-gradient(circle at top right, rgba(34, 211, 238, 0.12), transparent 32%);
+      pointer-events: none;
+    }
+
+    .project-card > *, .info-card > * { position: relative; z-index: 1; }
+
+    .card-top { display: flex; justify-content: space-between; gap: 14px; align-items: flex-start; margin-bottom: 16px; }
+
+    .icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: rgba(124, 58, 237, 0.14);
+      border: 1px solid rgba(124, 58, 237, 0.28);
+      font-size: 1.25rem;
+    }
+
+    .tag {
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      background: rgba(148, 163, 184, 0.08);
+      color: #cbd5e1;
+      border-radius: 999px;
+      padding: 5px 8px;
+      font-size: 0.72rem;
+      font-weight: 900;
+    }
+
+    .project-card h3, .info-card h3 { font-size: 1.2rem; letter-spacing: -0.035em; margin-bottom: 9px; }
+    .project-card p, .info-card p { color: var(--muted); line-height: 1.6; font-weight: 560; margin-bottom: 18px; }
+
+    .stack-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .stack-list span {
+      color: #dbeafe;
+      background: rgba(37, 99, 235, 0.12);
+      border: 1px solid rgba(96, 165, 250, 0.18);
+      border-radius: 999px;
+      padding: 7px 9px;
+      font-size: 0.82rem;
+      font-weight: 850;
+    }
+
+    .code-card {
+      border: 1px solid var(--border);
+      background: #020617;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .code-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.16);
+      padding: 14px 16px;
+      color: #cbd5e1;
+      font-weight: 950;
+    }
+
+    pre {
+      overflow: auto;
+      padding: 16px;
+      color: #dbeafe;
+      font-family: "JetBrains Mono", "Fira Code", Consolas, monospace;
+      font-size: 0.86rem;
+      line-height: 1.65;
+    }
+
+    .footer {
+      margin-top: 26px;
+      padding: 22px 0 8px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      color: var(--muted-2);
+      font-weight: 700;
+      border-top: 1px solid var(--border);
+    }
+
+    .back-to-top {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border-color: rgba(34, 211, 238, 0.28);
+      background: rgba(15, 23, 42, 0.86);
+      backdrop-filter: blur(16px);
+      color: white;
+      box-shadow: 0 16px 34px rgba(0, 0, 0, 0.28);
+      z-index: 60;
+      padding: 0;
+      font-size: 1.1rem;
+    }
+
+    @media (max-width: 980px) {
+      .hero, .grid.two { grid-template-columns: 1fr; }
+      .grid { grid-template-columns: 1fr; }
+      .hero { min-height: auto; }
+      .back-chip { position: static; margin-top: 14px; }
+    }
+
+    @media (max-width: 720px) {
+      body { padding: 14px; }
+      .topbar { position: static; border-radius: 24px; align-items: flex-start; flex-direction: column; }
+      .nav { justify-content: flex-start; }
+      .section-header { align-items: flex-start; flex-direction: column; }
+      .terminal-line { grid-template-columns: 1fr; gap: 2px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell" id="top">
+    <header class="topbar">
+      <a class="brand" href="../" aria-label="Volver al portfolio">
+        <span class="brand-mark"><img class="brand-avatar" src="https://avatars.githubusercontent.com/u/98700005" alt="Foto de perfil de AgusQuartz" loading="lazy" referrerpolicy="no-referrer" /></span>
+        <span>agusquartz</span>
+      </a>
+
+      <nav class="nav" aria-label="Navegación principal">
+        <a href="#resumen">Resumen</a>
+        <a href="#tecnico">Técnico</a>
+        <a href="#codigo">Código</a>
+        <a href="#aprendizajes">Aprendizajes</a>
+        <a href="../">Inicio</a>
+      </nav>
+    </header>
+
+    <a class="button back-chip" href="../">← Volver al inicio</a>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div>
+          <div class="eyebrow">ASM 8086 · emu8086 · Low Level Game</div>
+          <h1 id="hero-title"><span class="gradient-text">Simon Says ASM</span></h1>
+          <p class="hero-text">
+            Juego de memoria desarrollado en Assembly 8086 para emu8086. El proyecto recrea la dinámica de Simon Dice con interfaz en modo texto, regiones coloreadas mediante servicios de video BIOS INT 10h, mouse, niveles, dificultad progresiva, puntaje y pantallas completas de victoria o derrota.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#resumen">Ver proyecto</a>
+            <a class="button" href="./proyecto1AgustinArguello.asm" download>Descargar código ASM</a>
+            <a class="button" href="../">Volver al portfolio</a>
+          </div>
+        </div>
+
+        <aside class="hero-card" aria-label="Resumen técnico del proyecto">
+          <div class="terminal-header" aria-hidden="true">
+            <span class="terminal-dot"></span>
+            <span class="terminal-dot"></span>
+            <span class="terminal-dot"></span>
+          </div>
+          <div class="terminal-body">
+            <div class="terminal-line"><span class="terminal-key">project</span><span class="terminal-value">Simon Says ASM 8086</span></div>
+            <div class="terminal-line"><span class="terminal-key">runtime</span><span class="terminal-value">emu8086</span></div>
+            <div class="terminal-line"><span class="terminal-key">input</span><span class="terminal-value">Mouse + keyboard</span></div>
+            <div class="terminal-line"><span class="terminal-key">text_ui</span><span class="terminal-value">Text mode + BIOS INT 10h</span></div>
+            <div class="terminal-line"><span class="terminal-key">dos</span><span class="terminal-value">INT 21h services</span></div>
+            <div class="terminal-line"><span class="terminal-key">mouse</span><span class="terminal-value">INT 33h driver calls</span></div>
+          </div>
+          <div class="mock-board" aria-label="Representación visual del tablero Simon Says">
+            <div class="tile gray">gray</div>
+            <div class="tile blue">blue</div>
+            <div class="tile red">red</div>
+            <div class="tile green">green</div>
+          </div>
+        </aside>
+      </section>
+
+      <section id="resumen" aria-labelledby="summary-title">
+        <div class="section-header">
+          <div>
+            <div class="section-kicker">Proyecto</div>
+            <h2 id="summary-title">Qué demuestra</h2>
+          </div>
+          <p class="section-desc">No es solo un juego: es una muestra de control de hardware virtual, flujo de ejecución, estado de juego y UI sin librerías modernas.</p>
+        </div>
+
+        <div class="grid">
+          <article class="project-card">
+            <div class="card-top"><div class="icon">🎮</div><span class="tag">Gameplay</span></div>
+            <h3>Secuencias de memoria</h3>
+            <p>El programa genera una secuencia de colores, la muestra al jugador y valida cada click contra la posición esperada en la ronda.</p>
+          </article>
+
+          <article class="project-card">
+            <div class="card-top"><div class="icon">🖱️</div><span class="tag">Input</span></div>
+            <h3>Interacción con mouse</h3>
+            <p>Detecta clicks y coordenadas para decidir si el usuario presionó el cuadrante gris, azul, rojo o verde.</p>
+          </article>
+
+          <article class="project-card">
+            <div class="card-top"><div class="icon">🧩</div><span class="tag">State</span></div>
+            <h3>Niveles y dificultad</h3>
+            <p>Maneja puntaje, nivel, dificultad fácil/media/difícil y un modo automático que ajusta la velocidad durante la partida.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="tecnico" aria-labelledby="tech-title">
+        <div class="section-header">
+          <div>
+            <div class="section-kicker">Bajo nivel</div>
+            <h2 id="tech-title">Highlights técnicos</h2>
+          </div>
+          <p class="section-desc">El valor del proyecto está en resolver una experiencia interactiva usando recursos muy cercanos al sistema, priorizando modo texto por rendimiento frente al dibujo gráfico pixel-by-pixel en emu8086.</p>
+        </div>
+
+        <div class="grid two">
+          <article class="info-card">
+            <h3>Interrupciones del sistema</h3>
+            <p>Usa servicios BIOS y DOS para construir la pantalla en modo texto, mover cursor, imprimir texto, leer tiempo, esperar y controlar mouse.</p>
+            <div class="stack-list">
+              <span>INT 10h</span><span>INT 21h</span><span>INT 33h</span><span>INT 15h</span>
+            </div>
+          </article>
+
+          <article class="info-card">
+            <h3>Macros reutilizables</h3>
+            <p>Define macros para pintar regiones, mover cursor e imprimir caracteres repetidos, reduciendo repetición en las pantallas.</p>
+            <div class="stack-list">
+              <span>paint</span><span>movecursor</span><span>print</span>
+            </div>
+          </article>
+
+          <article class="info-card">
+            <h3>UI en modo texto</h3>
+            <p>Construye pantallas completas en modo texto con rectángulos de color, mensajes centrados, carga visual, menú de dificultad y tablero del juego, evitando dibujar píxel por píxel en modo gráfico.</p>
+            <div class="stack-list">
+              <span>Text Mode UI</span><span>Color Attributes</span><span>BIOS INT 10h</span>
+            </div>
+          </article>
+
+          <article class="info-card">
+            <h3>Generación pseudoaleatoria</h3>
+            <p>Construye secuencias usando tiempo, semillas y operaciones aritméticas para producir valores que representan colores.</p>
+            <div class="stack-list">
+              <span>Seeds</span><span>Modulo</span><span>Arrays</span><span>Game Loop</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="codigo" aria-labelledby="code-title">
+        <div class="section-header">
+          <div>
+            <div class="section-kicker">Código</div>
+            <h2 id="code-title">Fragmento representativo</h2>
+          </div>
+          <p class="section-desc">Las macros muestran cómo se abstraen operaciones repetidas de la interfaz en modo texto: pintar regiones, mover el cursor y reutilizar servicios de video BIOS sin dibujar píxeles individualmente.</p>
+        </div>
+
+        <div class="code-card">
+          <div class="code-title"><span>text-mode-macros.asm</span><span class="tag">8086</span></div>
+          <pre><code>paint macro x1, y1, x2, y2, color
+    mov al, 0d
+    mov ah, 06h
+    mov bh, color
+    mov ch, y1
+    mov cl, x1
+    mov dh, y2
+    mov dl, x2
+    int 10h
+endm
+
+movecursor macro x, y
+    mov ah, 02h
+    mov bh, 0d
+    mov dh, y
+    mov dl, x
+    int 10h
+endm</code></pre>
+        </div>
+      </section>
+
+      <section id="aprendizajes" aria-labelledby="lessons-title">
+        <div class="section-header">
+          <div>
+            <div class="section-kicker">Reflexión</div>
+            <h2 id="lessons-title">Qué aprendí construyéndolo</h2>
+          </div>
+        </div>
+
+        <div class="grid">
+          <article class="info-card">
+            <h3>Diseñar con restricciones</h3>
+            <p>Crear una interfaz jugable sin HTML, CSS, canvas ni librerías obliga a pensar en coordenadas de modo texto, regiones, atributos de color y flujo de pantalla.</p>
+          </article>
+          <article class="info-card">
+            <h3>Controlar estado manualmente</h3>
+            <p>El juego exige administrar arrays, índices, dificultad, secuencias, intentos, puntaje y reinicio sin estructuras de alto nivel.</p>
+          </article>
+          <article class="info-card">
+            <h3>Escribir código mantenible en ASM</h3>
+            <p>El siguiente paso sería extraer constantes con EQU, ordenar mejor las rutinas y cuidar más la simetría entre push/pop para robustez.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>© <span id="year"></span> Agustin Argüello · agusquartz</span>
+      <span>Simon Says ASM 8086</span>
+    </footer>
+  </div>
+
+  <button class="back-to-top" type="button" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })" aria-label="Volver arriba">↑</button>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

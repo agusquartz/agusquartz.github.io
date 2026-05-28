@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -311,7 +312,7 @@
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 14px;
     }
 
@@ -463,10 +464,6 @@
         grid-template-columns: 1fr;
       }
 
-      .grid {
-        grid-template-columns: 1fr;
-      }
-
       .hero {
         min-height: auto;
       }
@@ -527,6 +524,7 @@
           <div class="hero-actions">
             <a class="button primary" href="#proyectos">Ver proyectos</a>
             <a class="button" href="./academic-progress/">Academic Progress</a>
+            <a class="button" href="./simon-says-asm/">Simon Says ASM</a>
             <a class="button" href="https://github.com/agusquartz?tab=repositories" target="_blank" rel="noopener">Repositorios</a>
           </div>
         </div>
@@ -541,7 +539,7 @@
             <div class="terminal-line"><span class="terminal-key">user</span><span class="terminal-value">agusquartz</span></div>
             <div class="terminal-line"><span class="terminal-key">focus</span><span class="terminal-value">FullStack · Desktop · Cloud</span></div>
             <div class="terminal-line"><span class="terminal-key">os</span><span class="terminal-value">Debian</span></div>
-            <div class="terminal-line"><span class="terminal-key">langs</span><span class="terminal-value">Java · C · Rust · JavaScript · Python</span></div>
+            <div class="terminal-line"><span class="terminal-key">langs</span><span class="terminal-value">Java · C · Rust · JavaScript · Python · ASM 8086</span></div>
             <div class="terminal-line"><span class="terminal-key">tools</span><span class="terminal-value">SQL · Bash · Lua · HTML · CSS · JSON</span></div>
           </div>
         </aside>
@@ -583,6 +581,18 @@
 
           <article class="project-card">
             <div class="card-top">
+              <div class="icon">🕹️</div>
+              <span class="tag">ASM 8086</span>
+            </div>
+            <h3>Simon Says ASM</h3>
+            <p>Juego de memoria estilo Simon Says desarrollado en Assembly 8086 para emu8086, con mouse, pantallas, dificultad progresiva e interrupciones BIOS/DOS.</p>
+            <div class="card-links">
+              <a class="mini-link" href="./simon-says-asm/">Abrir proyecto →</a>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="card-top">
               <div class="icon">🧠</div>
               <span class="tag">Theory</span>
             </div>
@@ -619,6 +629,7 @@
               <span>Networks</span>
               <span>Compilers</span>
               <span>Databases</span>
+              <span>Assembly</span>
             </div>
           </article>
         </div>
@@ -645,6 +656,7 @@
               <span>Java</span>
               <span>C</span>
               <span>Python</span>
+              <span>ASM 8086</span>
               <span>SQL</span>
               <span>Bash</span>
               <span>HTML/CSS</span>
@@ -656,7 +668,8 @@
     </main>
 
     <footer class="footer">
-      <span><span id="year"></span> Agustin Argüello · agusquartz</span>
+      <span>© <span id="year"></span> Agustin Argüello · agusquartz</span>
+      <span>Built by AgusQuartz</span>
     </footer>
   </div>
 
