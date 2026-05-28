@@ -1,328 +1,792 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Huffman Compressing Algorithm</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Huffman Compression · AgusQuartz</title>
+  <meta name="description" content="Explicación visual del algoritmo de compresión de Huffman, bitfields, compresión y descompresión." />
+  <style>
+    :root {
+      --bg: #070a12;
+      --bg-soft: #0b1020;
+      --surface: rgba(15, 23, 42, 0.68);
+      --surface-strong: rgba(15, 23, 42, 0.96);
+      --border: rgba(148, 163, 184, 0.18);
+      --border-strong: rgba(148, 163, 184, 0.34);
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --muted-2: #64748b;
+      --primary: #7c3aed;
+      --primary-2: #22d3ee;
+      --green: #34d399;
+      --yellow: #fbbf24;
+      --red: #fb7185;
+      --blue: #60a5fa;
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.38);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 12% 12%, rgba(124, 58, 237, 0.24), transparent 26%),
+        radial-gradient(circle at 88% 10%, rgba(34, 211, 238, 0.18), transparent 28%),
+        radial-gradient(circle at 50% 96%, rgba(16, 185, 129, 0.08), transparent 24%),
+        var(--bg);
+      color: var(--text);
+      padding: 22px;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(circle at center, black 0%, transparent 74%);
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    button, a.button {
+      border: 1px solid var(--border-strong);
+      background: rgba(15, 23, 42, 0.82);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-weight: 850;
+      cursor: pointer;
+      transition: 180ms ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+
+    button:hover, a.button:hover, .project-card:hover, .info-card:hover {
+      border-color: rgba(34, 211, 238, 0.52);
+      transform: translateY(-2px);
+    }
+
+    .shell {
+      position: relative;
+      z-index: 1;
+      width: min(1180px, 100%);
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 14px;
+      z-index: 40;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      padding: 10px;
+      border: 1px solid var(--border);
+      background: rgba(7, 10, 18, 0.72);
+      backdrop-filter: blur(18px);
+      border-radius: 999px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-left: 6px;
+      font-weight: 950;
+      letter-spacing: -0.03em;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      box-shadow: 0 10px 28px rgba(124, 58, 237, 0.32);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      flex: 0 0 auto;
+    }
+
+    .brand-avatar { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav a {
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 800;
+      padding: 9px 11px;
+      border-radius: 999px;
+      transition: 160ms ease;
+    }
+
+    .nav a:hover { color: var(--text); background: rgba(148, 163, 184, 0.1); }
+
+    .back-chip {
+      position: fixed;
+      left: 18px;
+      bottom: 18px;
+      z-index: 60;
+      box-shadow: 0 16px 34px rgba(0, 0, 0, 0.28);
+      backdrop-filter: blur(16px);
+    }
+
+    .hero {
+      min-height: calc(100vh - 112px);
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(300px, 0.95fr);
+      align-items: center;
+      gap: 28px;
+      padding: 56px 0 34px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      color: #67e8f9;
+      border: 1px solid rgba(34, 211, 238, 0.22);
+      background: rgba(34, 211, 238, 0.08);
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-size: 0.78rem;
+      font-weight: 950;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(3rem, 8vw, 6.8rem);
+      line-height: 0.88;
+      letter-spacing: -0.08em;
+      max-width: 900px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #ffffff 0%, #c4b5fd 42%, #67e8f9 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-text {
+      max-width: 700px;
+      color: var(--muted);
+      font-size: clamp(1rem, 2vw, 1.18rem);
+      line-height: 1.75;
+      margin-top: 22px;
+      font-weight: 580;
+    }
+
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+
+    .primary {
+      border-color: rgba(124, 58, 237, 0.5) !important;
+      background: linear-gradient(135deg, var(--primary), #2563eb) !important;
+      box-shadow: 0 16px 38px rgba(37, 99, 235, 0.28);
+    }
+
+    .hero-card, .project-card, .info-card, .toc-card, .article-card, .code-card {
+      border: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.64);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card {
+      border-radius: var(--radius-xl);
+      padding: 20px;
+      overflow: hidden;
+    }
+
+    .terminal-header { display: flex; align-items: center; gap: 7px; margin-bottom: 18px; }
+    .terminal-dot { width: 11px; height: 11px; border-radius: 50%; background: var(--red); }
+    .terminal-dot:nth-child(2) { background: var(--yellow); }
+    .terminal-dot:nth-child(3) { background: var(--green); }
+
+    .terminal-body {
+      display: grid;
+      gap: 12px;
+      font-family: "JetBrains Mono", "Fira Code", Consolas, monospace;
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      line-height: 1.5;
+    }
+
+    .terminal-line {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 14px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+      padding-bottom: 10px;
+    }
+
+    .terminal-key { color: #67e8f9; font-weight: 900; }
+    .terminal-value { color: #e2e8f0; word-break: break-word; }
+
+    .tree-preview {
+      margin-top: 18px;
+      border-radius: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.86), rgba(15, 23, 42, 0.56));
+      padding: 16px;
+      min-height: 250px;
+      display: grid;
+      place-items: center;
+      font-family: "JetBrains Mono", "Fira Code", Consolas, monospace;
+      color: #cbd5e1;
+      overflow: auto;
+    }
+
+    .tree-preview pre { color: #dbeafe; background: transparent; box-shadow: none; padding: 0; margin: 0; }
+
+    section { padding: 34px 0; scroll-margin-top: 90px; }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .section-kicker {
+      color: var(--primary-2);
+      font-size: 0.78rem;
+      font-weight: 950;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      margin-bottom: 8px;
+    }
+
+    h2 { font-size: clamp(1.8rem, 4vw, 3rem); letter-spacing: -0.06em; line-height: 1; }
+    h3 { font-size: 1.35rem; letter-spacing: -0.035em; margin: 18px 0 10px; }
+    h4 { font-size: 1.05rem; margin: 16px 0 8px; color: #dbeafe; }
+
+    .section-desc { max-width: 620px; color: var(--muted); line-height: 1.65; font-weight: 600; }
+
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    .grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+    .project-card, .info-card, .article-card, .toc-card {
+      position: relative;
+      border-radius: var(--radius-lg);
+      padding: 18px;
+      transition: 180ms ease;
+      overflow: hidden;
+    }
+
+    .project-card::before, .info-card::before, .article-card::before, .toc-card::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      background: radial-gradient(circle at top right, rgba(34, 211, 238, 0.12), transparent 32%);
+      pointer-events: none;
+    }
+
+    .project-card > *, .info-card > *, .article-card > *, .toc-card > * { position: relative; z-index: 1; }
+
+    .card-top { display: flex; justify-content: space-between; gap: 14px; align-items: flex-start; margin-bottom: 16px; }
+
+    .icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: rgba(124, 58, 237, 0.14);
+      border: 1px solid rgba(124, 58, 237, 0.28);
+      font-size: 1.25rem;
+    }
+
+    .tag {
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      background: rgba(148, 163, 184, 0.08);
+      color: #cbd5e1;
+      border-radius: 999px;
+      padding: 5px 8px;
+      font-size: 0.72rem;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .project-card h3, .info-card h3 { font-size: 1.2rem; letter-spacing: -0.035em; margin: 0 0 9px; }
+    .project-card p, .info-card p, .article-card p, .article-card li {
+      color: var(--muted);
+      line-height: 1.68;
+      font-weight: 560;
+    }
+
+    .article-card p + p { margin-top: 12px; }
+    .article-card ul, .article-card ol { padding-left: 22px; margin: 12px 0; }
+    .article-card li + li { margin-top: 6px; }
+    .article-card strong { color: #e2e8f0; }
+    .article-card code:not(pre code) {
+      color: #bfdbfe;
+      background: rgba(37, 99, 235, 0.12);
+      border: 1px solid rgba(96, 165, 250, 0.18);
+      border-radius: 7px;
+      padding: 2px 6px;
+      font-size: 0.9em;
+    }
+
+    .content-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(240px, 300px);
+      gap: 18px;
+      align-items: start;
+      min-width: 0;
+    }
+
+    .article-card {
+      min-width: 0;
+    }
+
+    .toc-card {
+      position: sticky;
+      top: 92px;
+      align-self: start;
+      max-height: none;
+      overflow: visible;
+      padding: 14px;
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    .toc-title {
+      color: #67e8f9;
+      font-size: 0.78rem;
+      font-weight: 950;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      margin-bottom: 10px;
+    }
+
+    #toc {
+      display: grid;
+      gap: 6px;
+      min-width: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      overflow-y: visible;
+    }
+
+    #toc a {
+      display: block;
+      max-width: 100%;
+      min-width: 0;
+      color: var(--muted);
+      border: 1px solid transparent;
+      border-radius: 12px;
+      padding: 8px 10px;
+      font-size: 0.86rem;
+      font-weight: 800;
+      line-height: 1.25;
+      transition: 160ms ease;
+      white-space: normal;
+      overflow-wrap: anywhere;
+      word-break: normal;
+      hyphens: auto;
+    }
+
+    #toc a:hover, #toc a.active {
+      color: var(--text);
+      background: rgba(148, 163, 184, 0.1);
+      border-color: rgba(148, 163, 184, 0.16);
+    }
+
+    #toc a.h3 {
+      margin-left: 0;
+      padding-left: 22px;
+      font-size: 0.8rem;
+      color: #8aa0bd;
+    }
+
+    .code-card {
+      background: #020617;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin: 14px 0;
+      min-width: 0;
+    }
+
+    .code-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.16);
+      padding: 14px 16px;
+      color: #cbd5e1;
+      font-weight: 950;
+    }
+
+    pre {
+      overflow: auto;
+      padding: 16px;
+      color: #dbeafe;
+      font-family: "JetBrains Mono", "Fira Code", Consolas, monospace;
+      font-size: 0.86rem;
+      line-height: 1.65;
+      margin: 0;
+    }
+
+    .stack-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .stack-list span {
+      color: #dbeafe;
+      background: rgba(37, 99, 235, 0.12);
+      border: 1px solid rgba(96, 165, 250, 0.18);
+      border-radius: 999px;
+      padding: 7px 9px;
+      font-size: 0.82rem;
+      font-weight: 850;
+    }
+
+    .footer {
+      margin-top: 26px;
+      padding: 22px 0 8px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      color: var(--muted-2);
+      font-weight: 700;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer a { color: #bae6fd; }
+
+    .back-to-top {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border-color: rgba(34, 211, 238, 0.28);
+      background: rgba(15, 23, 42, 0.86);
+      backdrop-filter: blur(16px);
+      color: white;
+      box-shadow: 0 16px 34px rgba(0, 0, 0, 0.28);
+      z-index: 60;
+      padding: 0;
+      font-size: 1.1rem;
+    }
+
+    @media (max-width: 980px) {
+      .hero, .grid.two, .content-layout { grid-template-columns: 1fr; }
+      .grid { grid-template-columns: 1fr; }
+      .hero { min-height: auto; }
+      .back-chip { position: static; margin-top: 14px; }
+      .toc-card { position: static; max-height: none; overflow: visible; }
+    }
+
+    @media (max-width: 720px) {
+      body { padding: 14px; }
+      .topbar { position: static; border-radius: 24px; align-items: flex-start; flex-direction: column; }
+      .nav { justify-content: flex-start; }
+      .section-header { align-items: flex-start; flex-direction: column; }
+      .terminal-line { grid-template-columns: 1fr; gap: 2px; }
+      h1 { font-size: clamp(2.55rem, 16vw, 4rem); }
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <nav>
-      <ul>
-        <li class="active">Projects</li>
-      </ul>
-    </nav>
-  </header>
+  <div class="shell" id="top">
+    <header class="topbar">
+      <a class="brand" href="../" aria-label="Volver al portfolio">
+        <span class="brand-mark"><img class="brand-avatar" src="https://avatars.githubusercontent.com/u/98700005" alt="Foto de perfil de AgusQuartz" loading="lazy" referrerpolicy="no-referrer" /></span>
+        <span>agusquartz</span>
+      </a>
 
-  <main>
-    <aside id="toc">
-      <!-- Índice (TOC) autogenerado a partir de los headings -->
-    </aside>
+      <nav class="nav" aria-label="Navegación principal">
+        <a href="#resumen">Resumen</a>
+        <a href="#campobit">Campobit</a>
+        <a href="#compresion">Compresión</a>
+        <a href="#descompresion">Descompresión</a>
+        <a href="../">Inicio</a>
+      </nav>
+    </header>
 
-    <section id="content">
-      <h1>Huffman Compressing Algorithm</h1>
-      <p>Este documento explica el algoritmo de compresión de Huffman, sus conceptos básicos y los procesos involucrados tanto en la compresión como en la descompresión de archivos.</p>
-      
-      <!-- Nueva sección: Campobit y aritmética de bits -->
-      <h2>Campobit: Operaciones de Bajo Nivel y Aritmética de Bits</h2>
-      <p>
-        En muchos algoritmos de compresión (como el de Huffman) se requiere manipular datos a nivel de bits para optimizar el espacio. Un <strong>campobit</strong> es una estructura que nos permite almacenar una secuencia de bits en una variable numérica y realizar operaciones sobre ellos.
-      </p>
-      <p>
-        La operación básica que veremos es <code>bits_agregar</code>, que añade un bit (0 o 1) al final de nuestro campo de bits. Para entenderla, pensemos en el concepto de <em>desplazamiento de bits</em>: mover un bit a la izquierda o a la derecha. En este caso, usamos el desplazamiento para posicionar el nuevo bit en el lugar correcto.
-      </p>
-      <p>
-        Por ejemplo, supongamos que tenemos una estructura <code>campobits</code> con:
-      </p>
-      <pre><code>
-bits->bits  = 0001 1000 1000   (en binario)
-bits->tamano = 12
-      </code></pre>
-      <p>
-        Y queremos agregar un bit <strong>1</strong>:
-      </p>
-      <ol>
-        <li>
-          <strong>Incremento del tamaño:</strong>  
-          Se incrementa <code>bits->tamano</code> de 12 a 13, ya que se añade un bit más.
-        </li>
-        <li>
-          <strong>Cálculo de la máscara:</strong>  
-          Se calcula <code>0x1 << (bits->tamano - 1)</code>, lo que equivale a <code>0x1 << 12</code>. Esto genera una máscara en binario:
-          <br>
-          <code>0001 0000 0000 0000</code>
-        </li>
-        <li>
-          <strong>Actualización del campo de bits:</strong>  
-          Se utiliza la operación OR (|) para combinar el valor actual de <code>bits->bits</code> con la máscara, de forma que se agrega el bit 1 en la posición correcta sin alterar los otros bits:
-          <br>
-          <code>
-bits->bits  =  0000 0001 1000 1000  
-          OR   =  0001 0000 0000 0000  
-          ------------------------------
-Resultado  =  0001 0001 1000 1000
-          </code>
-        </li>
-      </ol>
-      <p>
-        Si en lugar de un 1 se quisiera agregar un 0, no es necesario modificar <code>bits->bits</code> (ya que se asume que sus posiciones están en 0) y solo se incrementa <code>bits->tamano</code>.
-      </p>
-      <pre><code>
-/**
- * Función: bits_agregar
- *
- * Descripción:
- *   Esta función añade un bit (0 o 1) al final del campo de bits de la estructura 'campobits'.
- *   Se utiliza aritmética de bits para posicionar el nuevo bit en la ubicación correcta. El campo
- *   'tamano' de la estructura indica cuántos bits se han almacenado hasta el momento y se usa para
- *   calcular la posición en la que se debe agregar el nuevo bit.
- *
- * Parámetros:
- *   - campobits* bits: Puntero a la estructura que contiene:
- *         • bits->bits: El valor numérico que almacena los bits. Se asume que está inicializado a 0.
- *         • bits->tamano: La cantidad actual de bits que se han agregado.
- *   - int bit: Valor del bit a agregar (debe ser 0 o 1).
- *
- * Funcionamiento:
- *   1. **Verificación de seguridad:** Se confirma que el puntero 'bits' no sea nulo y que
- *      aún exista espacio para agregar otro bit, comparando 'bits->tamano' con el máximo número
- *      de bits que puede almacenar 'bits->bits'.
- *
- *   2. **Incremento del tamaño:** Se incrementa 'bits->tamano' en 1, ya que se está añadiendo un nuevo bit.
- *
- *   3. **Cálculo de la máscara y actualización:**
- *      - Si el bit a agregar es 1, se crea una máscara para posicionarlo correctamente. La máscara se
- *        calcula como:
- *
- *            0x1 << (bits->tamano - 1)
- *
- *        Esto desplaza el número 1 a la izquierda tantas posiciones como el número de bits ya agregados,
- *        ubicando el nuevo 1 en la posición adecuada.
- *
- *      - Se actualiza 'bits->bits' aplicando la operación OR (|) entre el valor actual y la máscara.
- *        Esto coloca el bit 1 en su posición sin alterar los otros bits.
- *
- *      - Si el bit es 0, no es necesario modificar 'bits->bits' ya que se asume que todas sus posiciones
- *        están inicialmente a 0; simplemente se incrementa 'bits->tamano'.
- *
- * Ejemplo detallado:
- *   Supongamos que tenemos una variable de tipo 'campobits' inicializada de la siguiente forma:
- *
- *       bits->bits  = 0001 1000 1000   (en binario)
- *       bits->tamano = 12
- *
- *   Y queremos agregar un bit 1:
- *
- *   a) **Incremento del tamaño:**  
- *      - Nuevo valor: bits->tamano pasa de 12 a 13.
- *
- *   b) **Cálculo de la máscara:**  
- *      - Se calcula: 0x1 << (13 - 1) = 0x1 << 12  
- *      - Esto coloca un 1 en la posición 12 (contando desde 0), lo que equivale a la representación:
- *
- *            0001 0000 0000 0000  (en binario)
- *
- *   c) **Actualización del campo de bits:**  
- *      - Se realiza la operación OR:
- *
- *            bits->bits  =  0000 0001 1000 1000
- *          | máscara     =  0001 0000 0000 0000
- *          -------------------------------------
- *            Resultado   =  0001 0001 1000 1000
- *
- * Nota:
- *   Se asume que 'bits->bits' está inicialmente en 0, por lo que agregar un bit 0 no requiere modificar
- *   su valor, solo se incrementa 'bits->tamano'.
- */
-      </code></pre>
+    <a class="button back-chip" href="../">← Volver al inicio</a>
 
-      <h2>¿Qué es el algoritmo de Huffman?</h2>
-      <p>El algoritmo de Huffman es un método de compresión sin pérdida que asigna códigos de longitud variable a los caracteres, de tal forma que los caracteres más frecuentes tienen códigos más cortos. Esto permite reducir el tamaño total del archivo comprimido.</p>
-      
-      <h2>Procesos en la compresión</h2>
-      <p>La compresión con Huffman se realiza a través de varios pasos fundamentales:</p>
-      
-      <h3>1. Calcular Frecuencias</h3>
-      <p>Se analiza el archivo de entrada para determinar la frecuencia de cada carácter. El proceso consiste en:</p>
-      <ul>
-        <li>Leer el archivo carácter por carácter.</li>
-        <li>Contar las ocurrencias de cada uno y almacenarlas en un arreglo de tamaño 256 (para caracteres ASCII).</li>
-      </ul>
-      <pre><code>
-// Ejemplo de función en C para calcular frecuencias:
-static int calcular_frecuencias(int* frecuencias, char* entrada) {
-  // Inicializa el arreglo de frecuencias en 0.
-  for (int i = 0; i < 256; i++) {
-    frecuencias[i] = 0;
-  }
-  // Lee el archivo y cuenta ocurrencias...
-}
-      </code></pre>
-      
-      <h3>2. Construir el Árbol de Huffman</h3>
-      <p>Utilizando las frecuencias obtenidas:</p>
-      <ul>
-        <li>Se almacena cada par (carácter, frecuencia) en un nodo y se inserta en una cola de prioridad (heap), que ordena los nodos por frecuencia.</li>
-        <li>Se extraen los dos nodos con menor frecuencia, se crea un nodo padre cuya frecuencia es la suma de los dos, y se reinserta el nodo resultante en la cola.</li>
-        <li>Este proceso se repite hasta obtener un único nodo, que representa la raíz del árbol de Huffman.</li>
-      </ul>
-      <pre><code>
-// Ejemplo de uso del heap para construir el árbol:
-static Arbol crear_huffman(int* frecuencias) {
-  PQ pq = pq_create();
-  // Insertar cada carácter con su frecuencia en el heap...
-  // Combinar nodos hasta obtener el árbol completo.
-}
-      </code></pre>
-      
-      <h3>3. Codificar y Escribir el Árbol</h3>
-      <p>Una vez construido el árbol, el siguiente paso es:</p>
-      <ul>
-        <li>Recorrer el árbol en preorden para generar los códigos para cada carácter (0 para izquierda, 1 para derecha).</li>
-        <li>Escribir la estructura del árbol en el archivo comprimido. Esto permite su reconstrucción durante la descompresión.</li>
-        <li>Leer nuevamente el archivo de entrada y, utilizando una tabla de códigos (mapa de caracteres a secuencias de bits), escribir la representación codificada en el archivo de salida.</li>
-      </ul>
-      <pre><code>
-// Ejemplo de función para codificar:
-static int codificar(Arbol T, char* entrada, char* salida) {
-  // Escribir el árbol de Huffman en el archivo...
-  // Recorrer el archivo y escribir el código correspondiente a cada carácter.
-}
-      </code></pre>
-      
-      <h3>4. Crear Tabla de Códigos y Gestión del Campo de Bits</h3>
-      <p>Para generar la tabla de códigos se recorre el árbol de Huffman. En cada llamada recursiva se agrega un bit (0 para el subárbol izquierdo y 1 para el derecho) al <code>campobits</code> acumulado. Se pueden utilizar dos enfoques:</p>
-      <ul>
-        <li>
-          <strong>Copias Locales:</strong> Se crea una copia del <code>campobits</code> actual para cada rama. Esto permite que cada llamada recursiva tenga su propio estado, evitando modificar la variable original.  
-          <pre><code>
-campobits copia = actual;
-bits_agregar(&copia, 0);
-crear_tabla(nodo->izq, tabla, copia);
-          </code></pre>
-        </li>
-        <li>
-          <strong>Modificación In Situ con <code>bits_remove_last</code>:</strong> Se modifica el mismo objeto y, al regresar de la recursión, se quita el último bit para restaurar el estado.
-          <pre><code>
-bits_agregar(&actual, 0);
-crear_tabla(nodo->izq, tabla, actual);
-bits_remove_last(&actual);
-          </code></pre>
-        </li>
-      </ul>
-      
-      <h4>¿Qué hace <code>bits_remove_last</code>?</h4>
-      <p>Esta función elimina el último bit del <code>campobits</code> decrementando el contador de <em>tamano</em> y limpiando el bit correspondiente mediante una máscara. Esto es especialmente útil en recorridos recursivos donde se necesita retroceder el estado del código.</p>
-      <pre><code>
-/**
- * Función: bits_remove_last
- *
- * Descripción:
- *   Elimina el último bit añadido al campo de bits, reduciendo 'tamano' en uno
- *   y limpiando esa posición en 'bits->bits' mediante una máscara.
- *
- * Funcionamiento:
- *   1. Se decrementa 'bits->tamano' en 1.
- *   2. Se crea una máscara: ~(0x1 << bits->tamano) para poner a 0 el bit eliminado.
- *   3. Se actualiza 'bits->bits' aplicando la operación AND con la máscara.
- */
-static int bits_remove_last(campobits* bits) {
-    if (!bits || bits->tamano <= 0){
-        return -1; // Error: No bits to remove
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div>
+          <div class="eyebrow">C · Data Structures · Compression</div>
+          <h1 id="hero-title"><span class="gradient-text">Huffman Compression</span></h1>
+          <p class="hero-text">
+            Documento técnico sobre compresión sin pérdida con Huffman: frecuencias, heap, árbol binario, tabla de códigos, manejo de bits y reconstrucción durante la descompresión.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#resumen">Leer explicación</a>
+            <a class="button" href="../">Volver al portfolio</a>
+            <a class="button" href="https://github.com/agusquartz" target="_blank" rel="noopener">GitHub</a>
+          </div>
+        </div>
+
+        <aside class="hero-card" aria-label="Resumen técnico del documento">
+          <div class="terminal-header" aria-hidden="true">
+            <span class="terminal-dot"></span>
+            <span class="terminal-dot"></span>
+            <span class="terminal-dot"></span>
+          </div>
+          <div class="terminal-body">
+            <div class="terminal-line"><span class="terminal-key">topic</span><span class="terminal-value">Huffman coding</span></div>
+            <div class="terminal-line"><span class="terminal-key">type</span><span class="terminal-value">Lossless compression</span></div>
+            <div class="terminal-line"><span class="terminal-key">language</span><span class="terminal-value">C</span></div>
+            <div class="terminal-line"><span class="terminal-key">structures</span><span class="terminal-value">Heap · Binary tree · Bit stream</span></div>
+            <div class="terminal-line"><span class="terminal-key">focus</span><span class="terminal-value">Algorithm explanation + low-level bit handling</span></div>
+          </div>
+          <div class="tree-preview" aria-label="Representación textual de un árbol de Huffman">
+<pre>        root
+       /    \
+     0       1
+    / \     / \
+   A   B   C   D
+  00  01  10  11</pre>
+          </div>
+        </aside>
+      </section>
+
+      <section id="resumen" aria-labelledby="summary-title">
+        <div class="section-header">
+          <div>
+            <div class="section-kicker">Proyecto</div>
+            <h2 id="summary-title">Qué demuestra</h2>
+          </div>
+          <p class="section-desc">La página explica cómo una estructura de datos puede convertirse en un archivo comprimido real, bajando desde la teoría del árbol hasta la manipulación de bits.</p>
+        </div>
+
+        <div class="grid">
+          <article class="project-card">
+            <div class="card-top"><div class="icon">🌳</div><span class="tag">Tree</span></div>
+            <h3>Árbol de Huffman</h3>
+            <p>Construcción de un árbol binario a partir de frecuencias, combinando nodos de menor peso hasta obtener una raíz única.</p>
+          </article>
+          <article class="project-card">
+            <div class="card-top"><div class="icon">🧮</div><span class="tag">Heap</span></div>
+            <h3>Cola de prioridad</h3>
+            <p>Uso de heap para extraer eficientemente los nodos con menor frecuencia durante la construcción del árbol.</p>
+          </article>
+          <article class="project-card">
+            <div class="card-top"><div class="icon">⚙️</div><span class="tag">Bits</span></div>
+            <h3>Manipulación de bits</h3>
+            <p>Explicación de operaciones como desplazamiento, máscara, OR y AND para escribir secuencias compactas.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="contenido" aria-label="Contenido técnico">
+        <div class="content-layout">
+          <article class="article-card" id="articleContent">
+            <h2 id="campobit">Campobit: operaciones de bajo nivel y aritmética de bits</h2>
+            <p>En muchos algoritmos de compresión, como Huffman, no alcanza con guardar caracteres completos. Para aprovechar mejor el espacio hay que escribir códigos de longitud variable, y eso obliga a manipular datos a nivel de bits.</p>
+            <p>Un <strong>campobit</strong> es una estructura que permite almacenar una secuencia de bits dentro de una variable numérica junto con un contador de tamaño. La operación básica es <code>bits_agregar</code>, que añade un bit nuevo al final del campo.</p>
+
+            <h3>Agregar un bit con desplazamiento y OR</h3>
+            <p>Supongamos que la estructura contiene 12 bits y queremos agregar un <strong>1</strong>. Primero se incrementa el tamaño y luego se crea una máscara desplazando el valor <code>1</code> hasta la posición correcta.</p>
+            <div class="code-card">
+              <div class="code-title"><span>Ejemplo conceptual</span><span class="tag">bits</span></div>
+<pre><code>bits-&gt;bits   = 0000 0001 1000 1000
+bits-&gt;tamano = 12
+
+mask         = 0001 0000 0000 0000
+
+bits-&gt;bits   = 0000 0001 1000 1000
+OR mask      = 0001 0000 0000 0000
+-----------------------------------
+resultado    = 0001 0001 1000 1000</code></pre>
+            </div>
+            <p>Si el bit a agregar es <code>0</code>, normalmente no hace falta modificar el valor numérico porque las posiciones nuevas se asumen en cero; solo se actualiza <code>tamano</code>.</p>
+
+            <div class="code-card">
+              <div class="code-title"><span>bits_agregar</span><span class="tag">C</span></div>
+<pre><code>static int bits_agregar(campobits* bits, int bit) {
+    if (!bits || bits-&gt;tamano &gt;= (int)(sizeof(bits-&gt;bits) * 8)) {
+        return -1;
     }
-    int last_bit = (bits->bits >> (bits->tamano - 1)) & 0x1;
-    bits->tamano--;
-    bits->bits &= ~(0x1 << bits->tamano);
+
+    bits-&gt;tamano++;
+
+    if (bit == 1) {
+        bits-&gt;bits |= (0x1 &lt;&lt; (bits-&gt;tamano - 1));
+    }
+
+    return 0;
+}</code></pre>
+            </div>
+
+            <h2 id="huffman">Qué es el algoritmo de Huffman</h2>
+            <p>Huffman es un método de compresión sin pérdida que asigna códigos de longitud variable: los símbolos más frecuentes reciben códigos más cortos y los menos frecuentes reciben códigos más largos.</p>
+            <p>La idea central es construir un árbol binario donde cada hoja representa un símbolo. El camino desde la raíz hasta una hoja determina su código: por ejemplo, izquierda puede representar <code>0</code> y derecha <code>1</code>.</p>
+
+            <h2 id="compresion">Procesos en la compresión</h2>
+            <h3>1. Calcular frecuencias</h3>
+            <p>Se lee el archivo de entrada y se cuenta cuántas veces aparece cada carácter. Para texto basado en bytes, se puede usar un arreglo de 256 posiciones.</p>
+            <div class="code-card">
+              <div class="code-title"><span>calcular_frecuencias</span><span class="tag">C</span></div>
+<pre><code>static int calcular_frecuencias(int* frecuencias, char* entrada) {
+    for (int i = 0; i &lt; 256; i++) {
+        frecuencias[i] = 0;
+    }
+
+    /* Leer el archivo y contar ocurrencias... */
+    return 0;
+}</code></pre>
+            </div>
+
+            <h3>2. Construir el árbol de Huffman</h3>
+            <p>Cada símbolo con frecuencia positiva se inserta en una cola de prioridad. Luego se extraen los dos nodos con menor frecuencia, se combinan en un padre y se reinserta el resultado. El proceso termina cuando queda un único nodo: la raíz.</p>
+            <div class="code-card">
+              <div class="code-title"><span>crear_huffman</span><span class="tag">heap</span></div>
+<pre><code>static Arbol crear_huffman(int* frecuencias) {
+    PQ pq = pq_create();
+
+    /* Insertar símbolos con frecuencia positiva... */
+    /* Combinar los dos menores hasta obtener la raíz... */
+
+    return raiz;
+}</code></pre>
+            </div>
+
+            <h3>3. Crear la tabla de códigos</h3>
+            <p>Se recorre el árbol de forma recursiva. Cada vez que se baja a la izquierda se agrega un <code>0</code>; cada vez que se baja a la derecha se agrega un <code>1</code>. Al llegar a una hoja, el campobit acumulado es el código del carácter.</p>
+            <p>Hay dos enfoques comunes:</p>
+            <ul>
+              <li><strong>Copias locales:</strong> cada rama recibe su propia copia del campo de bits. Es más simple y seguro.</li>
+              <li><strong>Modificación in situ:</strong> se modifica el mismo objeto y se elimina el último bit al volver de la recursión. Ahorra copias, pero exige más cuidado.</li>
+            </ul>
+
+            <h3>4. Codificar el archivo</h3>
+            <p>Una vez generada la tabla, el archivo se lee nuevamente. Cada carácter se reemplaza por su secuencia de bits y se escribe en el flujo comprimido junto con la información necesaria para reconstruir el árbol.</p>
+
+            <h3>Eliminar el último bit</h3>
+            <p>Si se usa modificación in situ, una función como <code>bits_remove_last</code> permite retroceder un paso en el camino del árbol.</p>
+            <div class="code-card">
+              <div class="code-title"><span>bits_remove_last</span><span class="tag">C</span></div>
+<pre><code>static int bits_remove_last(campobits* bits) {
+    if (!bits || bits-&gt;tamano &lt;= 0) {
+        return -1;
+    }
+
+    int last_bit = (bits-&gt;bits &gt;&gt; (bits-&gt;tamano - 1)) &amp; 0x1;
+    bits-&gt;tamano--;
+    bits-&gt;bits &amp;= ~(0x1 &lt;&lt; bits-&gt;tamano);
+
     return last_bit;
-}
-      </code></pre>
-      <p><strong>Comparación:</strong></p>
-      <ul>
-        <li>
-          <strong>Copias locales:</strong> Permiten mantener cada estado independientemente, reduciendo el riesgo de errores durante el retroceso y simplificando el código recursivo.
-        </li>
-        <li>
-          <strong>Modificación in situ + <code>bits_remove_last</code>:</strong> Evita copiar la estructura en cada llamada, pero requiere una gestión cuidadosa del estado para eliminar el bit agregado al volver de la recursión.
-        </li>
-      </ul>
-      <p>
-		  <strong>Resumen:</strong> Usar copias locales resulta en un código más seguro y fácil de mantener, minimizando errores en entornos recursivos. Aunque esto implica un mayor uso de memoria, el impacto es limitado: en el peor de los casos, el uso máximo será el tamaño del <code>campobit</code> multiplicado por la profundidad del árbol. Incluso con <em>n</em> nodos, esta profundidad rara vez supera los 100 niveles debido a la distribución balanceada del árbol de Huffman. Por otro lado, modificar in situ con <code>bits_remove_last</code> puede ahorrar memoria pero incrementa la complejidad y el riesgo de errores. La elección depende del balance entre legibilidad, seguridad y eficiencia, siendo el enfoque con copias una opción más robusta y mantenible en la práctica.
-		</p>
+}</code></pre>
+            </div>
 
+            <h2 id="descompresion">Procesos en la descompresión</h2>
+            <h3>1. Reconstruir el árbol</h3>
+            <p>El descompresor lee la representación del árbol guardada en el archivo comprimido. Normalmente se usa un recorrido preorden para distinguir nodos internos y hojas.</p>
+            <div class="code-card">
+              <div class="code-title"><span>leer_arbol</span><span class="tag">preorder</span></div>
+<pre><code>static Arbol leer_arbol(BitStream bs) {
+    /* Reconstruir el árbol a partir de los bits leídos. */
+}</code></pre>
+            </div>
 
-      <h2>Procesos en la descompresión</h2>
-      <p>La descompresión utiliza el archivo comprimido y el árbol previamente almacenado para restaurar el contenido original. El proceso involucra:</p>
-      
-      <h3>1. Lectura y Reconstrucción del Árbol</h3>
-      <p>Se lee el árbol que fue escrito en el archivo comprimido:</p>
-      <ul>
-        <li>Se utiliza un método de lectura en preorden para reconstruir el árbol.</li>
-        <li>Se detecta si un nodo es hoja (representado con un bit 1 y el carácter) o interno (bit 0).</li>
-      </ul>
-      <pre><code>
-// Ejemplo de función para leer el árbol:
-static Arbol leer_arbol(BitStream bs) {
-  // Reconstruir el árbol a partir de los bits leídos.
-}
-      </code></pre>
-      
-      <h3>2. Decodificar el Archivo</h3>
-      <p>Con el árbol reconstruido, se procede a decodificar la secuencia de bits:</p>
-      <ul>
-        <li>Se empieza desde la raíz del árbol y se lee bit a bit para navegar por él.</li>
-        <li>Al llegar a una hoja se obtiene el carácter correspondiente, que se escribe en el archivo de salida.</li>
-        <li>Este proceso se repite hasta que se procesen todos los bits restantes del archivo.</li>
-      </ul>
-      <pre><code>
-// Ejemplo de función para decodificar:
-static void decodificar(BitStream in, BitStream out, Arbol arbol) {
-  // Procesar el stream de bits y escribir el contenido decodificado.
-}
-      </code></pre>
-      
-      <h2>Resumen</h2>
-      <p>El algoritmo de Huffman, implementado en C, se fundamenta en:</p>
-      <ul>
-        <li>La identificación de la frecuencia de cada carácter.</li>
-        <li>El uso de un heap para construir el árbol de Huffman de forma eficiente.</li>
-        <li>La generación de una tabla de códigos para la compresión y la posterior reconstrucción para la descompresión.</li>
-      </ul>
-      <p>
-        Estos pasos aseguran que se logre una compresión sin pérdida, aprovechando la frecuencia de aparición de cada carácter para reducir el espacio necesario para almacenarlos.
-      </p>
-    </section>
-  </main>
+            <h3>2. Decodificar el flujo de bits</h3>
+            <p>Con el árbol reconstruido, se leen bits uno por uno. Un <code>0</code> mueve el cursor a la izquierda y un <code>1</code> a la derecha. Al llegar a una hoja se escribe el carácter y se vuelve a la raíz.</p>
+            <div class="code-card">
+              <div class="code-title"><span>decodificar</span><span class="tag">BitStream</span></div>
+<pre><code>static void decodificar(BitStream in, BitStream out, Arbol arbol) {
+    /* Recorrer el árbol con cada bit y escribir caracteres. */
+}</code></pre>
+            </div>
+          </article>
 
-  <!-- Footer -->
-  <footer>
-    <a href="https://github.com/agusquartz" target="_blank" class="github-link">
-      <span class="github-button">
-        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0 0 30 30">
-          <path d="M15,3C8.373,3,3,8.373,3,15c0,5.623,3.872,10.328,9.092,11.63C12.036,26.468,12,26.28,12,26.047v-2.051 c-0.487,0-1.303,0-1.508,0c-0.821,0-1.551-0.353-1.905-1.009c-0.393-0.729-0.461-1.844-1.435-2.526 c-0.289-0.227-0.069-0.486,0.264-0.451c0.615,0.174,1.125,0.596,1.605,1.222c0.478,0.627,0.703,0.769,1.596,0.769 c0.433,0,1.081-0.025,1.691-0.121c0.328-0.833,0.895-1.6,1.588-1.962c-3.996-0.411-5.903-2.399-5.903-5.098 c0-1.162,0.495-2.286,1.336-3.233C9.053,10.647,8.706,8.73,9.435,8c1.798,0,2.885,1.166,3.146,1.481C13.477,9.174,14.461,9,15.495,9 c1.036,0,2.024,0.174,2.922,0.483C18.675,9.17,19.763,8,21.565,8c0.732,0.731,0.381,2.656,0.102,3.594 c0.836,0.945,1.328,2.066,1.328,3.226c0,2.697-1.904,4.684-5.894,5.097C18.199,20.49,19,22.1,19,23.313v2.734 c0,0.104-0.023,0.179-0.035,0.268C23.641,24.676,27,20.236,27,15C27,8.373,21.627,3,15,3z"></path>
-        </svg>
-      </span>
-      <span class="footer-text">agusquartz</span>
-    </a>
-  </footer>
+          <aside class="toc-card" aria-label="Índice de contenido">
+            <div class="toc-title">Índice</div>
+            <nav id="toc"></nav>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>Agustin Argüello · agusquartz</span>
+      <span><a href="https://github.com/agusquartz" target="_blank" rel="noopener">GitHub</a> · Huffman Compression</span>
+    </footer>
+  </div>
+
+  <button class="back-to-top" type="button" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })" aria-label="Volver arriba">↑</button>
 
   <script>
-    // Script para generar el índice (TOC) dinámicamente, basado en los headings h1, h2 y h3
-    const content = document.getElementById("content");
-    const toc = document.getElementById("toc");
-    const headings = content.querySelectorAll("h1, h2, h3");
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-    headings.forEach((heading, i) => {
-      const anchor = `heading-${i}`;
-      heading.id = anchor;
+    const article = document.getElementById('articleContent');
+    const toc = document.getElementById('toc');
+    const headings = [...article.querySelectorAll('h2, h3')];
+    const usedIds = new Set();
 
-      const link = document.createElement("a");
-      link.href = `#${anchor}`;
+    function slugify(text) {
+      return text
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '') || 'section';
+    }
+
+    headings.forEach((heading) => {
+      let baseId = heading.id || slugify(heading.textContent);
+      let id = baseId;
+      let counter = 2;
+
+      while (usedIds.has(id) || document.querySelectorAll(`#${CSS.escape(id)}`).length > 1) {
+        id = `${baseId}-${counter}`;
+        counter += 1;
+      }
+
+      heading.id = id;
+      usedIds.add(id);
+
+      const link = document.createElement('a');
+      link.href = `#${id}`;
       link.textContent = heading.textContent;
       link.className = heading.tagName.toLowerCase();
-
       toc.appendChild(link);
     });
+
+    const tocLinks = [...toc.querySelectorAll('a')];
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries
+        .filter(entry => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+      if (!visible) return;
+
+      tocLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === `#${visible.target.id}`);
+      });
+    }, { rootMargin: '-20% 0px -65% 0px', threshold: [0.1, 0.35, 0.7] });
+
+    headings.forEach(heading => observer.observe(heading));
   </script>
 </body>
 </html>
