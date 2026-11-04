@@ -120,6 +120,90 @@
     @media (max-width: 960px) { .page-header { flex-direction: column; } .header-actions { justify-content: flex-start; width: 100%; } .menu-dropdown { flex: 1 1 220px; } .menu-trigger { width: 100%; min-width: 0; } .menu-panel { left: 0; right: auto; width: min(320px, calc(100vw - 32px)); } .page-layout { grid-template-columns: 1fr; } .dependency-panel { position: static; max-height: none; order: -1; } }
     @media (max-width: 640px) { body { padding: 16px; } .semester-summary { align-items: flex-start; flex-direction: column; } .semester-stats { justify-content: flex-start; } .semester-content { grid-template-columns: 1fr; } .scroll-top { right: 16px; bottom: 16px; } }
   </style>
+
+  <style id="visual-refresh">
+    :root { color-scheme:dark; --ui-bg:#171b21; --ui-panel:#282f39; --ui-inset:#202731; --ui-border:#414c59; --ui-strong:#596779; --ui-text:#edf0f4; --ui-muted:#b5bec9; --ui-accent:#8fb7ed; --ui-primary:#8fb7ed; --ui-secondary:#aeb8c6; --ui-success:#78c69a; --ui-warning:#e5b86c; --ui-danger:#e77f84; --ui-info:#79b6e5; }
+    html,body { background:#171b21!important; color:#edf0f4!important; }
+    body { font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif!important; }
+    h1,h2,h3,h4,strong { color:#edf0f4; }
+    p,.subtitle,.footer,.hint { color:#b5bec9!important; }
+    button,.file-button,.file-label,.menu-trigger,.malla-tab,.name-input,.menu-item,.dependency-trigger { background:#202731!important; color:#e2e7ee!important; border-color:#414c59!important; border-radius:7px!important; box-shadow:none!important; }
+    button:hover,.file-button:hover,.file-label:hover,.menu-trigger:hover,.menu-item:hover,.dependency-trigger:hover { background:#303945!important; border-color:#596779!important; }
+    input,select,textarea,.modal-input { background:#171b21!important; color:#edf0f4!important; border:1px solid #414c59!important; border-radius:7px!important; }
+    input::placeholder,textarea::placeholder { color:#8993a1; }
+    .primary-btn,.primary-action,.scroll-top,.modal-close { background:#8fb7ed!important; color:#151a22!important; border-color:#8fb7ed!important; box-shadow:none!important; }
+    .danger-btn { color:#f18d7d!important; border-color:#754b45!important; }
+    .ghost-btn { background:transparent!important; }
+    .top-left-back,.home-nav-link { background:#282f39!important; color:#8fb7ed!important; border-color:#414c59!important; border-radius:7px!important; box-shadow:none!important; }
+    .header,.page-header,.card,.card-header,.main-flow,.aside-flow,.panel-box,.summary-card,.panel,.wizard-step,.format-card,.dependency-panel,.semester,.subject,.modal-card,.modal,.menu-panel,.dependency-item,.req-chip,.period-item,.period-card,.subject-item,.subject-card,.candidate-card,.candidate-item,.subject-accordion,.subject-detail-block,.period-group,.validation-item,.split-box,.empty-state,.form-section { background:#282f39!important; color:#e2e5de!important; border-color:#414c59!important; border-radius:9px!important; box-shadow:none!important; }
+    .header,.page-header { border-color:#414c59!important; }
+    .menu-panel,.modal-card { background:#282f39!important; }
+    .menu-trigger-kicker,.eyebrow,.dependency-kicker,.modal-kicker,.format-card-title { color:#8fb7ed!important; }
+    .menu-trigger-title,.dependency-title,.subject-title,.semester-title,.modal-title,.step-title { color:#edf0f4!important; }
+    .menu-current-info,.semester-count,.subject-code,.reqs-label,.dependency-subtitle,.dependency-semester,.req-name,.req-semester,.field-label,.section-note,.hint { color:#b5bec9!important; }
+    .card-header,.subject-accordion-summary,.period-group-title,.period-title-main { background:#282f39!important; color:#edf0f4!important; border-color:#414c59!important; }
+    .subject-meta,.candidate-meta,.summary-label,.format-card-text,.modal-message,.modal-input-label,.period-card,.subject-card,.candidate-card { color:#b5bec9!important; }
+    .order-pill,.id-badge,.chip,.tiny-chip { background:#303945!important; color:#d7dde6!important; border-color:#485362!important; }
+    .semester-summary { background:#282f39!important; }
+    .semester[open],.selected-card { border-color:#6688b7!important; }
+    .semester-title { color:#e3e8dd!important; }
+    .subject { background:#202731!important; }
+    .subject.approved-card { border-left-color:#77ac74!important; }.subject.available-card { border-left-color:#86a9c2!important; }.subject.blocked-card { border-left-color:#8c7162!important; }
+    .approved-text,.available-text,.blocked-text,.status { background:#252c35!important; color:#c7d0dc!important; border-color:#414c59!important; }
+    .dot.approved { background:#77ac74!important; }.dot.available { background:#86a9c2!important; }.dot.blocked { background:#b17b69!important; }
+    .stat-pill,.curriculum-pill,.legend-item,.malla-tab.active,.menu-dropdown[open] .menu-trigger { background:#303945!important; color:#d7dde6!important; border-color:#485362!important; }
+    .code-block,.modal-code-block { background:#11151b!important; color:#dbe1e9!important; }
+    .modal-backdrop { background:rgba(0,0,0,.72)!important; }
+    .validation-item.error { background:#2a1c1a!important; color:#f1a093!important; }.validation-item.warn { background:#292519!important; color:#e6c77b!important; }
+    .toast { background:#252c35!important; color:#edf0f4!important; border-color:#596779!important; }
+    .footer { border-color:#414c59!important; }
+    .step-number { background:#8fb7ed!important; color:#151a22!important; }
+    @media(max-width:760px) { .header,.page-header { border-radius:9px!important; } }
+
+    .secondary,.secondary-btn,.secondary-action { background:#303945!important; color:#dce2ea!important; border-color:#4b5869!important; }
+    .danger,.danger-btn,.destructive { background:#472b31!important; color:#ffb4b7!important; border-color:#80505a!important; }
+    .success,.success-btn { background:#243b32!important; color:#a6e0bd!important; border-color:#456c59!important; }
+    .warning,.warning-btn { background:#403725!important; color:#f0d18c!important; border-color:#77613a!important; }
+    .info,.info-btn { background:#26384c!important; color:#add4f4!important; border-color:#496985!important; }
+    /* Shared page frame and readable academic status colors. */
+    body { width:min(100%, 1720px); margin-inline:auto; padding:clamp(20px,3vw,48px); padding-top:88px!important; }
+    .page-header,.legend,.page-layout,.footer { width:100%; max-width:1500px; margin-left:auto; margin-right:auto; }
+    .page-header { min-height:150px; padding:clamp(22px,3vw,40px); align-items:center; gap:clamp(20px,4vw,56px); margin-bottom:24px; border:1px solid #414c59!important; }
+    .page-header > div:first-child { max-width:620px; }
+    .page-header h1 { font-size:clamp(1.8rem,3vw,2.5rem); line-height:1.12; letter-spacing:-.035em; }
+    .subtitle { max-width:58ch; font-size:1rem; }
+    .header-actions { gap:12px; }
+    .page-layout { grid-template-columns:minmax(0,1fr) minmax(290px,330px); gap:24px; }
+    .semester-summary { padding:18px 20px; }
+    .semester-content { padding:4px 20px 20px; gap:14px; }
+    .subject { padding:16px; }
+    .subject.approved-card { border-left-color:#4ade80!important; }
+    .subject.available-card { border-left-color:#60a5fa!important; }
+    .subject.blocked-card { border-left-color:#fb7185!important; }
+    .status.approved,.approved-text { background:#153c2c!important; color:#a7f3c1!important; border-color:#29734c!important; }
+    .status.available,.available-text { background:#172f49!important; color:#b9dcff!important; border-color:#386b9e!important; }
+    .status.blocked,.blocked-text { background:#48232b!important; color:#ffc0c7!important; border-color:#8d3e4b!important; }
+    .dot.approved { background:#4ade80!important; }.dot.available { background:#60a5fa!important; }.dot.blocked { background:#fb7185!important; }
+    .semester-approve { grid-column:1/-1; justify-self:start; display:inline-flex; align-items:center; justify-content:center; gap:10px; min-height:46px; width:auto; min-width:240px; margin:0 0 2px; padding:0 18px!important; text-align:center; background:#28563c!important; color:#d4ffe2!important; border:1px solid #62bd82!important; border-radius:8px!important; box-shadow:0 2px 0 #142c1f,0 6px 14px rgba(0,0,0,.18)!important; font-weight:850; cursor:pointer; transition:background .16s ease,border-color .16s ease,box-shadow .16s ease,transform .16s ease; }
+    .semester-approve::before { content:"✓"; display:grid; place-items:center; width:22px; height:22px; border-radius:50%; background:#4ade80; color:#102318; font-size:15px; font-weight:950; }
+    .semester-approve:hover:not(:disabled) { background:#34734e!important; border-color:#86efac!important; box-shadow:0 2px 0 #142c1f,0 9px 20px rgba(0,0,0,.25)!important; transform:translateY(-1px); }
+    .semester-approve:active:not(:disabled) { transform:translateY(1px); box-shadow:0 1px 0 #142c1f!important; }
+    .semester-approve:disabled { background:#25352c!important; color:#b7c8bc!important; border-color:#425a4b!important; box-shadow:none!important; opacity:1; cursor:default; }
+    .semester-approve:disabled::before { background:#53675a; color:#e4eee7; }
+    .checkbox { min-height:48px; margin-top:12px; padding:10px 12px; border:1px solid #536174; border-radius:8px; background:#303945; color:#edf0f4!important; cursor:pointer; line-height:1.3; }
+    .checkbox input { appearance:none; flex:0 0 24px; width:24px; height:24px; margin:0; border:2px solid #9ba9bb!important; border-radius:6px!important; background:#171b21!important; cursor:pointer; }
+    .checkbox input:checked { background:#4ade80!important; border-color:#4ade80!important; }
+    .checkbox input:checked::after { content:"✓"; display:block; color:#102318; text-align:center; font-size:17px; font-weight:950; line-height:20px; }
+    .checkbox:has(input:checked) { border-color:#34734e; background:#193b2c!important; }
+    .checkbox.disabled { color:#d2aeb4!important; cursor:not-allowed; }
+    .checkbox input:focus-visible,.semester-approve:focus-visible { outline:3px solid #8fb7ed; outline-offset:3px; }
+    .reqs-label,.dependency-subtitle,.req-name,.req-semester,.empty-req,.dependency-semester { color:#c3ccd7!important; }
+    .subject-code { color:#d5dce6!important; background:#303945!important; border-color:#536174!important; }
+    .dependency-trigger { color:#c2d7f1!important; }
+    @media(max-width:960px) { body { padding-top:88px!important; } .page-header { align-items:flex-start; } .page-layout { grid-template-columns:minmax(0,1fr); } }
+    @media(max-width:640px) { body { padding:76px 16px 20px!important; } .page-header { min-height:0; padding:20px!important; } .page-header h1 { font-size:1.85rem; } .semester-summary { padding:16px; } .semester-content { padding:0 12px 14px; } .semester-title-area { min-width:0; flex-wrap:wrap; } }
+</style>
+
 </head>
 <body>
   <a class="home-nav-link" href="../" aria-label="Volver al inicio">← Inicio</a>
@@ -436,6 +520,31 @@
       return semesterSubjects.reduce((acc, subject) => { acc[getStatus(subject).class] += 1; return acc; }, { approved: 0, available: 0, blocked: 0 });
     }
 
+    function canApproveSemester(semesterSubjects) {
+      const proposedState = { ...state };
+      const pending = semesterSubjects.filter(subject => !proposedState[subject.code]);
+      while (pending.length) {
+        const index = pending.findIndex(subject => canTake(subject, proposedState));
+        if (index === -1) return false;
+        proposedState[pending[index].code] = true;
+        pending.splice(index, 1);
+      }
+      return true;
+    }
+
+    function approveSemester(semesterName) {
+      const semesterSubjects = subjects.filter(subject => subject.semester === semesterName);
+      if (!canApproveSemester(semesterSubjects)) return;
+      const pending = semesterSubjects.filter(subject => !state[subject.code]);
+      while (pending.length) {
+        const index = pending.findIndex(subject => canTake(subject));
+        if (index === -1) return;
+        state[pending[index].code] = true;
+        pending.splice(index, 1);
+      }
+      render();
+    }
+
     function expandAllSemesters() { getOrderedSemesters().forEach(semester => expandedSemesters.add(semester.name)); render(); }
     function collapseAllSemesters() { expandedSemesters.clear(); render(); }
 
@@ -455,12 +564,21 @@
         summary.innerHTML = `<div class="semester-title-area"><span class="semester-arrow">▶</span><span class="semester-title">${escapeHtml(semester.name)} Semestre</span><span class="semester-count">${semesterSubjects.length} materias</span></div><div class="semester-stats"><span class="stat-pill approved-text">${stats.approved} aprobadas</span><span class="stat-pill available-text">${stats.available} disponibles</span><span class="stat-pill blocked-text">${stats.blocked} bloqueadas</span></div>`;
         const content = document.createElement('div');
         content.className = 'semester-content';
+        const semesterAction = document.createElement('button');
+        semesterAction.type = 'button';
+        semesterAction.className = 'semester-approve';
+        semesterAction.textContent = stats.approved === semesterSubjects.length ? 'Semestre aprobado' : 'Aprobar semestre completo';
+        semesterAction.disabled = stats.approved === semesterSubjects.length || !canApproveSemester(semesterSubjects);
+        semesterAction.title = semesterAction.disabled && stats.approved !== semesterSubjects.length ? 'Completá primero las correlativas pendientes para aprobar todo el semestre.' : '';
+        semesterAction.setAttribute('aria-label', `${semesterAction.textContent}: ${semester.name} semestre`);
+        semesterAction.addEventListener('click', () => approveSemester(semester.name));
+        content.appendChild(semesterAction);
         semesterSubjects.forEach(subject => {
           const status = getStatus(subject);
           const isLocked = !state[subject.code] && !canTake(subject);
           const card = document.createElement('div');
           card.className = `subject ${status.class}-card${selectedSubjectCode === subject.code ? ' selected-card' : ''}`;
-          card.innerHTML = `<div class="subject-header"><div><div class="subject-title">${escapeHtml(subject.name)}</div><span class="subject-code">ID ${escapeHtml(subject.code)}</span></div><div class="status ${status.class}">${status.text}</div></div><span class="reqs-label">Correlativas</span>${getReqsHtml(subject)}${getDependencyButtonHtml(subject)}<label class="checkbox ${isLocked ? 'disabled' : ''}" title="${isLocked ? 'Primero aprobá sus correlativas' : ''}"><input type="checkbox" ${state[subject.code] ? 'checked' : ''} ${isLocked ? 'disabled' : ''} />${isLocked ? 'Bloqueada por correlativas' : 'Marcar como aprobada'}</label>`;
+          card.innerHTML = `<div class="subject-header"><div><div class="subject-title">${escapeHtml(subject.name)}</div><span class="subject-code">ID ${escapeHtml(subject.code)}</span></div><div class="status ${status.class}">${status.text}</div></div><span class="reqs-label">Correlativas</span>${getReqsHtml(subject)}${getDependencyButtonHtml(subject)}<label class="checkbox ${isLocked ? 'disabled' : ''}" title="${isLocked ? 'Primero aprobá sus correlativas' : ''}"><input type="checkbox" aria-label="${state[subject.code] ? 'Desmarcar como aprobada' : 'Marcar como aprobada'}: ${escapeHtml(subject.name)}" ${state[subject.code] ? 'checked' : ''} ${isLocked ? 'disabled' : ''} />${isLocked ? 'Bloqueada por correlativas' : state[subject.code] ? 'Materia aprobada' : 'Marcar como aprobada'}</label>`;
           const checkbox = card.querySelector('input');
           const dependencyButton = card.querySelector('.dependency-trigger');
           checkbox.addEventListener('change', event => {
