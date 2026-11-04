@@ -129,6 +129,7 @@
             display: flex;
             gap: 15px;
             align-items: center;
+            margin-left: auto;
         }
 
         .nav-links a {
@@ -158,6 +159,69 @@
             stroke: currentColor;
             transition: stroke 0.3s ease;
         }
+
+        .language-switcher { position: relative; z-index: 20; margin-left: 12px; }
+
+        .language-button {
+            height: 28px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 0 8px;
+            border: 1px solid rgba(170, 190, 218, 0.25);
+            border-radius: 6px;
+            background: #2b3542;
+            color: #dce5f0;
+            font: inherit;
+            font-size: 0.72rem;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .language-button:hover,
+        .language-switcher.open .language-button {
+            border-color: rgba(143, 183, 237, 0.72);
+            background: #344354;
+            color: #fff;
+        }
+
+        .language-button svg { width: 15px; height: 15px; }
+
+        .language-menu {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            display: none;
+            min-width: 196px;
+            padding: 6px;
+            border: 1px solid #465567;
+            border-radius: 8px;
+            background: #252d39;
+            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.32);
+        }
+
+        .language-switcher.open .language-menu { display: grid; }
+
+        .language-option {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            padding: 8px 9px;
+            border: 0;
+            border-radius: 5px;
+            background: transparent;
+            color: #dce5f0;
+            font: inherit;
+            font-size: 0.8rem;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .language-option:hover { background: #34404f; }
+        .language-option[aria-current="true"] { color: #fff; font-weight: 800; }
+        .language-option-code { color: #9dacbd; font-size: 0.7rem; font-weight: 800; }
 
         /* --- HERO --- */
         .hero {
@@ -630,6 +694,7 @@
 
         @media (max-width: 650px) {
             .mobile-toggle { display: block; }
+            .language-switcher { margin-left: auto; }
             .nav-links {
                 position: absolute; top: 50px; right: 0; flex-direction: column;
                 align-items: flex-start; background: var(--nav-bg); backdrop-filter: blur(15px);
@@ -670,7 +735,7 @@
             <span class="logo-text">agusquartz</span>
         </div>
 
-        <button class="mobile-toggle" id="btn-menu">
+        <button class="mobile-toggle" id="btn-menu" aria-label="Abrir menú" data-i18n-aria-label="menu.open">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="4" y1="12" x2="20" y2="12"></line>
                 <line x1="4" y1="6" x2="20" y2="6"></line>
@@ -679,10 +744,25 @@
         </button>
 
         <div class="nav-links" id="menu-links">
-            <a href="#about">Sobre mí</a>
-            <a href="#projects">Proyectos</a>
-            <a href="#skills">Habilidades</a>
+            <a href="#about" data-i18n="nav.about">Sobre mí</a>
+            <a href="#projects" data-i18n="nav.projects">Proyectos</a>
+            <a href="#skills" data-i18n="nav.skills">Habilidades</a>
             <a href="https://github.com/agusquartz" target="_blank" rel="noopener">GitHub</a>
+        </div>
+
+        <div class="language-switcher" id="languageSwitcher">
+            <button class="language-button" id="languageButton" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="languageMenu" aria-label="Cambiar idioma" data-i18n-aria-label="language.aria">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/></svg>
+                <span class="language-code-current" id="languageCode">ES</span>
+            </button>
+            <div class="language-menu" id="languageMenu" aria-label="Selector de idioma">
+                <button class="language-option" type="button" data-locale="es" lang="es" aria-current="true"><span>Español</span><span class="language-option-code">ES</span></button>
+                <button class="language-option" type="button" data-locale="en" lang="en"><span>English</span><span class="language-option-code">EN</span></button>
+                <button class="language-option" type="button" data-locale="pt" lang="pt-BR"><span>Português</span><span class="language-option-code">PT</span></button>
+                <button class="language-option" type="button" data-locale="zh-Hant" lang="zh-Hant"><span>繁體中文</span><span class="language-option-code">繁中</span></button>
+                <button class="language-option" type="button" data-locale="ru" lang="ru"><span>Русский</span><span class="language-option-code">RU</span></button>
+                <button class="language-option" type="button" data-locale="de" lang="de"><span>Deutsch</span><span class="language-option-code">DE</span></button>
+            </div>
         </div>
     </div>
 
@@ -694,11 +774,11 @@
         <div class="eyebrow">FullStack · Desktop · Cloud</div>
         <h1 id="hero-title"><span class="gradient-text">Agustin Argüello</span></h1>
         <p class="hero-text">
-            Desarrollo aplicaciones y herramientas útiles, desde interfaces web y servicios backend hasta software de escritorio. También administro y despliego servicios en servidores Linux.
+            <span data-i18n="hero.copy">Desarrollo aplicaciones y herramientas útiles, desde interfaces web y servicios backend hasta software de escritorio. También administro y despliego servicios en servidores Linux.</span>
         </p>
 
         <div class="hero-actions">
-            <a class="button primary" href="#proyectos">Ver proyectos</a>
+            <a class="button primary" href="#proyectos" data-i18n="hero.projects">Ver proyectos</a>
             <a class="button" href="https://github.com/agusquartz" target="_blank" rel="noopener">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.03c3.15-.38 6.5-1.4 6.5-7a5.2 5.2 0 0 0-1.5-3.8 4.8 4.8 0 0 0 .1-3.7s-1.2-.4-3.9 1.4a13.3 13.3 0 0 0-7 0c-2.7-1.8-3.9-1.4-3.9-1.4a4.8 4.8 0 0 0 .1 3.7 5.2 5.2 0 0 0-1.5 3.8c0 5.6 3.3 6.6 6.5 7a4.8 4.8 0 0 0-1 3.03V22"/><path d="M9 20c-5 1.5-5-2.5-7-3"/></svg>
                 GitHub
@@ -706,26 +786,26 @@
         </div>
     </div>
 
-    <aside class="hero-card" aria-label="Áreas de desarrollo">
-        <p class="hero-card-eyebrow">Qué desarrollo</p>
-        <h2>Software para web, escritorio y móvil.</h2>
-        <p class="hero-card-copy">Aplicaciones a medida, integraciones y servicios backend, con despliegues en servidores Linux cuando el proyecto lo requiere.</p>
-        <div class="hero-card-tags" aria-label="Áreas">
+    <aside class="hero-card" aria-label="Áreas de desarrollo" data-i18n-aria-label="hero.card.aria">
+        <p class="hero-card-eyebrow" data-i18n="hero.card.eyebrow">Qué desarrollo</p>
+        <h2 data-i18n="hero.card.title">Software para web, escritorio y móvil.</h2>
+        <p class="hero-card-copy" data-i18n="hero.card.copy">Aplicaciones a medida, integraciones y servicios backend, con despliegues en servidores Linux cuando el proyecto lo requiere.</p>
+        <div class="hero-card-tags" aria-label="Áreas" data-i18n-aria-label="hero.card.tagsAria">
             <span>Web</span>
-            <span>Escritorio</span>
-            <span>Móvil</span>
+            <span data-i18n="hero.card.desktop">Escritorio</span>
+            <span data-i18n="hero.card.mobile">Móvil</span>
             <span>Backend</span>
         </div>
     </aside>
 </section>
 
 <section class="skills-section" id="skills">
-    <h2 class="section-title">Habilidades Técnicas</h2>
+    <h2 class="section-title" data-i18n="skills.title">Habilidades Técnicas</h2>
 
     <div class="skills-cards-container">
 
         <div class="skill-card">
-            <h3>Lenguajes</h3>
+            <h3 data-i18n="skills.languages">Lenguajes</h3>
             <div class="skills-grid">
                 <div class="skill-item"><i class="devicon-rust-plain"></i><span>Rust</span></div>
                 <div class="skill-item"><i class="devicon-java-plain"></i><span>Java</span></div>
@@ -738,7 +818,7 @@
         </div>
 
         <div class="skill-card">
-            <h3>Web, backend y datos</h3>
+            <h3 data-i18n="skills.web">Web, backend y datos</h3>
             <div class="skills-grid">
                 <div class="skill-item"><i class="devicon-postgresql-plain"></i><span>PostgreSQL</span></div>
                 <div class="skill-item"><i class="devicon-microsoftsqlserver-plain"></i><span>SQL Server</span></div>
@@ -750,7 +830,7 @@
         </div>
 
         <div class="skill-card">
-            <h3>Sistemas & Entornos</h3>
+            <h3 data-i18n="skills.systems">Sistemas & Entornos</h3>
             <div class="skills-grid">
                 <div class="skill-item"><i class="devicon-windows8-original"></i><span>Windows</span></div>
                 <div class="skill-item"><i class="devicon-apple-original"></i><span>macOS</span></div>
@@ -762,7 +842,7 @@
         </div>
 
         <div class="skill-card">
-            <h3>Cloud & Deploy</h3>
+            <h3 data-i18n="skills.cloud">Cloud & Deploy</h3>
             <div class="skills-grid">
                 <div class="skill-item"><i class="devicon-amazonwebservices-plain-wordmark"></i><span>AWS</span></div>
                 <div class="skill-item"><i class="devicon-azure-plain"></i><span>Azure</span></div>
@@ -776,71 +856,71 @@
 
 <section class="projects-section" id="projects">
     <span id="proyectos"></span>
-    <h2 class="section-title">Proyectos Destacados</h2>
+    <h2 class="section-title" data-i18n="projects.title">Proyectos Destacados</h2>
 
     <div class="projects-grid">
 
         <article class="project-card">
             <h3>Image Service</h3>
             <p>
-                Servicio open source autoalojado en Rust y Axum para validar, optimizar y servir imágenes WebP, con almacenamiento local o S3.
+                <span data-i18n="projects.image.copy">Servicio open source autoalojado en Rust y Axum para validar, optimizar y servir imágenes WebP, con almacenamiento local o S3.</span>
             </p>
             <div class="project-tags">
                 <span>Rust</span>
                 <span>Axum</span>
                 <span>OpenDAL</span>
                 <span>WebP · S3</span>
-                <span>Código abierto</span>
+                <span data-i18n="projects.image.opensource">Código abierto</span>
                 <span>Apache 2.0</span>
             </div>
             <div class="project-actions">
-                <a class="project-link" href="https://github.com/agusquartz/image_service" target="_blank" rel="noopener">Ver repositorio ↗</a>
+                <a class="project-link" href="https://github.com/agusquartz/image_service" target="_blank" rel="noopener" data-i18n="projects.image.link">Ver repositorio ↗</a>
             </div>
         </article>
 
         <article class="project-card">
             <h3>Academic Progress</h3>
             <p>
-                Herramienta para seguir el avance académico, consultar correlativas y organizar materias en una malla curricular.
+                <span data-i18n="projects.academic.copy">Herramienta para seguir el avance académico, consultar correlativas y organizar materias en una malla curricular.</span>
             </p>
             <div class="project-tags">
                 <span>JavaScript</span>
-                <span>Educación</span>
-                <span>Planificación</span>
+                <span data-i18n="projects.academic.education">Educación</span>
+                <span data-i18n="projects.academic.planning">Planificación</span>
             </div>
             <div class="project-actions">
-                <a class="project-link" href="./academic-progress/">Abrir Academic Progress</a>
-                <a class="project-link" href="./academic-progress/curriculum-builder/">Crear malla</a>
+                <a class="project-link" href="./academic-progress/" data-i18n="projects.academic.open">Abrir Academic Progress</a>
+                <a class="project-link" href="./academic-progress/curriculum-builder/" data-i18n="projects.academic.create">Crear malla</a>
             </div>
         </article>
 
         <article class="project-card">
             <h3>Simon Says ASM</h3>
             <p>
-                Juego de memoria en Assembly 8086 con mouse, pantallas, niveles de dificultad e interrupciones BIOS/DOS.
+                <span data-i18n="projects.simon.copy">Juego de memoria en Assembly 8086 con mouse, pantallas, niveles de dificultad e interrupciones BIOS/DOS.</span>
             </p>
             <div class="project-tags">
                 <span>Assembly 8086</span>
                 <span>emu8086</span>
-                <span>Juego</span>
+                <span data-i18n="projects.simon.game">Juego</span>
             </div>
             <div class="project-actions">
-                <a class="project-link" href="./simon-says-asm/">Abrir proyecto</a>
+                <a class="project-link" href="./simon-says-asm/" data-i18n="projects.simon.open">Abrir proyecto</a>
             </div>
         </article>
 
         <article class="project-card">
             <h3>Huffman</h3>
             <p>
-                Material interactivo sobre compresión sin pérdida, árboles de Huffman, frecuencias y codificación de bits.
+                <span data-i18n="projects.huffman.copy">Material interactivo sobre compresión sin pérdida, árboles de Huffman, frecuencias y codificación de bits.</span>
             </p>
             <div class="project-tags">
                 <span>C</span>
-                <span>Algoritmos</span>
-                <span>Compresión</span>
+                <span data-i18n="projects.huffman.algorithms">Algoritmos</span>
+                <span data-i18n="projects.huffman.compression">Compresión</span>
             </div>
             <div class="project-actions">
-                <a class="project-link" href="./HUFFMAN/">Abrir Huffman</a>
+                <a class="project-link" href="./HUFFMAN/" data-i18n="projects.huffman.open">Abrir Huffman</a>
             </div>
         </article>
 
@@ -849,20 +929,13 @@
 </section>
 
 <section class="about-section" id="about">
-    <h2 class="section-title">Sobre mí y contacto</h2>
+    <h2 class="section-title" data-i18n="about.title">Sobre mí y contacto</h2>
 
     <div class="about-card">
         <div>
-            <p>
-                Soy <span class="about-highlight">Agustin Argüello</span>, desarrollador enfocado en construir
-                software útil, eficiente y mantenible. Me interesa crear soluciones completas, desde la base de datos
-                y el backend hasta la interfaz final, combinando pensamiento técnico con una visión práctica del producto.
-            </p>
+            <p data-i18n-html="about.first">Soy <span class="about-highlight">Agustin Argüello</span>, desarrollador enfocado en construir software útil, eficiente y mantenible. Me interesa crear soluciones completas, desde la base de datos y el backend hasta la interfaz final, combinando pensamiento técnico con una visión práctica del producto.</p>
             <br>
-            <p>
-                Trabajo especialmente con tecnologías web, sistemas de escritorio, servidores Linux, bases de datos
-                y herramientas orientadas a resolver problemas reales.
-            </p>
+            <p data-i18n="about.second">Trabajo especialmente con tecnologías web, sistemas de escritorio, servidores Linux, bases de datos y herramientas orientadas a resolver problemas reales.</p>
         </div>
 
         <div class="contact-box">
@@ -873,7 +946,7 @@
     </div>
 </section>
 
-<a href="#" class="back-to-top" aria-label="Volver al inicio">
+<a href="#" class="back-to-top" aria-label="Volver al inicio" data-i18n-aria-label="backToTop">
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="m18 15-6-6-6 6"/>
     </svg>
@@ -882,6 +955,57 @@
 <script>
     const btnMenu = document.getElementById('btn-menu');
     const menuLinks = document.getElementById('menu-links');
+    const languageSwitcher = document.getElementById('languageSwitcher');
+    const languageButton = document.getElementById('languageButton');
+    const languageCode = document.getElementById('languageCode');
+    const localeCodes = { es: 'ES', en: 'EN', pt: 'PT', 'zh-Hant': '繁中', ru: 'RU', de: 'DE' };
+    const documentLocales = { es: 'es', en: 'en', pt: 'pt-BR', 'zh-Hant': 'zh-Hant', ru: 'ru', de: 'de' };
+
+    function readTranslation(messages, path) {
+        return path.split('.').reduce((value, part) => value && value[part], messages);
+    }
+
+    function applyTranslations(messages, locale) {
+        document.querySelectorAll('[data-i18n]').forEach(element => {
+            const value = readTranslation(messages, element.dataset.i18n);
+            if (typeof value === 'string') element.textContent = value;
+        });
+
+        document.querySelectorAll('[data-i18n-html]').forEach(element => {
+            const value = readTranslation(messages, element.dataset.i18nHtml);
+            if (typeof value === 'string') element.innerHTML = value;
+        });
+
+        document.querySelectorAll('[data-i18n-aria-label]').forEach(element => {
+            const value = readTranslation(messages, element.dataset.i18nAriaLabel);
+            if (typeof value === 'string') element.setAttribute('aria-label', value);
+        });
+
+        const title = readTranslation(messages, 'meta.title');
+        if (typeof title === 'string') document.title = title;
+        document.documentElement.lang = documentLocales[locale] || locale;
+        languageCode.textContent = localeCodes[locale] || locale.toUpperCase();
+        document.querySelectorAll('.language-option').forEach(option => {
+            option.setAttribute('aria-current', String(option.dataset.locale === locale));
+        });
+    }
+
+    async function setLanguage(locale) {
+        try {
+            const response = await fetch(`./locales/${locale}.json`);
+            if (!response.ok) throw new Error(`Could not load locale: ${locale}`);
+            const messages = await response.json();
+            applyTranslations(messages, locale);
+            localStorage.setItem('portfolio-locale', locale);
+        } catch (error) {
+            console.error('Language selection failed.', error);
+        }
+    }
+
+    function closeLanguageMenu() {
+        languageSwitcher.classList.remove('open');
+        languageButton.setAttribute('aria-expanded', 'false');
+    }
 
     btnMenu.addEventListener('click', () => {
         menuLinks.classList.toggle('active');
@@ -892,6 +1016,28 @@
             menuLinks.classList.remove('active');
         });
     });
+
+    languageButton.addEventListener('click', () => {
+        const isOpen = languageSwitcher.classList.toggle('open');
+        languageButton.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    document.querySelectorAll('.language-option').forEach(option => {
+        option.addEventListener('click', () => {
+            setLanguage(option.dataset.locale);
+            closeLanguageMenu();
+        });
+    });
+
+    document.addEventListener('click', event => {
+        if (!languageSwitcher.contains(event.target)) closeLanguageMenu();
+    });
+
+    document.addEventListener('keydown', event => {
+        if (event.key === 'Escape') closeLanguageMenu();
+    });
+
+    setLanguage(localStorage.getItem('portfolio-locale') || 'es');
 </script>
 
 </body>
