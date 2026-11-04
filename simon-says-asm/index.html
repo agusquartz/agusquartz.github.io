@@ -432,9 +432,18 @@
     :root { --bg:#171b21; --bg-soft:#202731; --surface:#282f39; --surface-strong:#303a46; --border:#414c59; --border-strong:#596779; --text:#edf0f4; --muted:#b5bec9; --muted-2:#929eac; --primary:#8fb7ed; --primary-2:#8fb7ed; --secondary:#aeb8c6; --success:#78c69a; --warning:#e5b86c; --danger:#e77f84; --info:#79b6e5; --radius-xl:14px; --radius-lg:10px; --radius-md:8px; --shadow:0 14px 30px rgba(0,0,0,.18); }
     body { background:#171b21; color:var(--text); padding:24px; }
     body::before { display:none; }
-    .topbar { position:static; display:flex; justify-content:flex-start; padding:0; border:0; background:transparent; box-shadow:none; backdrop-filter:none; }
+    .topbar { position:static; display:flex; justify-content:space-between; padding:0; border:0; background:transparent; box-shadow:none; backdrop-filter:none; }
     .back-link { display:inline-flex; align-items:center; gap:9px; min-height:42px; padding:0 14px; border:1px solid #536174; border-radius:8px; background:#252f3b; color:#dce7f5; font-size:.92rem; font-weight:750; transition:background .16s ease,border-color .16s ease,transform .16s ease; }
     .back-link:hover { background:#344355; border-color:#8fb7ed; color:#fff; transform:translateX(-2px); }
+    .language-slot { margin-left:auto; }
+    .language-switcher { position:relative; }
+    .language-button { height:42px; display:inline-flex; align-items:center; gap:7px; padding:0 11px; border:1px solid #536174; border-radius:8px; background:#252f3b; color:#dce7f5; font:inherit; font-size:.78rem; font-weight:800; cursor:pointer; }
+    .language-button:hover,.language-switcher.open .language-button { border-color:#8fb7ed; background:#344355; color:#fff; }
+    .language-button svg { width:16px; height:16px; }
+    .language-menu { position:absolute; top:calc(100% + 8px); right:0; display:none; min-width:196px; padding:6px; border:1px solid #4b5868; border-radius:8px; background:#252f3b; box-shadow:0 14px 30px rgba(0,0,0,.32); z-index:30; }
+    .language-switcher.open .language-menu { display:grid; }
+    .language-option { width:100%; display:flex; align-items:center; justify-content:space-between; gap:18px; padding:8px 9px; border:0; border-radius:5px; background:transparent; color:#dce7f5; font:inherit; font-size:.8rem; text-align:left; cursor:pointer; }
+    .language-option:hover { background:#34404f; }.language-option[aria-current="true"] { color:#fff; font-weight:800; }.language-option-code { color:#9dacbd; font-size:.7rem; font-weight:800; }
     .eyebrow { color:var(--primary); background:transparent; border:0; border-left:2px solid var(--primary); border-radius:0; padding:2px 0 2px 10px; font-weight:700; letter-spacing:.12em; }
     h1,h2,h3,h4 { color:#edf0f4; }
     h1 { letter-spacing:-.055em; line-height:.98; }
@@ -487,7 +496,8 @@
 <body>
   <div class="shell" id="top">
     <header class="topbar">
-      <a class="back-link" href="../" aria-label="Atrás, volver al portfolio"><span aria-hidden="true">←</span> Atrás</a>
+      <a class="back-link" href="../" aria-label="Atrás, volver al portfolio"><span aria-hidden="true">←</span> <span data-i18n="simon.back">Atrás</span></a>
+      <div class="language-slot" id="languageSlot"></div>
     </header>
 
     <main>
@@ -495,12 +505,10 @@
         <div>
           <div class="eyebrow">ASM 8086 · emu8086 · Low Level Game</div>
           <h1 id="hero-title"><span class="gradient-text">Simon Says ASM</span></h1>
-          <p class="hero-text">
-            Juego de memoria desarrollado en Assembly 8086 para emu8086. El proyecto recrea la dinámica de Simon Dice con interfaz en modo texto, regiones coloreadas mediante servicios de video BIOS INT 10h, mouse, niveles, dificultad progresiva, puntaje y pantallas completas de victoria o derrota.
-          </p>
+          <p class="hero-text" data-i18n="simon.hero.copy">Juego de memoria desarrollado en Assembly 8086 para emu8086. El proyecto recrea la dinámica de Simon Dice con interfaz en modo texto, regiones coloreadas mediante servicios de video BIOS INT 10h, mouse, niveles, dificultad progresiva, puntaje y pantallas completas de victoria o derrota.</p>
           <div class="hero-actions">
-            <a class="button primary" href="#resumen">Ver proyecto</a>
-            <a class="button" href="./proyecto1AgustinArguello.asm" download>Descargar código ASM</a>
+            <a class="button primary" href="#resumen" data-i18n="simon.hero.open">Ver proyecto</a>
+            <a class="button" href="./proyecto1AgustinArguello.asm" download data-i18n="simon.hero.download">Descargar código ASM</a>
           </div>
         </div>
 
@@ -531,28 +539,28 @@
         <div class="section-header">
           <div>
             <div class="section-kicker">Proyecto</div>
-            <h2 id="summary-title">Qué demuestra</h2>
+            <h2 id="summary-title" data-i18n="simon.summary.title">Qué demuestra</h2>
           </div>
-          <p class="section-desc">No es solo un juego: es una muestra de control de hardware virtual, flujo de ejecución, estado de juego y UI sin librerías modernas.</p>
+          <p class="section-desc" data-i18n="simon.summary.copy">No es solo un juego: es una muestra de control de hardware virtual, flujo de ejecución, estado de juego y UI sin librerías modernas.</p>
         </div>
 
         <div class="grid">
           <article class="project-card">
             <div class="card-top"><span class="tag">Gameplay</span></div>
-            <h3>Secuencias de memoria</h3>
-            <p>El programa genera una secuencia de colores, la muestra al jugador y valida cada click contra la posición esperada en la ronda.</p>
+            <h3 data-i18n="simon.summary.memory.title">Secuencias de memoria</h3>
+            <p data-i18n="simon.summary.memory.copy">El programa genera una secuencia de colores, la muestra al jugador y valida cada click contra la posición esperada en la ronda.</p>
           </article>
 
           <article class="project-card">
             <div class="card-top"><span class="tag">Input</span></div>
-            <h3>Interacción con mouse</h3>
-            <p>Detecta clicks y coordenadas para decidir si el usuario presionó el cuadrante gris, azul, rojo o verde.</p>
+            <h3 data-i18n="simon.summary.input.title">Interacción con mouse</h3>
+            <p data-i18n="simon.summary.input.copy">Detecta clicks y coordenadas para decidir si el usuario presionó el cuadrante gris, azul, rojo o verde.</p>
           </article>
 
           <article class="project-card">
             <div class="card-top"><span class="tag">State</span></div>
-            <h3>Niveles y dificultad</h3>
-            <p>Maneja puntaje, nivel, dificultad fácil/media/difícil y un modo automático que ajusta la velocidad durante la partida.</p>
+            <h3 data-i18n="simon.summary.levels.title">Niveles y dificultad</h3>
+            <p data-i18n="simon.summary.levels.copy">Maneja puntaje, nivel, dificultad fácil/media/difícil y un modo automático que ajusta la velocidad durante la partida.</p>
           </article>
         </div>
       </section>
@@ -561,39 +569,39 @@
         <div class="section-header">
           <div>
             <div class="section-kicker">Bajo nivel</div>
-            <h2 id="tech-title">Highlights técnicos</h2>
+            <h2 id="tech-title" data-i18n="simon.tech.title">Highlights técnicos</h2>
           </div>
-          <p class="section-desc">El valor del proyecto está en resolver una experiencia interactiva usando recursos muy cercanos al sistema, priorizando modo texto por rendimiento frente al dibujo gráfico pixel-by-pixel en emu8086.</p>
+          <p class="section-desc" data-i18n="simon.tech.copy">El valor del proyecto está en resolver una experiencia interactiva usando recursos muy cercanos al sistema, priorizando modo texto por rendimiento frente al dibujo gráfico pixel-by-pixel en emu8086.</p>
         </div>
 
         <div class="grid two">
           <article class="info-card">
-            <h3>Interrupciones del sistema</h3>
-            <p>Usa servicios BIOS y DOS para construir la pantalla en modo texto, mover cursor, imprimir texto, leer tiempo, esperar y controlar mouse.</p>
+            <h3 data-i18n="simon.tech.interrupts.title">Interrupciones del sistema</h3>
+            <p data-i18n="simon.tech.interrupts.copy">Usa servicios BIOS y DOS para construir la pantalla en modo texto, mover cursor, imprimir texto, leer tiempo, esperar y controlar mouse.</p>
             <div class="stack-list">
               <span>INT 10h</span><span>INT 21h</span><span>INT 33h</span><span>INT 15h</span>
             </div>
           </article>
 
           <article class="info-card">
-            <h3>Macros reutilizables</h3>
-            <p>Define macros para pintar regiones, mover cursor e imprimir caracteres repetidos, reduciendo repetición en las pantallas.</p>
+            <h3 data-i18n="simon.tech.macros.title">Macros reutilizables</h3>
+            <p data-i18n="simon.tech.macros.copy">Define macros para pintar regiones, mover cursor e imprimir caracteres repetidos, reduciendo repetición en las pantallas.</p>
             <div class="stack-list">
               <span>paint</span><span>movecursor</span><span>print</span>
             </div>
           </article>
 
           <article class="info-card">
-            <h3>UI en modo texto</h3>
-            <p>Construye pantallas completas en modo texto con rectángulos de color, mensajes centrados, carga visual, menú de dificultad y tablero del juego, evitando dibujar píxel por píxel en modo gráfico.</p>
+            <h3 data-i18n="simon.tech.textUi.title">UI en modo texto</h3>
+            <p data-i18n="simon.tech.textUi.copy">Construye pantallas completas en modo texto con rectángulos de color, mensajes centrados, carga visual, menú de dificultad y tablero del juego, evitando dibujar píxel por píxel en modo gráfico.</p>
             <div class="stack-list">
               <span>Text Mode UI</span><span>Color Attributes</span><span>BIOS INT 10h</span>
             </div>
           </article>
 
           <article class="info-card">
-            <h3>Generación pseudoaleatoria</h3>
-            <p>Construye secuencias usando tiempo, semillas y operaciones aritméticas para producir valores que representan colores.</p>
+            <h3 data-i18n="simon.tech.random.title">Generación pseudoaleatoria</h3>
+            <p data-i18n="simon.tech.random.copy">Construye secuencias usando tiempo, semillas y operaciones aritméticas para producir valores que representan colores.</p>
             <div class="stack-list">
               <span>Seeds</span><span>Modulo</span><span>Arrays</span><span>Game Loop</span>
             </div>
@@ -605,9 +613,9 @@
         <div class="section-header">
           <div>
             <div class="section-kicker">Código</div>
-            <h2 id="code-title">Fragmento representativo</h2>
+            <h2 id="code-title" data-i18n="simon.code.title">Fragmento representativo</h2>
           </div>
-          <p class="section-desc">Las macros muestran cómo se abstraen operaciones repetidas de la interfaz en modo texto: pintar regiones, mover el cursor y reutilizar servicios de video BIOS sin dibujar píxeles individualmente.</p>
+          <p class="section-desc" data-i18n="simon.code.copy">Las macros muestran cómo se abstraen operaciones repetidas de la interfaz en modo texto: pintar regiones, mover el cursor y reutilizar servicios de video BIOS sin dibujar píxeles individualmente.</p>
         </div>
 
         <div class="code-card">
@@ -637,22 +645,22 @@ endm</code></pre>
         <div class="section-header">
           <div>
             <div class="section-kicker">Reflexión</div>
-            <h2 id="lessons-title">Qué aprendí construyéndolo</h2>
+            <h2 id="lessons-title" data-i18n="simon.lessons.title">Qué aprendí construyéndolo</h2>
           </div>
         </div>
 
         <div class="grid">
           <article class="info-card">
-            <h3>Diseñar con restricciones</h3>
-            <p>Crear una interfaz jugable sin HTML, CSS, canvas ni librerías obliga a pensar en coordenadas de modo texto, regiones, atributos de color y flujo de pantalla.</p>
+            <h3 data-i18n="simon.lessons.constraints.title">Diseñar con restricciones</h3>
+            <p data-i18n="simon.lessons.constraints.copy">Crear una interfaz jugable sin HTML, CSS, canvas ni librerías obliga a pensar en coordenadas de modo texto, regiones, atributos de color y flujo de pantalla.</p>
           </article>
           <article class="info-card">
-            <h3>Controlar estado manualmente</h3>
-            <p>El juego exige administrar arrays, índices, dificultad, secuencias, intentos, puntaje y reinicio sin estructuras de alto nivel.</p>
+            <h3 data-i18n="simon.lessons.state.title">Controlar estado manualmente</h3>
+            <p data-i18n="simon.lessons.state.copy">El juego exige administrar arrays, índices, dificultad, secuencias, intentos, puntaje y reinicio sin estructuras de alto nivel.</p>
           </article>
           <article class="info-card">
-            <h3>Escribir código mantenible en ASM</h3>
-            <p>El siguiente paso sería extraer constantes con EQU, ordenar mejor las rutinas y cuidar más la simetría entre push/pop para robustez.</p>
+            <h3 data-i18n="simon.lessons.maintainable.title">Escribir código mantenible en ASM</h3>
+            <p data-i18n="simon.lessons.maintainable.copy">El siguiente paso sería extraer constantes con EQU, ordenar mejor las rutinas y cuidar más la simetría entre push/pop para robustez.</p>
           </article>
         </div>
       </section>
@@ -666,7 +674,13 @@ endm</code></pre>
 
   <button class="back-to-top" type="button" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })" aria-label="Volver arriba">↑</button>
 
+  <script src="../locales/i18n.js?rev=2"></script>
   <script>
+    PortfolioI18n.mount({
+      slot: '#languageSlot',
+      prefix: 'simon',
+      onLocale: (copy) => { if (copy && copy.title) document.title = copy.title; }
+    });
     const yearElement = document.getElementById('year');
     if (yearElement) yearElement.textContent = new Date().getFullYear();
   </script>
