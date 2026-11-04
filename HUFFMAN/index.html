@@ -517,9 +517,10 @@
     :root { --bg:#171b21; --bg-soft:#202731; --surface:#282f39; --surface-strong:#303a46; --border:#414c59; --border-strong:#596779; --text:#edf0f4; --muted:#b5bec9; --muted-2:#929eac; --primary:#8fb7ed; --primary-2:#8fb7ed; --secondary:#aeb8c6; --success:#78c69a; --warning:#e5b86c; --danger:#e77f84; --info:#79b6e5; --radius-xl:14px; --radius-lg:10px; --radius-md:8px; --shadow:0 14px 30px rgba(0,0,0,.18); }
     body { background:#171b21; color:var(--text); padding:24px; }
     body::before { display:none; }
-    .topbar { position:static; display:flex; justify-content:flex-start; padding:0; border:0; background:transparent; box-shadow:none; backdrop-filter:none; }
+    .topbar { position:static; display:flex; justify-content:space-between; padding:0; border:0; background:transparent; box-shadow:none; backdrop-filter:none; }
     .back-link { display:inline-flex; align-items:center; gap:9px; min-height:42px; padding:0 14px; border:1px solid #536174; border-radius:8px; background:#252f3b; color:#dce7f5; font-size:.92rem; font-weight:750; transition:background .16s ease,border-color .16s ease,transform .16s ease; }
     .back-link:hover { background:#344355; border-color:#8fb7ed; color:#fff; transform:translateX(-2px); }
+    .language-slot { margin-left:auto; }.language-switcher { position:relative; }.language-button { height:42px; display:inline-flex; align-items:center; gap:7px; padding:0 11px; border:1px solid #536174; border-radius:8px; background:#252f3b; color:#dce7f5; font:inherit; font-size:.78rem; font-weight:800; cursor:pointer; }.language-button:hover,.language-switcher.open .language-button { border-color:#8fb7ed; background:#344355; color:#fff; }.language-button svg { width:16px; height:16px; }.language-menu { position:absolute; top:calc(100% + 8px); right:0; display:none; min-width:196px; padding:6px; border:1px solid #4b5868; border-radius:8px; background:#252f3b; box-shadow:0 14px 30px rgba(0,0,0,.32); z-index:30; }.language-switcher.open .language-menu { display:grid; }.language-option { width:100%; display:flex; align-items:center; justify-content:space-between; gap:18px; padding:8px 9px; border:0; border-radius:5px; background:transparent; color:#dce7f5; font:inherit; font-size:.8rem; text-align:left; cursor:pointer; }.language-option:hover { background:#34404f; }.language-option[aria-current="true"] { color:#fff; font-weight:800; }.language-option-code { color:#9dacbd; font-size:.7rem; font-weight:800; }
     .eyebrow { color:var(--primary); background:transparent; border:0; border-left:2px solid var(--primary); border-radius:0; padding:2px 0 2px 10px; font-weight:700; letter-spacing:.12em; }
     h1,h2,h3,h4 { color:#edf0f4; }
     h1 { letter-spacing:-.055em; line-height:.98; }
@@ -570,7 +571,8 @@
 <body>
   <div class="shell" id="top">
     <header class="topbar">
-      <a class="back-link" href="../" aria-label="Atrás, volver al portfolio"><span aria-hidden="true">←</span> Atrás</a>
+      <a class="back-link" href="../" aria-label="Atrás, volver al portfolio"><span aria-hidden="true">←</span> <span data-i18n="huffman.back">Atrás</span></a>
+      <div class="language-slot" id="languageSlot"></div>
     </header>
 
     <main>
@@ -578,11 +580,9 @@
         <div>
           <div class="eyebrow">C · Data Structures · Compression</div>
           <h1 id="hero-title"><span class="gradient-text">Huffman Compression</span></h1>
-          <p class="hero-text">
-            Documento técnico sobre compresión sin pérdida con Huffman: frecuencias, heap, árbol binario, tabla de códigos, manejo de bits y reconstrucción durante la descompresión.
-          </p>
+          <p class="hero-text" data-i18n="huffman.hero.copy">Documento técnico sobre compresión sin pérdida con Huffman: frecuencias, heap, árbol binario, tabla de códigos, manejo de bits y reconstrucción durante la descompresión.</p>
           <div class="hero-actions">
-            <a class="button primary" href="#resumen">Leer explicación</a>
+            <a class="button primary" href="#resumen" data-i18n="huffman.hero.open">Leer explicación</a>
             <a class="button" href="https://github.com/agusquartz" target="_blank" rel="noopener">GitHub</a>
           </div>
         </div>
@@ -615,26 +615,26 @@
         <div class="section-header">
           <div>
             <div class="section-kicker">Proyecto</div>
-            <h2 id="summary-title">Qué demuestra</h2>
+            <h2 id="summary-title" data-i18n="huffman.summary.title">Qué demuestra</h2>
           </div>
-          <p class="section-desc">La página explica cómo una estructura de datos puede convertirse en un archivo comprimido real, bajando desde la teoría del árbol hasta la manipulación de bits.</p>
+          <p class="section-desc" data-i18n="huffman.summary.copy">La página explica cómo una estructura de datos puede convertirse en un archivo comprimido real, bajando desde la teoría del árbol hasta la manipulación de bits.</p>
         </div>
 
         <div class="grid">
           <article class="project-card">
             <div class="card-top"><span class="tag">Tree</span></div>
-            <h3>Árbol de Huffman</h3>
-            <p>Construcción de un árbol binario a partir de frecuencias, combinando nodos de menor peso hasta obtener una raíz única.</p>
+            <h3 data-i18n="huffman.summary.tree.title">Árbol de Huffman</h3>
+            <p data-i18n="huffman.summary.tree.copy">Construcción de un árbol binario a partir de frecuencias, combinando nodos de menor peso hasta obtener una raíz única.</p>
           </article>
           <article class="project-card">
             <div class="card-top"><span class="tag">Heap</span></div>
-            <h3>Cola de prioridad</h3>
-            <p>Uso de heap para extraer eficientemente los nodos con menor frecuencia durante la construcción del árbol.</p>
+            <h3 data-i18n="huffman.summary.heap.title">Cola de prioridad</h3>
+            <p data-i18n="huffman.summary.heap.copy">Uso de heap para extraer eficientemente los nodos con menor frecuencia durante la construcción del árbol.</p>
           </article>
           <article class="project-card">
             <div class="card-top"><span class="tag">Bits</span></div>
-            <h3>Manipulación de bits</h3>
-            <p>Explicación de operaciones como desplazamiento, máscara, OR y AND para escribir secuencias compactas.</p>
+            <h3 data-i18n="huffman.summary.bits.title">Manipulación de bits</h3>
+            <p data-i18n="huffman.summary.bits.copy">Explicación de operaciones como desplazamiento, máscara, OR y AND para escribir secuencias compactas.</p>
           </article>
         </div>
       </section>
@@ -642,14 +642,14 @@
       <section id="contenido" aria-label="Contenido técnico">
         <div class="content-layout">
           <article class="article-card" id="articleContent">
-            <h2 id="campobit">Campobit: operaciones de bajo nivel y aritmética de bits</h2>
-            <p>En muchos algoritmos de compresión, como Huffman, no alcanza con guardar caracteres completos. Para aprovechar mejor el espacio hay que escribir códigos de longitud variable, y eso obliga a manipular datos a nivel de bits.</p>
-            <p>Un <strong>campobit</strong> es una estructura que permite almacenar una secuencia de bits dentro de una variable numérica junto con un contador de tamaño. La operación básica es <code>bits_agregar</code>, que añade un bit nuevo al final del campo.</p>
+            <h2 id="campobit" data-i18n="huffman.article.bitfield.title">Campobit: operaciones de bajo nivel y aritmética de bits</h2>
+            <p data-i18n-html="huffman.article.bitfield.intro">En muchos algoritmos de compresión, como Huffman, no alcanza con guardar caracteres completos. Para aprovechar mejor el espacio hay que escribir códigos de longitud variable, y eso obliga a manipular datos a nivel de bits.</p>
+            <p data-i18n-html="huffman.article.bitfield.definition">Un <strong>campobit</strong> es una estructura que permite almacenar una secuencia de bits dentro de una variable numérica junto con un contador de tamaño. La operación básica es <code>bits_agregar</code>, que añade un bit nuevo al final del campo.</p>
 
-            <h3>Agregar un bit con desplazamiento y OR</h3>
-            <p>Supongamos que la estructura contiene 12 bits y queremos agregar un <strong>1</strong>. Primero se incrementa el tamaño y luego se crea una máscara desplazando el valor <code>1</code> hasta la posición correcta.</p>
+            <h3 data-i18n="huffman.article.bitfield.addTitle">Agregar un bit con desplazamiento y OR</h3>
+            <p data-i18n-html="huffman.article.bitfield.addCopy">Supongamos que la estructura contiene 12 bits y queremos agregar un <strong>1</strong>. Primero se incrementa el tamaño y luego se crea una máscara desplazando el valor <code>1</code> hasta la posición correcta.</p>
             <div class="code-card">
-              <div class="code-title"><span>Ejemplo conceptual</span><span class="tag">bits</span></div>
+              <div class="code-title"><span data-i18n="huffman.article.conceptualExample">Ejemplo conceptual</span><span class="tag">bits</span></div>
 <pre><code>bits-&gt;bits   = 0000 0001 1000 1000
 bits-&gt;tamano = 12
 
@@ -660,7 +660,7 @@ OR mask      = 0001 0000 0000 0000
 -----------------------------------
 resultado    = 0001 0001 1000 1000</code></pre>
             </div>
-            <p>Si el bit a agregar es <code>0</code>, normalmente no hace falta modificar el valor numérico porque las posiciones nuevas se asumen en cero; solo se actualiza <code>tamano</code>.</p>
+            <p data-i18n-html="huffman.article.bitfield.zeroCopy">Si el bit a agregar es <code>0</code>, normalmente no hace falta modificar el valor numérico porque las posiciones nuevas se asumen en cero; solo se actualiza <code>tamano</code>.</p>
 
             <div class="code-card">
               <div class="code-title"><span>bits_agregar</span><span class="tag">C</span></div>
@@ -679,13 +679,13 @@ resultado    = 0001 0001 1000 1000</code></pre>
 }</code></pre>
             </div>
 
-            <h2 id="huffman">Qué es el algoritmo de Huffman</h2>
-            <p>Huffman es un método de compresión sin pérdida que asigna códigos de longitud variable: los símbolos más frecuentes reciben códigos más cortos y los menos frecuentes reciben códigos más largos.</p>
-            <p>La idea central es construir un árbol binario donde cada hoja representa un símbolo. El camino desde la raíz hasta una hoja determina su código: por ejemplo, izquierda puede representar <code>0</code> y derecha <code>1</code>.</p>
+            <h2 id="huffman" data-i18n="huffman.article.algorithm.title">Qué es el algoritmo de Huffman</h2>
+            <p data-i18n="huffman.article.algorithm.intro">Huffman es un método de compresión sin pérdida que asigna códigos de longitud variable: los símbolos más frecuentes reciben códigos más cortos y los menos frecuentes reciben códigos más largos.</p>
+            <p data-i18n-html="huffman.article.algorithm.copy">La idea central es construir un árbol binario donde cada hoja representa un símbolo. El camino desde la raíz hasta una hoja determina su código: por ejemplo, izquierda puede representar <code>0</code> y derecha <code>1</code>.</p>
 
-            <h2 id="compresion">Procesos en la compresión</h2>
-            <h3>1. Calcular frecuencias</h3>
-            <p>Se lee el archivo de entrada y se cuenta cuántas veces aparece cada carácter. Para texto basado en bytes, se puede usar un arreglo de 256 posiciones.</p>
+            <h2 id="compresion" data-i18n="huffman.article.compression.title">Procesos en la compresión</h2>
+            <h3 data-i18n="huffman.article.compression.frequenciesTitle">1. Calcular frecuencias</h3>
+            <p data-i18n="huffman.article.compression.frequenciesCopy">Se lee el archivo de entrada y se cuenta cuántas veces aparece cada carácter. Para texto basado en bytes, se puede usar un arreglo de 256 posiciones.</p>
             <div class="code-card">
               <div class="code-title"><span>calcular_frecuencias</span><span class="tag">C</span></div>
 <pre><code>static int calcular_frecuencias(int* frecuencias, char* entrada) {
@@ -698,8 +698,8 @@ resultado    = 0001 0001 1000 1000</code></pre>
 }</code></pre>
             </div>
 
-            <h3>2. Construir el árbol de Huffman</h3>
-            <p>Cada símbolo con frecuencia positiva se inserta en una cola de prioridad. Luego se extraen los dos nodos con menor frecuencia, se combinan en un padre y se reinserta el resultado. El proceso termina cuando queda un único nodo: la raíz.</p>
+            <h3 data-i18n="huffman.article.compression.treeTitle">2. Construir el árbol de Huffman</h3>
+            <p data-i18n="huffman.article.compression.treeCopy">Cada símbolo con frecuencia positiva se inserta en una cola de prioridad. Luego se extraen los dos nodos con menor frecuencia, se combinan en un padre y se reinserta el resultado. El proceso termina cuando queda un único nodo: la raíz.</p>
             <div class="code-card">
               <div class="code-title"><span>crear_huffman</span><span class="tag">heap</span></div>
 <pre><code>static Arbol crear_huffman(int* frecuencias) {
@@ -712,19 +712,19 @@ resultado    = 0001 0001 1000 1000</code></pre>
 }</code></pre>
             </div>
 
-            <h3>3. Crear la tabla de códigos</h3>
-            <p>Se recorre el árbol de forma recursiva. Cada vez que se baja a la izquierda se agrega un <code>0</code>; cada vez que se baja a la derecha se agrega un <code>1</code>. Al llegar a una hoja, el campobit acumulado es el código del carácter.</p>
-            <p>Hay dos enfoques comunes:</p>
+            <h3 data-i18n="huffman.article.compression.tableTitle">3. Crear la tabla de códigos</h3>
+            <p data-i18n-html="huffman.article.compression.tableCopy">Se recorre el árbol de forma recursiva. Cada vez que se baja a la izquierda se agrega un <code>0</code>; cada vez que se baja a la derecha se agrega un <code>1</code>. Al llegar a una hoja, el campobit acumulado es el código del carácter.</p>
+            <p data-i18n="huffman.article.compression.approaches">Hay dos enfoques comunes:</p>
             <ul>
-              <li><strong>Copias locales:</strong> cada rama recibe su propia copia del campo de bits. Es más simple y seguro.</li>
-              <li><strong>Modificación in situ:</strong> se modifica el mismo objeto y se elimina el último bit al volver de la recursión. Ahorra copias, pero exige más cuidado.</li>
+              <li data-i18n-html="huffman.article.compression.localCopies"><strong>Copias locales:</strong> cada rama recibe su propia copia del campo de bits. Es más simple y seguro.</li>
+              <li data-i18n-html="huffman.article.compression.inPlace"><strong>Modificación in situ:</strong> se modifica el mismo objeto y se elimina el último bit al volver de la recursión. Ahorra copias, pero exige más cuidado.</li>
             </ul>
 
-            <h3>4. Codificar el archivo</h3>
-            <p>Una vez generada la tabla, el archivo se lee nuevamente. Cada carácter se reemplaza por su secuencia de bits y se escribe en el flujo comprimido junto con la información necesaria para reconstruir el árbol.</p>
+            <h3 data-i18n="huffman.article.compression.encodeTitle">4. Codificar el archivo</h3>
+            <p data-i18n="huffman.article.compression.encodeCopy">Una vez generada la tabla, el archivo se lee nuevamente. Cada carácter se reemplaza por su secuencia de bits y se escribe en el flujo comprimido junto con la información necesaria para reconstruir el árbol.</p>
 
-            <h3>Eliminar el último bit</h3>
-            <p>Si se usa modificación in situ, una función como <code>bits_remove_last</code> permite retroceder un paso en el camino del árbol.</p>
+            <h3 data-i18n="huffman.article.compression.removeTitle">Eliminar el último bit</h3>
+            <p data-i18n-html="huffman.article.compression.removeCopy">Si se usa modificación in situ, una función como <code>bits_remove_last</code> permite retroceder un paso en el camino del árbol.</p>
             <div class="code-card">
               <div class="code-title"><span>bits_remove_last</span><span class="tag">C</span></div>
 <pre><code>static int bits_remove_last(campobits* bits) {
@@ -740,9 +740,9 @@ resultado    = 0001 0001 1000 1000</code></pre>
 }</code></pre>
             </div>
 
-            <h2 id="descompresion">Procesos en la descompresión</h2>
-            <h3>1. Reconstruir el árbol</h3>
-            <p>El descompresor lee la representación del árbol guardada en el archivo comprimido. Normalmente se usa un recorrido preorden para distinguir nodos internos y hojas.</p>
+            <h2 id="descompresion" data-i18n="huffman.article.decompression.title">Procesos en la descompresión</h2>
+            <h3 data-i18n="huffman.article.decompression.rebuildTitle">1. Reconstruir el árbol</h3>
+            <p data-i18n="huffman.article.decompression.rebuildCopy">El descompresor lee la representación del árbol guardada en el archivo comprimido. Normalmente se usa un recorrido preorden para distinguir nodos internos y hojas.</p>
             <div class="code-card">
               <div class="code-title"><span>leer_arbol</span><span class="tag">preorder</span></div>
 <pre><code>static Arbol leer_arbol(BitStream bs) {
@@ -750,8 +750,8 @@ resultado    = 0001 0001 1000 1000</code></pre>
 }</code></pre>
             </div>
 
-            <h3>2. Decodificar el flujo de bits</h3>
-            <p>Con el árbol reconstruido, se leen bits uno por uno. Un <code>0</code> mueve el cursor a la izquierda y un <code>1</code> a la derecha. Al llegar a una hoja se escribe el carácter y se vuelve a la raíz.</p>
+            <h3 data-i18n="huffman.article.decompression.decodeTitle">2. Decodificar el flujo de bits</h3>
+            <p data-i18n-html="huffman.article.decompression.decodeCopy">Con el árbol reconstruido, se leen bits uno por uno. Un <code>0</code> mueve el cursor a la izquierda y un <code>1</code> a la derecha. Al llegar a una hoja se escribe el carácter y se vuelve a la raíz.</p>
             <div class="code-card">
               <div class="code-title"><span>decodificar</span><span class="tag">BitStream</span></div>
 <pre><code>static void decodificar(BitStream in, BitStream out, Arbol arbol) {
@@ -760,8 +760,8 @@ resultado    = 0001 0001 1000 1000</code></pre>
             </div>
           </article>
 
-          <aside class="toc-card" aria-label="Índice de contenido">
-            <div class="toc-title">Índice</div>
+          <aside class="toc-card" aria-label="Índice de contenido" data-i18n-aria-label="huffman.article.tocAria">
+            <div class="toc-title" data-i18n="huffman.article.toc">Índice</div>
             <nav id="toc"></nav>
           </aside>
         </div>
@@ -776,6 +776,7 @@ resultado    = 0001 0001 1000 1000</code></pre>
 
   <button class="back-to-top" type="button" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })" aria-label="Volver arriba">↑</button>
 
+  <script src="../locales/i18n.js?rev=2"></script>
   <script>
     const yearElement = document.getElementById('year');
 
@@ -793,7 +794,10 @@ resultado    = 0001 0001 1000 1000</code></pre>
         .replace(/^-+|-+$/g, '') || 'section';
     }
 
-    headings.forEach((heading) => {
+    function buildToc() {
+      toc.innerHTML = '';
+      usedIds.clear();
+      headings.forEach((heading) => {
       let baseId = heading.id || slugify(heading.textContent);
       let id = baseId;
       let counter = 2;
@@ -811,9 +815,12 @@ resultado    = 0001 0001 1000 1000</code></pre>
       link.textContent = heading.textContent;
       link.className = heading.tagName.toLowerCase();
       toc.appendChild(link);
-    });
+      });
+    }
 
-    const tocLinks = [...toc.querySelectorAll('a')];
+    buildToc();
+
+    let tocLinks = [...toc.querySelectorAll('a')];
     const observer = new IntersectionObserver((entries) => {
       const visible = entries
         .filter(entry => entry.isIntersecting)
@@ -827,6 +834,16 @@ resultado    = 0001 0001 1000 1000</code></pre>
     }, { rootMargin: '-20% 0px -65% 0px', threshold: [0.1, 0.35, 0.7] });
 
     headings.forEach(heading => observer.observe(heading));
+
+    PortfolioI18n.mount({
+      slot: '#languageSlot',
+      prefix: 'huffman',
+      onLocale: (copy) => {
+        if (copy && copy.title) document.title = copy.title;
+        buildToc();
+        tocLinks = [...toc.querySelectorAll('a')];
+      }
+    });
   </script>
 </body>
 </html>

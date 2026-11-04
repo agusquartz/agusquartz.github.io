@@ -1,0 +1,76 @@
+{
+  "meta": { "title": "Portafolio - Agustin Argüello" },
+  "language": { "aria": "Cambiar idioma" },
+  "menu": { "open": "Abrir menú" },
+  "nav": { "about": "Sobre mí", "projects": "Proyectos", "skills": "Habilidades" },
+  "hero": {
+    "copy": "Desarrollo aplicaciones y herramientas útiles, desde interfaces web y servicios backend hasta software de escritorio. También administro y despliego servicios en servidores Linux.",
+    "projects": "Ver proyectos",
+    "card": {
+      "aria": "Áreas de desarrollo",
+      "eyebrow": "Qué desarrollo",
+      "title": "Software para web, escritorio y móvil.",
+      "copy": "Aplicaciones a medida, integraciones y servicios backend, con despliegues en servidores Linux cuando el proyecto lo requiere.",
+      "tagsAria": "Áreas",
+      "desktop": "Escritorio",
+      "mobile": "Móvil"
+    }
+  },
+  "skills": {
+    "title": "Habilidades Técnicas",
+    "languages": "Lenguajes",
+    "web": "Web, backend y datos",
+    "systems": "Sistemas & Entornos",
+    "cloud": "Cloud & Deploy"
+  },
+  "projects": {
+    "title": "Proyectos Destacados",
+    "image": {
+      "copy": "Servicio open source autoalojado en Rust y Axum para validar, optimizar y servir imágenes WebP, con almacenamiento local o S3.",
+      "opensource": "Código abierto",
+      "link": "Ver repositorio ↗"
+    },
+    "academic": {
+      "copy": "Herramienta para seguir el avance académico, consultar correlativas y organizar materias en una malla curricular.",
+      "education": "Educación",
+      "planning": "Planificación",
+      "open": "Abrir Academic Progress",
+      "create": "Crear malla"
+    },
+    "simon": { "copy": "Juego de memoria en Assembly 8086 con mouse, pantallas, niveles de dificultad e interrupciones BIOS/DOS.", "game": "Juego", "open": "Abrir proyecto" },
+    "huffman": { "copy": "Material interactivo sobre compresión sin pérdida, árboles de Huffman, frecuencias y codificación de bits.", "algorithms": "Algoritmos", "compression": "Compresión", "open": "Abrir Huffman" }
+  },
+  "about": {
+    "title": "Sobre mí y contacto",
+    "first": "Soy <span class=\"about-highlight\">Agustin Argüello</span>, desarrollador enfocado en construir software útil, eficiente y mantenible. Me interesa crear soluciones completas, desde la base de datos y el backend hasta la interfaz final, combinando pensamiento técnico con una visión práctica del producto.",
+    "second": "Trabajo especialmente con tecnologías web, sistemas de escritorio, servidores Linux, bases de datos y herramientas orientadas a resolver problemas reales."
+  },
+  "backToTop": "Volver al inicio",
+  "simon": {
+    "title": "Simon Says ASM 8086 · AgusQuartz", "back": "Atrás",
+    "hero": { "copy": "Juego de memoria desarrollado en Assembly 8086 para emu8086. El proyecto recrea la dinámica de Simon Dice con interfaz en modo texto, regiones coloreadas mediante servicios de video BIOS INT 10h, mouse, niveles, dificultad progresiva, puntaje y pantallas completas de victoria o derrota.", "open": "Ver proyecto", "download": "Descargar código ASM" },
+    "summary": {
+      "title": "Qué demuestra", "copy": "No es solo un juego: es una muestra de control de hardware virtual, flujo de ejecución, estado de juego y UI sin librerías modernas.",
+      "memory": { "title": "Secuencias de memoria", "copy": "El programa genera una secuencia de colores, la muestra al jugador y valida cada click contra la posición esperada en la ronda." },
+      "input": { "title": "Interacción con mouse", "copy": "Detecta clicks y coordenadas para decidir si el usuario presionó el cuadrante gris, azul, rojo o verde." },
+      "levels": { "title": "Niveles y dificultad", "copy": "Maneja puntaje, nivel, dificultad fácil/media/difícil y un modo automático que ajusta la velocidad durante la partida." }
+    },
+    "tech": { "title": "Aspectos técnicos", "copy": "El valor del proyecto está en resolver una experiencia interactiva usando recursos muy cercanos al sistema, priorizando modo texto por rendimiento frente al dibujo gráfico pixel por píxel en emu8086.", "interrupts": { "title": "Interrupciones del sistema", "copy": "Usa servicios BIOS y DOS para construir la pantalla en modo texto, mover el cursor, imprimir texto, leer tiempo, esperar y controlar el mouse." }, "macros": { "title": "Macros reutilizables", "copy": "Define macros para pintar regiones, mover el cursor e imprimir caracteres repetidos, reduciendo la repetición en las pantallas." }, "textUi": { "title": "UI en modo texto", "copy": "Construye pantallas completas en modo texto con rectángulos de color, mensajes centrados, carga visual, menú de dificultad y tablero, evitando dibujar píxel por píxel." }, "random": { "title": "Generación pseudoaleatoria", "copy": "Construye secuencias usando tiempo, semillas y operaciones aritméticas para producir valores que representan colores." } },
+    "code": { "title": "Fragmento representativo", "copy": "Las macros muestran cómo se abstraen operaciones repetidas de la interfaz en modo texto: pintar regiones, mover el cursor y reutilizar servicios de video BIOS sin dibujar píxeles individualmente." },
+    "lessons": { "title": "Qué aprendí construyéndolo", "constraints": { "title": "Diseñar con restricciones", "copy": "Crear una interfaz jugable sin HTML, CSS, canvas ni librerías obliga a pensar en coordenadas de modo texto, regiones, atributos de color y flujo de pantalla." }, "state": { "title": "Controlar estado manualmente", "copy": "El juego exige administrar arrays, índices, dificultad, secuencias, intentos, puntaje y reinicio sin estructuras de alto nivel." }, "maintainable": { "title": "Escribir código mantenible en ASM", "copy": "El siguiente paso sería extraer constantes con EQU, ordenar mejor las rutinas y cuidar más la simetría entre push/pop para robustez." } }
+  },
+  "huffman": {
+    "title": "Huffman Compression · AgusQuartz", "back": "Atrás",
+    "hero": { "copy": "Documento técnico sobre compresión sin pérdida con Huffman: frecuencias, heap, árbol binario, tabla de códigos, manejo de bits y reconstrucción durante la descompresión.", "open": "Leer explicación" },
+    "summary": { "title": "Qué demuestra", "copy": "La página explica cómo una estructura de datos puede convertirse en un archivo comprimido real, bajando desde la teoría del árbol hasta la manipulación de bits.", "tree": { "title": "Árbol de Huffman", "copy": "Construcción de un árbol binario a partir de frecuencias, combinando nodos de menor peso hasta obtener una raíz única." }, "heap": { "title": "Cola de prioridad", "copy": "Uso de heap para extraer eficientemente los nodos con menor frecuencia durante la construcción del árbol." }, "bits": { "title": "Manipulación de bits", "copy": "Explicación de operaciones como desplazamiento, máscara, OR y AND para escribir secuencias compactas." } },
+    "article": { "toc": "Índice", "tocAria": "Índice de contenido", "conceptualExample": "Ejemplo conceptual", "bitfield": { "title": "Campobit: operaciones de bajo nivel y aritmética de bits", "intro": "En muchos algoritmos de compresión, como Huffman, no alcanza con guardar caracteres completos. Para aprovechar mejor el espacio hay que escribir códigos de longitud variable, y eso obliga a manipular datos a nivel de bits.", "definition": "Un <strong>campobit</strong> es una estructura que permite almacenar una secuencia de bits dentro de una variable numérica junto con un contador de tamaño. La operación básica es <code>bits_agregar</code>, que añade un bit nuevo al final del campo.", "addTitle": "Agregar un bit con desplazamiento y OR", "addCopy": "Supongamos que la estructura contiene 12 bits y queremos agregar un <strong>1</strong>. Primero se incrementa el tamaño y luego se crea una máscara desplazando el valor <code>1</code> hasta la posición correcta.", "zeroCopy": "Si el bit a agregar es <code>0</code>, normalmente no hace falta modificar el valor numérico porque las posiciones nuevas se asumen en cero; solo se actualiza <code>tamano</code>." }, "algorithm": { "title": "Qué es el algoritmo de Huffman", "intro": "Huffman es un método de compresión sin pérdida que asigna códigos de longitud variable: los símbolos más frecuentes reciben códigos más cortos y los menos frecuentes reciben códigos más largos.", "copy": "La idea central es construir un árbol binario donde cada hoja representa un símbolo. El camino desde la raíz hasta una hoja determina su código: por ejemplo, izquierda puede representar <code>0</code> y derecha <code>1</code>." }, "compression": { "title": "Procesos en la compresión", "frequenciesTitle": "1. Calcular frecuencias", "frequenciesCopy": "Se lee el archivo de entrada y se cuenta cuántas veces aparece cada carácter. Para texto basado en bytes, se puede usar un arreglo de 256 posiciones.", "treeTitle": "2. Construir el árbol de Huffman", "treeCopy": "Cada símbolo con frecuencia positiva se inserta en una cola de prioridad. Luego se extraen los dos nodos con menor frecuencia, se combinan en un padre y se reinserta el resultado. El proceso termina cuando queda un único nodo: la raíz.", "tableTitle": "3. Crear la tabla de códigos", "tableCopy": "Se recorre el árbol de forma recursiva. Cada vez que se baja a la izquierda se agrega un <code>0</code>; cada vez que se baja a la derecha se agrega un <code>1</code>. Al llegar a una hoja, el campobit acumulado es el código del carácter.", "approaches": "Hay dos enfoques comunes:", "localCopies": "<strong>Copias locales:</strong> cada rama recibe su propia copia del campo de bits. Es más simple y seguro.", "inPlace": "<strong>Modificación in situ:</strong> se modifica el mismo objeto y se elimina el último bit al volver de la recursión. Ahorra copias, pero exige más cuidado.", "encodeTitle": "4. Codificar el archivo", "encodeCopy": "Una vez generada la tabla, el archivo se lee nuevamente. Cada carácter se reemplaza por su secuencia de bits y se escribe en el flujo comprimido junto con la información necesaria para reconstruir el árbol.", "removeTitle": "Eliminar el último bit", "removeCopy": "Si se usa modificación in situ, una función como <code>bits_remove_last</code> permite retroceder un paso en el camino del árbol." }, "decompression": { "title": "Procesos en la descompresión", "rebuildTitle": "1. Reconstruir el árbol", "rebuildCopy": "El descompresor lee la representación del árbol guardada en el archivo comprimido. Normalmente se usa un recorrido preorden para distinguir nodos internos y hojas.", "decodeTitle": "2. Decodificar el flujo de bits", "decodeCopy": "Con el árbol reconstruido, se leen bits uno por uno. Un <code>0</code> mueve el cursor a la izquierda y un <code>1</code> a la derecha. Al llegar a una hoja se escribe el carácter y se vuelve a la raíz." } }
+  },
+  "academic": {
+    "title": "Malla de Correlativas", "home": "Inicio", "subtitle": "Gestioná tu progreso académico y cargá nuevas mallas desde archivos CSV.",
+    "menu": { "progress": "Progreso", "importExport": "Importar / exportar", "downloadProgress": "Descargar progreso", "uploadProgress": "Cargar progreso", "progressFormat": "Formato del progreso", "curriculum": "Malla", "currentCurriculum": "Malla actual", "createCurriculum": "Crear malla", "downloadCurriculum": "Descargar malla", "uploadCurriculum": "Cargar malla", "curriculumFormat": "Formato para cargar una malla" },
+    "status": { "approved": "Aprobada", "available": "Disponible", "blocked": "Bloqueada" },
+    "semester": { "approve": "Aprobar semestre completo", "done": "Semestre aprobado" },
+    "requirements": "Correlativas", "lockedHint": "Primero aprobá sus correlativas", "locked": "Bloqueada por correlativas", "approve": "Marcar como aprobada", "unapprove": "Desmarcar como aprobada", "approvedSubject": "Materia aprobada",
+    "ui": { "semester": "semestre", "semesters": "semestres", "subjects": "materias", "none": "Ninguna", "notFound": "Semestre no encontrado", "expand": "Expandir semestres", "collapse": "Contraer semestres", "controls": "Controles de semestres", "quickView": "Vista rápida", "selectSubject": "Seleccioná una materia", "selectHint": "Al tocar una card vas a ver de qué materias es correlativa, su semestre y su estado actual.", "selectedSubject": "Materia seleccionada", "noDependencies": "Esta materia no desbloquea otras materias en la malla cargada.", "dependent": "dependiente", "dependents": "dependientes", "isPrerequisiteOf": "Es correlativa de", "noDependentSubjects": "No tiene materias dependientes registradas.", "viewDependency": "Ver dependencia", "viewDependencies": "Ver dependencias", "approvedCount": "aprobadas", "availableCount": "disponibles", "blockedCount": "bloqueadas", "semesterDisabled": "Completá primero las correlativas pendientes para aprobar todo el semestre.", "backToTop": "Volver arriba", "footerLabel": "Malla actual:", "footerCopy": "Usá los menús de la esquina superior derecha para cargar o descargar progreso, o cambiar la malla." }
+  }
+}

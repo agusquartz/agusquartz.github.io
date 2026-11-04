@@ -173,6 +173,8 @@
     .page-header h1 { font-size:clamp(1.8rem,3vw,2.5rem); line-height:1.12; letter-spacing:-.035em; }
     .subtitle { max-width:58ch; font-size:1rem; }
     .header-actions { gap:12px; }
+    .language-slot { align-self:flex-start; margin-left:auto; }
+    .language-switcher { position:relative; }.language-button { min-height:42px; display:inline-flex; align-items:center; gap:7px; padding:0 11px!important; border:1px solid #536174!important; border-radius:7px!important; background:#252f3b!important; color:#dce7f5!important; font:inherit; font-size:.78rem; font-weight:800; cursor:pointer; }.language-button:hover,.language-switcher.open .language-button { border-color:#8fb7ed!important; background:#344355!important; color:#fff!important; }.language-button svg { width:16px; height:16px; }.language-menu { position:absolute; top:calc(100% + 8px); right:0; display:none; min-width:196px; padding:6px; border:1px solid #4b5868; border-radius:8px; background:#252f3b; box-shadow:0 14px 30px rgba(0,0,0,.32); z-index:60; }.language-switcher.open .language-menu { display:grid; }.language-option { width:100%; display:flex; align-items:center; justify-content:space-between; gap:18px; padding:8px 9px!important; border:0!important; border-radius:5px!important; background:transparent!important; color:#dce7f5!important; font:inherit; font-size:.8rem; text-align:left; cursor:pointer; }.language-option:hover { background:#34404f!important; }.language-option[aria-current="true"] { color:#fff!important; font-weight:800; }.language-option-code { color:#9dacbd; font-size:.7rem; font-weight:800; }
     .page-layout { grid-template-columns:minmax(0,1fr) minmax(290px,330px); gap:24px; }
     .semester-summary { padding:18px 20px; }
     .semester-content { padding:4px 20px 20px; gap:14px; }
@@ -206,46 +208,47 @@
 
 </head>
 <body>
-  <a class="home-nav-link" href="../" aria-label="Volver al inicio">← Inicio</a>
+  <a class="home-nav-link" href="../" aria-label="Volver al inicio">← <span data-i18n="academic.home">Inicio</span></a>
   <header class="page-header">
     <div>
-      <h1>Malla de Correlativas</h1>
-      <p class="subtitle">Gestioná tu progreso académico y cargá nuevas mallas desde archivos CSV.</p>
+      <h1 data-i18n="academic.title">Malla de Correlativas</h1>
+      <p class="subtitle" data-i18n="academic.subtitle">Gestioná tu progreso académico y cargá nuevas mallas desde archivos CSV.</p>
     </div>
 
     <div class="header-actions" aria-label="Acciones de archivos">
       <details class="menu-dropdown" id="progressMenu">
         <summary class="menu-trigger">
-          <span class="menu-trigger-kicker">Progreso</span>
-          <span class="menu-trigger-title">Importar / exportar</span>
+          <span class="menu-trigger-kicker" data-i18n="academic.menu.progress">Progreso</span>
+          <span class="menu-trigger-title" data-i18n="academic.menu.importExport">Importar / exportar</span>
         </summary>
         <div class="menu-panel">
-          <button type="button" class="menu-item" onclick="openProgressDownloadModal(); closeDropdowns();">Descargar progreso</button>
-          <label class="menu-item menu-file-label">Cargar progreso<input type="file" id="progressUpload" accept=".txt,.csv" /></label>
-          <button type="button" class="menu-item muted" onclick="openProgressFormatModal(); closeDropdowns();">Formato del progreso</button>
+          <button type="button" class="menu-item" onclick="openProgressDownloadModal(); closeDropdowns();" data-i18n="academic.menu.downloadProgress">Descargar progreso</button>
+          <label class="menu-item menu-file-label"><span data-i18n="academic.menu.uploadProgress">Cargar progreso</span><input type="file" id="progressUpload" accept=".txt,.csv" /></label>
+          <button type="button" class="menu-item muted" onclick="openProgressFormatModal(); closeDropdowns();" data-i18n="academic.menu.progressFormat">Formato del progreso</button>
         </div>
       </details>
 
       <details class="menu-dropdown" id="curriculumMenu">
         <summary class="menu-trigger malla-current-trigger">
-          <span class="menu-trigger-kicker">Malla</span>
+          <span class="menu-trigger-kicker" data-i18n="academic.menu.curriculum">Malla</span>
           <span class="menu-trigger-title" id="currentMallaLabel">Ingeniería Informática 2016</span>
         </summary>
         <div class="menu-panel">
-          <div class="menu-current-info" id="currentMallaInfo">Malla actual</div>
-          <a class="menu-item" href="./curriculum-builder/">Crear malla</a>
-          <button type="button" class="menu-item" onclick="downloadCurriculum(); closeDropdowns();">Descargar malla</button>
-          <label class="menu-item menu-file-label">Cargar malla<input type="file" id="curriculumUpload" accept=".txt,.csv" /></label>
-          <button type="button" class="menu-item muted" onclick="openCurriculumFormatModal(); closeDropdowns();">Formato para cargar una malla</button>
+          <div class="menu-current-info" id="currentMallaInfo" data-i18n="academic.menu.currentCurriculum">Malla actual</div>
+          <a class="menu-item" href="./curriculum-builder/" data-i18n="academic.menu.createCurriculum">Crear malla</a>
+          <button type="button" class="menu-item" onclick="downloadCurriculum(); closeDropdowns();" data-i18n="academic.menu.downloadCurriculum">Descargar malla</button>
+          <label class="menu-item menu-file-label"><span data-i18n="academic.menu.uploadCurriculum">Cargar malla</span><input type="file" id="curriculumUpload" accept=".txt,.csv" /></label>
+          <button type="button" class="menu-item muted" onclick="openCurriculumFormatModal(); closeDropdowns();" data-i18n="academic.menu.curriculumFormat">Formato para cargar una malla</button>
         </div>
       </details>
+      <div class="language-slot" id="languageSlot"></div>
     </div>
   </header>
 
   <div class="legend">
-    <div class="legend-item"><div class="dot approved"></div><span>Aprobada</span></div>
-    <div class="legend-item"><div class="dot available"></div><span>Disponible para rendir</span></div>
-    <div class="legend-item"><div class="dot blocked"></div><span>Bloqueada por correlativas</span></div>
+    <div class="legend-item"><div class="dot approved"></div><span data-i18n="academic.status.approved">Aprobada</span></div>
+    <div class="legend-item"><div class="dot available"></div><span data-i18n="academic.status.available">Disponible para rendir</span></div>
+    <div class="legend-item"><div class="dot blocked"></div><span data-i18n="academic.status.blocked">Bloqueada por correlativas</span></div>
   </div>
 
   <main class="page-layout">
@@ -256,7 +259,7 @@
   <button class="scroll-top" type="button" onclick="scrollToPageTop()" aria-label="Volver al inicio de la página" title="Volver arriba">↑</button>
 
   <div class="footer">
-    <strong>Malla actual:</strong> <span id="footerMallaLabel">Ingeniería Informática 2016</span>. Usá los menús de la esquina superior derecha para cargar/descargar progreso o cambiar la malla.
+    <strong data-i18n="academic.ui.footerLabel">Malla actual:</strong> <span id="footerMallaLabel">Ingeniería Informática 2016</span>. <span data-i18n="academic.ui.footerCopy">Usá los menús de la esquina superior derecha para cargar o descargar progreso, o cambiar la malla.</span>
   </div>
 
   <div class="modal-backdrop" id="progressDownloadModal" hidden role="dialog" aria-modal="true" aria-labelledby="progressDownloadTitle">
@@ -295,6 +298,7 @@
     </div>
   </div>
 
+  <script src="../locales/i18n.js?rev=2"></script>
   <script>
     const DEFAULT_CURRICULUM = { id: 'informatica-2016', name: 'Ingeniería Informática', year: '2016', semestersCount: 10, exportVersion: 'v4-subject-id', warning: 'El CSV fuente tenía el ID 340 repetido; Electiva 2 usa subject_id 340-ELECTIVA2 para que el progreso sea unívoco.' };
     const DEFAULT_SUBJECTS = [{"semesterOrder": 1, "semester": "Primero", "code": "02", "name": "Calculo 1", "reqs": []}, {"semesterOrder": 1, "semester": "Primero", "code": "03", "name": "Fisica 1", "reqs": []}, {"semesterOrder": 1, "semester": "Primero", "code": "301", "name": "Comunicacion 1", "reqs": []}, {"semesterOrder": 1, "semester": "Primero", "code": "302", "name": "Arquitectura y Componentes", "reqs": []}, {"semesterOrder": 1, "semester": "Primero", "code": "314", "name": "Programacion 1", "reqs": []}, {"semesterOrder": 2, "semester": "Segundo", "code": "010", "name": "Calculo 2", "reqs": ["02"]}, {"semesterOrder": 2, "semester": "Segundo", "code": "011", "name": "Fisica 2", "reqs": ["03"]}, {"semesterOrder": 2, "semester": "Segundo", "code": "304", "name": "Comunicacion 2", "reqs": ["301"]}, {"semesterOrder": 2, "semester": "Segundo", "code": "305", "name": "Matematica Discreta", "reqs": []}, {"semesterOrder": 2, "semester": "Segundo", "code": "303", "name": "Programacion 2", "reqs": ["314", "02"]}, {"semesterOrder": 3, "semester": "Tercero", "code": "014", "name": "Calculo 3", "reqs": ["010"]}, {"semesterOrder": 3, "semester": "Tercero", "code": "015", "name": "Fisica 3", "reqs": ["010", "011"]}, {"semesterOrder": 3, "semester": "Tercero", "code": "309", "name": "Ingles 1", "reqs": []}, {"semesterOrder": 3, "semester": "Tercero", "code": "307", "name": "Diseno Digital", "reqs": ["302"]}, {"semesterOrder": 3, "semester": "Tercero", "code": "331", "name": "Paradigmas de la Programacion", "reqs": ["303"]}, {"semesterOrder": 4, "semester": "Cuarto", "code": "017", "name": "Estadistica", "reqs": ["010"]}, {"semesterOrder": 4, "semester": "Cuarto", "code": "312", "name": "Contabilidad", "reqs": []}, {"semesterOrder": 4, "semester": "Cuarto", "code": "311", "name": "Ingles 2", "reqs": ["309"]}, {"semesterOrder": 4, "semester": "Cuarto", "code": "318", "name": "Redes 1", "reqs": ["302"]}, {"semesterOrder": 4, "semester": "Cuarto", "code": "313", "name": "Administracion", "reqs": []}, {"semesterOrder": 4, "semester": "Cuarto", "code": "308", "name": "Algoritmos 1", "reqs": ["305", "331", "014"]}, {"semesterOrder": 5, "semester": "Quinto", "code": "306", "name": "Tecnologias Emergentes", "reqs": ["308", "311"]}, {"semesterOrder": 5, "semester": "Quinto", "code": "316", "name": "Economia", "reqs": ["312"]}, {"semesterOrder": 5, "semester": "Quinto", "code": "317", "name": "Ingles 3", "reqs": ["311"]}, {"semesterOrder": 5, "semester": "Quinto", "code": "310", "name": "Bases de Datos", "reqs": ["308"]}, {"semesterOrder": 5, "semester": "Quinto", "code": "320", "name": "Redes 2", "reqs": ["303", "318", "015"]}, {"semesterOrder": 6, "semester": "Sexto", "code": "321", "name": "Algoritmos 2", "reqs": ["308"]}, {"semesterOrder": 6, "semester": "Sexto", "code": "323", "name": "Ingles 4", "reqs": ["317"]}, {"semesterOrder": 6, "semester": "Sexto", "code": "322", "name": "Organizacion y Recursos Humanos", "reqs": ["313"]}, {"semesterOrder": 6, "semester": "Sexto", "code": "330", "name": "Sistemas Operativos", "reqs": ["302", "308"]}, {"semesterOrder": 6, "semester": "Sexto", "code": "315", "name": "Sistemas de Gestion", "reqs": ["310", "306", "316", "313"]}, {"semesterOrder": 7, "semester": "Septimo", "code": "324", "name": "Ingenieria de Software 1", "reqs": ["315", "322"]}, {"semesterOrder": 7, "semester": "Septimo", "code": "327", "name": "Sistemas Web y Distribuidos", "reqs": ["320", "321", "330"]}, {"semesterOrder": 7, "semester": "Septimo", "code": "325", "name": "Electronica", "reqs": ["015", "302"]}, {"semesterOrder": 7, "semester": "Septimo", "code": "009", "name": "Algebra Lineal", "reqs": []}, {"semesterOrder": 7, "semester": "Septimo", "code": "336", "name": "Interaccion Hombre Maquina", "reqs": ["308", "330"]}, {"semesterOrder": 8, "semester": "Octavo", "code": "328", "name": "Ingenieria de Software 2", "reqs": ["324", "321", "327"]}, {"semesterOrder": 8, "semester": "Octavo", "code": "332", "name": "Administracion Financiera", "reqs": ["322", "312"]}, {"semesterOrder": 8, "semester": "Octavo", "code": "340", "name": "Seguridad Informatica", "reqs": ["320", "324", "327"]}, {"semesterOrder": 8, "semester": "Octavo", "code": "329", "name": "Microprocesadores y Lenguaje de Ensamblador", "reqs": ["308", "307"]}, {"semesterOrder": 8, "semester": "Octavo", "code": "338", "name": "Procesamiento Digital de Imagenes", "reqs": ["015", "017", "321", "009"]}, {"semesterOrder": 9, "semester": "Noveno", "code": "335", "name": "Auditoria", "reqs": ["322", "315"]}, {"semesterOrder": 9, "semester": "Noveno", "code": "319", "name": "Marketing", "reqs": ["313", "306"]}, {"semesterOrder": 9, "semester": "Noveno", "code": "337", "name": "Seminario de Trabajo Final de Grado", "reqs": ["328", "332", "340", "329", "338"]}, {"semesterOrder": 9, "semester": "Noveno", "code": "339", "name": "Electiva 1", "reqs": []}, {"semesterOrder": 9, "semester": "Noveno", "code": "326", "name": "Inteligencia Artificial", "reqs": ["321", "009", "017"]}, {"semesterOrder": 10, "semester": "Decimo", "code": "340-ELECTIVA2", "name": "Electiva 2", "reqs": []}, {"semesterOrder": 10, "semester": "Decimo", "code": "131", "name": "Aspectos Legales y Profesionales de la Informatica", "reqs": []}, {"semesterOrder": 10, "semester": "Decimo", "code": "334", "name": "Diseno de Compiladores", "reqs": ["329", "331", "321"]}, {"semesterOrder": 10, "semester": "Decimo", "code": "333", "name": "Graficos por Computadora", "reqs": ["321", "009"]}];
@@ -304,6 +308,11 @@
     let state = {};
     const expandedSemesters = new Set();
     let selectedSubjectCode = null;
+    let academicCopy = {};
+
+    function translateAcademic(path, fallback) {
+      return path.split('.').reduce((value, key) => value && value[key], academicCopy) || fallback;
+    }
 
     function cloneSubjects(list) {
       return list.map(subject => ({ semesterOrder: Number(subject.semesterOrder), semester: subject.semester, code: subject.code, name: subject.name, reqs: [...(subject.reqs || [])] }));
@@ -435,9 +444,9 @@
     function canTake(subject, sourceState = state) { return subject.reqs.every(reqCode => sourceState[reqCode]); }
 
     function getStatus(subject) {
-      if (state[subject.code]) return { text: 'Aprobada', class: 'approved' };
-      if (canTake(subject)) return { text: 'Disponible', class: 'available' };
-      return { text: 'Bloqueada', class: 'blocked' };
+      if (state[subject.code]) return { text: translateAcademic('status.approved', 'Aprobada'), class: 'approved' };
+      if (canTake(subject)) return { text: translateAcademic('status.available', 'Disponible'), class: 'available' };
+      return { text: translateAcademic('status.blocked', 'Bloqueada'), class: 'blocked' };
     }
 
     function getMissingRequirementsForState(subject, sourceState) {
@@ -477,9 +486,9 @@
 
     function getAccordionControlsHtml() {
       return `
-        <div class="dependency-control-bar" aria-label="Controles de semestres">
-          <button type="button" onclick="expandAllSemesters()">Expandir semestres</button>
-          <button type="button" onclick="collapseAllSemesters()">Contraer semestres</button>
+        <div class="dependency-control-bar" aria-label="${translateAcademic('ui.controls', 'Controles de semestres')}">
+          <button type="button" onclick="expandAllSemesters()">${translateAcademic('ui.expand', 'Expandir semestres')}</button>
+          <button type="button" onclick="collapseAllSemesters()">${translateAcademic('ui.collapse', 'Contraer semestres')}</button>
         </div>`;
     }
 
@@ -487,33 +496,34 @@
       const panel = document.getElementById('dependencyPanel');
       const selectedSubject = selectedSubjectCode ? getSubjectByCode(selectedSubjectCode) : null;
       if (!selectedSubject) {
-        panel.innerHTML = `${getAccordionControlsHtml()}<div class="dependency-kicker">Vista rápida</div><div class="dependency-title">Seleccioná una materia</div><p class="dependency-subtitle">Al tocar una card vas a ver de qué materias es correlativa, su semestre y su estado actual.</p>`;
+        panel.innerHTML = `${getAccordionControlsHtml()}<div class="dependency-kicker">${translateAcademic('ui.quickView', 'Vista rápida')}</div><div class="dependency-title">${translateAcademic('ui.selectSubject', 'Seleccioná una materia')}</div><p class="dependency-subtitle">${translateAcademic('ui.selectHint', 'Al tocar una card vas a ver de qué materias es correlativa, su semestre y su estado actual.')}</p>`;
         return;
       }
       const dependencies = getDependencies(selectedSubject.code);
       const dependencyListHtml = dependencies.length
         ? `<div class="dependency-list">${dependencies.map(subject => {
             const status = getStatus(subject);
-            return `<div class="dependency-item"><div class="dependency-item-top"><span class="dependency-subject-name">${escapeHtml(subject.name)}</span><span class="status ${status.class}">${status.text}</span></div><div class="dependency-semester">${escapeHtml(subject.semester)} semestre · ID ${escapeHtml(subject.code)}</div></div>`;
+            return `<div class="dependency-item"><div class="dependency-item-top"><span class="dependency-subject-name">${escapeHtml(subject.name)}</span><span class="status ${status.class}">${status.text}</span></div><div class="dependency-semester">${escapeHtml(subject.semester)} ${translateAcademic('ui.semester', 'semestre')} · ID ${escapeHtml(subject.code)}</div></div>`;
           }).join('')}</div>`
-        : '<p class="dependency-subtitle">Esta materia no desbloquea otras materias en la malla cargada.</p>';
-      panel.innerHTML = `${getAccordionControlsHtml()}<div class="dependency-kicker">Materia seleccionada</div><div class="dependency-title">${escapeHtml(selectedSubject.name)}</div><p class="dependency-subtitle">${escapeHtml(selectedSubject.semester)} semestre · ID ${escapeHtml(selectedSubject.code)}<br />${dependencies.length ? `Es correlativa de ${dependencies.length} materia${dependencies.length === 1 ? '' : 's'}.` : 'No tiene materias dependientes registradas.'}</p>${dependencyListHtml}`;
+        : `<p class="dependency-subtitle">${translateAcademic('ui.noDependencies', 'Esta materia no desbloquea otras materias en la malla cargada.')}</p>`;
+      const dependentWord = dependencies.length === 1 ? translateAcademic('ui.dependent', 'dependiente') : translateAcademic('ui.dependents', 'dependientes');
+      panel.innerHTML = `${getAccordionControlsHtml()}<div class="dependency-kicker">${translateAcademic('ui.selectedSubject', 'Materia seleccionada')}</div><div class="dependency-title">${escapeHtml(selectedSubject.name)}</div><p class="dependency-subtitle">${escapeHtml(selectedSubject.semester)} ${translateAcademic('ui.semester', 'semestre')} · ID ${escapeHtml(selectedSubject.code)}<br />${dependencies.length ? `${translateAcademic('ui.isPrerequisiteOf', 'Es correlativa de')} ${dependencies.length} ${dependentWord}.` : translateAcademic('ui.noDependentSubjects', 'No tiene materias dependientes registradas.')}</p>${dependencyListHtml}`;
     }
 
     function selectSubject(subjectCode) { selectedSubjectCode = subjectCode; render(); }
     function scrollToPageTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
 
     function getReqsHtml(subject) {
-      if (!subject.reqs.length) return '<span class="empty-req">Ninguna</span>';
+      if (!subject.reqs.length) return `<span class="empty-req">${translateAcademic('ui.none', 'Ninguna')}</span>`;
       return `<div class="req-list">${subject.reqs.map(reqCode => {
         const found = getSubjectByCode(reqCode);
-        return `<div class="req-chip"><span class="req-name">${escapeHtml(found ? found.name : reqCode)}</span><span class="req-semester">${escapeHtml(found ? `${found.semester} semestre` : 'Semestre no encontrado')}</span></div>`;
+        return `<div class="req-chip"><span class="req-name">${escapeHtml(found ? found.name : reqCode)}</span><span class="req-semester">${escapeHtml(found ? `${found.semester} ${translateAcademic('ui.semester', 'semestre')}` : translateAcademic('ui.notFound', 'Semestre no encontrado'))}</span></div>`;
       }).join('')}</div>`;
     }
 
     function getDependencyButtonHtml(subject) {
       const dependencies = getDependencies(subject.code);
-      return `<button class="dependency-trigger" type="button">${dependencies.length ? `Ver ${dependencies.length} dependiente${dependencies.length === 1 ? '' : 's'}` : 'Ver dependencias'}</button>`;
+      return `<button class="dependency-trigger" type="button">${dependencies.length ? `${dependencies.length} ${dependencies.length === 1 ? translateAcademic('ui.dependent', 'dependiente') : translateAcademic('ui.dependents', 'dependientes')}` : translateAcademic('ui.viewDependencies', 'Ver dependencias')}</button>`;
     }
 
     function getSemesterStats(semesterSubjects) {
@@ -561,16 +571,16 @@
         wrapper.addEventListener('toggle', () => wrapper.open ? expandedSemesters.add(semester.name) : expandedSemesters.delete(semester.name));
         const summary = document.createElement('summary');
         summary.className = 'semester-summary';
-        summary.innerHTML = `<div class="semester-title-area"><span class="semester-arrow">▶</span><span class="semester-title">${escapeHtml(semester.name)} Semestre</span><span class="semester-count">${semesterSubjects.length} materias</span></div><div class="semester-stats"><span class="stat-pill approved-text">${stats.approved} aprobadas</span><span class="stat-pill available-text">${stats.available} disponibles</span><span class="stat-pill blocked-text">${stats.blocked} bloqueadas</span></div>`;
+        summary.innerHTML = `<div class="semester-title-area"><span class="semester-arrow">▶</span><span class="semester-title">${escapeHtml(semester.name)} ${translateAcademic('ui.semester', 'Semestre')}</span><span class="semester-count">${semesterSubjects.length} ${translateAcademic('ui.subjects', 'materias')}</span></div><div class="semester-stats"><span class="stat-pill approved-text">${stats.approved} ${translateAcademic('ui.approvedCount', 'aprobadas')}</span><span class="stat-pill available-text">${stats.available} ${translateAcademic('ui.availableCount', 'disponibles')}</span><span class="stat-pill blocked-text">${stats.blocked} ${translateAcademic('ui.blockedCount', 'bloqueadas')}</span></div>`;
         const content = document.createElement('div');
         content.className = 'semester-content';
         const semesterAction = document.createElement('button');
         semesterAction.type = 'button';
         semesterAction.className = 'semester-approve';
-        semesterAction.textContent = stats.approved === semesterSubjects.length ? 'Semestre aprobado' : 'Aprobar semestre completo';
+        semesterAction.textContent = stats.approved === semesterSubjects.length ? translateAcademic('semester.done', 'Semestre aprobado') : translateAcademic('semester.approve', 'Aprobar semestre completo');
         semesterAction.disabled = stats.approved === semesterSubjects.length || !canApproveSemester(semesterSubjects);
-        semesterAction.title = semesterAction.disabled && stats.approved !== semesterSubjects.length ? 'Completá primero las correlativas pendientes para aprobar todo el semestre.' : '';
-        semesterAction.setAttribute('aria-label', `${semesterAction.textContent}: ${semester.name} semestre`);
+        semesterAction.title = semesterAction.disabled && stats.approved !== semesterSubjects.length ? translateAcademic('ui.semesterDisabled', 'Completá primero las correlativas pendientes para aprobar todo el semestre.') : '';
+        semesterAction.setAttribute('aria-label', `${semesterAction.textContent}: ${semester.name} ${translateAcademic('ui.semester', 'semestre')}`);
         semesterAction.addEventListener('click', () => approveSemester(semester.name));
         content.appendChild(semesterAction);
         semesterSubjects.forEach(subject => {
@@ -578,7 +588,7 @@
           const isLocked = !state[subject.code] && !canTake(subject);
           const card = document.createElement('div');
           card.className = `subject ${status.class}-card${selectedSubjectCode === subject.code ? ' selected-card' : ''}`;
-          card.innerHTML = `<div class="subject-header"><div><div class="subject-title">${escapeHtml(subject.name)}</div><span class="subject-code">ID ${escapeHtml(subject.code)}</span></div><div class="status ${status.class}">${status.text}</div></div><span class="reqs-label">Correlativas</span>${getReqsHtml(subject)}${getDependencyButtonHtml(subject)}<label class="checkbox ${isLocked ? 'disabled' : ''}" title="${isLocked ? 'Primero aprobá sus correlativas' : ''}"><input type="checkbox" aria-label="${state[subject.code] ? 'Desmarcar como aprobada' : 'Marcar como aprobada'}: ${escapeHtml(subject.name)}" ${state[subject.code] ? 'checked' : ''} ${isLocked ? 'disabled' : ''} />${isLocked ? 'Bloqueada por correlativas' : state[subject.code] ? 'Materia aprobada' : 'Marcar como aprobada'}</label>`;
+          card.innerHTML = `<div class="subject-header"><div><div class="subject-title">${escapeHtml(subject.name)}</div><span class="subject-code">ID ${escapeHtml(subject.code)}</span></div><div class="status ${status.class}">${status.text}</div></div><span class="reqs-label">${translateAcademic('requirements', 'Correlativas')}</span>${getReqsHtml(subject)}${getDependencyButtonHtml(subject)}<label class="checkbox ${isLocked ? 'disabled' : ''}" title="${isLocked ? translateAcademic('lockedHint', 'Primero aprobá sus correlativas') : ''}"><input type="checkbox" aria-label="${state[subject.code] ? translateAcademic('unapprove', 'Desmarcar como aprobada') : translateAcademic('approve', 'Marcar como aprobada')}: ${escapeHtml(subject.name)}" ${state[subject.code] ? 'checked' : ''} ${isLocked ? 'disabled' : ''} />${isLocked ? translateAcademic('locked', 'Bloqueada por correlativas') : state[subject.code] ? translateAcademic('approvedSubject', 'Materia aprobada') : translateAcademic('approve', 'Marcar como aprobada')}</label>`;
           const checkbox = card.querySelector('input');
           const dependencyButton = card.querySelector('.dependency-trigger');
           checkbox.addEventListener('change', event => {
@@ -793,6 +803,15 @@
     });
 
     resetState();
+    PortfolioI18n.mount({
+      slot: '#languageSlot',
+      prefix: 'academic',
+      onLocale: (copy, messages) => {
+        academicCopy = { ...(copy || {}), ui: (messages && messages.academicUi) || (copy && copy.ui) || {} };
+        if (academicCopy.title) document.title = academicCopy.title;
+        render();
+      }
+    });
     render();
   </script>
 </body>
