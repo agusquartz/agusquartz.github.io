@@ -693,7 +693,7 @@
         }
 
         @media (max-width: 650px) {
-            .mobile-toggle { display: block; }
+            .mobile-toggle { display: block; margin-left: 8px; }
             .language-switcher { margin-left: auto; }
             .nav-links {
                 position: absolute; top: 50px; right: 0; flex-direction: column;
@@ -735,14 +735,6 @@
             <span class="logo-text">agusquartz</span>
         </div>
 
-        <button class="mobile-toggle" id="btn-menu" aria-label="Abrir menú" data-i18n-aria-label="menu.open">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="4" y1="12" x2="20" y2="12"></line>
-                <line x1="4" y1="6" x2="20" y2="6"></line>
-                <line x1="4" y1="18" x2="20" y2="18"></line>
-            </svg>
-        </button>
-
         <div class="nav-links" id="menu-links">
             <a href="#about" data-i18n="nav.about">Sobre mí</a>
             <a href="#projects" data-i18n="nav.projects">Proyectos</a>
@@ -764,6 +756,14 @@
                 <button class="language-option" type="button" data-locale="de" lang="de"><span>Deutsch</span><span class="language-option-code">DE</span></button>
             </div>
         </div>
+
+        <button class="mobile-toggle" id="btn-menu" aria-label="Abrir menú" data-i18n-aria-label="menu.open">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="4" y1="12" x2="20" y2="12"></line>
+                <line x1="4" y1="6" x2="20" y2="6"></line>
+                <line x1="4" y1="18" x2="20" y2="18"></line>
+            </svg>
+        </button>
     </div>
 
     <svg class="svg-der" width="20" height="20" viewBox="100 0 100 100" xmlns="http://www.w3.org/2000/svg" transform="scale(-1 1)"><path d="M100 100V0h100v100a100 100 0 1 0-200 0"/></svg>
