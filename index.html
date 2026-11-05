@@ -3,7 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portafolio - Agustin Argüello</title>
+    <title>Agustin Argüello | Software Developer</title>
+    <meta name="description" content="Portfolio of Agustin Argüello, software developer focused on backend systems, Rust, APIs, databases, and cloud infrastructure.">
+    <meta name="author" content="Agustin Argüello">
+    <link rel="canonical" href="https://agusquartz.github.io/">
+    <meta property="og:title" content="Agustin Argüello | Software Developer">
+    <meta property="og:description" content="Backend systems, Rust, APIs, databases, and cloud infrastructure.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://agusquartz.github.io/">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
 
@@ -449,6 +456,18 @@
             transition: all 0.3s ease;
         }
 
+        .skill-mark {
+            display: grid;
+            place-items: center;
+            width: 2rem;
+            height: 2rem;
+            border: 1px solid rgba(170, 190, 218, 0.26);
+            border-radius: 6px;
+            color: #c8d6e7;
+            font: 700 0.7rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+            letter-spacing: -0.04em;
+        }
+
         .skill-item span {
             font-family: 'Inter', sans-serif;
             font-size: 0.75rem;
@@ -653,6 +672,13 @@
             gap: 14px;
         }
 
+        .contact-item { display: grid; gap: 5px; }
+        .contact-label { color: #aeb9c6; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+        .contact-email { color: #edf0f4; font-size: 0.95rem; text-decoration: none; word-break: break-word; }
+        .contact-email:hover { color: #a8c9f7; }
+        .contact-copy { align-self: flex-start; min-height: 30px; padding: 5px 9px; border: 1px solid rgba(143, 183, 237, 0.28); border-radius: 6px; background: transparent; color: #a8c9f7; font: inherit; font-size: 0.78rem; font-weight: 650; cursor: pointer; }
+        .contact-copy:hover { background: rgba(83, 125, 184, 0.16); border-color: #8fb7ed; }
+
         .contact-box .button {
             justify-content: center;
         }
@@ -815,14 +841,14 @@
 
 <section class="hero" aria-labelledby="hero-title">
     <div>
-        <div class="eyebrow">FullStack · Desktop · Cloud</div>
+        <div class="eyebrow" data-i18n="hero.eyebrow">Software Developer · Backend &amp; Systems</div>
         <h1 id="hero-title"><span class="gradient-text">Agustin Argüello</span></h1>
         <p class="hero-text">
-            <span data-i18n="hero.copy">Desarrollo aplicaciones y herramientas útiles, desde interfaces web y servicios backend hasta software de escritorio. También administro y despliego servicios en servidores Linux.</span>
+            <span data-i18n="hero.copy">Desarrollador de software enfocado en sistemas backend, APIs, infraestructura y aplicaciones prácticas. Trabajo principalmente con Rust, desarrollando servicios, herramientas autoalojadas y software empresarial, con especial atención a la arquitectura, las integraciones seguras y el despliegue de aplicaciones.</span>
         </p>
 
         <div class="hero-actions">
-            <a class="button primary" href="#proyectos" data-i18n="hero.projects">Ver proyectos</a>
+            <a class="button primary" href="#projects" data-i18n="hero.projects">Ver proyectos</a>
             <a class="button" href="https://github.com/agusquartz" target="_blank" rel="noopener">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.03c3.15-.38 6.5-1.4 6.5-7a5.2 5.2 0 0 0-1.5-3.8 4.8 4.8 0 0 0 .1-3.7s-1.2-.4-3.9 1.4a13.3 13.3 0 0 0-7 0c-2.7-1.8-3.9-1.4-3.9-1.4a4.8 4.8 0 0 0 .1 3.7 5.2 5.2 0 0 0-1.5 3.8c0 5.6 3.3 6.6 6.5 7a4.8 4.8 0 0 0-1 3.03V22"/><path d="M9 20c-5 1.5-5-2.5-7-3"/></svg>
                 GitHub
@@ -831,14 +857,14 @@
     </div>
 
     <aside class="hero-card" aria-label="Áreas de desarrollo" data-i18n-aria-label="hero.card.aria">
-        <p class="hero-card-eyebrow" data-i18n="hero.card.eyebrow">Qué desarrollo</p>
-        <h2 data-i18n="hero.card.title">Software para web, escritorio y móvil.</h2>
-        <p class="hero-card-copy" data-i18n="hero.card.copy">Aplicaciones a medida, integraciones y servicios backend, con despliegues en servidores Linux cuando el proyecto lo requiere.</p>
+        <p class="hero-card-eyebrow" data-i18n="hero.card.eyebrow">Áreas de desarrollo</p>
+        <h2 data-i18n="hero.card.title">Backend, aplicaciones e infraestructura.</h2>
+        <p class="hero-card-copy" data-i18n="hero.card.copy">Desarrollo servicios, APIs y aplicaciones, desde la lógica de negocio y las bases de datos hasta las integraciones y el despliegue.</p>
         <div class="hero-card-tags" aria-label="Áreas" data-i18n-aria-label="hero.card.tagsAria">
-            <span>Web</span>
-            <span data-i18n="hero.card.desktop">Escritorio</span>
-            <span data-i18n="hero.card.mobile">Móvil</span>
-            <span>Backend</span>
+            <span data-i18n="hero.card.backend">Backend &amp; APIs</span>
+            <span data-i18n="hero.card.webDesktop">Web &amp; Desktop</span>
+            <span data-i18n="hero.card.databases">Databases</span>
+            <span data-i18n="hero.card.infrastructure">Infrastructure</span>
         </div>
     </aside>
 </section>
@@ -900,27 +926,49 @@
 </section>
 
 <section class="projects-section" id="projects">
-    <span id="proyectos"></span>
     <h2 class="section-title" data-i18n="projects.title">Proyectos Destacados</h2>
 
+    <div class="project-group">
+    <h3 class="project-group-title" data-i18n="projects.softwareTitle">Software Projects</h3>
     <div class="projects-grid">
 
+        <article class="project-card featured-project">
+            <div class="featured-project-main">
+                <div class="featured-project-kicker" data-i18n="projects.image.eyebrow">Proyecto open source destacado</div>
+                <h3>Image Service</h3>
+                <p data-i18n="projects.image.copy">Servicio open source de procesamiento y almacenamiento de imágenes desarrollado en Rust y Axum. Incluye validación de archivos, optimización WebP, almacenamiento local o compatible con S3 y una API HTTP para integrarse con otras aplicaciones.</p>
+                <div class="project-tags">
+                    <span>Rust</span>
+                    <span>Axum</span>
+                    <span>Tokio</span>
+                    <span>OpenDAL</span>
+                    <span>WebP</span>
+                    <span>S3</span>
+                </div>
+                <div class="project-actions">
+                    <a class="project-link" href="https://github.com/agusquartz/image_service" target="_blank" rel="noopener" data-i18n="projects.image.link">Ver repositorio ↗</a>
+                    <a class="project-link" href="https://github.com/agusquartz/image_service/tree/main/docs" target="_blank" rel="noopener" data-i18n="projects.image.docs">Leer documentación ↗</a>
+                </div>
+            </div>
+            <div class="featured-project-facts" aria-label="Image Service highlights">
+                <div class="featured-project-fact"><strong data-i18n="projects.image.uploadLabel">Procesamiento y validación</strong><span data-i18n="projects.image.upload">Validación de archivos, límites de decodificación, control de concurrencia y optimización WebP.</span></div>
+                <div class="featured-project-fact"><strong data-i18n="projects.image.architectureLabel">Arquitectura modular</strong><span data-i18n="projects.image.architecture">Separación de responsabilidades entre API HTTP, procesamiento y almacenamiento.</span></div>
+                <div class="featured-project-fact"><strong data-i18n="projects.image.storageLabel">Almacenamiento y despliegue</strong><span data-i18n="projects.image.storage">Soporte local y compatible con S3 mediante OpenDAL, con despliegue mediante Docker.</span></div>
+            </div>
+        </article>
+
         <article class="project-card">
-            <h3>Image Service</h3>
-            <p>
-                <span data-i18n="projects.image.copy">Servicio open source autoalojado en Rust y Axum para validar, optimizar y servir imágenes WebP, con almacenamiento local o S3.</span>
-            </p>
-            <div class="project-tags">
-                <span>Rust</span>
-                <span>Axum</span>
-                <span>OpenDAL</span>
-                <span>WebP · S3</span>
-                <span data-i18n="projects.image.opensource">Código abierto</span>
-                <span>Apache 2.0</span>
-            </div>
-            <div class="project-actions">
-                <a class="project-link" href="https://github.com/agusquartz/image_service" target="_blank" rel="noopener" data-i18n="projects.image.link">Ver repositorio ↗</a>
-            </div>
+            <h3>rust-postgres-pool</h3>
+            <p data-i18n="projects.pool.copy">Ejemplo de gestión asíncrona de conexiones PostgreSQL con Rust, Tokio y deadpool-postgres. Explora pooling de conexiones, transacciones, configuración y manejo de errores.</p>
+            <div class="project-tags"><span>Rust</span><span>Tokio</span><span>PostgreSQL</span></div>
+            <div class="project-actions"><a class="project-link" href="https://github.com/agusquartz/rust-postgres-pool" target="_blank" rel="noopener" data-i18n="projects.pool.link">Ver repositorio ↗</a></div>
+        </article>
+
+        <article class="project-card">
+            <h3>http-two-cookies</h3>
+            <p data-i18n="projects.cookies.copy">Ejemplo de servidor HTTP en Rust que explora autenticación JWT y protección CSRF utilizando un enfoque de dos cookies con Axum y Tokio.</p>
+            <div class="project-tags"><span>Rust</span><span>Axum</span><span>JWT</span><span>CSRF</span></div>
+            <div class="project-actions"><a class="project-link" href="https://github.com/agusquartz/http-two-cookies" target="_blank" rel="noopener" data-i18n="projects.cookies.link">Ver repositorio ↗</a></div>
         </article>
 
         <article class="project-card">
@@ -938,7 +986,12 @@
                 <a class="project-link" href="./academic-progress/curriculum-builder/" data-i18n="projects.academic.create">Crear malla</a>
             </div>
         </article>
+    </div>
+    </div>
 
+    <div class="project-group">
+    <h3 class="project-group-title" data-i18n="projects.academicTitle">Academic &amp; Experimental Projects</h3>
+    <div class="projects-grid">
         <article class="project-card">
             <h3>Simon Says ASM</h3>
             <p>
@@ -968,8 +1021,7 @@
                 <a class="project-link" href="./HUFFMAN/" data-i18n="projects.huffman.open">Abrir Huffman</a>
             </div>
         </article>
-
-
+    </div>
     </div>
 </section>
 
@@ -978,15 +1030,23 @@
 
     <div class="about-card">
         <div>
-            <p data-i18n-html="about.first">Soy <span class="about-highlight">Agustin Argüello</span>, desarrollador enfocado en construir software útil, eficiente y mantenible. Me interesa crear soluciones completas, desde la base de datos y el backend hasta la interfaz final, combinando pensamiento técnico con una visión práctica del producto.</p>
+            <p data-i18n-html="about.first">Soy <span class="about-highlight">Agustin Argüello</span>, desarrollador de software con especial interés en sistemas backend, arquitectura de aplicaciones e infraestructura.</p>
             <br>
-            <p data-i18n="about.second">Trabajo especialmente con tecnologías web, sistemas de escritorio, servidores Linux, bases de datos y herramientas orientadas a resolver problemas reales.</p>
+            <p data-i18n="about.second">Trabajo principalmente con Rust, desarrollando servicios, APIs y herramientas orientadas a resolver problemas reales. También construyo aplicaciones web y de escritorio, software empresarial e integraciones entre diferentes tecnologías.</p>
+            <br>
+            <p data-i18n="about.third">Me interesa diseñar sistemas mantenibles, trabajar con bases de datos relacionales y desarrollar soluciones completas, desde la lógica de negocio hasta su despliegue.</p>
         </div>
 
         <div class="contact-box">
-            <a class="button primary" href="https://github.com/agusquartz" target="_blank" rel="noopener">
-                GitHub
-            </a>
+            <div class="contact-item">
+                <span class="contact-label" data-i18n="contact.emailLabel">Correo electrónico</span>
+                <a class="contact-email" href="mailto:agusquartz@gmail.com">agusquartz@gmail.com</a>
+                <button class="contact-copy" type="button" id="copyEmail" data-i18n="contact.copy">Copiar</button>
+            </div>
+            <div class="contact-item">
+                <span class="contact-label">GitHub</span>
+                <a class="button primary" href="https://github.com/agusquartz" target="_blank" rel="noopener">@agusquartz</a>
+            </div>
         </div>
     </div>
 </section>

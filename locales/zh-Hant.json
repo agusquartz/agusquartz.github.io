@@ -1,22 +1,26 @@
 {
-  "meta": { "title": "作品集 - Agustin Argüello" },
+  "meta": { "title": "Agustin Argüello | Software Developer" },
   "language": { "aria": "切換語言" },
   "menu": { "open": "開啟選單" },
   "nav": { "about": "關於我", "projects": "專案", "skills": "技能" },
   "hero": {
-    "copy": "我開發實用的應用程式與工具，從網頁介面和後端服務到桌面軟體；也會在 Linux 伺服器上管理與部署服務。",
+    "eyebrow": "Software Developer · Backend & Systems",
+    "copy": "專注於後端系統、API、基礎架構與實用軟體應用的軟體開發者。我主要使用 Rust，開發服務、自架工具與企業軟體，著重於可維護的架構、安全整合與可靠部署。",
     "projects": "查看專案",
-    "card": { "aria": "開發領域", "eyebrow": "我開發的內容", "title": "適用於網頁、桌面與行動裝置的軟體。", "copy": "量身打造的應用程式、整合與後端服務，並在專案需要時部署到 Linux 伺服器。", "tagsAria": "領域", "desktop": "桌面", "mobile": "行動裝置" }
+    "card": { "aria": "開發領域", "eyebrow": "開發領域", "title": "後端、應用程式與基礎架構。", "copy": "我開發服務、API 與應用程式，涵蓋商業邏輯、資料庫、整合與部署。", "tagsAria": "領域", "backend": "後端與 API", "webDesktop": "網頁與桌面", "databases": "資料庫", "infrastructure": "基礎架構" }
   },
-  "skills": { "title": "技術技能", "languages": "程式語言", "web": "網頁、後端與資料", "systems": "系統與環境", "cloud": "雲端與部署" },
+  "skills": { "title": "技術技能", "backend": "後端", "storage": "資料庫與儲存", "webDesktop": "網頁與桌面", "infrastructure": "基礎架構與工具" },
   "projects": {
-    "title": "精選專案",
-    "image": { "copy": "以 Rust 與 Axum 建置的自架開源服務，用於驗證、最佳化和提供 WebP 圖片，支援本機或 S3 儲存。", "opensource": "開源", "link": "查看儲存庫 ↗" },
+    "title": "精選專案", "softwareTitle": "軟體專案", "academicTitle": "學術與實驗性專案",
+    "image": { "eyebrow": "精選開源專案", "copy": "以 Rust 與 Axum 開發的開源圖片處理與儲存服務。包含檔案驗證、WebP 最佳化、本機或相容 S3 的儲存空間，以及可與其他應用程式整合的 HTTP API。", "opensource": "開源", "uploadLabel": "處理與驗證", "upload": "檔案驗證、解碼器限制、受控並行處理與 WebP 最佳化。", "architectureLabel": "模組化架構", "architecture": "在 HTTP API、圖片處理與儲存之間明確分離責任。", "storageLabel": "儲存與部署", "storage": "透過 OpenDAL 支援本機與相容 S3 的儲存，並可使用 Docker 部署。", "link": "查看儲存庫 ↗", "docs": "閱讀文件 ↗" },
+    "pool": { "copy": "以 Rust、Tokio 與 deadpool-postgres 進行非同步 PostgreSQL 連線管理的範例，涵蓋連線池、交易、設定與錯誤處理。", "link": "查看儲存庫 ↗" },
+    "cookies": { "copy": "以 Rust 撰寫的 HTTP 伺服器範例，使用 Axum 與 Tokio 的雙 cookie 方法探索 JWT 驗證與 CSRF 保護。", "link": "查看儲存庫 ↗" },
     "academic": { "copy": "用於追蹤學業進度、查詢先修關係，以及在課程架構中整理科目的工具。", "education": "教育", "planning": "規劃", "open": "開啟 Academic Progress", "create": "建立課程架構" },
     "simon": { "copy": "以 Assembly 8086 製作的記憶遊戲，具備滑鼠、畫面、難度等級及 BIOS/DOS 中斷功能。", "game": "遊戲", "open": "開啟專案" },
     "huffman": { "copy": "關於無損壓縮、霍夫曼樹、頻率和位元編碼的互動教材。", "algorithms": "演算法", "compression": "壓縮", "open": "開啟 Huffman" }
   },
-  "about": { "title": "關於我與聯絡方式", "first": "我是 <span class=\"about-highlight\">Agustin Argüello</span>，專注於打造實用、高效且易於維護軟體的開發者。我喜歡建立完整的解決方案，從資料庫和後端到最終介面，結合技術思維與務實的產品觀點。", "second": "我主要使用網頁技術、桌面系統、Linux 伺服器、資料庫，以及解決實際問題的工具。" },
+  "about": { "title": "關於我與聯絡方式", "first": "我是 <span class=\"about-highlight\">Agustin Argüello</span>，特別關注後端系統、應用程式架構與基礎架構的軟體開發者。", "second": "我主要使用 Rust 開發服務、API 與實用工具，也建置網頁與桌面應用程式、企業軟體，以及跨技術整合。", "third": "我重視可維護系統、關聯式資料庫，以及從商業邏輯到部署的完整解決方案。" },
+  "contact": { "emailLabel": "電子郵件", "copy": "複製", "copied": "已複製" },
   "backToTop": "回到頂端",
   "simon": { "title": "Simon Says ASM 8086 · AgusQuartz", "back": "返回", "hero": { "copy": "使用 Assembly 8086 為 emu8086 開發的記憶遊戲。它以文字模式介面、透過 BIOS INT 10h 視訊服務的彩色區域、滑鼠、關卡、漸進難度、計分以及完整的勝負畫面重現 Simon Says。", "open": "查看專案", "download": "下載 ASM 程式碼" }, "summary": { "title": "展示的內容", "copy": "它不只是一個遊戲：也展示了虛擬硬體控制、執行流程、遊戲狀態，以及不使用現代函式庫的 UI。", "memory": { "title": "記憶序列", "copy": "程式會產生顏色序列、向玩家顯示，並依照該回合預期位置驗證每次點擊。" }, "input": { "title": "滑鼠互動", "copy": "它偵測點擊與座標，以判斷使用者是否按下灰色、藍色、紅色或綠色象限。" }, "levels": { "title": "關卡與難度", "copy": "它管理分數、關卡、簡單/中等/困難模式，以及在遊戲中調整速度的自動模式。" } }, "tech": { "title": "技術重點", "copy": "本專案以接近系統的資源解決互動體驗，為了效能而優先使用文字模式，而非在 emu8086 中逐像素繪圖。", "interrupts": { "title": "系統中斷", "copy": "使用 BIOS 與 DOS 服務來建立文字模式畫面、移動游標、輸出文字、讀取時間、等待與控制滑鼠。" }, "macros": { "title": "可重複使用的巨集", "copy": "定義用於填色區域、移動游標與輸出重複字元的巨集，以減少畫面之間的重複。" }, "textUi": { "title": "文字模式 UI", "copy": "使用彩色矩形、置中訊息、載入畫面、難度選單與遊戲板建立完整文字模式畫面，避免逐像素繪圖。" }, "random": { "title": "偽隨機生成", "copy": "利用時間、種子與算術運算建立代表顏色的數值序列。" } }, "code": { "title": "代表性片段", "copy": "這些巨集展示如何抽象化重複的文字模式介面操作：填色區域、移動游標，以及重複使用 BIOS 視訊服務而不逐一繪製像素。" }, "lessons": { "title": "製作過程中的收穫", "constraints": { "title": "在限制下設計", "copy": "在沒有 HTML、CSS、canvas 或函式庫的情況下建立可玩的介面，需要思考文字模式座標、區域、色彩屬性與畫面流程。" }, "state": { "title": "手動管理狀態", "copy": "遊戲必須在沒有高階結構的情況下管理陣列、索引、難度、序列、嘗試次數、分數與重新開始。" }, "maintainable": { "title": "撰寫可維護的 ASM", "copy": "下一步可以用 EQU 擷取常數、更有條理地整理程序，並更仔細處理 push/pop 的對稱性以提升穩健性。" } } }
   ,"academic": { "title":"先修課程地圖", "home":"首頁", "subtitle":"追蹤學業進度並從 CSV 檔案載入新的課程架構。", "menu":{"progress":"進度","importExport":"匯入 / 匯出","downloadProgress":"下載進度","uploadProgress":"上傳進度","progressFormat":"進度檔案格式","curriculum":"課程架構","currentCurriculum":"目前課程架構","createCurriculum":"建立課程架構","downloadCurriculum":"下載課程架構","uploadCurriculum":"上傳課程架構","curriculumFormat":"課程架構檔案格式"}, "status":{"approved":"已通過","available":"可修讀","blocked":"已鎖定"}, "semester":{"approve":"通過整個學期","done":"學期已通過"}, "requirements":"先修課程", "lockedHint":"請先通過先修課程", "locked":"因先修課程而鎖定", "approve":"標記為已通過", "unapprove":"取消已通過標記", "approvedSubject":"科目已通過" }
