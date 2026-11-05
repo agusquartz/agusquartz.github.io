@@ -483,7 +483,7 @@
 
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
+            grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 25px;
         }
 
@@ -506,6 +506,43 @@
             box-shadow: 0 18px 40px rgba(83, 125, 184, 0.14);
             border-color: rgba(143, 183, 237, 0.24);
         }
+
+        .project-card.featured-project {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.65fr);
+            gap: 28px;
+            padding: 30px;
+            border-color: rgba(143, 183, 237, 0.34);
+            background: linear-gradient(120deg, rgba(43, 53, 66, 0.98), rgba(32, 39, 49, 0.98));
+        }
+
+        .featured-project-main { display: flex; flex-direction: column; gap: 15px; }
+
+        .featured-project-kicker {
+            margin: 0;
+            color: #a8c9f7;
+            font-size: 0.72rem;
+            font-weight: 750;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .featured-project h3 { font-size: clamp(1.45rem, 2.4vw, 1.85rem); letter-spacing: -0.03em; }
+        .featured-project p { max-width: 680px; font-size: 1rem; }
+
+        .featured-project-facts {
+            display: grid;
+            align-content: center;
+            gap: 0;
+            border-left: 1px solid rgba(170, 190, 218, 0.2);
+            padding-left: 28px;
+        }
+
+        .featured-project-fact { padding: 13px 0; border-bottom: 1px solid rgba(170, 190, 218, 0.14); }
+        .featured-project-fact:last-child { border-bottom: 0; }
+        .featured-project-fact strong { display: block; color: #edf0f4; font-size: 0.9rem; }
+        .featured-project-fact span { display: block; margin-top: 4px; color: #aeb9c6; font-size: 0.82rem; line-height: 1.45; }
 
         .project-icon {
             width: 44px;
@@ -576,6 +613,10 @@
             border-color: #8fb7ed;
             outline: none;
         }
+
+        .project-group { display: flex; flex-direction: column; gap: 18px; }
+        .project-group + .project-group { margin-top: 14px; }
+        .project-group-title { margin: 0; color: #b7c3d2; font-size: 0.76rem; font-weight: 750; letter-spacing: 0.1em; text-transform: uppercase; }
 
         /* =========================================
            SECCIÓN: ABOUT / CONTACTO
@@ -677,6 +718,9 @@
             .projects-grid {
                 grid-template-columns: 1fr;
             }
+
+            .project-card.featured-project { grid-template-columns: 1fr; }
+            .featured-project-facts { border-left: 0; border-top: 1px solid rgba(170, 190, 218, 0.2); padding: 8px 0 0; }
 
             .about-card {
                 grid-template-columns: 1fr;
@@ -805,49 +849,50 @@
     <div class="skills-cards-container">
 
         <div class="skill-card">
-            <h3 data-i18n="skills.languages">Lenguajes</h3>
+            <h3 data-i18n="skills.backend">Backend</h3>
             <div class="skills-grid">
                 <div class="skill-item"><i class="devicon-rust-plain"></i><span>Rust</span></div>
-                <div class="skill-item"><i class="devicon-java-plain"></i><span>Java</span></div>
+                <div class="skill-item"><span class="skill-mark">Ax</span><span>Axum</span></div>
+                <div class="skill-item"><span class="skill-mark">Tk</span><span>Tokio</span></div>
                 <div class="skill-item"><i class="devicon-csharp-plain"></i><span>C#</span></div>
-                <div class="skill-item"><i class="devicon-c-plain"></i><span>C</span></div>
-                <div class="skill-item"><i class="devicon-python-plain"></i><span>Python</span></div>
-                <div class="skill-item"><i class="devicon-javascript-plain"></i><span>JS</span></div>
-                <div class="skill-item"><i class="devicon-typescript-plain"></i><span>TS</span></div>
+                <div class="skill-item"><i class="devicon-dotnetcore-plain"></i><span>.NET</span></div>
+                <div class="skill-item"><i class="devicon-java-plain"></i><span>Java</span></div>
+                <div class="skill-item"><i class="devicon-spring-original"></i><span>Spring Boot</span></div>
             </div>
         </div>
 
         <div class="skill-card">
-            <h3 data-i18n="skills.web">Web, backend y datos</h3>
+            <h3 data-i18n="skills.storage">Databases &amp; Storage</h3>
             <div class="skills-grid">
                 <div class="skill-item"><i class="devicon-postgresql-plain"></i><span>PostgreSQL</span></div>
                 <div class="skill-item"><i class="devicon-microsoftsqlserver-plain"></i><span>SQL Server</span></div>
+                <div class="skill-item"><span class="skill-mark">OD</span><span>OpenDAL</span></div>
+                <div class="skill-item"><span class="skill-mark">S3</span><span>S3 storage</span></div>
+            </div>
+        </div>
+
+        <div class="skill-card">
+            <h3 data-i18n="skills.webDesktop">Web &amp; Desktop</h3>
+            <div class="skills-grid">
+                <div class="skill-item"><i class="devicon-javascript-plain"></i><span>JavaScript</span></div>
+                <div class="skill-item"><i class="devicon-typescript-plain"></i><span>TypeScript</span></div>
+                <div class="skill-item"><i class="devicon-nextjs-plain"></i><span>Next.js</span></div>
+                <div class="skill-item"><span class="skill-mark">Tr</span><span>Tauri</span></div>
                 <div class="skill-item"><i class="devicon-html5-plain"></i><span>HTML</span></div>
                 <div class="skill-item"><i class="devicon-css3-plain"></i><span>CSS</span></div>
-                <div class="skill-item"><i class="devicon-spring-original"></i><span>Spring Boot</span></div>
-                <div class="skill-item"><i class="devicon-dotnetcore-plain"></i><span>.NET</span></div>
             </div>
         </div>
 
         <div class="skill-card">
-            <h3 data-i18n="skills.systems">Sistemas & Entornos</h3>
+            <h3 data-i18n="skills.infrastructure">Infrastructure &amp; Tools</h3>
             <div class="skills-grid">
-                <div class="skill-item"><i class="devicon-windows8-original"></i><span>Windows</span></div>
-                <div class="skill-item"><i class="devicon-apple-original"></i><span>macOS</span></div>
                 <div class="skill-item"><i class="devicon-linux-plain"></i><span>Linux</span></div>
-                <div class="skill-item"><i class="devicon-android-plain"></i><span>Android</span></div>
-                <div class="skill-item"><i class="devicon-apple-original"></i><span>iOS</span></div>
+                <div class="skill-item"><i class="devicon-docker-plain"></i><span>Docker</span></div>
                 <div class="skill-item"><i class="devicon-bash-plain"></i><span>Bash</span></div>
-            </div>
-        </div>
-
-        <div class="skill-card">
-            <h3 data-i18n="skills.cloud">Cloud & Deploy</h3>
-            <div class="skills-grid">
+                <div class="skill-item"><i class="devicon-git-plain"></i><span>Git</span></div>
                 <div class="skill-item"><i class="devicon-amazonwebservices-plain-wordmark"></i><span>AWS</span></div>
                 <div class="skill-item"><i class="devicon-azure-plain"></i><span>Azure</span></div>
-                <div class="skill-item"><i class="devicon-oracle-original"></i><span>Oracle</span></div>
-                <div class="skill-item"><i class="devicon-vercel-original"></i><span>Vercel</span></div>
+                <div class="skill-item"><i class="devicon-oracle-original"></i><span>OCI</span></div>
             </div>
         </div>
 
