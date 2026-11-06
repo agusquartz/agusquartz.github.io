@@ -5,7 +5,7 @@
   "nav": { "about": "About", "projects": "Projects", "skills": "Skills" },
   "hero": {
     "eyebrow": "Software Developer · Backend & Systems",
-    "copy": "Software developer focused on backend systems, APIs, infrastructure, and practical software applications. I primarily work with Rust, building backend services, self-hosted tools, and business software, with an emphasis on maintainable architecture, secure integrations, and reliable deployments.",
+    "copy": "Software developer focused on backend systems, APIs, infrastructure, and practical software applications. I primarily work with Rust and also build enterprise backends with Java and Spring Boot, with an emphasis on maintainable architecture, secure integrations, and reliable deployments.",
     "projects": "View projects",
     "card": {
       "aria": "Development areas",
@@ -30,6 +30,12 @@
       "eyebrow": "Corporate website", "subtitle": "Multilingual Corporate Website",
       "description": "A responsive website presenting EOSTECH's products, services, and technology solutions, with navigation and localization in six languages.",
       "localization": "AI-assisted translations with technical implementation and integration of the multilingual experience.", "link": "Visit website ↗"
+    },
+    "printing": {
+      "eyebrow": "Independent software project", "status": "Testing & refinement", "title": "3D Printing ERP", "subtitle": "Multitenant ERP for 3D printing businesses",
+      "description": "A multitenant ERP built with Java and Spring Boot for 3D printing businesses. It manages inventory, purchasing, sales, users, and business operations with transactional flows, security controls, and tenant-isolated operation.",
+      "period": "2026 – Present", "source": "Private source code", "architectureLabel": "Multitenant architecture", "architecture": "Spring Boot services, API Gateway, Eureka, and a shared module.",
+      "securityLabel": "Tenant security", "security": "JWT, RBAC, and tenant isolation.", "persistenceLabel": "Transactional persistence", "persistence": "Purchases, sales, inventory movements, and database migrations."
     }
   },
   "projects": {

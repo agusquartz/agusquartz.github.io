@@ -1211,7 +1211,7 @@
 
     async function setLanguage(locale, { persist = true } = {}) {
         try {
-            const response = await fetch(`./locales/${locale}.json?rev=5`);
+            const response = await fetch(`./locales/${locale}.json?rev=6`);
             if (!response.ok) throw new Error(`Could not load locale: ${locale}`);
             const messages = await response.json();
             applyTranslations(messages, locale);
