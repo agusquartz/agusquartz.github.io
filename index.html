@@ -3,7 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portafolio - Agustin Argüello</title>
+    <title>Agustin Argüello | Software Developer</title>
+    <meta name="description" content="Portfolio of Agustin Argüello, software developer focused on backend systems, Rust, APIs, databases, and cloud infrastructure.">
+    <meta name="author" content="Agustin Argüello">
+    <link rel="canonical" href="https://agusquartz.github.io/">
+    <meta property="og:title" content="Agustin Argüello | Software Developer">
+    <meta property="og:description" content="Backend systems, Rust, APIs, databases, and cloud infrastructure.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://agusquartz.github.io/">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
 
@@ -17,6 +24,13 @@
 
         html {
             scroll-behavior: smooth;
+        }
+
+        section { scroll-margin-top: 70px; }
+
+        :focus-visible {
+            outline: 2px solid #a8c9f7;
+            outline-offset: 3px;
         }
 
         body {
@@ -449,6 +463,18 @@
             transition: all 0.3s ease;
         }
 
+        .skill-mark {
+            display: grid;
+            place-items: center;
+            width: 2rem;
+            height: 2rem;
+            border: 1px solid rgba(170, 190, 218, 0.26);
+            border-radius: 6px;
+            color: #c8d6e7;
+            font: 700 0.7rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+            letter-spacing: -0.04em;
+        }
+
         .skill-item span {
             font-family: 'Inter', sans-serif;
             font-size: 0.75rem;
@@ -483,7 +509,7 @@
 
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
+            grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 25px;
         }
 
@@ -506,6 +532,43 @@
             box-shadow: 0 18px 40px rgba(83, 125, 184, 0.14);
             border-color: rgba(143, 183, 237, 0.24);
         }
+
+        .project-card.featured-project {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.65fr);
+            gap: 28px;
+            padding: 30px;
+            border-color: rgba(143, 183, 237, 0.34);
+            background: linear-gradient(120deg, rgba(43, 53, 66, 0.98), rgba(32, 39, 49, 0.98));
+        }
+
+        .featured-project-main { display: flex; flex-direction: column; gap: 15px; }
+
+        .featured-project-kicker {
+            margin: 0;
+            color: #a8c9f7;
+            font-size: 0.72rem;
+            font-weight: 750;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .featured-project h3 { font-size: clamp(1.45rem, 2.4vw, 1.85rem); letter-spacing: -0.03em; }
+        .featured-project p { max-width: 680px; font-size: 1rem; }
+
+        .featured-project-facts {
+            display: grid;
+            align-content: center;
+            gap: 0;
+            border-left: 1px solid rgba(170, 190, 218, 0.2);
+            padding-left: 28px;
+        }
+
+        .featured-project-fact { padding: 13px 0; border-bottom: 1px solid rgba(170, 190, 218, 0.14); }
+        .featured-project-fact:last-child { border-bottom: 0; }
+        .featured-project-fact strong { display: block; color: #edf0f4; font-size: 0.9rem; }
+        .featured-project-fact span { display: block; margin-top: 4px; color: #aeb9c6; font-size: 0.82rem; line-height: 1.45; }
 
         .project-icon {
             width: 44px;
@@ -577,6 +640,10 @@
             outline: none;
         }
 
+        .project-group { display: flex; flex-direction: column; gap: 18px; }
+        .project-group + .project-group { margin-top: 14px; }
+        .project-group-title { margin: 0; color: #b7c3d2; font-size: 0.76rem; font-weight: 750; letter-spacing: 0.1em; text-transform: uppercase; }
+
         /* =========================================
            SECCIÓN: ABOUT / CONTACTO
            ========================================= */
@@ -611,6 +678,13 @@
             flex-direction: column;
             gap: 14px;
         }
+
+        .contact-item { display: grid; gap: 5px; }
+        .contact-label { color: #aeb9c6; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+        .contact-email { color: #edf0f4; font-size: 0.95rem; text-decoration: none; word-break: break-word; }
+        .contact-email:hover { color: #a8c9f7; }
+        .contact-copy { align-self: flex-start; min-height: 30px; padding: 5px 9px; border: 1px solid rgba(143, 183, 237, 0.28); border-radius: 6px; background: transparent; color: #a8c9f7; font: inherit; font-size: 0.78rem; font-weight: 650; cursor: pointer; }
+        .contact-copy:hover { background: rgba(83, 125, 184, 0.16); border-color: #8fb7ed; }
 
         .contact-box .button {
             justify-content: center;
@@ -678,6 +752,9 @@
                 grid-template-columns: 1fr;
             }
 
+            .project-card.featured-project { grid-template-columns: 1fr; }
+            .featured-project-facts { border-left: 0; border-top: 1px solid rgba(170, 190, 218, 0.2); padding: 8px 0 0; }
+
             .about-card {
                 grid-template-columns: 1fr;
                 text-align: center;
@@ -721,6 +798,11 @@
                 height: 38px;
             }
         }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
+        }
     </style>
 </head>
 <body>
@@ -757,7 +839,7 @@
             </div>
         </div>
 
-        <button class="mobile-toggle" id="btn-menu" aria-label="Abrir menú" data-i18n-aria-label="menu.open">
+        <button class="mobile-toggle" id="btn-menu" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-links" data-i18n-aria-label="menu.open">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="4" y1="12" x2="20" y2="12"></line>
                 <line x1="4" y1="6" x2="20" y2="6"></line>
@@ -771,14 +853,14 @@
 
 <section class="hero" aria-labelledby="hero-title">
     <div>
-        <div class="eyebrow">FullStack · Desktop · Cloud</div>
+        <div class="eyebrow" data-i18n="hero.eyebrow">Software Developer · Backend &amp; Systems</div>
         <h1 id="hero-title"><span class="gradient-text">Agustin Argüello</span></h1>
         <p class="hero-text">
-            <span data-i18n="hero.copy">Desarrollo aplicaciones y herramientas útiles, desde interfaces web y servicios backend hasta software de escritorio. También administro y despliego servicios en servidores Linux.</span>
+            <span data-i18n="hero.copy">Desarrollador de software enfocado en sistemas backend, APIs, infraestructura y aplicaciones prácticas. Trabajo principalmente con Rust, desarrollando servicios, herramientas autoalojadas y software empresarial, con especial atención a la arquitectura, las integraciones seguras y el despliegue de aplicaciones.</span>
         </p>
 
         <div class="hero-actions">
-            <a class="button primary" href="#proyectos" data-i18n="hero.projects">Ver proyectos</a>
+            <a class="button primary" href="#projects" data-i18n="hero.projects">Ver proyectos</a>
             <a class="button" href="https://github.com/agusquartz" target="_blank" rel="noopener">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.03c3.15-.38 6.5-1.4 6.5-7a5.2 5.2 0 0 0-1.5-3.8 4.8 4.8 0 0 0 .1-3.7s-1.2-.4-3.9 1.4a13.3 13.3 0 0 0-7 0c-2.7-1.8-3.9-1.4-3.9-1.4a4.8 4.8 0 0 0 .1 3.7 5.2 5.2 0 0 0-1.5 3.8c0 5.6 3.3 6.6 6.5 7a4.8 4.8 0 0 0-1 3.03V22"/><path d="M9 20c-5 1.5-5-2.5-7-3"/></svg>
                 GitHub
@@ -787,14 +869,14 @@
     </div>
 
     <aside class="hero-card" aria-label="Áreas de desarrollo" data-i18n-aria-label="hero.card.aria">
-        <p class="hero-card-eyebrow" data-i18n="hero.card.eyebrow">Qué desarrollo</p>
-        <h2 data-i18n="hero.card.title">Software para web, escritorio y móvil.</h2>
-        <p class="hero-card-copy" data-i18n="hero.card.copy">Aplicaciones a medida, integraciones y servicios backend, con despliegues en servidores Linux cuando el proyecto lo requiere.</p>
+        <p class="hero-card-eyebrow" data-i18n="hero.card.eyebrow">Áreas de desarrollo</p>
+        <h2 data-i18n="hero.card.title">Backend, aplicaciones e infraestructura.</h2>
+        <p class="hero-card-copy" data-i18n="hero.card.copy">Desarrollo servicios, APIs y aplicaciones, desde la lógica de negocio y las bases de datos hasta las integraciones y el despliegue.</p>
         <div class="hero-card-tags" aria-label="Áreas" data-i18n-aria-label="hero.card.tagsAria">
-            <span>Web</span>
-            <span data-i18n="hero.card.desktop">Escritorio</span>
-            <span data-i18n="hero.card.mobile">Móvil</span>
-            <span>Backend</span>
+            <span data-i18n="hero.card.backend">Backend &amp; APIs</span>
+            <span data-i18n="hero.card.webDesktop">Web &amp; Desktop</span>
+            <span data-i18n="hero.card.databases">Databases</span>
+            <span data-i18n="hero.card.infrastructure">Infrastructure</span>
         </div>
     </aside>
 </section>
@@ -805,49 +887,50 @@
     <div class="skills-cards-container">
 
         <div class="skill-card">
-            <h3 data-i18n="skills.languages">Lenguajes</h3>
+            <h3 data-i18n="skills.backend">Backend</h3>
             <div class="skills-grid">
                 <div class="skill-item"><i class="devicon-rust-plain"></i><span>Rust</span></div>
-                <div class="skill-item"><i class="devicon-java-plain"></i><span>Java</span></div>
+                <div class="skill-item"><span class="skill-mark">Ax</span><span>Axum</span></div>
+                <div class="skill-item"><span class="skill-mark">Tk</span><span>Tokio</span></div>
                 <div class="skill-item"><i class="devicon-csharp-plain"></i><span>C#</span></div>
-                <div class="skill-item"><i class="devicon-c-plain"></i><span>C</span></div>
-                <div class="skill-item"><i class="devicon-python-plain"></i><span>Python</span></div>
-                <div class="skill-item"><i class="devicon-javascript-plain"></i><span>JS</span></div>
-                <div class="skill-item"><i class="devicon-typescript-plain"></i><span>TS</span></div>
+                <div class="skill-item"><i class="devicon-dotnetcore-plain"></i><span>.NET</span></div>
+                <div class="skill-item"><i class="devicon-java-plain"></i><span>Java</span></div>
+                <div class="skill-item"><i class="devicon-spring-original"></i><span>Spring Boot</span></div>
             </div>
         </div>
 
         <div class="skill-card">
-            <h3 data-i18n="skills.web">Web, backend y datos</h3>
+            <h3 data-i18n="skills.storage">Databases &amp; Storage</h3>
             <div class="skills-grid">
                 <div class="skill-item"><i class="devicon-postgresql-plain"></i><span>PostgreSQL</span></div>
                 <div class="skill-item"><i class="devicon-microsoftsqlserver-plain"></i><span>SQL Server</span></div>
+                <div class="skill-item"><span class="skill-mark">OD</span><span>OpenDAL</span></div>
+                <div class="skill-item"><span class="skill-mark">S3</span><span>S3 storage</span></div>
+            </div>
+        </div>
+
+        <div class="skill-card">
+            <h3 data-i18n="skills.webDesktop">Web &amp; Desktop</h3>
+            <div class="skills-grid">
+                <div class="skill-item"><i class="devicon-javascript-plain"></i><span>JavaScript</span></div>
+                <div class="skill-item"><i class="devicon-typescript-plain"></i><span>TypeScript</span></div>
+                <div class="skill-item"><i class="devicon-nextjs-plain"></i><span>Next.js</span></div>
+                <div class="skill-item"><span class="skill-mark">Tr</span><span>Tauri</span></div>
                 <div class="skill-item"><i class="devicon-html5-plain"></i><span>HTML</span></div>
                 <div class="skill-item"><i class="devicon-css3-plain"></i><span>CSS</span></div>
-                <div class="skill-item"><i class="devicon-spring-original"></i><span>Spring Boot</span></div>
-                <div class="skill-item"><i class="devicon-dotnetcore-plain"></i><span>.NET</span></div>
             </div>
         </div>
 
         <div class="skill-card">
-            <h3 data-i18n="skills.systems">Sistemas & Entornos</h3>
+            <h3 data-i18n="skills.infrastructure">Infrastructure &amp; Tools</h3>
             <div class="skills-grid">
-                <div class="skill-item"><i class="devicon-windows8-original"></i><span>Windows</span></div>
-                <div class="skill-item"><i class="devicon-apple-original"></i><span>macOS</span></div>
                 <div class="skill-item"><i class="devicon-linux-plain"></i><span>Linux</span></div>
-                <div class="skill-item"><i class="devicon-android-plain"></i><span>Android</span></div>
-                <div class="skill-item"><i class="devicon-apple-original"></i><span>iOS</span></div>
+                <div class="skill-item"><i class="devicon-docker-plain"></i><span>Docker</span></div>
                 <div class="skill-item"><i class="devicon-bash-plain"></i><span>Bash</span></div>
-            </div>
-        </div>
-
-        <div class="skill-card">
-            <h3 data-i18n="skills.cloud">Cloud & Deploy</h3>
-            <div class="skills-grid">
+                <div class="skill-item"><i class="devicon-git-plain"></i><span>Git</span></div>
                 <div class="skill-item"><i class="devicon-amazonwebservices-plain-wordmark"></i><span>AWS</span></div>
                 <div class="skill-item"><i class="devicon-azure-plain"></i><span>Azure</span></div>
-                <div class="skill-item"><i class="devicon-oracle-original"></i><span>Oracle</span></div>
-                <div class="skill-item"><i class="devicon-vercel-original"></i><span>Vercel</span></div>
+                <div class="skill-item"><i class="devicon-oracle-original"></i><span>OCI</span></div>
             </div>
         </div>
 
@@ -855,27 +938,49 @@
 </section>
 
 <section class="projects-section" id="projects">
-    <span id="proyectos"></span>
     <h2 class="section-title" data-i18n="projects.title">Proyectos Destacados</h2>
 
+    <div class="project-group">
+    <h3 class="project-group-title" data-i18n="projects.softwareTitle">Software Projects</h3>
     <div class="projects-grid">
 
+        <article class="project-card featured-project">
+            <div class="featured-project-main">
+                <div class="featured-project-kicker" data-i18n="projects.image.eyebrow">Proyecto open source destacado</div>
+                <h3>Image Service</h3>
+                <p data-i18n="projects.image.copy">Servicio open source de procesamiento y almacenamiento de imágenes desarrollado en Rust y Axum. Incluye validación de archivos, optimización WebP, almacenamiento local o compatible con S3 y una API HTTP para integrarse con otras aplicaciones.</p>
+                <div class="project-tags">
+                    <span>Rust</span>
+                    <span>Axum</span>
+                    <span>Tokio</span>
+                    <span>OpenDAL</span>
+                    <span>WebP</span>
+                    <span>S3</span>
+                </div>
+                <div class="project-actions">
+                    <a class="project-link" href="https://github.com/agusquartz/image_service" target="_blank" rel="noopener" data-i18n="projects.image.link">Ver repositorio ↗</a>
+                    <a class="project-link" href="https://github.com/agusquartz/image_service/tree/main/docs" target="_blank" rel="noopener" data-i18n="projects.image.docs">Leer documentación ↗</a>
+                </div>
+            </div>
+            <div class="featured-project-facts" aria-label="Image Service highlights">
+                <div class="featured-project-fact"><strong data-i18n="projects.image.uploadLabel">Procesamiento y validación</strong><span data-i18n="projects.image.upload">Validación de archivos, límites de decodificación, control de concurrencia y optimización WebP.</span></div>
+                <div class="featured-project-fact"><strong data-i18n="projects.image.architectureLabel">Arquitectura modular</strong><span data-i18n="projects.image.architecture">Separación de responsabilidades entre API HTTP, procesamiento y almacenamiento.</span></div>
+                <div class="featured-project-fact"><strong data-i18n="projects.image.storageLabel">Almacenamiento y despliegue</strong><span data-i18n="projects.image.storage">Soporte local y compatible con S3 mediante OpenDAL, con despliegue mediante Docker.</span></div>
+            </div>
+        </article>
+
         <article class="project-card">
-            <h3>Image Service</h3>
-            <p>
-                <span data-i18n="projects.image.copy">Servicio open source autoalojado en Rust y Axum para validar, optimizar y servir imágenes WebP, con almacenamiento local o S3.</span>
-            </p>
-            <div class="project-tags">
-                <span>Rust</span>
-                <span>Axum</span>
-                <span>OpenDAL</span>
-                <span>WebP · S3</span>
-                <span data-i18n="projects.image.opensource">Código abierto</span>
-                <span>Apache 2.0</span>
-            </div>
-            <div class="project-actions">
-                <a class="project-link" href="https://github.com/agusquartz/image_service" target="_blank" rel="noopener" data-i18n="projects.image.link">Ver repositorio ↗</a>
-            </div>
+            <h3>rust-postgres-pool</h3>
+            <p data-i18n="projects.pool.copy">Ejemplo de gestión asíncrona de conexiones PostgreSQL con Rust, Tokio y deadpool-postgres. Explora pooling de conexiones, transacciones, configuración y manejo de errores.</p>
+            <div class="project-tags"><span>Rust</span><span>Tokio</span><span>PostgreSQL</span></div>
+            <div class="project-actions"><a class="project-link" href="https://github.com/agusquartz/rust-postgres-pool" target="_blank" rel="noopener" data-i18n="projects.pool.link">Ver repositorio ↗</a></div>
+        </article>
+
+        <article class="project-card">
+            <h3>http-two-cookies</h3>
+            <p data-i18n="projects.cookies.copy">Ejemplo de servidor HTTP en Rust que explora autenticación JWT y protección CSRF utilizando un enfoque de dos cookies con Axum y Tokio.</p>
+            <div class="project-tags"><span>Rust</span><span>Axum</span><span>JWT</span><span>CSRF</span></div>
+            <div class="project-actions"><a class="project-link" href="https://github.com/agusquartz/http-two-cookies" target="_blank" rel="noopener" data-i18n="projects.cookies.link">Ver repositorio ↗</a></div>
         </article>
 
         <article class="project-card">
@@ -893,7 +998,12 @@
                 <a class="project-link" href="./academic-progress/curriculum-builder/" data-i18n="projects.academic.create">Crear malla</a>
             </div>
         </article>
+    </div>
+    </div>
 
+    <div class="project-group">
+    <h3 class="project-group-title" data-i18n="projects.academicTitle">Academic &amp; Experimental Projects</h3>
+    <div class="projects-grid">
         <article class="project-card">
             <h3>Simon Says ASM</h3>
             <p>
@@ -923,8 +1033,7 @@
                 <a class="project-link" href="./HUFFMAN/" data-i18n="projects.huffman.open">Abrir Huffman</a>
             </div>
         </article>
-
-
+    </div>
     </div>
 </section>
 
@@ -933,15 +1042,23 @@
 
     <div class="about-card">
         <div>
-            <p data-i18n-html="about.first">Soy <span class="about-highlight">Agustin Argüello</span>, desarrollador enfocado en construir software útil, eficiente y mantenible. Me interesa crear soluciones completas, desde la base de datos y el backend hasta la interfaz final, combinando pensamiento técnico con una visión práctica del producto.</p>
+            <p data-i18n-html="about.first">Soy <span class="about-highlight">Agustin Argüello</span>, desarrollador de software con especial interés en sistemas backend, arquitectura de aplicaciones e infraestructura.</p>
             <br>
-            <p data-i18n="about.second">Trabajo especialmente con tecnologías web, sistemas de escritorio, servidores Linux, bases de datos y herramientas orientadas a resolver problemas reales.</p>
+            <p data-i18n="about.second">Trabajo principalmente con Rust, desarrollando servicios, APIs y herramientas orientadas a resolver problemas reales. También construyo aplicaciones web y de escritorio, software empresarial e integraciones entre diferentes tecnologías.</p>
+            <br>
+            <p data-i18n="about.third">Me interesa diseñar sistemas mantenibles, trabajar con bases de datos relacionales y desarrollar soluciones completas, desde la lógica de negocio hasta su despliegue.</p>
         </div>
 
         <div class="contact-box">
-            <a class="button primary" href="https://github.com/agusquartz" target="_blank" rel="noopener">
-                GitHub
-            </a>
+            <div class="contact-item">
+                <span class="contact-label" data-i18n="contact.emailLabel">Correo electrónico</span>
+                <a class="contact-email" href="mailto:agusquartz@gmail.com">agusquartz@gmail.com</a>
+                <button class="contact-copy" type="button" id="copyEmail" data-i18n="contact.copy">Copiar</button>
+            </div>
+            <div class="contact-item">
+                <span class="contact-label">GitHub</span>
+                <a class="button primary" href="https://github.com/agusquartz" target="_blank" rel="noopener">@agusquartz</a>
+            </div>
         </div>
     </div>
 </section>
@@ -958,6 +1075,7 @@
     const languageSwitcher = document.getElementById('languageSwitcher');
     const languageButton = document.getElementById('languageButton');
     const languageCode = document.getElementById('languageCode');
+    const copyEmailButton = document.getElementById('copyEmail');
     const localeCodes = { es: 'ES', en: 'EN', pt: 'PT', 'zh-Hant': '繁中', ru: 'RU', de: 'DE' };
     const documentLocales = { es: 'es', en: 'en', pt: 'pt-BR', 'zh-Hant': 'zh-Hant', ru: 'ru', de: 'de' };
 
@@ -966,6 +1084,7 @@
     }
 
     function applyTranslations(messages, locale) {
+        window.currentMessages = messages;
         document.querySelectorAll('[data-i18n]').forEach(element => {
             const value = readTranslation(messages, element.dataset.i18n);
             if (typeof value === 'string') element.textContent = value;
@@ -990,13 +1109,13 @@
         });
     }
 
-    async function setLanguage(locale) {
+    async function setLanguage(locale, { persist = true } = {}) {
         try {
-            const response = await fetch(`./locales/${locale}.json`);
+            const response = await fetch(`./locales/${locale}.json?rev=4`);
             if (!response.ok) throw new Error(`Could not load locale: ${locale}`);
             const messages = await response.json();
             applyTranslations(messages, locale);
-            localStorage.setItem('portfolio-locale', locale);
+            if (persist) localStorage.setItem('portfolio-locale', locale);
         } catch (error) {
             console.error('Language selection failed.', error);
         }
@@ -1008,12 +1127,14 @@
     }
 
     btnMenu.addEventListener('click', () => {
-        menuLinks.classList.toggle('active');
+        const isOpen = menuLinks.classList.toggle('active');
+        btnMenu.setAttribute('aria-expanded', String(isOpen));
     });
 
     document.querySelectorAll('.nav-links a').forEach(link => {
         link.addEventListener('click', () => {
             menuLinks.classList.remove('active');
+            btnMenu.setAttribute('aria-expanded', 'false');
         });
     });
 
@@ -1034,10 +1155,37 @@
     });
 
     document.addEventListener('keydown', event => {
-        if (event.key === 'Escape') closeLanguageMenu();
+        if (event.key === 'Escape') {
+            closeLanguageMenu();
+            menuLinks.classList.remove('active');
+            btnMenu.setAttribute('aria-expanded', 'false');
+        }
     });
 
-    setLanguage(localStorage.getItem('portfolio-locale') || 'es');
+    copyEmailButton.addEventListener('click', async () => {
+        try {
+            await navigator.clipboard.writeText('agusquartz@gmail.com');
+            copyEmailButton.textContent = readTranslation(window.currentMessages || {}, 'contact.copied') || 'Copied';
+        } catch (error) {
+            window.location.href = 'mailto:agusquartz@gmail.com';
+        }
+    });
+
+    function getInitialLocale() {
+        const saved = localStorage.getItem('portfolio-locale');
+        if (saved && localeCodes[saved]) return { locale: saved, persist: false };
+        const preferred = navigator.languages || [navigator.language];
+        for (const language of preferred) {
+            const normalized = String(language || '').toLowerCase();
+            if (normalized.startsWith('zh')) return { locale: 'zh-Hant', persist: false };
+            const locale = normalized.split('-')[0];
+            if (localeCodes[locale]) return { locale, persist: false };
+        }
+        return { locale: 'en', persist: false };
+    }
+
+    const initialLocale = getInitialLocale();
+    setLanguage(initialLocale.locale, initialLocale);
 </script>
 
 </body>

@@ -1,34 +1,39 @@
 {
-  "meta": { "title": "Portfolio - Agustin Argüello" },
+  "meta": { "title": "Agustin Argüello | Software Developer" },
   "language": { "aria": "Change language" },
   "menu": { "open": "Open menu" },
   "nav": { "about": "About", "projects": "Projects", "skills": "Skills" },
   "hero": {
-    "copy": "I build useful applications and tools, from web interfaces and backend services to desktop software. I also manage and deploy services on Linux servers.",
+    "eyebrow": "Software Developer · Backend & Systems",
+    "copy": "Software developer focused on backend systems, APIs, infrastructure, and practical software applications. I primarily work with Rust, building backend services, self-hosted tools, and business software, with an emphasis on maintainable architecture, secure integrations, and reliable deployments.",
     "projects": "View projects",
     "card": {
       "aria": "Development areas",
-      "eyebrow": "What I build",
-      "title": "Software for web, desktop, and mobile.",
-      "copy": "Custom applications, integrations, and backend services, deployed on Linux servers when the project calls for it.",
+      "eyebrow": "Development areas",
+      "title": "Backend, applications, and infrastructure.",
+      "copy": "I build services, APIs, and applications, from business logic and databases to integrations and deployment.",
       "tagsAria": "Areas",
-      "desktop": "Desktop",
-      "mobile": "Mobile"
+      "backend": "Backend & APIs", "webDesktop": "Web & Desktop", "databases": "Databases", "infrastructure": "Infrastructure"
     }
   },
-  "skills": { "title": "Technical Skills", "languages": "Languages", "web": "Web, backend, and data", "systems": "Systems & environments", "cloud": "Cloud & deployment" },
+  "skills": { "title": "Technical Skills", "backend": "Backend", "storage": "Databases & Storage", "webDesktop": "Web & Desktop", "infrastructure": "Infrastructure & Tools" },
   "projects": {
     "title": "Featured Projects",
-    "image": { "copy": "A self-hosted open-source service built with Rust and Axum to validate, optimize, and serve WebP images, with local or S3 storage.", "opensource": "Open source", "link": "View repository ↗" },
+    "softwareTitle": "Software Projects", "academicTitle": "Academic & Experimental Projects",
+    "image": { "eyebrow": "Featured open-source project", "copy": "An open-source image processing and storage service built with Rust and Axum. It includes file validation, WebP optimization, local or S3-compatible storage, and an HTTP API for application integration.", "opensource": "Open source", "uploadLabel": "Processing and validation", "upload": "File validation, decoder limits, controlled concurrency, and WebP optimization.", "architectureLabel": "Modular architecture", "architecture": "Clear separation between the HTTP API, image processing, and storage.", "storageLabel": "Storage and deployment", "storage": "Local and S3-compatible storage through OpenDAL, with Docker deployment.", "link": "View repository ↗", "docs": "Read documentation ↗" },
+    "pool": { "copy": "An example of asynchronous PostgreSQL connection management with Rust, Tokio, and deadpool-postgres. It explores pooling, transactions, configuration, and error handling.", "link": "View repository ↗" },
+    "cookies": { "copy": "A Rust HTTP server example exploring JWT authentication and CSRF protection through a two-cookie approach with Axum and Tokio.", "link": "View repository ↗" },
     "academic": { "copy": "A tool to track academic progress, explore prerequisite relationships, and organize subjects in a curriculum.", "education": "Education", "planning": "Planning", "open": "Open Academic Progress", "create": "Create curriculum" },
     "simon": { "copy": "A memory game in Assembly 8086 with mouse input, screens, difficulty levels, and BIOS/DOS interrupts.", "game": "Game", "open": "Open project" },
     "huffman": { "copy": "Interactive material about lossless compression, Huffman trees, frequencies, and bit encoding.", "algorithms": "Algorithms", "compression": "Compression", "open": "Open Huffman" }
   },
   "about": {
     "title": "About and contact",
-    "first": "I am <span class=\"about-highlight\">Agustin Argüello</span>, a developer focused on building useful, efficient, and maintainable software. I enjoy creating complete solutions, from databases and backend services to the final interface, combining technical thinking with a practical product perspective.",
-    "second": "I work especially with web technologies, desktop systems, Linux servers, databases, and tools designed to solve real problems."
+    "first": "I'm <span class=\"about-highlight\">Agustin Argüello</span>, a software developer particularly interested in backend systems, application architecture, and infrastructure.",
+    "second": "I primarily work with Rust, developing services, APIs, and practical software tools. I also build web and desktop applications, business software, and integrations across different technologies.",
+    "third": "I'm interested in designing maintainable systems, working with relational databases, and building complete solutions from business logic to deployment."
   },
+  "contact": { "emailLabel": "Email", "copy": "Copy", "copied": "Copied" },
   "backToTop": "Back to top",
   "simon": {
     "title": "Simon Says ASM 8086 · AgusQuartz", "back": "Back",
