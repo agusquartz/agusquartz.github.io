@@ -17,10 +17,25 @@
     }
   },
   "skills": { "title": "Technical Skills", "backend": "Backend", "storage": "Databases & Storage", "webDesktop": "Web & Desktop", "infrastructure": "Infrastructure & Tools" },
+  "professional": {
+    "title": "Professional Work",
+    "sysman": {
+      "eyebrow": "Professional software · since 2024", "status": "In production use", "subtitle": "Cloud ERP & Desktop Application",
+      "description": "A business management system developed end-to-end for EOSTECH, covering sales, inventory, customers, quotations, cash management, multi-currency operations, and multiple branches.",
+      "developmentLabel": "Development", "development": "Frontend, backend, and desktop", "dataLabel": "Data", "infrastructureLabel": "Infrastructure", "infrastructure": "Cloud and Linux", "sourceLabel": "Source", "source": "Private · commercial software", "role": "My role: architecture, frontend, backend, database, integrations, and deployment.",
+      "link": "Explore the product at EOSTECH ↗", "diagramAlt": "SYSMAN conceptual diagram: applications use the business API for data and retrieve images directly from Image Service.",
+      "architecture": "Applications use the main API for business operations, while product images are retrieved directly from Image Service through HTTP GET, keeping processing and storage in a separate service."
+    },
+    "eostech": {
+      "eyebrow": "Corporate website", "subtitle": "Multilingual Corporate Website",
+      "description": "A responsive website presenting EOSTECH's products, services, and technology solutions, with navigation and localization in six languages.",
+      "localization": "AI-assisted translations with technical implementation and integration of the multilingual experience.", "link": "Visit website ↗"
+    }
+  },
   "projects": {
-    "title": "Featured Projects",
+    "title": "Open Source & Other Projects",
     "softwareTitle": "Software Projects", "academicTitle": "Academic & Experimental Projects",
-    "image": { "eyebrow": "Featured open-source project", "copy": "An open-source image processing and storage service built with Rust and Axum. It includes file validation, WebP optimization, local or S3-compatible storage, and an HTTP API for application integration.", "opensource": "Open source", "uploadLabel": "Processing and validation", "upload": "File validation, decoder limits, controlled concurrency, and WebP optimization.", "architectureLabel": "Modular architecture", "architecture": "Clear separation between the HTTP API, image processing, and storage.", "storageLabel": "Storage and deployment", "storage": "Local and S3-compatible storage through OpenDAL, with Docker deployment.", "link": "View repository ↗", "docs": "Read documentation ↗" },
+    "image": { "eyebrow": "Featured open-source project", "copy": "An open-source image processing, optimization, and storage service built with Rust and Axum. It validates and converts images to WebP, stores them on the local filesystem or S3-compatible storage, and serves them directly to client applications through HTTP GET.", "opensource": "Open source", "uploadLabel": "Processing and validation", "upload": "File validation, decoder limits, controlled concurrency, and WebP optimization.", "architectureLabel": "Modular architecture", "architecture": "Clear separation between the HTTP API, image processing, storage, and delivery.", "storageLabel": "Storage and delivery", "storage": "Local and S3-compatible storage through OpenDAL, direct HTTP reads, and documentation for self-hosted configuration.", "link": "View repository ↗", "docs": "Read documentation ↗" },
     "pool": { "copy": "An example of asynchronous PostgreSQL connection management with Rust, Tokio, and deadpool-postgres. It explores pooling, transactions, configuration, and error handling.", "link": "View repository ↗" },
     "cookies": { "copy": "A Rust HTTP server example exploring JWT authentication and CSRF protection through a two-cookie approach with Axum and Tokio.", "link": "View repository ↗" },
     "academic": { "copy": "A tool to track academic progress, explore prerequisite relationships, and organize subjects in a curriculum.", "education": "Education", "planning": "Planning", "open": "Open Academic Progress", "create": "Create curriculum" },
@@ -29,9 +44,9 @@
   },
   "about": {
     "title": "About and contact",
-    "first": "I'm <span class=\"about-highlight\">Agustin Argüello</span>, a software developer particularly interested in backend systems, application architecture, and infrastructure.",
-    "second": "I primarily work with Rust, developing services, APIs, and practical software tools. I also build web and desktop applications, business software, and integrations across different technologies.",
-    "third": "I'm interested in designing maintainable systems, working with relational databases, and building complete solutions from business logic to deployment."
+    "first": "I'm <span class=\"about-highlight\">Agustin Argüello</span>, a software developer focused on backend systems, application architecture, and infrastructure.",
+    "second": "I primarily work with Rust, building APIs, services, and software tools. I also develop web and desktop applications, integrate different technologies, and work with relational databases.",
+    "third": "I've built business software end-to-end, from architecture and business logic to frontend development, infrastructure, and production deployment. I focus on creating maintainable software that solves practical problems and evolves with its users."
   },
   "contact": { "emailLabel": "Email", "copy": "Copy", "copied": "Copied" },
   "backToTop": "Back to top",
