@@ -26,20 +26,35 @@
     "webDesktop": "Web y escritorio",
     "infrastructure": "Infraestructura y herramientas"
   },
+  "professional": {
+    "title": "Trabajo profesional",
+    "sysman": {
+      "eyebrow": "Software profesional · desde 2024", "status": "En uso real", "subtitle": "ERP cloud y aplicación de escritorio",
+      "description": "Sistema de gestión empresarial desarrollado de extremo a extremo para EOSTECH, orientado a ventas, inventario, clientes, presupuestos, caja, operaciones multimoneda y múltiples sucursales.",
+      "developmentLabel": "Desarrollo", "development": "Frontend, backend y desktop", "dataLabel": "Datos", "infrastructureLabel": "Infraestructura", "infrastructure": "Cloud y Linux", "sourceLabel": "Código fuente", "source": "Privado · producto comercial", "role": "Mi responsabilidad: arquitectura, frontend, backend, base de datos, integraciones y despliegue.",
+      "link": "Conocer el producto en EOSTECH ↗", "diagramAlt": "Diagrama conceptual de SYSMAN: las aplicaciones usan la API empresarial para los datos y obtienen imágenes directamente desde Image Service.",
+      "architecture": "Las aplicaciones consultan la API principal para las operaciones empresariales; las imágenes de productos se recuperan directamente desde Image Service mediante HTTP GET, manteniendo el procesamiento y almacenamiento en un servicio independiente."
+    },
+    "eostech": {
+      "eyebrow": "Sitio corporativo", "subtitle": "Sitio web corporativo multilingüe",
+      "description": "Sitio web responsive para presentar los productos, servicios y soluciones tecnológicas de EOSTECH, con navegación y localización en seis idiomas.",
+      "localization": "Traducciones asistidas por IA con implementación e integración técnica de la experiencia multilingüe.", "link": "Visitar sitio web ↗"
+    }
+  },
   "projects": {
-    "title": "Proyectos Destacados",
+    "title": "Open source y otros proyectos",
     "softwareTitle": "Proyectos de software",
     "academicTitle": "Proyectos académicos y experimentales",
     "image": {
       "eyebrow": "Proyecto open source destacado",
-      "copy": "Servicio open source de procesamiento y almacenamiento de imágenes desarrollado en Rust y Axum. Incluye validación de archivos, optimización WebP, almacenamiento local o compatible con S3 y una API HTTP para integrarse con otras aplicaciones.",
+      "copy": "Servicio open source de procesamiento, optimización y almacenamiento de imágenes desarrollado con Rust y Axum. Valida y convierte imágenes a WebP, las almacena localmente o en servicios compatibles con S3, y las entrega directamente a las aplicaciones cliente mediante HTTP GET.",
       "opensource": "Código abierto",
       "uploadLabel": "Procesamiento y validación",
       "upload": "Validación de archivos, límites de decodificación, control de concurrencia y optimización WebP.",
       "architectureLabel": "Arquitectura modular",
-      "architecture": "Separación de responsabilidades entre API HTTP, procesamiento y almacenamiento.",
-      "storageLabel": "Almacenamiento y despliegue",
-      "storage": "Soporte local y compatible con S3 mediante OpenDAL, con despliegue mediante Docker.",
+      "architecture": "Separación entre API HTTP, procesamiento, almacenamiento y entrega de imágenes.",
+      "storageLabel": "Almacenamiento y entrega",
+      "storage": "Almacenamiento local o compatible con S3 mediante OpenDAL, lectura HTTP directa y documentación para configuración autoalojada.",
       "link": "Ver repositorio ↗",
       "docs": "Leer documentación ↗"
     },
@@ -57,9 +72,9 @@
   },
   "about": {
     "title": "Sobre mí y contacto",
-    "first": "Soy <span class=\"about-highlight\">Agustin Argüello</span>, desarrollador de software con especial interés en sistemas backend, arquitectura de aplicaciones e infraestructura.",
-    "second": "Trabajo principalmente con Rust, desarrollando servicios, APIs y herramientas orientadas a resolver problemas reales. También construyo aplicaciones web y de escritorio, software empresarial e integraciones entre diferentes tecnologías.",
-    "third": "Me interesa diseñar sistemas mantenibles, trabajar con bases de datos relacionales y desarrollar soluciones completas, desde la lógica de negocio hasta su despliegue."
+    "first": "Soy <span class=\"about-highlight\">Agustin Argüello</span>, desarrollador de software enfocado en sistemas backend, arquitectura de aplicaciones e infraestructura.",
+    "second": "Trabajo principalmente con Rust, desarrollando APIs, servicios y herramientas de software. También construyo aplicaciones web y de escritorio, integro diferentes tecnologías y trabajo con bases de datos relacionales.",
+    "third": "He desarrollado productos empresariales de extremo a extremo, desde su arquitectura y lógica de negocio hasta el frontend, la infraestructura y su puesta en producción. Me interesa crear software mantenible que resuelva problemas reales y pueda evolucionar con sus usuarios."
   },
   "contact": { "emailLabel": "Correo electrónico", "copy": "Copiar", "copied": "Copiado" },
   "backToTop": "Volver al inicio",
