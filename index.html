@@ -26,6 +26,13 @@
             scroll-behavior: smooth;
         }
 
+        section { scroll-margin-top: 70px; }
+
+        :focus-visible {
+            outline: 2px solid #a8c9f7;
+            outline-offset: 3px;
+        }
+
         body {
             display: flex;
             flex-direction: column;
@@ -791,6 +798,11 @@
                 height: 38px;
             }
         }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
+        }
     </style>
 </head>
 <body>
@@ -827,7 +839,7 @@
             </div>
         </div>
 
-        <button class="mobile-toggle" id="btn-menu" aria-label="Abrir menú" data-i18n-aria-label="menu.open">
+        <button class="mobile-toggle" id="btn-menu" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-links" data-i18n-aria-label="menu.open">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="4" y1="12" x2="20" y2="12"></line>
                 <line x1="4" y1="6" x2="20" y2="6"></line>
@@ -1063,6 +1075,7 @@
     const languageSwitcher = document.getElementById('languageSwitcher');
     const languageButton = document.getElementById('languageButton');
     const languageCode = document.getElementById('languageCode');
+    const copyEmailButton = document.getElementById('copyEmail');
     const localeCodes = { es: 'ES', en: 'EN', pt: 'PT', 'zh-Hant': '繁中', ru: 'RU', de: 'DE' };
     const documentLocales = { es: 'es', en: 'en', pt: 'pt-BR', 'zh-Hant': 'zh-Hant', ru: 'ru', de: 'de' };
 
@@ -1071,6 +1084,7 @@
     }
 
     function applyTranslations(messages, locale) {
+        window.currentMessages = messages;
         document.querySelectorAll('[data-i18n]').forEach(element => {
             const value = readTranslation(messages, element.dataset.i18n);
             if (typeof value === 'string') element.textContent = value;
@@ -1095,13 +1109,13 @@
         });
     }
 
-    async function setLanguage(locale) {
+    async function setLanguage(locale, { persist = true } = {}) {
         try {
-            const response = await fetch(`./locales/${locale}.json`);
+            const response = await fetch(`./locales/${locale}.json?rev=4`);
             if (!response.ok) throw new Error(`Could not load locale: ${locale}`);
             const messages = await response.json();
             applyTranslations(messages, locale);
-            localStorage.setItem('portfolio-locale', locale);
+            if (persist) localStorage.setItem('portfolio-locale', locale);
         } catch (error) {
             console.error('Language selection failed.', error);
         }
@@ -1113,12 +1127,14 @@
     }
 
     btnMenu.addEventListener('click', () => {
-        menuLinks.classList.toggle('active');
+        const isOpen = menuLinks.classList.toggle('active');
+        btnMenu.setAttribute('aria-expanded', String(isOpen));
     });
 
     document.querySelectorAll('.nav-links a').forEach(link => {
         link.addEventListener('click', () => {
             menuLinks.classList.remove('active');
+            btnMenu.setAttribute('aria-expanded', 'false');
         });
     });
 
@@ -1139,10 +1155,37 @@
     });
 
     document.addEventListener('keydown', event => {
-        if (event.key === 'Escape') closeLanguageMenu();
+        if (event.key === 'Escape') {
+            closeLanguageMenu();
+            menuLinks.classList.remove('active');
+            btnMenu.setAttribute('aria-expanded', 'false');
+        }
     });
 
-    setLanguage(localStorage.getItem('portfolio-locale') || 'es');
+    copyEmailButton.addEventListener('click', async () => {
+        try {
+            await navigator.clipboard.writeText('agusquartz@gmail.com');
+            copyEmailButton.textContent = readTranslation(window.currentMessages || {}, 'contact.copied') || 'Copied';
+        } catch (error) {
+            window.location.href = 'mailto:agusquartz@gmail.com';
+        }
+    });
+
+    function getInitialLocale() {
+        const saved = localStorage.getItem('portfolio-locale');
+        if (saved && localeCodes[saved]) return { locale: saved, persist: false };
+        const preferred = navigator.languages || [navigator.language];
+        for (const language of preferred) {
+            const normalized = String(language || '').toLowerCase();
+            if (normalized.startsWith('zh')) return { locale: 'zh-Hant', persist: false };
+            const locale = normalized.split('-')[0];
+            if (localeCodes[locale]) return { locale, persist: false };
+        }
+        return { locale: 'en', persist: false };
+    }
+
+    const initialLocale = getInitialLocale();
+    setLanguage(initialLocale.locale, initialLocale);
 </script>
 
 </body>
