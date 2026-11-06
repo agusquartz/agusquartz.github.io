@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agustin Argüello | Software Developer</title>
-    <meta name="description" content="Portfolio of Agustin Argüello, software developer focused on backend systems, Rust, APIs, databases, and cloud infrastructure.">
+    <meta name="description" content="Portfolio of Agustin Argüello, software developer focused on backend systems with Rust, Java, Spring Boot, APIs, databases, and cloud infrastructure.">
     <meta name="author" content="Agustin Argüello">
     <link rel="canonical" href="https://agusquartz.github.io/">
     <meta property="og:title" content="Agustin Argüello | Software Developer">
-    <meta property="og:description" content="Backend systems, Rust, APIs, databases, and cloud infrastructure.">
+    <meta property="og:description" content="Backend systems with Rust, Java, Spring Boot, APIs, databases, and cloud infrastructure.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://agusquartz.github.io/">
 
@@ -571,6 +571,8 @@
         }
         #professional-work .professional-card .featured-project-main { gap: 12px; }
         #professional-work .eostech-card { grid-column: auto; }
+        #professional-work .java-erp-card { margin: 0; }
+        .project-period { color: #b9cae0; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.04em; }
         .project-role {
             border-top: 1px solid rgba(170, 190, 218, 0.14);
             padding-top: 12px;
@@ -901,7 +903,7 @@
         <div class="eyebrow" data-i18n="hero.eyebrow">Software Developer · Backend &amp; Systems</div>
         <h1 id="hero-title"><span class="gradient-text">Agustin Argüello</span></h1>
         <p class="hero-text">
-            <span data-i18n="hero.copy">Desarrollador de software enfocado en sistemas backend, APIs, infraestructura y aplicaciones prácticas. Trabajo principalmente con Rust, desarrollando servicios, herramientas autoalojadas y software empresarial, con especial atención a la arquitectura, las integraciones seguras y el despliegue de aplicaciones.</span>
+            <span data-i18n="hero.copy">Desarrollador de software enfocado en sistemas backend, APIs, infraestructura y aplicaciones prácticas. Trabajo principalmente con Rust y también desarrollo backend empresarial con Java y Spring Boot, con especial atención a la arquitectura, las integraciones seguras y el despliegue de aplicaciones.</span>
         </p>
 
         <div class="hero-actions">
@@ -957,6 +959,26 @@
             <div class="project-actions"><a class="project-link" href="https://eostech.dev/" target="_blank" rel="noopener" data-i18n="professional.eostech.link">Visitar sitio web ↗</a></div>
         </article>
     </div>
+
+    <article class="project-card featured-project java-erp-card">
+        <div class="featured-project-main">
+            <div class="featured-project-kicker" data-i18n="professional.printing.eyebrow">Proyecto de software independiente</div>
+            <span class="professional-status" data-i18n="professional.printing.status">Pruebas y refinamiento</span>
+            <h3 data-i18n="professional.printing.title">3D Printing ERP</h3>
+            <p class="project-subtitle" data-i18n="professional.printing.subtitle">ERP multitenant para empresas de impresión 3D</p>
+            <p data-i18n="professional.printing.description">ERP multitenant desarrollado con Java y Spring Boot para empresas de impresión 3D. Gestiona inventario, compras, ventas, usuarios y operaciones comerciales, con flujos transaccionales, controles de seguridad y operación aislada por tenant.</p>
+            <div class="project-tags"><span>Java 21</span><span>Spring Boot</span><span>PostgreSQL</span><span>Hibernate</span><span>Liquibase</span><span>Redis</span></div>
+            <div class="project-actions">
+                <span class="project-period" data-i18n="professional.printing.period">2026 – Presente</span>
+                <span class="project-source" data-i18n="professional.printing.source">Código privado</span>
+            </div>
+        </div>
+        <div class="featured-project-facts" aria-label="3D Printing ERP highlights">
+            <div class="featured-project-fact"><strong data-i18n="professional.printing.architectureLabel">Arquitectura multitenant</strong><span data-i18n="professional.printing.architecture">Servicios Spring Boot, API Gateway, Eureka y un módulo compartido.</span></div>
+            <div class="featured-project-fact"><strong data-i18n="professional.printing.securityLabel">Seguridad por tenant</strong><span data-i18n="professional.printing.security">JWT, RBAC y aislamiento por tenant.</span></div>
+            <div class="featured-project-fact"><strong data-i18n="professional.printing.persistenceLabel">Persistencia transaccional</strong><span data-i18n="professional.printing.persistence">Compras, ventas, movimientos de inventario y migraciones de base de datos.</span></div>
+        </div>
+    </article>
 </section>
 
 <section class="projects-section" id="projects">
@@ -1079,6 +1101,7 @@
             <div class="skills-grid">
                 <div class="skill-item"><i class="devicon-postgresql-plain"></i><span>PostgreSQL</span></div>
                 <div class="skill-item"><i class="devicon-microsoftsqlserver-plain"></i><span>SQL Server</span></div>
+                <div class="skill-item"><i class="devicon-redis-plain"></i><span>Redis</span></div>
                 <div class="skill-item"><span class="skill-mark">OD</span><span>OpenDAL</span></div>
                 <div class="skill-item"><span class="skill-mark">S3</span><span>S3 storage</span></div>
             </div>
@@ -1188,7 +1211,7 @@
 
     async function setLanguage(locale, { persist = true } = {}) {
         try {
-            const response = await fetch(`./locales/${locale}.json?rev=5`);
+            const response = await fetch(`./locales/${locale}.json?rev=6`);
             if (!response.ok) throw new Error(`Could not load locale: ${locale}`);
             const messages = await response.json();
             applyTranslations(messages, locale);

@@ -5,7 +5,7 @@
   "nav": { "about": "Sobre mí", "projects": "Proyectos", "skills": "Habilidades" },
   "hero": {
     "eyebrow": "Software Developer · Backend & Systems",
-    "copy": "Desarrollador de software enfocado en sistemas backend, APIs, infraestructura y aplicaciones prácticas. Trabajo principalmente con Rust, desarrollando servicios, herramientas autoalojadas y software empresarial, con especial atención a la arquitectura, las integraciones seguras y el despliegue de aplicaciones.",
+    "copy": "Desarrollador de software enfocado en sistemas backend, APIs, infraestructura y aplicaciones prácticas. Trabajo principalmente con Rust y también desarrollo backend empresarial con Java y Spring Boot, con especial atención a la arquitectura, las integraciones seguras y el despliegue de aplicaciones.",
     "projects": "Ver proyectos",
     "card": {
       "aria": "Áreas de desarrollo",
@@ -39,6 +39,12 @@
       "eyebrow": "Sitio corporativo", "subtitle": "Sitio web corporativo multilingüe",
       "description": "Sitio web responsive para presentar los productos, servicios y soluciones tecnológicas de EOSTECH, con navegación y localización en seis idiomas.",
       "localization": "Traducciones asistidas por IA con implementación e integración técnica de la experiencia multilingüe.", "link": "Visitar sitio web ↗"
+    },
+    "printing": {
+      "eyebrow": "Proyecto de software independiente", "status": "Pruebas y refinamiento", "title": "3D Printing ERP", "subtitle": "ERP multitenant para empresas de impresión 3D",
+      "description": "ERP multitenant desarrollado con Java y Spring Boot para empresas de impresión 3D. Gestiona inventario, compras, ventas, usuarios y operaciones comerciales, con flujos transaccionales, controles de seguridad y operación aislada por tenant.",
+      "period": "2026 – Presente", "source": "Código privado", "architectureLabel": "Arquitectura multitenant", "architecture": "Servicios Spring Boot, API Gateway, Eureka y un módulo compartido.",
+      "securityLabel": "Seguridad por tenant", "security": "JWT, RBAC y aislamiento por tenant.", "persistenceLabel": "Persistencia transaccional", "persistence": "Compras, ventas, movimientos de inventario y migraciones de base de datos."
     }
   },
   "projects": {

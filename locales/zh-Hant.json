@@ -5,12 +5,17 @@
   "nav": { "about": "關於我", "projects": "專案", "skills": "技能" },
   "hero": {
     "eyebrow": "Software Developer · Backend & Systems",
-    "copy": "專注於後端系統、API、基礎架構與實用軟體應用的軟體開發者。我主要使用 Rust，開發服務、自架工具與企業軟體，著重於可維護的架構、安全整合與可靠部署。",
+    "copy": "專注於後端系統、API、基礎架構與實用軟體應用的軟體開發者。我主要使用 Rust，也使用 Java 與 Spring Boot 開發企業後端，著重於可維護的架構、安全整合與可靠部署。",
     "projects": "查看專案",
     "card": { "aria": "開發領域", "eyebrow": "開發領域", "title": "後端、應用程式與基礎架構。", "copy": "我開發服務、API 與應用程式，涵蓋商業邏輯、資料庫、整合與部署。", "tagsAria": "領域", "backend": "後端與 API", "webDesktop": "網頁與桌面", "databases": "資料庫", "infrastructure": "基礎架構" }
   },
   "skills": { "title": "技術技能", "backend": "後端", "storage": "資料庫與儲存", "webDesktop": "網頁與桌面", "infrastructure": "基礎架構與工具" },
-  "professional": { "title": "專業工作", "sysman": { "eyebrow": "專業軟體 · 自 2024 年起", "status": "實際使用中", "subtitle": "雲端 ERP 與桌面應用程式", "description": "為 EOSTECH 從零到一開發的企業管理系統，涵蓋銷售、庫存、客戶、報價、收銀、多幣別作業與多個分支機構。", "developmentLabel": "開發", "development": "前端、後端與桌面程式", "dataLabel": "資料", "infrastructureLabel": "基礎架構", "infrastructure": "雲端與 Linux", "sourceLabel": "原始碼", "source": "私人 · 商業軟體", "role": "我的職責：架構、前端、後端、資料庫、整合與部署。", "link": "在 EOSTECH 了解產品 ↗", "diagramAlt": "SYSMAN 概念圖：應用程式透過企業 API 處理資料，並直接從 Image Service 取得圖片。", "architecture": "應用程式透過主要 API 執行企業作業；產品圖片則以 HTTP GET 直接從 Image Service 取得，將處理與儲存保留在獨立服務中。" }, "eostech": { "eyebrow": "企業網站", "subtitle": "多語言企業網站", "description": "用於介紹 EOSTECH 產品、服務與技術解決方案的響應式網站，提供六種語言的導覽與本地化。", "localization": "由 AI 輔助翻譯，並完成多語言體驗的技術實作與整合。", "link": "造訪網站 ↗" } },
+  "professional": {
+    "title": "專業工作",
+    "sysman": { "eyebrow": "專業軟體 · 自 2024 年起", "status": "實際使用中", "subtitle": "雲端 ERP 與桌面應用程式", "description": "為 EOSTECH 從零到一開發的企業管理系統，涵蓋銷售、庫存、客戶、報價、收銀、多幣別作業與多個分支機構。", "developmentLabel": "開發", "development": "前端、後端與桌面程式", "dataLabel": "資料", "infrastructureLabel": "基礎架構", "infrastructure": "雲端與 Linux", "sourceLabel": "原始碼", "source": "私人 · 商業軟體", "role": "我的職責：架構、前端、後端、資料庫、整合與部署。", "link": "在 EOSTECH 了解產品 ↗", "diagramAlt": "SYSMAN 概念圖：應用程式透過企業 API 處理資料，並直接從 Image Service 取得圖片。", "architecture": "應用程式透過主要 API 執行企業作業；產品圖片則以 HTTP GET 直接從 Image Service 取得，將處理與儲存保留在獨立服務中。" },
+    "eostech": { "eyebrow": "企業網站", "subtitle": "多語言企業網站", "description": "用於介紹 EOSTECH 產品、服務與技術解決方案的響應式網站，提供六種語言的導覽與本地化。", "localization": "由 AI 輔助翻譯，並完成多語言體驗的技術實作與整合。", "link": "造訪網站 ↗" },
+    "printing": { "eyebrow": "獨立軟體專案", "status": "測試與優化", "title": "3D Printing ERP", "subtitle": "面向 3D 列印企業的多租戶 ERP", "description": "使用 Java 與 Spring Boot 為 3D 列印企業開發的多租戶 ERP。它管理庫存、採購、銷售、使用者與商業作業，具備交易流程、安全控制與租戶隔離運作。", "period": "2026 – 至今", "source": "私人原始碼", "architectureLabel": "多租戶架構", "architecture": "Spring Boot 服務、API Gateway、Eureka 與共用模組。", "securityLabel": "租戶安全", "security": "JWT、RBAC 與租戶隔離。", "persistenceLabel": "交易持久化", "persistence": "採購、銷售、庫存異動與資料庫遷移。" }
+  },
   "projects": {
     "title": "開源與其他專案", "softwareTitle": "軟體專案", "academicTitle": "學術與實驗性專案",
     "image": { "eyebrow": "精選開源專案", "copy": "以 Rust 與 Axum 開發的開源圖片處理、最佳化與儲存服務。它會驗證並轉換圖片為 WebP，儲存在本機或相容 S3 的服務中，並透過 HTTP GET 直接提供給用戶端應用程式。", "opensource": "開源", "uploadLabel": "處理與驗證", "upload": "檔案驗證、解碼器限制、受控並行處理與 WebP 最佳化。", "architectureLabel": "模組化架構", "architecture": "清楚分離 HTTP API、圖片處理、儲存與傳遞。", "storageLabel": "儲存與傳遞", "storage": "透過 OpenDAL 支援本機與相容 S3 的儲存、直接 HTTP 讀取，以及自架設定文件。", "link": "查看儲存庫 ↗", "docs": "閱讀文件 ↗" },
