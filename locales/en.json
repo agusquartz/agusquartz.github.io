@@ -21,19 +21,19 @@
     "title": "Professional Work",
     "sysman": {
       "eyebrow": "Professional software · since 2024", "status": "In production use", "subtitle": "Cloud ERP & Desktop Application",
-      "description": "A business management system developed end-to-end for EOSTECH, covering sales, inventory, customers, quotations, cash management, multi-currency operations, and multiple branches.",
+      "description": "A business management system covering sales, inventory, customers, quotations, cash management, multi-currency operations, and multiple branches. Developed end-to-end for EOSTECH.",
       "developmentLabel": "Development", "development": "Frontend, backend, and desktop", "dataLabel": "Data", "infrastructureLabel": "Infrastructure", "infrastructure": "Cloud and Linux", "sourceLabel": "Source", "source": "Private · commercial software", "role": "My role: architecture, frontend, backend, database, integrations, and deployment.",
       "link": "Explore the product at EOSTECH ↗", "diagramAlt": "SYSMAN conceptual diagram: applications use the business API for data and retrieve images directly from Image Service.",
       "architecture": "Applications use the main API for business operations, while product images are retrieved directly from Image Service through HTTP GET, keeping processing and storage in a separate service."
     },
     "eostech": {
       "eyebrow": "Corporate website", "subtitle": "Multilingual Corporate Website",
-      "description": "A responsive website presenting EOSTECH's products, services, and technology solutions, with navigation and localization in six languages.",
-      "localization": "AI-assisted translations with technical implementation and integration of the multilingual experience.", "link": "Visit website ↗"
+      "description": "A corporate website presenting EOSTECH's products, services, and technology solutions, with clear navigation and content available in six languages.",
+      "localization": "AI-assisted translations with technical implementation and integration of the multilingual experience.", "frontend": "Frontend", "web": "Web development", "multilingual": "Multilingual", "link": "Visit website ↗"
     },
     "printing": {
       "eyebrow": "Independent software project", "status": "Testing & refinement", "title": "3D Printing ERP", "subtitle": "Multitenant ERP for 3D printing businesses",
-      "description": "A multitenant ERP built with Java and Spring Boot for 3D printing businesses. It manages inventory, purchasing, sales, users, and business operations with transactional flows, security controls, and tenant-isolated operation.",
+      "description": "A multitenant ERP for 3D printing businesses. It manages inventory, purchasing, sales, users, and business operations with transactional flows, security controls, and tenant-isolated operation.",
       "period": "2026 – Present", "source": "Private source code", "architectureLabel": "Multitenant architecture", "architecture": "Spring Boot services, API Gateway, Eureka, and a shared module.",
       "securityLabel": "Tenant security", "security": "JWT, RBAC, and tenant isolation.", "persistenceLabel": "Transactional persistence", "persistence": "Purchases, sales, inventory movements, and database migrations."
     }
@@ -52,9 +52,9 @@
     "title": "About and contact",
     "first": "I'm <span class=\"about-highlight\">Agustin Argüello</span>, a software developer focused on backend systems, application architecture, and infrastructure.",
     "second": "I primarily work with Rust, building APIs, services, and software tools. I also develop web and desktop applications, integrate different technologies, and work with relational databases.",
-    "third": "I've built business software end-to-end, from architecture and business logic to frontend development, infrastructure, and production deployment. I focus on creating maintainable software that solves practical problems and evolves with its users."
+    "third": "I've built business software end-to-end, from architecture and business logic to frontend development, infrastructure, and production deployment. I build maintainable software that solves practical problems and evolves with its users."
   },
-  "contact": { "emailLabel": "Email", "copy": "Copy", "copied": "Copied" },
+  "contact": { "emailLabel": "Email", "phoneLabel": "Phone", "copy": "Copy", "copied": "Copied" },
   "backToTop": "Back to top",
   "simon": {
     "title": "Simon Says ASM 8086 · AgusQuartz", "back": "Back",
