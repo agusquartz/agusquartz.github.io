@@ -30,19 +30,19 @@
     "title": "Trabajo profesional",
     "sysman": {
       "eyebrow": "Software profesional · desde 2024", "status": "En uso real", "subtitle": "ERP cloud y aplicación de escritorio",
-      "description": "Sistema de gestión empresarial desarrollado de extremo a extremo para EOSTECH, orientado a ventas, inventario, clientes, presupuestos, caja, operaciones multimoneda y múltiples sucursales.",
+      "description": "Sistema de gestión empresarial orientado a ventas, inventario, clientes, presupuestos, caja, operaciones multimoneda y múltiples sucursales. Desarrollado de extremo a extremo para EOSTECH.",
       "developmentLabel": "Desarrollo", "development": "Frontend, backend y desktop", "dataLabel": "Datos", "infrastructureLabel": "Infraestructura", "infrastructure": "Cloud y Linux", "sourceLabel": "Código fuente", "source": "Privado · producto comercial", "role": "Mi responsabilidad: arquitectura, frontend, backend, base de datos, integraciones y despliegue.",
       "link": "Conocer el producto en EOSTECH ↗", "diagramAlt": "Diagrama conceptual de SYSMAN: las aplicaciones usan la API empresarial para los datos y obtienen imágenes directamente desde Image Service.",
       "architecture": "Las aplicaciones consultan la API principal para las operaciones empresariales; las imágenes de productos se recuperan directamente desde Image Service mediante HTTP GET, manteniendo el procesamiento y almacenamiento en un servicio independiente."
     },
     "eostech": {
-      "eyebrow": "Sitio corporativo", "subtitle": "Sitio web corporativo multilingüe",
-      "description": "Sitio web responsive para presentar los productos, servicios y soluciones tecnológicas de EOSTECH, con navegación y localización en seis idiomas.",
-      "localization": "Traducciones asistidas por IA con implementación e integración técnica de la experiencia multilingüe.", "link": "Visitar sitio web ↗"
+      "eyebrow": "Sitio web corporativo", "subtitle": "Sitio web corporativo multilingüe",
+      "description": "Sitio web corporativo para presentar los productos, servicios y soluciones tecnológicas de EOSTECH, con navegación clara y contenido disponible en seis idiomas.",
+      "localization": "Traducciones asistidas por IA con implementación e integración técnica de la experiencia multilingüe.", "frontend": "Frontend", "web": "Desarrollo web", "multilingual": "Multilenguaje", "link": "Visitar sitio web ↗"
     },
     "printing": {
       "eyebrow": "Proyecto de software independiente", "status": "Pruebas y refinamiento", "title": "3D Printing ERP", "subtitle": "ERP multitenant para empresas de impresión 3D",
-      "description": "ERP multitenant desarrollado con Java y Spring Boot para empresas de impresión 3D. Gestiona inventario, compras, ventas, usuarios y operaciones comerciales, con flujos transaccionales, controles de seguridad y operación aislada por tenant.",
+      "description": "ERP multitenant para empresas de impresión 3D. Gestiona inventario, compras, ventas, usuarios y operaciones comerciales, con flujos transaccionales, controles de seguridad y operación aislada por tenant.",
       "period": "2026 – Presente", "source": "Código privado", "architectureLabel": "Arquitectura multitenant", "architecture": "Servicios Spring Boot, API Gateway, Eureka y un módulo compartido.",
       "securityLabel": "Seguridad por tenant", "security": "JWT, RBAC y aislamiento por tenant.", "persistenceLabel": "Persistencia transaccional", "persistence": "Compras, ventas, movimientos de inventario y migraciones de base de datos."
     }
@@ -80,9 +80,9 @@
     "title": "Sobre mí y contacto",
     "first": "Soy <span class=\"about-highlight\">Agustin Argüello</span>, desarrollador de software enfocado en sistemas backend, arquitectura de aplicaciones e infraestructura.",
     "second": "Trabajo principalmente con Rust, desarrollando APIs, servicios y herramientas de software. También construyo aplicaciones web y de escritorio, integro diferentes tecnologías y trabajo con bases de datos relacionales.",
-    "third": "He desarrollado productos empresariales de extremo a extremo, desde su arquitectura y lógica de negocio hasta el frontend, la infraestructura y su puesta en producción. Me interesa crear software mantenible que resuelva problemas reales y pueda evolucionar con sus usuarios."
+    "third": "He desarrollado productos empresariales de extremo a extremo, desde su arquitectura y lógica de negocio hasta el frontend, la infraestructura y su puesta en producción. Creo software mantenible que resuelve problemas reales y puede evolucionar con sus usuarios."
   },
-  "contact": { "emailLabel": "Correo electrónico", "copy": "Copiar", "copied": "Copiado" },
+  "contact": { "emailLabel": "Correo electrónico", "phoneLabel": "Teléfono", "copy": "Copiar", "copied": "Copiado" },
   "backToTop": "Volver al inicio",
   "simon": {
     "title": "Simon Says ASM 8086 · AgusQuartz", "back": "Atrás",
