@@ -1,37 +1,23 @@
-# HW06 Git Github NodeJS Deploy in Github Pages
+# AgusQuartz portfolio
 
-- Small frontend to authenticate to mini-erp and retrieve some products
-- I didn't use Github Actions to deploy because Github pages deploy static sites by itself with each push
+Static portfolio published with GitHub Pages from the repository root. `index.html` is and will remain the main Spanish page.
 
-## LIVE DEMO
-**Github Pages**: https://agusquartz.github.io/
+## Languages
 
-It may not work because github pages is https and the api is http, so just consider that...
-To fix it, download the site and run it locally
+The language selector links to separate HTML documents: `/` (Spanish), `/en/`, `/pt/`, `/zh-hant/`, `/ru/`, and `/de/`. Language pages are generated in their respective folders (`en/index.html`, `pt/index.html`, and so on). They do not require Cloudflare, server functions, or redirects.
 
-## Technologies
-- HTML + CSS + JAVASCRIPT: No Frameworks used
+After editing `src/portfolio.template.html` or the text in `locales/`, regenerate the pages with:
 
-## Functionalities
-- **Login**: (email + password)
-- **Profile**: session validation
-- **Products**: GET /api/inventory/products/ -> Then show them in the table
-- **Logout**: Cleans the session
+```sh
+node scripts/build-portfolio.mjs
+```
 
-## Used ENDPOINTS
-- POST /api/users/users/login/
-- GET /api/users/users/profile/
-- GET /api/inventory/products/
+The script writes the Spanish homepage to `index.html` and the other language versions to their folders. Generated HTML files are included in the repository, so GitHub Pages serves them after a push without running the generator in production. For local development, run `python3 -m http.server 8000` and open `http://localhost:8000/`.
 
-## Test Credentials
-- admin@minierp.com / test123456
+Project links use paths from the domain root, such as `/academic-progress/`, so they work from both `/` and `/en/`.
 
-## Functionality proof
-![alt text](image.png)
+## SYSMAN and Image Service
 
-## Mini-ERP Credits
-https://github.com/Piuliss/mini-erp
+The portfolio presents SYSMAN as a product in real-world use since 2024, built and evolved alongside merchants. The team observes how merchants use each version and considers their feedback when deciding which improvements to make. The portfolio describes its single-tenant architecture without exposing product screens or workflows; interested companies are invited to discuss their needs.
 
-
-## OTHERS (huffman doc)
-- **Github Pages**: https://agusquartz.github.io/HUFFMAN
+Image Service is presented as an open-source Rust service used in production by SYSMAN, with a link to [its repository](https://github.com/agusquartz/image_service).
