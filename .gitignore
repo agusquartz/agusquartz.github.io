@@ -1,0 +1,6 @@
+# The business site draft uses local SYSMAN reference screenshots; keep them out of GitHub Pages.
+/lang-idea/src/assets/sysman/*.webp
+/lang-idea/dist/
+/.playwright-mcp/
+/AGUS-IDEA-OF-MY-OWN-SITE.html
+/AGUS-IDEA-OF-MY-OWN-SITE_ORIGINAL-DO_NOT_EDIT.html

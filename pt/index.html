@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agustin Argüello | Desenvolvedor de software</title>
+    <link rel="icon" href="https://avatars.githubusercontent.com/u/98700005?s=64" type="image/png">
+    <meta name="description" content="Desenvolvo software para ajudar comércios e empresas a organizar suas operações e resolver necessidades concretas.">
+    <meta name="author" content="Agustin Argüello">
+    <link rel="canonical" href="https://agusquartz.github.io/pt/">
+    <meta property="og:title" content="Agustin Argüello | Desenvolvedor de software">
+    <meta property="og:description" content="Desenvolvo software para ajudar comércios e empresas a organizar suas operações e resolver necessidades concretas.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://agusquartz.github.io/pt/">
+    <meta property="og:image" content="https://agusquartz.github.io/assets/social-preview.png?v=20261118">
+    <meta property="og:image:width" content="1920">
+    <meta property="og:image:height" content="1080">
+    <meta property="og:image:alt" content="Agustin Argüello — Desenvolvedor de software">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Agustin Argüello | Desenvolvedor de software">
+    <meta name="twitter:description" content="Desenvolvo software para ajudar comércios e empresas a organizar suas operações e resolver necessidades concretas.">
+    <meta name="twitter:image" content="https://agusquartz.github.io/assets/social-preview.png?v=20261118">
+    <link rel="alternate" hreflang="es" href="https://agusquartz.github.io/">
+    <link rel="alternate" hreflang="en" href="https://agusquartz.github.io/en/">
+    <link rel="alternate" hreflang="pt-BR" href="https://agusquartz.github.io/pt/">
+    <link rel="alternate" hreflang="zh-Hant" href="https://agusquartz.github.io/zh-hant/">
+    <link rel="alternate" hreflang="ru" href="https://agusquartz.github.io/ru/">
+    <link rel="alternate" hreflang="de" href="https://agusquartz.github.io/de/">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "ProfilePage",
+          "@id": "https://agusquartz.github.io/#profile",
+          "url": "https://agusquartz.github.io/",
+          "name": "Agustin Argüello | Desenvolvedor de software",
+          "dateModified": "2026-11-18",
+          "mainEntity": { "@id": "https://agusquartz.github.io/#person" },
+          "mentions": [
+            {
+              "@type": "Organization",
+              "name": "EOSTECH",
+              "url": "https://eostech.dev/"
+            }
+          ]
+        },
+        {
+          "@type": "Person",
+          "@id": "https://agusquartz.github.io/#person",
+          "name": "Agustin Argüello",
+          "alternateName": "agusquartz",
+          "url": "https://agusquartz.github.io/",
+          "jobTitle": "Desenvolvedor de software",
+          "image": "https://avatars.githubusercontent.com/u/98700005",
+          "sameAs": ["https://github.com/agusquartz"]
+        },
+        {
+          "@type": "SoftwareSourceCode",
+          "@id": "https://github.com/agusquartz/image_service#software",
+          "name": "Image Service",
+          "url": "https://github.com/agusquartz/image_service",
+          "codeRepository": "https://github.com/agusquartz/image_service",
+          "programmingLanguage": "Rust",
+          "license": "https://www.apache.org/licenses/LICENSE-2.0",
+          "author": { "@id": "https://agusquartz.github.io/#person" },
+          "isPartOf": { "@id": "https://agusquartz.github.io/#profile" }
+        },
+        {
+          "@type": "SoftwareSourceCode",
+          "@id": "https://github.com/agusquartz/rust-postgres-pool#software",
+          "name": "rust-postgres-pool",
+          "url": "https://github.com/agusquartz/rust-postgres-pool",
+          "codeRepository": "https://github.com/agusquartz/rust-postgres-pool",
+          "programmingLanguage": "Rust",
+          "author": { "@id": "https://agusquartz.github.io/#person" },
+          "isPartOf": { "@id": "https://agusquartz.github.io/#profile" }
+        },
+        {
+          "@type": "SoftwareSourceCode",
+          "@id": "https://github.com/agusquartz/http-two-cookies#software",
+          "name": "http-two-cookies",
+          "url": "https://github.com/agusquartz/http-two-cookies",
+          "codeRepository": "https://github.com/agusquartz/http-two-cookies",
+          "programmingLanguage": "Rust",
+          "author": { "@id": "https://agusquartz.github.io/#person" },
+          "isPartOf": { "@id": "https://agusquartz.github.io/#profile" }
+        }
+      ]
+    }
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+
+    <style>
+        :root {
+            --nav-bg: #252d39;
+            --nav-glow: rgba(143, 183, 237, 0.16);
+            --text-glow: rgba(143, 183, 237, 0.24);
+            --nav-border: rgba(143, 183, 237, 0.34);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        section { scroll-margin-top: 70px; }
+
+        :focus-visible {
+            outline: 2px solid #a8c9f7;
+            outline-offset: 3px;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            margin: 0;
+            padding-bottom: 80px;
+            background: radial-gradient(circle at 50% -20%, #20252d 0%, #171b21 60%, #1b2028 100%);
+            font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* --- NAVBAR --- */
+        .contenedor-principal {
+            display: flex;
+            width: 80vw;
+            align-items: flex-start;
+            margin-top: 0;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5));
+            transition: width 0.3s ease;
+            z-index: 100;
+            /* Sticky pegado al borde superior */
+            position: sticky;
+            top: 0;
+        }
+
+        .svg-izq path, .svg-der path { fill: var(--nav-bg); }
+
+        .svg-izq, .svg-der {
+            flex-shrink: 0;
+            width: 20px;
+            height: 20px;
+            max-width: none;
+            aspect-ratio: 1 / 1;
+            filter: drop-shadow(0px 1px 0px var(--nav-border));
+        }
+
+        .svg-der { transform: scaleX(-1); }
+
+        .centro-bloque {
+            flex-grow: 1;
+            background: var(--nav-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            height: 40px;
+            border-radius: 0px 0px 20px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 25px;
+            box-sizing: border-box;
+            border-bottom: 1px solid var(--nav-border);
+            position: relative;
+        }
+
+        .nav-logo {
+            font-weight: 800;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .profile-pic {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(143, 183, 237, 0.42);
+            box-shadow: 0 0 8px rgba(83, 125, 184, 0.28);
+            transition: all 0.3s ease;
+        }
+
+        .nav-logo:hover .profile-pic {
+            border-color: rgba(143, 183, 237, 0.78);
+            box-shadow: 0 0 15px rgba(83, 125, 184, 0.34);
+            transform: scale(1.05);
+        }
+
+        .logo-text {
+            background: linear-gradient(90deg, #ffffff, #8fb7ed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: text-shadow 0.3s ease;
+        }
+
+        .nav-logo:hover .logo-text { text-shadow: 0 0 8px var(--text-glow); }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 5px;
+            z-index: 10;
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-toggle:hover { color: #9bbcf0; }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            margin-left: auto;
+        }
+
+        .nav-links a {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 6px 14px;
+            border-radius: 8px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(255, 255, 255, 0);
+        }
+
+        .nav-links a:hover {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 15px rgba(83, 125, 184, 0.14);
+            text-shadow: 0 0 8px var(--text-glow);
+        }
+
+        .nav-links a.nav-contact {
+            color: #fff;
+            border: 1px solid rgba(143, 183, 237, 0.34);
+            background: rgba(83, 125, 184, 0.16);
+        }
+
+        .nav-links a svg {
+            stroke: currentColor;
+            transition: stroke 0.3s ease;
+        }
+
+        .language-switcher { position: relative; z-index: 20; margin-left: 12px; }
+
+        .language-button {
+            height: 28px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 0 8px;
+            border: 1px solid rgba(170, 190, 218, 0.25);
+            border-radius: 6px;
+            background: #2b3542;
+            color: #dce5f0;
+            font: inherit;
+            font-size: 0.72rem;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .language-button:hover,
+        .language-switcher.open .language-button {
+            border-color: rgba(143, 183, 237, 0.72);
+            background: #344354;
+            color: #fff;
+        }
+
+        .language-button svg { width: 15px; height: 15px; }
+
+        .language-menu {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            display: none;
+            min-width: 196px;
+            padding: 6px;
+            border: 1px solid #465567;
+            border-radius: 8px;
+            background: #252d39;
+            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.32);
+        }
+
+        .language-switcher.open .language-menu { display: grid; }
+
+        .language-option {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            padding: 8px 9px;
+            box-sizing: border-box;
+            border: 0;
+            border-radius: 5px;
+            background: transparent;
+            color: #dce5f0;
+            font: inherit;
+            font-size: 0.8rem;
+            text-decoration: none;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .language-option:hover { background: #34404f; }
+        .language-option[aria-current="page"] { color: #fff; font-weight: 800; }
+        .language-option-code { color: #9dacbd; font-size: 0.7rem; font-weight: 800; }
+
+        /* --- HERO --- */
+        .hero {
+            display: flex;
+            width: 80vw;
+            max-width: 1200px;
+            margin-top: 80px;
+            gap: 50px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .hero > div { flex: 1; }
+
+        .eyebrow {
+            color: #9bbcf0;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        #hero-title {
+            font-size: 3.5rem;
+            margin: 0 0 20px 0;
+            line-height: 1.1;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #ffffff, #a8c9f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-text {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 35px;
+            max-width: 95%;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .button {
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            color: #edf0f4;
+            background: rgba(170, 190, 218, 0.06);
+            border: 1px solid rgba(170, 190, 218, 0.14);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .button:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(143, 183, 237, 0.45);
+            box-shadow: 0 0 15px rgba(83, 125, 184, 0.12);
+            transform: translateY(-2px);
+        }
+
+        .button.primary {
+            background: #8fb7ed;
+            border-color: #8fb7ed;
+            color: #171b21;
+            box-shadow: 0 4px 15px rgba(83, 125, 184, 0.28);
+        }
+
+        .button.primary:hover {
+            background: #a8c9f7;
+            box-shadow: 0 6px 20px rgba(83, 125, 184, 0.24);
+        }
+
+        /* --- HERO SUMMARY --- */
+        .hero-card {
+            flex: 0.8;
+            box-sizing: border-box;
+            max-width: 100%;
+            padding: 28px;
+            background: var(--nav-bg);
+            border: 1px solid var(--nav-border);
+            border-radius: 12px;
+            box-shadow: 0 16px 34px rgba(0, 0, 0, 0.22);
+        }
+
+        .hero-card h2 {
+            margin: 0 0 18px;
+            color: #edf0f4;
+            font-size: clamp(1.55rem, 2.6vw, 2rem);
+            line-height: 1.15;
+            letter-spacing: -0.035em;
+        }
+
+        .hero-card-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 18px; padding-top: 16px; border-top: 1px solid rgba(170, 190, 218, 0.18); }
+        .hero-card-area h3 { margin: 0 0 5px; color: #a8c9f7; font-size: 0.78rem; line-height: 1.35; }
+        .hero-card-area p { margin: 0; color: #b5bec9; font-size: 0.82rem; line-height: 1.45; }
+
+        /* =========================================
+           SECCIÓN: SKILLS & TECNOLOGÍAS
+           ========================================= */
+        .skills-section {
+            width: 80vw;
+            max-width: 1200px;
+            margin-top: 100px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin: 0;
+            color: #fff;
+            position: relative;
+            padding-left: 20px;
+            font-weight: 700;
+        }
+
+        .section-title::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 10%;
+            bottom: 10%;
+            width: 5px;
+            background: #8fb7ed;
+            border-radius: 4px;
+        }
+
+        .skills-cards-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .skill-card {
+            background: var(--nav-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 12px;
+            border: 1px solid var(--nav-border);
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(83, 125, 184, 0.10);
+            border-color: rgba(143, 183, 237, 0.24);
+        }
+
+        .skill-card h3 {
+            margin-top: 0;
+            color: #edf0f4;
+            font-size: 1.15rem;
+            margin-bottom: 25px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .skill-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: rgba(255, 255, 255, 0.6);
+            transition: all 0.3s ease;
+            width: 60px;
+            cursor: default;
+        }
+
+        .skill-item i, .skill-item svg {
+            font-size: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .skill-mark {
+            display: grid;
+            place-items: center;
+            width: 2rem;
+            height: 2rem;
+            border: 1px solid rgba(170, 190, 218, 0.26);
+            border-radius: 6px;
+            color: #c8d6e7;
+            font: 700 0.7rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+            letter-spacing: -0.04em;
+        }
+
+        .skill-item span {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-align: center;
+            letter-spacing: 0.5px;
+        }
+
+        .skill-item:hover {
+            color: #ffffff;
+            transform: translateY(-4px);
+        }
+
+        .skill-item:hover i, .skill-item:hover svg {
+            color: #9bbcf0;
+            filter: drop-shadow(0 0 10px var(--nav-glow));
+        }
+
+        /* =========================================
+           SECCIÓN: PROYECTOS DESTACADOS
+           ========================================= */
+        .projects-section,
+        .about-section {
+            width: 80vw;
+            max-width: 1200px;
+            margin-top: 100px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            scroll-margin-top: 70px;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 25px;
+        }
+
+        .project-card {
+            background: var(--nav-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 14px;
+            border: 1px solid var(--nav-border);
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .project-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 40px rgba(83, 125, 184, 0.14);
+            border-color: rgba(143, 183, 237, 0.24);
+        }
+
+        .project-card.featured-project {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.65fr);
+            gap: 28px;
+            padding: 30px;
+            border-color: rgba(143, 183, 237, 0.34);
+            background: linear-gradient(120deg, rgba(43, 53, 66, 0.98), rgba(32, 39, 49, 0.98));
+        }
+
+        .professional-card { border-color: rgba(143, 183, 237, 0.42); }
+        .project-subtitle { margin: -7px 0 0; color: #b9cae0; font-size: 0.95rem; font-weight: 650; }
+        .professional-status {
+            display: inline-flex;
+            width: fit-content;
+            padding: 5px 8px;
+            border: 1px solid rgba(143, 183, 237, 0.3);
+            border-radius: 5px;
+            color: #b9d4f7;
+            font-size: 0.7rem;
+            font-weight: 750;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+        /* Professional work: compact, balanced 2/3 + 1/3 layout. */
+        #professional-work .projects-grid {
+            grid-template-columns: minmax(0, 1.7fr) minmax(270px, 1fr);
+            align-items: stretch;
+        }
+        #professional-work .professional-card {
+            grid-column: auto;
+            display: flex;
+            flex-direction: column;
+            padding: 28px;
+            background: var(--nav-bg);
+        }
+        #professional-work .professional-card .featured-project-main { gap: 12px; }
+        #professional-work .eostech-card { grid-column: auto; }
+        #professional-work .java-erp-card { margin: 0; }
+        .project-period { color: #b9cae0; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.04em; }
+        .project-role {
+            border-top: 1px solid rgba(170, 190, 218, 0.14);
+            padding-top: 12px;
+            font-size: 0.85rem !important;
+            color: #b6c1ce !important;
+        }
+        .project-source { color: #aeb9c6; font-size: 0.75rem; align-self: center; }
+        .eostech-heading { display: flex; align-items: center; gap: 12px; }
+        .eostech-icon {
+            width: 38px;
+            height: 38px;
+            object-fit: contain;
+            box-sizing: border-box;
+            flex-shrink: 0;
+        }
+
+        .featured-project-main { display: flex; flex-direction: column; gap: 15px; }
+
+        .featured-project-kicker {
+            margin: 0;
+            color: #a8c9f7;
+            font-size: 0.72rem;
+            font-weight: 750;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .featured-project h3 { font-size: clamp(1.45rem, 2.4vw, 1.85rem); letter-spacing: -0.03em; }
+        .featured-project p { max-width: 680px; font-size: 1rem; }
+
+        .featured-project-facts {
+            display: grid;
+            align-content: center;
+            gap: 0;
+            border-left: 1px solid rgba(170, 190, 218, 0.2);
+            padding-left: 28px;
+        }
+
+        .featured-project-fact { padding: 13px 0; border-bottom: 1px solid rgba(170, 190, 218, 0.14); }
+        .featured-project-fact:last-child { border-bottom: 0; }
+        .featured-project-fact strong { display: block; color: #edf0f4; font-size: 0.9rem; }
+        .featured-project-fact span { display: block; margin-top: 4px; color: #aeb9c6; font-size: 0.82rem; line-height: 1.45; }
+
+        .project-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: rgba(83, 125, 184, 0.14);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #9bbcf0;
+            box-shadow: 0 0 18px rgba(83, 125, 184, 0.14);
+        }
+
+        .project-card h3 {
+            margin: 0;
+            color: #edf0f4;
+            font-size: 1.15rem;
+        }
+
+        .project-card p {
+            margin: 0;
+            color: rgba(255, 255, 255, 0.65);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: auto;
+        }
+
+        .project-tags span {
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: #d5dce6;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 6px 9px;
+            border-radius: 999px;
+        }
+
+        .project-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 4px;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            min-height: 36px;
+            padding: 7px 11px;
+            border: 1px solid rgba(143, 183, 237, 0.3);
+            border-radius: 7px;
+            color: #a8c9f7;
+            font-size: 0.82rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background-color .18s ease, border-color .18s ease;
+        }
+
+        .project-link:hover, .project-link:focus-visible {
+            background: rgba(83, 125, 184, 0.16);
+            border-color: #8fb7ed;
+            outline: none;
+        }
+
+        .project-group { display: flex; flex-direction: column; gap: 18px; }
+        .project-group + .project-group { margin-top: 14px; }
+        .project-group-title { margin: 0; color: #b7c3d2; font-size: 0.76rem; font-weight: 750; letter-spacing: 0.1em; text-transform: uppercase; }
+
+        .services-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 25px; }
+        .service-card h3 { color: #a8c9f7; }
+        .service-platforms { margin: 0; color: #b9c5d3; line-height: 1.55; font-size: 0.9rem; }
+        .faq-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; align-items: start; }
+        .faq-item {
+            background: var(--nav-bg);
+            border: 1px solid var(--nav-border);
+            border-radius: 12px;
+            padding: 16px 18px;
+        }
+        .faq-item summary { color: #edf0f4; font-weight: 650; line-height: 1.45; cursor: pointer; }
+        .faq-item summary::marker { color: #a8c9f7; }
+        .faq-item p { margin: 12px 0 0; color: rgba(255, 255, 255, 0.68); line-height: 1.6; font-size: 0.9rem; }
+        .faq-item[open] { border-color: rgba(143, 183, 237, 0.45); }
+
+        /* =========================================
+           SECCIÓN: ABOUT / CONTACTO
+           ========================================= */
+        .about-card {
+            background: var(--nav-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 16px;
+            border: 1px solid var(--nav-border);
+            padding: 35px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+            display: grid;
+            grid-template-columns: 1.4fr 0.8fr;
+            gap: 35px;
+            align-items: center;
+        }
+
+        .about-card p {
+            margin: 0;
+            color: rgba(255, 255, 255, 0.68);
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        .about-highlight {
+            color: #edf0f4;
+            font-weight: 600;
+        }
+
+        .contact-box {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .contact-item { display: grid; justify-items: center; gap: 7px; text-align: center; }
+        .contact-label { color: #aeb9c6; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+        .contact-email { color: #edf0f4; font-size: 0.95rem; line-height: 1.4; text-decoration: none; word-break: break-word; }
+        .contact-email:hover { color: #a8c9f7; }
+        .contact-copy { justify-self: center; width: 88px; min-height: 32px; padding: 6px 12px; border: 1px solid rgba(143, 183, 237, 0.28); border-radius: 7px; background: rgba(83, 125, 184, 0.08); color: #a8c9f7; font: inherit; font-size: 0.78rem; font-weight: 650; cursor: pointer; transition: background 0.2s ease, border-color 0.2s ease; }
+        .contact-copy:hover { background: rgba(83, 125, 184, 0.16); border-color: #8fb7ed; }
+        #contact { scroll-margin-top: 70px; }
+        .contact-socials { grid-column: 1 / -1; display: flex; justify-content: center; gap: 14px; margin-top: 54px; }
+        .contact-social-link { display: inline-flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; width: 74px; height: 78px; padding: 7px 6px; border: 1px solid rgba(143, 183, 237, 0.28); border-radius: 11px; color: #a8c9f7; text-decoration: none; transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease; }
+        .contact-social-link:hover { background: rgba(83, 125, 184, 0.16); border-color: #8fb7ed; color: #edf0f4; }
+        .contact-social-link svg { width: 26px; height: 26px; flex: 0 0 auto; }
+        .contact-social-link span { color: #b9c5d3; font-size: 0.75rem; font-weight: 700; line-height: 1; }
+        .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+        .contact-box .button {
+            justify-content: center;
+        }
+
+        /* Botón discreto para subir */
+        .back-to-top {
+            position: fixed;
+            right: 22px;
+            bottom: 22px;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: rgba(32, 39, 49, 0.96);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: rgba(255, 255, 255, 0.75);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
+            opacity: 0.65;
+            transition: all 0.3s ease;
+            z-index: 200;
+        }
+
+        .back-to-top:hover {
+            opacity: 1;
+            color: #ffffff;
+            border-color: rgba(143, 183, 237, 0.38);
+            box-shadow: 0 0 18px rgba(83, 125, 184, 0.14);
+            transform: translateY(-3px);
+        }
+
+        /* =========================================
+           MEDIA QUERIES
+           ========================================= */
+
+        @media (max-width: 900px) {
+            .contenedor-principal { width: 95vw; }
+            .centro-bloque { padding: 0 15px; }
+            .nav-links { gap: 5px; }
+            .nav-links a { padding: 6px 10px; font-size: 0.75rem; }
+            .nav-logo { font-size: 1rem; }
+            .profile-pic { width: 24px; height: 24px; }
+
+            .hero, .skills-section {
+                flex-direction: column;
+                text-align: center;
+                gap: 40px;
+                margin-top: 60px;
+                width: 90vw;
+            }
+
+            .projects-section,
+            .about-section {
+                width: 90vw;
+                margin-top: 80px;
+                text-align: center;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid, .faq-grid { grid-template-columns: 1fr; }
+
+            .project-card.featured-project { grid-template-columns: 1fr; }
+            #professional-work .projects-grid { grid-template-columns: 1fr; }
+            .featured-project-facts { border-left: 0; border-top: 1px solid rgba(170, 190, 218, 0.2); padding: 8px 0 0; }
+
+            .about-card {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .contact-box { grid-template-columns: 1fr; }
+            .contact-socials { grid-column: auto; justify-content: center; margin-top: 26px; }
+            .contact-copy { justify-self: center; }
+
+            .hero-text { margin: 0 auto 30px auto; }
+            .hero-actions { justify-content: center; }
+            .hero-card { width: 100%; text-align: left; }
+            .hero-card-grid { grid-template-columns: 1fr; gap: 14px; }
+            .section-title::before { display: none; }
+            .section-title { padding-left: 0; }
+            .project-icon { margin: 0 auto; }
+            .project-tags { justify-content: center; }
+        }
+
+        @media (max-width: 1110px) {
+            .mobile-toggle { display: block; margin-left: 8px; }
+            .language-switcher { margin-left: auto; }
+            .nav-links {
+                position: absolute; top: 50px; right: 0; flex-direction: column;
+                align-items: flex-start; background: var(--nav-bg); backdrop-filter: blur(15px);
+                -webkit-backdrop-filter: blur(15px); padding: 15px; border-radius: 12px;
+                border: 1px solid var(--nav-border); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+                gap: 10px; min-width: 180px; opacity: 0; visibility: hidden;
+                transform: translateY(-15px); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            .nav-links a { width: 100%; box-sizing: border-box; }
+            .nav-links.active { opacity: 1; visibility: visible; transform: translateY(0); }
+        }
+
+        @media (max-width: 760px) {
+            #hero-title { font-size: 2.5rem; }
+
+            .skills-cards-container { grid-template-columns: 1fr; }
+
+            .about-card {
+                padding: 25px;
+            }
+
+            .back-to-top {
+                right: 16px;
+                bottom: 16px;
+                width: 38px;
+                height: 38px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="contenedor-principal">
+
+    <svg class="svg-izq" width="20" height="20" viewBox="100 0 100 100"><path d="M100 100V0h100v100a100 100 0 1 0-200 0"/></svg>
+
+    <div class="centro-bloque">
+        <div class="nav-logo">
+            <img src="https://avatars.githubusercontent.com/u/98700005" alt="agusquartz avatar" class="profile-pic">
+            <span class="logo-text">agusquartz</span>
+        </div>
+
+        <div class="nav-links" id="menu-links">
+            <a href="#about">Sobre mim</a>
+            <a href="#professional-work">Projetos</a>
+            <a href="#services">Serviços</a>
+            <a href="#faq">FAQ</a>
+            <a href="#skills">Habilidades</a>
+            <a href="https://github.com/agusquartz" target="_blank" rel="me noopener">GitHub</a>
+            <a class="nav-contact" href="#contact">Contato</a>
+        </div>
+
+        <div class="language-switcher" id="languageSwitcher">
+            <button class="language-button" id="languageButton" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="languageMenu"  aria-label="Mudar idioma">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/></svg>
+                <span class="language-code-current" id="languageCode">PT</span>
+            </button>
+            <div class="language-menu" id="languageMenu" aria-label="Selector de idioma">
+                <a class="language-option" href="/" lang="es"><span>Español</span><span class="language-option-code">ES</span></a>
+                <a class="language-option" href="/en/" lang="en"><span>English</span><span class="language-option-code">EN</span></a>
+                <a class="language-option" href="/pt/" lang="pt-BR" aria-current="page"><span>Português</span><span class="language-option-code">PT</span></a>
+                <a class="language-option" href="/zh-hant/" lang="zh-Hant"><span>繁體中文</span><span class="language-option-code">繁中</span></a>
+                <a class="language-option" href="/ru/" lang="ru"><span>Русский</span><span class="language-option-code">RU</span></a>
+                <a class="language-option" href="/de/" lang="de"><span>Deutsch</span><span class="language-option-code">DE</span></a>
+            </div>
+        </div>
+
+        <button class="mobile-toggle" id="btn-menu" aria-expanded="false" aria-controls="menu-links"  aria-label="Abrir menu">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="4" y1="12" x2="20" y2="12"></line>
+                <line x1="4" y1="6" x2="20" y2="6"></line>
+                <line x1="4" y1="18" x2="20" y2="18"></line>
+            </svg>
+        </button>
+    </div>
+
+    <svg class="svg-der" width="20" height="20" viewBox="100 0 100 100" xmlns="http://www.w3.org/2000/svg" transform="scale(-1 1)"><path d="M100 100V0h100v100a100 100 0 1 0-200 0"/></svg>
+</div>
+
+<section class="hero" aria-labelledby="hero-title">
+    <div>
+        <div class="eyebrow">Desenvolvedor de software</div>
+        <h1 id="hero-title"><span class="gradient-text">Agustin Argüello</span></h1>
+        <p class="hero-text">
+            <span>Desenvolvo software para ajudar comércios e empresas a organizar suas operações e resolver necessidades concretas.</span>
+        </p>
+
+        <div class="hero-actions">
+            <a class="button primary" href="#professional-work">Ver projetos</a>
+            <a class="button" href="https://github.com/agusquartz" target="_blank" rel="me noopener">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.03c3.15-.38 6.5-1.4 6.5-7a5.2 5.2 0 0 0-1.5-3.8 4.8 4.8 0 0 0 .1-3.7s-1.2-.4-3.9 1.4a13.3 13.3 0 0 0-7 0c-2.7-1.8-3.9-1.4-3.9-1.4a4.8 4.8 0 0 0 .1 3.7 5.2 5.2 0 0 0-1.5 3.8c0 5.6 3.3 6.6 6.5 7a4.8 4.8 0 0 0-1 3.03V22"/><path d="M9 20c-5 1.5-5-2.5-7-3"/></svg>
+                GitHub
+            </a>
+        </div>
+    </div>
+
+    <aside class="hero-card"  aria-label="Áreas de desenvolvimento">
+        <h2>Áreas de desenvolvimento</h2>
+        <div class="hero-card-grid">
+            <div class="hero-card-area"><h3>Desenvolvimento de software</h3><p>Frontend, backend, APIs e aplicações.</p></div>
+            <div class="hero-card-area"><h3>Dados e arquitetura</h3><p>Design de sistemas, bancos de dados e sua administração.</p></div>
+            <div class="hero-card-area"><h3>Infraestrutura e implantação</h3><p>Servidores, Linux, cloud, DevOps e publicação em produção.</p></div>
+            <div class="hero-card-area"><h3>Análise técnica</h3><p>Pesquisa, avaliação de opções e integrações.</p></div>
+        </div>
+    </aside>
+</section>
+
+<section class="projects-section" id="professional-work" aria-labelledby="professional-title">
+    <h2 class="section-title" id="professional-title">Trabalho profissional</h2>
+
+    <div class="projects-grid">
+        <article class="project-card featured-project professional-card">
+            <div class="featured-project-main">
+                <div class="featured-project-kicker">Software profissional · desde 2024</div>
+                <span class="professional-status">Em uso real</span>
+                <h3>SYSMAN</h3>
+                <p class="project-subtitle">ERP em nuvem e aplicação desktop</p>
+                <p>O SYSMAN reúne vendas, produtos, cobranças, caixa e filiais, com operação multimoeda. Está em uso real desde 2024 e evolui junto com comerciantes. A equipe observa como cada versão é usada e avalia os comentários e sugestões para orientar as melhorias do produto. O aplicativo desktop funciona em Windows, macOS e Linux; Linux é a plataforma preferida.</p>
+                <p class="project-role">Desenvolvi o SYSMAN de ponta a ponta: arquitetura, frontend, backend, banco de dados, integrações e implantação. Seu modelo single-tenant permite que cada empresa opere de forma independente.</p>
+                <div class="project-tags"><span>Rust</span><span>Axum</span><span>Tokio</span><span>PostgreSQL</span><span>Next.js</span><span>Tauri</span><span>Linux</span></div>
+                <div class="project-actions">
+                    <a class="project-link" href="https://eostech.dev/#sysman" target="_blank" rel="noopener">Conhecer o SYSMAN na EOSTECH ↗</a>
+                    <span class="project-source">Privado · software comercial</span>
+                </div>
+            </div>
+        </article>
+
+        <article class="project-card eostech-card">
+            <div class="featured-project-kicker">Site corporativo</div>
+            <div class="eostech-heading">
+                <img class="eostech-icon" src="/assets/projects/eostech/favicon.svg" alt="" loading="lazy" width="38" height="38">
+                <h3>EOSTECH</h3>
+            </div>
+            <p>Site corporativo para apresentar produtos, serviços e soluções tecnológicas da EOSTECH, com navegação clara e conteúdo disponível em seis idiomas.</p>
+            <div class="project-tags"><span>Frontend</span><span>Desenvolvimento web</span><span>Multilíngue</span></div>
+            <div class="project-actions"><a class="project-link" href="https://eostech.dev/" target="_blank" rel="noopener">Visitar site ↗</a></div>
+        </article>
+    </div>
+
+    <article class="project-card featured-project java-erp-card">
+        <div class="featured-project-main">
+            <div class="featured-project-kicker">Projeto de software independente</div>
+            <span class="professional-status">Testes e refinamento</span>
+            <h3>3D Printing ERP</h3>
+            <p class="project-subtitle">ERP multitenant para empresas de impressão 3D</p>
+            <p>ERP multitenant para empresas de impressão 3D. Gerencia estoque, compras, vendas, usuários e operações comerciais, com fluxos transacionais, controles de segurança e operação isolada por tenant.</p>
+            <div class="project-tags"><span>Java 21</span><span>Spring Boot</span><span>PostgreSQL</span><span>Hibernate</span><span>Liquibase</span><span>Redis</span></div>
+            <div class="project-actions">
+                <span class="project-period">2026 – Presente</span>
+                <span class="project-source">Código-fonte privado</span>
+            </div>
+        </div>
+        <div class="featured-project-facts" aria-label="3D Printing ERP highlights">
+            <div class="featured-project-fact"><strong>Arquitetura multitenant</strong><span>Serviços Spring Boot, API Gateway, Eureka e um módulo compartilhado.</span></div>
+            <div class="featured-project-fact"><strong>Segurança por tenant</strong><span>JWT, RBAC e isolamento por tenant.</span></div>
+            <div class="featured-project-fact"><strong>Persistência transacional</strong><span>Compras, vendas, movimentos de estoque e migrações de banco de dados.</span></div>
+        </div>
+    </article>
+</section>
+
+<section class="projects-section" id="services" aria-labelledby="services-title">
+    <h2 class="section-title" id="services-title">Serviços</h2>
+    <p class="service-platforms">Desenvolvimento sob medida para empresas e comércios, de uma necessidade pontual a um sistema completo.</p>
+    <div class="services-grid">
+        <article class="project-card service-card">
+            <h3>Software sob medida</h3>
+            <p>Você pode contratar um sistema completo, um módulo ou uma funcionalidade específica, conforme o escopo necessário.</p>
+        </article>
+        <article class="project-card service-card">
+            <h3>Arquitetura e desenvolvimento</h3>
+            <p>Design de arquitetura, frontend, backend, bancos de dados e integrações de acordo com os requisitos do projeto.</p>
+        </article>
+        <article class="project-card service-card">
+            <h3>Implantação e continuidade</h3>
+            <p>Infraestrutura e implantação, com suporte, manutenção e hospedagem mensal opcionais.</p>
+        </article>
+    </div>
+    <p class="service-platforms">Desenvolvo para web, desktop (Windows, macOS e Linux) e dispositivos móveis (iOS e Android); as plataformas são definidas para cada projeto.</p>
+</section>
+
+<section class="projects-section" id="projects">
+    <h2 class="section-title">Open source e outros projetos</h2>
+
+    <div class="project-group">
+    <h3 class="project-group-title">Projetos de software</h3>
+    <div class="projects-grid">
+
+        <article class="project-card featured-project">
+            <div class="featured-project-main">
+                <div class="featured-project-kicker">Projeto open source em destaque</div>
+                <h3>Image Service</h3>
+                <p>Serviço open source em Rust com endpoints HTTP que abstrai autenticação, processamento, controle de concorrência, armazenamento e obtenção de imagens. O SYSMAN o utiliza em produção. Posso implantá-lo na infraestrutura necessária ou integrá-lo a outro sistema.</p>
+                <div class="project-tags">
+                    <span>Rust</span>
+                    <span>Axum</span>
+                    <span>Tokio</span>
+                    <span>OpenDAL</span>
+                    <span>WebP</span>
+                    <span>S3</span>
+                </div>
+                <div class="project-actions">
+                    <a class="project-link" href="https://github.com/agusquartz/image_service" target="_blank" rel="noopener">Ver repositório ↗</a>
+                    <a class="project-link" href="https://github.com/agusquartz/image_service/tree/main/docs" target="_blank" rel="noopener">Ler documentação ↗</a>
+                </div>
+            </div>
+            <div class="featured-project-facts" aria-label="Image Service highlights">
+                <div class="featured-project-fact"><strong>Processamento e validação</strong><span>Validação de arquivos, limites de decodificação, concorrência controlada e otimização WebP. O tamanho processável depende da configuração e dos recursos do servidor.</span></div>
+                <div class="featured-project-fact"><strong>Arquitetura modular</strong><span>Separação entre API HTTP, processamento, armazenamento e entrega de imagens.</span></div>
+                <div class="featured-project-fact"><strong>Armazenamento e entrega</strong><span>Armazenamento local e compatível com S3 via OpenDAL, leitura HTTP direta e documentação para configuração auto-hospedada.</span></div>
+            </div>
+        </article>
+
+        <article class="project-card">
+            <h3>rust-postgres-pool</h3>
+            <p>Exemplo de gestão assíncrona de conexões PostgreSQL com Rust, Tokio e deadpool-postgres. Explora pooling, transações, configuração e tratamento de erros.</p>
+            <div class="project-tags"><span>Rust</span><span>Tokio</span><span>PostgreSQL</span></div>
+            <div class="project-actions"><a class="project-link" href="https://github.com/agusquartz/rust-postgres-pool" target="_blank" rel="noopener">Ver repositório ↗</a></div>
+        </article>
+
+        <article class="project-card">
+            <h3>http-two-cookies</h3>
+            <p>Exemplo de servidor HTTP em Rust que explora autenticação JWT e proteção CSRF por meio de duas cookies com Axum e Tokio.</p>
+            <div class="project-tags"><span>Rust</span><span>Axum</span><span>JWT</span><span>CSRF</span></div>
+            <div class="project-actions"><a class="project-link" href="https://github.com/agusquartz/http-two-cookies" target="_blank" rel="noopener">Ver repositório ↗</a></div>
+        </article>
+
+        <article class="project-card">
+            <h3>Academic Progress</h3>
+            <p>
+                <span>Ferramenta para acompanhar o progresso acadêmico, consultar pré-requisitos e organizar disciplinas em uma grade curricular.</span>
+            </p>
+            <div class="project-tags">
+                <span>JavaScript</span>
+                <span>Educação</span>
+                <span>Planejamento</span>
+            </div>
+            <div class="project-actions">
+                <a class="project-link" href="/academic-progress/">Abrir Academic Progress</a>
+                <a class="project-link" href="/academic-progress/curriculum-builder/">Criar grade curricular</a>
+            </div>
+        </article>
+    </div>
+    </div>
+
+    <div class="project-group">
+    <h3 class="project-group-title">Projetos acadêmicos e experimentais</h3>
+    <div class="projects-grid">
+        <article class="project-card">
+            <h3>Simon Says ASM</h3>
+            <p>
+                <span>Jogo de memória em Assembly 8086 com mouse, telas, níveis de dificuldade e interrupções BIOS/DOS.</span>
+            </p>
+            <div class="project-tags">
+                <span>Assembly 8086</span>
+                <span>emu8086</span>
+                <span>Jogo</span>
+            </div>
+            <div class="project-actions">
+                <a class="project-link" href="/simon-says-asm/">Abrir projeto</a>
+            </div>
+        </article>
+
+        <article class="project-card">
+            <h3>Huffman</h3>
+            <p>
+                <span>Material interativo sobre compressão sem perdas, árvores de Huffman, frequências e codificação de bits.</span>
+            </p>
+            <div class="project-tags">
+                <span>C</span>
+                <span>Algoritmos</span>
+                <span>Compressão</span>
+            </div>
+            <div class="project-actions">
+                <a class="project-link" href="/HUFFMAN/">Abrir Huffman</a>
+            </div>
+        </article>
+    </div>
+    </div>
+</section>
+
+<section class="skills-section" id="skills">
+    <h2 class="section-title">Habilidades técnicas</h2>
+    <div class="skills-cards-container">
+        <div class="skill-card">
+            <h3>Backend</h3>
+            <div class="skills-grid">
+                <div class="skill-item"><i class="devicon-rust-plain"></i><span>Rust</span></div>
+                <div class="skill-item"><span class="skill-mark">Ax</span><span>Axum</span></div>
+                <div class="skill-item"><span class="skill-mark">Tk</span><span>Tokio</span></div>
+                <div class="skill-item"><i class="devicon-csharp-plain"></i><span>C#</span></div>
+                <div class="skill-item"><i class="devicon-dotnetcore-plain"></i><span>.NET</span></div>
+                <div class="skill-item"><i class="devicon-java-plain"></i><span>Java</span></div>
+                <div class="skill-item"><i class="devicon-spring-original"></i><span>Spring Boot</span></div>
+            </div>
+        </div>
+        <div class="skill-card">
+            <h3>Bancos de dados e armazenamento</h3>
+            <div class="skills-grid">
+                <div class="skill-item"><i class="devicon-postgresql-plain"></i><span>PostgreSQL</span></div>
+                <div class="skill-item"><i class="devicon-microsoftsqlserver-plain"></i><span>SQL Server</span></div>
+                <div class="skill-item"><i class="devicon-redis-plain"></i><span>Redis</span></div>
+                <div class="skill-item"><span class="skill-mark">OD</span><span>OpenDAL</span></div>
+                <div class="skill-item"><span class="skill-mark">S3</span><span>S3 storage</span></div>
+            </div>
+        </div>
+        <div class="skill-card">
+            <h3>Web e desktop</h3>
+            <div class="skills-grid">
+                <div class="skill-item"><i class="devicon-javascript-plain"></i><span>JavaScript</span></div>
+                <div class="skill-item"><i class="devicon-typescript-plain"></i><span>TypeScript</span></div>
+                <div class="skill-item"><i class="devicon-nextjs-plain"></i><span>Next.js</span></div>
+                <div class="skill-item"><span class="skill-mark">Tr</span><span>Tauri</span></div>
+                <div class="skill-item"><i class="devicon-html5-plain"></i><span>HTML</span></div>
+                <div class="skill-item"><i class="devicon-css3-plain"></i><span>CSS</span></div>
+            </div>
+        </div>
+        <div class="skill-card">
+            <h3>Infraestrutura e ferramentas</h3>
+            <div class="skills-grid">
+                <div class="skill-item"><i class="devicon-linux-plain"></i><span>Linux</span></div>
+                <div class="skill-item"><i class="devicon-docker-plain"></i><span>Docker</span></div>
+                <div class="skill-item"><i class="devicon-bash-plain"></i><span>Bash</span></div>
+                <div class="skill-item"><i class="devicon-git-plain"></i><span>Git</span></div>
+                <div class="skill-item"><i class="devicon-amazonwebservices-plain-wordmark"></i><span>AWS</span></div>
+                <div class="skill-item"><i class="devicon-azure-plain"></i><span>Azure</span></div>
+                <div class="skill-item"><i class="devicon-oracle-original"></i><span>OCI</span></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="projects-section faq-section" id="faq" aria-labelledby="faq-title">
+    <h2 class="section-title" id="faq-title">Perguntas frequentes</h2>
+    <div class="faq-grid">
+        <details class="faq-item"><summary>Quanto custa um projeto?</summary><p>Não tenho preços fixos. Cada orçamento é definido conforme o projeto e seu escopo.</p></details>
+        <details class="faq-item"><summary>Quanto tempo um projeto costuma levar?</summary><p>O prazo é estimado após definir os requisitos e o escopo. A proposta apresenta as etapas e entregas previstas.</p></details>
+        <details class="faq-item"><summary>Você está disponível para novos projetos?</summary><p>A disponibilidade pode variar. Envie uma breve descrição do que precisa para consultar datas.</p></details>
+        <details class="faq-item"><summary>Você trabalha remotamente?</summary><p>Sim. Trabalho remotamente durante todo o projeto.</p></details>
+        <details class="faq-item"><summary>Há reuniões presenciais?</summary><p>Em projetos de grande porte, podemos combinar reuniões presenciais quando o trabalho exigir. Posso viajar pelo Paraguai e, se um projeto grande precisar, também para o exterior. Se preferir se reunir comigo pessoalmente, estou em Encarnación, Paraguai.</p></details>
+        <details class="faq-item"><summary>Como funcionam os pagamentos e as mudanças de requisitos?</summary><p>Trabalho principalmente por etapas. Se os requisitos mudarem, reviso o novo escopo e preparo uma proposta atualizada. O trabalho pendente que não depende da mudança pode continuar enquanto faço a análise; se o que falta depende dos requisitos alterados, pauso essa parte e reviso a proposta o mais rápido possível.</p></details>
+        <details class="faq-item"><summary>Quem fica com os direitos do código-fonte?</summary><p>As condições para o código desenvolvido para o cliente e os componentes reutilizáveis são acordadas conforme as necessidades e a sensibilidade de cada projeto.</p></details>
+        <details class="faq-item"><summary>Você oferece suporte após o lançamento?</summary><p>Sim. Podemos combinar suporte ou manutenção com pagamentos recorrentes mensais ou anuais. Também posso implantar e hospedar o sistema; a mensalidade ou anuidade cobre os serviços acordados.</p></details>
+        <details class="faq-item"><summary>Você pode assinar um acordo de confidencialidade?</summary><p>Sim. Posso assinar um acordo de confidencialidade antes de você compartilhar detalhes sensíveis do projeto.</p></details>
+        <details class="faq-item"><summary>Como você considera a acessibilidade?</summary><p>A acessibilidade é avaliada ao definir os requisitos, considerando quem usará o sistema e em qual contexto.</p></details>
+    </div>
+</section>
+
+<section class="about-section" id="about">
+    <h2 class="section-title">Sobre mim e contato</h2>
+
+    <div class="about-card">
+        <div>
+            <p>Sou <span class="about-highlight">Agustin Argüello</span>, desenvolvedor de software focado em sistemas backend, arquitetura de aplicações e infraestrutura.</p>
+            <br>
+            <p>Trabalho principalmente com Rust, criando APIs, serviços e ferramentas de software. Também desenvolvo aplicações web e desktop, integro tecnologias diferentes e trabalho com bancos de dados relacionais.</p>
+            <br>
+            <p>Desenvolvi software empresarial de ponta a ponta, da arquitetura e lógica de negócio ao frontend, infraestrutura e implantação em produção. Crio software sustentável que resolve problemas reais e evolui com seus usuários.</p>
+        </div>
+
+        <div class="contact-box" id="contact">
+            <div class="contact-item">
+                <span class="contact-label">E-mail</span>
+                <a class="contact-email" href="mailto:agusquartz@gmail.com">agusquartz@gmail.com</a>
+                <button class="contact-copy" type="button" id="copyEmail">Copiar</button>
+                <span class="visually-hidden" id="copyEmailStatus" role="status" aria-live="polite"></span>
+            </div>
+            <div class="contact-item">
+                <span class="contact-label">Telefone</span>
+                <a class="contact-email" href="tel:+595974551760">+595 974 551 760</a>
+                <button class="contact-copy" type="button" id="copyPhone">Copiar</button>
+                <span class="visually-hidden" id="copyPhoneStatus" role="status" aria-live="polite"></span>
+            </div>
+            <div class="contact-socials">
+                <a class="contact-social-link" href="https://github.com/agusquartz" target="_blank" rel="me noopener" aria-label="GitHub" title="GitHub">
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.56.1.76-.24.76-.54v-2.1c-3.1.67-3.76-1.32-3.76-1.32-.5-1.28-1.23-1.62-1.23-1.62-1.01-.69.08-.68.08-.68 1.12.08 1.71 1.15 1.71 1.15 1 1.7 2.63 1.21 3.27.93.1-.72.39-1.21.71-1.49-2.48-.28-5.09-1.24-5.09-5.51 0-1.22.44-2.22 1.15-3-.12-.28-.5-1.42.11-2.96 0 0 .94-.3 3.05 1.15a10.6 10.6 0 0 1 5.55 0c2.12-1.45 3.05-1.15 3.05-1.15.61 1.54.23 2.68.12 2.96.71.78 1.14 1.78 1.14 3 0 4.28-2.61 5.22-5.1 5.5.4.35.76 1.02.76 2.06v3.08c0 .3.2.65.77.54A11.1 11.1 0 0 0 12 .9Z"/></svg>
+                    <span>GitHub</span>
+                </a>
+                <a class="contact-social-link" href="https://t.me/agusquartz" target="_blank" rel="noopener" aria-label="Telegram" title="Telegram">
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.94 4.66 18.7 19.94c-.24 1.08-.88 1.35-1.78.84l-4.92-3.63-2.37 2.28c-.26.26-.48.48-.98.48l.35-5.01 9.12-8.24c.4-.35-.09-.55-.62-.2L6.23 13.58l-4.84-1.51c-1.05-.33-1.07-1.05.22-1.56L20.55 3.1c.87-.32 1.63.21 1.39 1.56Z"/></svg>
+                    <span>Telegram</span>
+                </a>
+                <a class="contact-social-link" href="https://wa.me/595974551760" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp">
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m15.271 13.21c.578.185 1.078.416 1.543.7l-.031-.018c.529.235.986.51 1.403.833l-.015-.011c.02.061.032.13.032.203 0 .011 0 .021-.001.032v-.001c-.015.429-.11.832-.271 1.199l.008-.021c-.231.463-.616.82-1.087 1.01l-.014.005c-.459.243-1.001.393-1.576.411h-.006c-1.1-.146-2.094-.484-2.988-.982l.043.022c-1.022-.468-1.895-1.083-2.636-1.829l-.001-.001c-.824-.857-1.579-1.795-2.248-2.794l-.047-.074c-.636-.829-1.041-1.866-1.1-2.995l-.001-.013v-.124c.032-.975.468-1.843 1.144-2.447l.003-.003c.207-.206.491-.335.805-.341h.001c.101.003.198.011.292.025l-.013-.002c.087.013.188.021.292.023h.003c.019-.002.04-.003.062-.003.13 0 .251.039.352.105l-.002-.001c.107.118.189.261.238.418l.002.008q.124.31.512 1.364c.135.314.267.701.373 1.099l.014.063c-.076.361-.268.668-.533.889l-.003.002q-.535.566-.535.72c.004.088.034.168.081.234l-.001-.001c.405.829.936 1.533 1.576 2.119l.005.005c.675.609 1.446 1.132 2.282 1.54l.059.026c.097.063.213.103.339.109h.002q.233 0 .838-.752t.804-.752zm-3.147 8.216h.022c1.357 0 2.647-.285 3.814-.799l-.061.024c2.356-.994 4.193-2.831 5.163-5.124l.024-.063c.49-1.113.775-2.411.775-3.775s-.285-2.662-.799-3.837l.024.062c-.994-2.356-2.831-4.193-5.124-5.163l-.063-.024c-1.113-.49-2.411-.775-3.775-.775s-2.662.285-3.837.799l.062-.024c-2.356.994-4.193 2.831-5.163 5.124l-.024.063c-.49 1.117-.775 2.419-.775 3.787 0 2.141.698 4.12 1.879 5.72l-.019-.026-1.225 3.613 3.752-1.194c1.49 1.01 3.327 1.612 5.305 1.612h.047zm0-21.426h.033c1.628 0 3.176.342 4.575.959l-.073-.029c2.825 1.197 5.028 3.4 6.196 6.149l.029.076c.588 1.337.93 2.896.93 4.535s-.342 3.198-.959 4.609l.029-.074c-1.197 2.825-3.4 5.028-6.149 6.196l-.076.029c-1.327.588-2.875.93-4.503.93-.011 0-.023 0-.034 0h.002c-.016 0-.034 0-.053 0-2.059 0-3.992-.541-5.664-1.488l.057.03-6.465 2.078 2.109-6.279c-1.051-1.714-1.674-3.789-1.674-6.01 0-1.646.342-3.212.959-4.631l-.029.075c1.197-2.825 3.4-5.028 6.149-6.196l.076-.029c1.327-.588 2.875-.93 4.503-.93h.033-.002z"/></svg>
+                    <span>WhatsApp</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<a href="#" class="back-to-top"  aria-label="Voltar ao topo">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m18 15-6-6-6 6"/>
+    </svg>
+</a>
+
+<script>
+    const btnMenu = document.getElementById('btn-menu');
+    const menuLinks = document.getElementById('menu-links');
+    const languageSwitcher = document.getElementById('languageSwitcher');
+    const languageButton = document.getElementById('languageButton');
+    const copyEmailButton = document.getElementById('copyEmail');
+    const copyPhoneButton = document.getElementById('copyPhone');
+    const copyEmailStatus = document.getElementById('copyEmailStatus');
+    const copyPhoneStatus = document.getElementById('copyPhoneStatus');
+    btnMenu.addEventListener('click', () => {
+      const isOpen = menuLinks.classList.toggle('active');
+      btnMenu.setAttribute('aria-expanded', String(isOpen));
+    });
+    document.querySelectorAll('.nav-links a').forEach(link => link.addEventListener('click', () => {
+      menuLinks.classList.remove('active'); btnMenu.setAttribute('aria-expanded', 'false');
+    }));
+    languageButton.addEventListener('click', () => {
+      const isOpen = languageSwitcher.classList.toggle('open');
+      languageButton.setAttribute('aria-expanded', String(isOpen));
+    });
+    function closeLanguageMenu() { languageSwitcher.classList.remove('open'); languageButton.setAttribute('aria-expanded', 'false'); }
+    document.addEventListener('click', event => { if (!languageSwitcher.contains(event.target)) closeLanguageMenu(); });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape') { closeLanguageMenu(); menuLinks.classList.remove('active'); btnMenu.setAttribute('aria-expanded', 'false'); }
+    });
+    copyEmailButton.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText('agusquartz@gmail.com');
+        copyEmailButton.textContent = 'Copiado';
+        copyEmailStatus.textContent = copyEmailButton.textContent;
+      }
+      catch { window.location.href = 'mailto:agusquartz@gmail.com'; }
+    });
+    copyPhoneButton.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText('+595 974 551 760');
+        copyPhoneButton.textContent = 'Copiado';
+        copyPhoneStatus.textContent = copyPhoneButton.textContent;
+      } catch {
+        copyPhoneStatus.textContent = 'Não foi possível copiar o número';
+      }
+    });
+  </script>
+
+</body>
+</html>

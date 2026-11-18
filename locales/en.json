@@ -2,28 +2,28 @@
   "meta": { "title": "Agustin Argüello | Software Developer" },
   "language": { "aria": "Change language" },
   "menu": { "open": "Open menu" },
-  "nav": { "about": "About", "projects": "Projects", "skills": "Skills" },
+  "nav": {"about":"About","projects":"Projects","skills":"Skills","contact":"Contact","services":"Services","faq":"FAQ"},
   "hero": {
-    "eyebrow": "Software Developer · Backend & Systems",
-    "copy": "Software developer focused on backend systems, APIs, infrastructure, and practical software applications. I primarily work with Rust and also build enterprise backends with Java and Spring Boot, with an emphasis on maintainable architecture, secure integrations, and reliable deployments.",
+    "eyebrow": "Software Developer",
+    "copy": "I build software that helps merchants and businesses organize their operations and solve practical needs.",
     "projects": "View projects",
     "card": {
       "aria": "Development areas",
       "eyebrow": "Development areas",
-      "title": "Backend, applications, and infrastructure.",
-      "copy": "I build services, APIs, and applications, from business logic and databases to integrations and deployment.",
+      "title": "Development areas",
+      "copy": "I primarily work with Rust and also build business backends with Java and Spring Boot, focusing on APIs, integrations, databases, and infrastructure.",
       "tagsAria": "Areas",
       "backend": "Backend & APIs", "webDesktop": "Web & Desktop", "databases": "Databases", "infrastructure": "Infrastructure"
-    }
+    , "groups": {"software": {"title": "Software development","copy": "Frontend, backend, APIs, and applications."},"data": {"title": "Data and architecture","copy": "System design, databases, and database administration."},"platform": {"title": "Infrastructure and deployment","copy": "Servers, Linux, cloud, DevOps, and production deployments."},"analysis": {"title": "Technical analysis","copy": "Research, evaluating options, and integrations."}}}
   },
   "skills": { "title": "Technical Skills", "backend": "Backend", "storage": "Databases & Storage", "webDesktop": "Web & Desktop", "infrastructure": "Infrastructure & Tools" },
   "professional": {
     "title": "Professional Work",
     "sysman": {
       "eyebrow": "Professional software · since 2024", "status": "In production use", "subtitle": "Cloud ERP & Desktop Application",
-      "description": "A business management system covering sales, inventory, customers, quotations, cash management, multi-currency operations, and multiple branches. Developed end-to-end for EOSTECH.",
-      "developmentLabel": "Development", "development": "Frontend, backend, and desktop", "dataLabel": "Data", "infrastructureLabel": "Infrastructure", "infrastructure": "Cloud and Linux", "sourceLabel": "Source", "source": "Private · commercial software", "role": "My role: architecture, frontend, backend, database, integrations, and deployment.",
-      "link": "Explore the product at EOSTECH ↗", "diagramAlt": "SYSMAN conceptual diagram: applications use the business API for data and retrieve images directly from Image Service.",
+      "description": "SYSMAN brings together sales, products, payments, cash management, and branches, with multi-currency operations. Businesses have used it since 2024, and it continues to evolve alongside merchants. The team observes how each version is used and evaluates merchants’ comments and suggestions to guide product improvements. The desktop application runs on Windows, macOS, and Linux; Linux is the preferred platform.",
+      "developmentLabel": "Development", "development": "Frontend, backend, and desktop", "dataLabel": "Data", "infrastructureLabel": "Infrastructure", "infrastructure": "Cloud and Linux", "sourceLabel": "Source", "source": "Private · commercial software", "role": "I built SYSMAN end to end, from architecture and database to applications, integrations, and deployment. Its single-tenant design lets each business operate independently.",
+      "link": "Explore SYSMAN at EOSTECH ↗", "diagramAlt": "SYSMAN conceptual diagram: applications use the business API for data and retrieve images directly from Image Service.",
       "architecture": "Applications use the main API for business operations, while product images are retrieved directly from Image Service through HTTP GET, keeping processing and storage in a separate service."
     },
     "eostech": {
@@ -41,20 +41,22 @@
   "projects": {
     "title": "Open Source & Other Projects",
     "softwareTitle": "Software Projects", "academicTitle": "Academic & Experimental Projects",
-    "image": { "eyebrow": "Featured open-source project", "copy": "An open-source image processing, optimization, and storage service built with Rust and Axum. It validates and converts images to WebP, stores them on the local filesystem or S3-compatible storage, and serves them directly to client applications through HTTP GET.", "opensource": "Open source", "uploadLabel": "Processing and validation", "upload": "File validation, decoder limits, controlled concurrency, and WebP optimization.", "architectureLabel": "Modular architecture", "architecture": "Clear separation between the HTTP API, image processing, storage, and delivery.", "storageLabel": "Storage and delivery", "storage": "Local and S3-compatible storage through OpenDAL, direct HTTP reads, and documentation for self-hosted configuration.", "link": "View repository ↗", "docs": "Read documentation ↗" },
+    "image": { "eyebrow": "Featured open-source project", "copy": "An open-source Rust service with HTTP endpoints that abstracts authentication, processing, concurrency control, storage, and image retrieval. SYSMAN uses it in production. I can deploy it on the infrastructure you need or integrate it into another system.", "opensource": "Open source", "uploadLabel": "Processing and validation", "upload": "File validation, decoder limits, controlled concurrency, and WebP optimization. Processable image size depends on configuration and server resources.", "architectureLabel": "Modular architecture", "architecture": "Clear separation between the HTTP API, image processing, storage, and delivery.", "storageLabel": "Storage and delivery", "storage": "Local and S3-compatible storage through OpenDAL, direct HTTP reads, and documentation for self-hosted configuration.", "link": "View repository ↗", "docs": "Read documentation ↗" },
     "pool": { "copy": "An example of asynchronous PostgreSQL connection management with Rust, Tokio, and deadpool-postgres. It explores pooling, transactions, configuration, and error handling.", "link": "View repository ↗" },
     "cookies": { "copy": "A Rust HTTP server example exploring JWT authentication and CSRF protection through a two-cookie approach with Axum and Tokio.", "link": "View repository ↗" },
     "academic": { "copy": "A tool to track academic progress, explore prerequisite relationships, and organize subjects in a curriculum.", "education": "Education", "planning": "Planning", "open": "Open Academic Progress", "create": "Create curriculum" },
     "simon": { "copy": "A memory game in Assembly 8086 with mouse input, screens, difficulty levels, and BIOS/DOS interrupts.", "game": "Game", "open": "Open project" },
     "huffman": { "copy": "Interactive material about lossless compression, Huffman trees, frequencies, and bit encoding.", "algorithms": "Algorithms", "compression": "Compression", "open": "Open Huffman" }
   },
+  "services": {"title":"Services","intro":"Custom software for businesses, from a focused need to a complete system.","custom":{"title":"Custom software","copy":"You can hire me to build a complete system, a module, or a single feature, depending on your needs."},"architecture":{"title":"Architecture and development","copy":"Architecture design, frontend, backend, databases, and integrations shaped around the project requirements."},"delivery":{"title":"Deployment and ongoing support","copy":"Infrastructure and deployment, with optional post-launch support, maintenance, and monthly hosting."},"platforms":"I build for web, desktop (Windows, macOS, and Linux), and mobile (iOS and Android); target platforms are chosen for each project."},
+  "faq": {"title":"Frequently asked questions","cost":{"question":"How much does a project cost?","answer":"I do not have fixed prices. Each quote is based on the project and its scope."},"timeline":{"question":"How long does a project usually take?","answer":"I estimate the timeline after defining the requirements and scope. The proposal outlines the planned stages and deliverables."},"availability":{"question":"Are you available for new projects?","answer":"Availability can change. Send me a brief description of what you need to check dates."},"remote":{"question":"Do you work remotely?","answer":"Yes. I work remotely throughout the project."},"meetings":{"question":"Do you hold in-person meetings?","answer":"For larger projects, we can arrange in-person meetings when the work calls for them. I can travel within Paraguay and, when a large project requires it, internationally. If you would rather meet me in person, I am based in Encarnación, Paraguay."},"milestones":{"question":"How do payments and requirement changes work?","answer":"I primarily work in milestones. If requirements change, I review the new scope and prepare an updated proposal. Unchanged pending work can continue while I assess the change; if the remaining work depends on the changed requirements, I pause that part and revise the proposal as quickly as possible."},"ownership":{"question":"Who owns the source code?","answer":"Terms for project-specific code and reusable components are agreed based on the needs and sensitivity of each project."},"support":{"question":"Do you provide support after launch?","answer":"Yes. We can arrange ongoing support or maintenance with monthly or annual payments. I can also deploy and host the system; the recurring fee covers the agreed hosting and maintenance."},"nda":{"question":"Can you sign a confidentiality agreement?","answer":"Yes. I can sign a confidentiality agreement before you share sensitive project details."},"accessibility":{"question":"How do you consider accessibility?","answer":"Accessibility is assessed while defining requirements, based on who will use the system and in what context."}},
   "about": {
     "title": "About and contact",
     "first": "I'm <span class=\"about-highlight\">Agustin Argüello</span>, a software developer focused on backend systems, application architecture, and infrastructure.",
     "second": "I primarily work with Rust, building APIs, services, and software tools. I also develop web and desktop applications, integrate different technologies, and work with relational databases.",
     "third": "I've built business software end-to-end, from architecture and business logic to frontend development, infrastructure, and production deployment. I build maintainable software that solves practical problems and evolves with its users."
   },
-  "contact": { "emailLabel": "Email", "phoneLabel": "Phone", "copy": "Copy", "copied": "Copied" },
+  "contact": { "emailLabel": "Email", "phoneLabel": "Phone", "copy": "Copy", "copied": "Copied", "copyError": "Could not copy the number" },
   "backToTop": "Back to top",
   "simon": {
     "title": "Simon Says ASM 8086 · AgusQuartz", "back": "Back",

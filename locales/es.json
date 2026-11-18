@@ -1,23 +1,23 @@
 {
-  "meta": { "title": "Agustin Argüello | Software Developer" },
+  "meta": { "title": "Agustin Argüello | Desarrollador de software" },
   "language": { "aria": "Cambiar idioma" },
   "menu": { "open": "Abrir menú" },
-  "nav": { "about": "Sobre mí", "projects": "Proyectos", "skills": "Habilidades" },
+  "nav": {"about":"Sobre mí","projects":"Proyectos","skills":"Habilidades","contact":"Contactar","services":"Servicios","faq":"FAQ"},
   "hero": {
-    "eyebrow": "Software Developer · Backend & Systems",
-    "copy": "Desarrollador de software enfocado en sistemas backend, APIs, infraestructura y aplicaciones prácticas. Trabajo principalmente con Rust y también desarrollo backend empresarial con Java y Spring Boot, con especial atención a la arquitectura, las integraciones seguras y el despliegue de aplicaciones.",
+    "eyebrow": "Desarrollador de software",
+    "copy": "Desarrollo software para ayudar a comercios y empresas a organizar su operación y resolver necesidades concretas.",
     "projects": "Ver proyectos",
     "card": {
       "aria": "Áreas de desarrollo",
       "eyebrow": "Áreas de desarrollo",
-      "title": "Backend, aplicaciones e infraestructura.",
-      "copy": "Desarrollo servicios, APIs y aplicaciones, desde la lógica de negocio y las bases de datos hasta las integraciones y el despliegue.",
+      "title": "Áreas de desarrollo",
+      "copy": "Trabajo principalmente con Rust y también desarrollo backend empresarial con Java y Spring Boot, con foco en APIs, integraciones, bases de datos e infraestructura.",
       "tagsAria": "Áreas",
       "backend": "Backend & APIs",
       "webDesktop": "Web & Desktop",
       "databases": "Bases de datos",
       "infrastructure": "Infraestructura"
-    }
+    , "groups": {"software": {"title": "Desarrollo de software","copy": "Frontend, backend, APIs y aplicaciones."},"data": {"title": "Datos y arquitectura","copy": "Diseño de sistemas, bases de datos y su gestión."},"platform": {"title": "Infraestructura y despliegue","copy": "Servidores, Linux, cloud, DevOps y puesta en producción."},"analysis": {"title": "Análisis técnico","copy": "Investigación, evaluación de opciones e integraciones."}}}
   },
   "skills": {
     "title": "Habilidades Técnicas",
@@ -30,9 +30,9 @@
     "title": "Trabajo profesional",
     "sysman": {
       "eyebrow": "Software profesional · desde 2024", "status": "En uso real", "subtitle": "ERP cloud y aplicación de escritorio",
-      "description": "Sistema de gestión empresarial orientado a ventas, inventario, clientes, presupuestos, caja, operaciones multimoneda y múltiples sucursales. Desarrollado de extremo a extremo para EOSTECH.",
-      "developmentLabel": "Desarrollo", "development": "Frontend, backend y desktop", "dataLabel": "Datos", "infrastructureLabel": "Infraestructura", "infrastructure": "Cloud y Linux", "sourceLabel": "Código fuente", "source": "Privado · producto comercial", "role": "Mi responsabilidad: arquitectura, frontend, backend, base de datos, integraciones y despliegue.",
-      "link": "Conocer el producto en EOSTECH ↗", "diagramAlt": "Diagrama conceptual de SYSMAN: las aplicaciones usan la API empresarial para los datos y obtienen imágenes directamente desde Image Service.",
+      "description": "SYSMAN reúne ventas, productos, cobros, caja y sucursales, con operación multimoneda. Está en uso real desde 2024 y evoluciona junto a comerciantes. El equipo observa cómo se utiliza cada versión y evalúa sus comentarios y sugerencias para orientar las mejoras del producto. La aplicación de escritorio funciona en Windows, macOS y Linux; Linux es la plataforma preferida.",
+      "developmentLabel": "Desarrollo", "development": "Frontend, backend y desktop", "dataLabel": "Datos", "infrastructureLabel": "Infraestructura", "infrastructure": "Cloud y Linux", "sourceLabel": "Código fuente", "source": "Privado · producto comercial", "role": "Desarrollé SYSMAN de principio a fin: arquitectura, frontend, backend, base de datos, integraciones y despliegue. Su diseño single-tenant permite que cada empresa opere de forma independiente.",
+      "link": "Conocer SYSMAN en EOSTECH ↗", "diagramAlt": "Diagrama conceptual de SYSMAN: las aplicaciones usan la API empresarial para los datos y obtienen imágenes directamente desde Image Service.",
       "architecture": "Las aplicaciones consultan la API principal para las operaciones empresariales; las imágenes de productos se recuperan directamente desde Image Service mediante HTTP GET, manteniendo el procesamiento y almacenamiento en un servicio independiente."
     },
     "eostech": {
@@ -53,10 +53,10 @@
     "academicTitle": "Proyectos académicos y experimentales",
     "image": {
       "eyebrow": "Proyecto open source destacado",
-      "copy": "Servicio open source de procesamiento, optimización y almacenamiento de imágenes desarrollado con Rust y Axum. Valida y convierte imágenes a WebP, las almacena localmente o en servicios compatibles con S3, y las entrega directamente a las aplicaciones cliente mediante HTTP GET.",
+      "copy": "Servicio open source en Rust con endpoints HTTP que abstrae autenticación, procesamiento, control de concurrencia, almacenamiento y obtención de imágenes. SYSMAN lo utiliza en producción. Puedo desplegarlo en la infraestructura que necesites o integrarlo en otro sistema.",
       "opensource": "Código abierto",
       "uploadLabel": "Procesamiento y validación",
-      "upload": "Validación de archivos, límites de decodificación, control de concurrencia y optimización WebP.",
+      "upload": "Validación de archivos, límites de decodificación, concurrencia controlada y optimización WebP. El tamaño procesable depende de la configuración y los recursos del servidor.",
       "architectureLabel": "Arquitectura modular",
       "architecture": "Separación entre API HTTP, procesamiento, almacenamiento y entrega de imágenes.",
       "storageLabel": "Almacenamiento y entrega",
@@ -76,13 +76,15 @@
     "simon": { "copy": "Juego de memoria en Assembly 8086 con mouse, pantallas, niveles de dificultad e interrupciones BIOS/DOS.", "game": "Juego", "open": "Abrir proyecto" },
     "huffman": { "copy": "Material interactivo sobre compresión sin pérdida, árboles de Huffman, frecuencias y codificación de bits.", "algorithms": "Algoritmos", "compression": "Compresión", "open": "Abrir Huffman" }
   },
+  "services": {"title":"Servicios","intro":"Desarrollo a medida para empresas y comercios, desde una necesidad puntual hasta un sistema completo.","custom":{"title":"Software a medida","copy":"Puedes contratar un sistema completo, un módulo o una funcionalidad puntual, según el alcance que necesites."},"architecture":{"title":"Arquitectura y desarrollo","copy":"Diseño de arquitectura, frontend, backend, bases de datos e integraciones, de acuerdo con los requisitos del proyecto."},"delivery":{"title":"Despliegue y continuidad","copy":"Infraestructura, despliegue y, si lo necesitas, soporte, mantenimiento y alojamiento mensual."},"platforms":"Trabajo para web, escritorio (Windows, macOS y Linux) y móviles (iOS y Android); las plataformas se definen para cada proyecto."},
+  "faq": {"title":"Preguntas frecuentes","cost":{"question":"¿Cuánto cuesta un proyecto?","answer":"No tengo precios fijos. Cada presupuesto se define según el proyecto y su alcance."},"timeline":{"question":"¿Cuánto suele tardar un proyecto?","answer":"El plazo se estima al definir los requisitos y el alcance. La propuesta establece las etapas y entregas previstas."},"availability":{"question":"¿Estás disponible para nuevos proyectos?","answer":"La disponibilidad puede variar. Escríbeme con una breve descripción de lo que necesitas para consultar fechas."},"remote":{"question":"¿Trabajas de forma remota?","answer":"Sí. Trabajo de forma remota durante todo el proyecto."},"meetings":{"question":"¿Hay reuniones presenciales?","answer":"En proyectos de gran alcance, podemos coordinar encuentros presenciales cuando el trabajo lo requiera. Puedo viajar dentro de Paraguay y, si un proyecto grande lo necesita, también al exterior. Si prefieres reunirte conmigo en persona, estoy en Encarnación, Paraguay."},"milestones":{"question":"¿Cómo se organizan los pagos y los cambios de requisitos?","answer":"Trabajo principalmente por hitos. Si cambian los requisitos, reviso el nuevo alcance y preparo una propuesta actualizada. El trabajo pendiente que no dependa del cambio puede continuar mientras lo analizo; si lo pendiente sí cambia, pauso esa parte y reviso la propuesta lo antes posible."},"ownership":{"question":"¿Quién conserva los derechos del código?","answer":"Las condiciones sobre el código desarrollado para el cliente y los componentes reutilizables se acuerdan según las necesidades y la sensibilidad de cada proyecto."},"support":{"question":"¿Ofreces soporte después del lanzamiento?","answer":"Sí. Podemos acordar soporte o mantenimiento con pagos recurrentes mensuales o anuales. También puedo desplegar y alojar el sistema; la cuota incluye el alojamiento y el mantenimiento acordados."},"nda":{"question":"¿Puedes firmar un acuerdo de confidencialidad?","answer":"Sí. Puedo firmar un acuerdo de confidencialidad antes de que compartas detalles sensibles del proyecto."},"accessibility":{"question":"¿Cómo tienes en cuenta la accesibilidad?","answer":"La accesibilidad se evalúa al definir los requisitos, considerando quiénes usarán el sistema y en qué contexto."}},
   "about": {
     "title": "Sobre mí y contacto",
     "first": "Soy <span class=\"about-highlight\">Agustin Argüello</span>, desarrollador de software enfocado en sistemas backend, arquitectura de aplicaciones e infraestructura.",
     "second": "Trabajo principalmente con Rust, desarrollando APIs, servicios y herramientas de software. También construyo aplicaciones web y de escritorio, integro diferentes tecnologías y trabajo con bases de datos relacionales.",
     "third": "He desarrollado productos empresariales de extremo a extremo, desde su arquitectura y lógica de negocio hasta el frontend, la infraestructura y su puesta en producción. Creo software mantenible que resuelve problemas reales y puede evolucionar con sus usuarios."
   },
-  "contact": { "emailLabel": "Correo electrónico", "phoneLabel": "Teléfono", "copy": "Copiar", "copied": "Copiado" },
+  "contact": { "emailLabel": "Correo electrónico", "phoneLabel": "Teléfono", "copy": "Copiar", "copied": "Copiado", "copyError": "No se pudo copiar el número" },
   "backToTop": "Volver al inicio",
   "simon": {
     "title": "Simon Says ASM 8086 · AgusQuartz", "back": "Atrás",
