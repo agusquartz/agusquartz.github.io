@@ -3,22 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agustin Argüello | Software Developer</title>
-    <meta name="description" content="Portfolio of Agustin Argüello, software developer focused on backend systems with Rust, Java, Spring Boot, APIs, databases, and cloud infrastructure.">
+    <title>Agustin Argüello | Desarrollador de software</title>
+    <link rel="icon" href="https://avatars.githubusercontent.com/u/98700005?s=64" type="image/png">
+    <meta name="description" content="Desarrollo software para ayudar a comercios y empresas a organizar su operación y resolver necesidades concretas.">
     <meta name="author" content="Agustin Argüello">
     <link rel="canonical" href="https://agusquartz.github.io/">
-    <meta property="og:title" content="Agustin Argüello | Software Developer">
-    <meta property="og:description" content="Backend systems with Rust, Java, Spring Boot, APIs, databases, and cloud infrastructure.">
+    <meta property="og:title" content="Agustin Argüello | Desarrollador de software">
+    <meta property="og:description" content="Desarrollo software para ayudar a comercios y empresas a organizar su operación y resolver necesidades concretas.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://agusquartz.github.io/">
-    <meta property="og:image" content="https://agusquartz.github.io/assets/social-preview.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Agustin Argüello — Software Developer">
+    <meta property="og:image" content="https://agusquartz.github.io/assets/social-preview.png?v=20261118">
+    <meta property="og:image:width" content="1920">
+    <meta property="og:image:height" content="1080">
+    <meta property="og:image:alt" content="Agustin Argüello — Desarrollador de software">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Agustin Argüello | Software Developer">
-    <meta name="twitter:description" content="Backend systems with Rust, Java, Spring Boot, APIs, databases, and cloud infrastructure.">
-    <meta name="twitter:image" content="https://agusquartz.github.io/assets/social-preview.png">
+    <meta name="twitter:title" content="Agustin Argüello | Desarrollador de software">
+    <meta name="twitter:description" content="Desarrollo software para ayudar a comercios y empresas a organizar su operación y resolver necesidades concretas.">
+    <meta name="twitter:image" content="https://agusquartz.github.io/assets/social-preview.png?v=20261118">
+    <link rel="alternate" hreflang="es" href="https://agusquartz.github.io/">
+    <link rel="alternate" hreflang="en" href="https://agusquartz.github.io/en/">
+    <link rel="alternate" hreflang="pt-BR" href="https://agusquartz.github.io/pt/">
+    <link rel="alternate" hreflang="zh-Hant" href="https://agusquartz.github.io/zh-hant/">
+    <link rel="alternate" hreflang="ru" href="https://agusquartz.github.io/ru/">
+    <link rel="alternate" hreflang="de" href="https://agusquartz.github.io/de/">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -27,8 +34,8 @@
           "@type": "ProfilePage",
           "@id": "https://agusquartz.github.io/#profile",
           "url": "https://agusquartz.github.io/",
-          "name": "Agustin Argüello | Software Developer",
-          "dateModified": "2026-11-06",
+          "name": "Agustin Argüello | Desarrollador de software",
+          "dateModified": "2026-11-18",
           "mainEntity": { "@id": "https://agusquartz.github.io/#person" },
           "mentions": [
             {
@@ -44,7 +51,7 @@
           "name": "Agustin Argüello",
           "alternateName": "agusquartz",
           "url": "https://agusquartz.github.io/",
-          "jobTitle": "Software Developer",
+          "jobTitle": "Desarrollador de software",
           "image": "https://avatars.githubusercontent.com/u/98700005",
           "sameAs": ["https://github.com/agusquartz"]
         },
@@ -240,6 +247,12 @@
             text-shadow: 0 0 8px var(--text-glow);
         }
 
+        .nav-links a.nav-contact {
+            color: #fff;
+            border: 1px solid rgba(143, 183, 237, 0.34);
+            background: rgba(83, 125, 184, 0.16);
+        }
+
         .nav-links a svg {
             stroke: currentColor;
             transition: stroke 0.3s ease;
@@ -294,18 +307,20 @@
             justify-content: space-between;
             gap: 18px;
             padding: 8px 9px;
+            box-sizing: border-box;
             border: 0;
             border-radius: 5px;
             background: transparent;
             color: #dce5f0;
             font: inherit;
             font-size: 0.8rem;
+            text-decoration: none;
             text-align: left;
             cursor: pointer;
         }
 
         .language-option:hover { background: #34404f; }
-        .language-option[aria-current="true"] { color: #fff; font-weight: 800; }
+        .language-option[aria-current="page"] { color: #fff; font-weight: 800; }
         .language-option-code { color: #9dacbd; font-size: 0.7rem; font-weight: 800; }
 
         /* --- HERO --- */
@@ -403,47 +418,17 @@
             box-shadow: 0 16px 34px rgba(0, 0, 0, 0.22);
         }
 
-        .hero-card-eyebrow {
-            margin: 0 0 14px;
-            color: #a8c9f7;
-            font-size: 0.78rem;
-            font-weight: 700;
-            letter-spacing: 0.09em;
-            text-transform: uppercase;
-        }
-
         .hero-card h2 {
-            margin: 0;
+            margin: 0 0 18px;
             color: #edf0f4;
             font-size: clamp(1.55rem, 2.6vw, 2rem);
             line-height: 1.15;
             letter-spacing: -0.035em;
         }
 
-        .hero-card-copy {
-            margin: 14px 0 20px;
-            color: #b5bec9;
-            font-size: 0.98rem;
-            line-height: 1.65;
-        }
-
-        .hero-card-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            padding-top: 16px;
-            border-top: 1px solid rgba(170, 190, 218, 0.18);
-        }
-
-        .hero-card-tags span {
-            padding: 6px 9px;
-            border: 1px solid rgba(170, 190, 218, 0.18);
-            border-radius: 6px;
-            background: rgba(170, 190, 218, 0.06);
-            color: #d5dce6;
-            font-size: 0.78rem;
-            font-weight: 600;
-        }
+        .hero-card-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 18px; padding-top: 16px; border-top: 1px solid rgba(170, 190, 218, 0.18); }
+        .hero-card-area h3 { margin: 0 0 5px; color: #a8c9f7; font-size: 0.78rem; line-height: 1.35; }
+        .hero-card-area p { margin: 0; color: #b5bec9; font-size: 0.82rem; line-height: 1.45; }
 
         /* =========================================
            SECCIÓN: SKILLS & TECNOLOGÍAS
@@ -761,6 +746,21 @@
         .project-group + .project-group { margin-top: 14px; }
         .project-group-title { margin: 0; color: #b7c3d2; font-size: 0.76rem; font-weight: 750; letter-spacing: 0.1em; text-transform: uppercase; }
 
+        .services-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 25px; }
+        .service-card h3 { color: #a8c9f7; }
+        .service-platforms { margin: 0; color: #b9c5d3; line-height: 1.55; font-size: 0.9rem; }
+        .faq-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; align-items: start; }
+        .faq-item {
+            background: var(--nav-bg);
+            border: 1px solid var(--nav-border);
+            border-radius: 12px;
+            padding: 16px 18px;
+        }
+        .faq-item summary { color: #edf0f4; font-weight: 650; line-height: 1.45; cursor: pointer; }
+        .faq-item summary::marker { color: #a8c9f7; }
+        .faq-item p { margin: 12px 0 0; color: rgba(255, 255, 255, 0.68); line-height: 1.6; font-size: 0.9rem; }
+        .faq-item[open] { border-color: rgba(143, 183, 237, 0.45); }
+
         /* =========================================
            SECCIÓN: ABOUT / CONTACTO
            ========================================= */
@@ -791,19 +791,24 @@
         }
 
         .contact-box {
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 14px;
         }
 
-        .contact-item { display: grid; gap: 5px; }
+        .contact-item { display: grid; justify-items: center; gap: 7px; text-align: center; }
         .contact-label { color: #aeb9c6; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
-        .contact-email { color: #edf0f4; font-size: 0.95rem; text-decoration: none; word-break: break-word; }
+        .contact-email { color: #edf0f4; font-size: 0.95rem; line-height: 1.4; text-decoration: none; word-break: break-word; }
         .contact-email:hover { color: #a8c9f7; }
-        .contact-copy { align-self: flex-start; min-height: 30px; padding: 5px 9px; border: 1px solid rgba(143, 183, 237, 0.28); border-radius: 6px; background: transparent; color: #a8c9f7; font: inherit; font-size: 0.78rem; font-weight: 650; cursor: pointer; }
+        .contact-copy { justify-self: center; width: 88px; min-height: 32px; padding: 6px 12px; border: 1px solid rgba(143, 183, 237, 0.28); border-radius: 7px; background: rgba(83, 125, 184, 0.08); color: #a8c9f7; font: inherit; font-size: 0.78rem; font-weight: 650; cursor: pointer; transition: background 0.2s ease, border-color 0.2s ease; }
         .contact-copy:hover { background: rgba(83, 125, 184, 0.16); border-color: #8fb7ed; }
-        .contact-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 3px; }
-        .contact-actions .button { min-height: 36px; padding: 7px 11px; font-size: 0.82rem; }
+        #contact { scroll-margin-top: 70px; }
+        .contact-socials { grid-column: 1 / -1; display: flex; justify-content: center; gap: 14px; margin-top: 54px; }
+        .contact-social-link { display: inline-flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; width: 74px; height: 78px; padding: 7px 6px; border: 1px solid rgba(143, 183, 237, 0.28); border-radius: 11px; color: #a8c9f7; text-decoration: none; transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease; }
+        .contact-social-link:hover { background: rgba(83, 125, 184, 0.16); border-color: #8fb7ed; color: #edf0f4; }
+        .contact-social-link svg { width: 26px; height: 26px; flex: 0 0 auto; }
+        .contact-social-link span { color: #b9c5d3; font-size: 0.75rem; font-weight: 700; line-height: 1; }
+        .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 
         .contact-box .button {
             justify-content: center;
@@ -871,6 +876,8 @@
                 grid-template-columns: 1fr;
             }
 
+            .services-grid, .faq-grid { grid-template-columns: 1fr; }
+
             .project-card.featured-project { grid-template-columns: 1fr; }
             #professional-work .projects-grid { grid-template-columns: 1fr; }
             .featured-project-facts { border-left: 0; border-top: 1px solid rgba(170, 190, 218, 0.2); padding: 8px 0 0; }
@@ -880,16 +887,21 @@
                 text-align: center;
             }
 
+            .contact-box { grid-template-columns: 1fr; }
+            .contact-socials { grid-column: auto; justify-content: center; margin-top: 26px; }
+            .contact-copy { justify-self: center; }
+
             .hero-text { margin: 0 auto 30px auto; }
             .hero-actions { justify-content: center; }
             .hero-card { width: 100%; text-align: left; }
+            .hero-card-grid { grid-template-columns: 1fr; gap: 14px; }
             .section-title::before { display: none; }
             .section-title { padding-left: 0; }
             .project-icon { margin: 0 auto; }
             .project-tags { justify-content: center; }
         }
 
-        @media (max-width: 650px) {
+        @media (max-width: 1110px) {
             .mobile-toggle { display: block; margin-left: 8px; }
             .language-switcher { margin-left: auto; }
             .nav-links {
@@ -902,7 +914,9 @@
             }
             .nav-links a { width: 100%; box-sizing: border-box; }
             .nav-links.active { opacity: 1; visibility: visible; transform: translateY(0); }
+        }
 
+        @media (max-width: 760px) {
             #hero-title { font-size: 2.5rem; }
 
             .skills-cards-container { grid-template-columns: 1fr; }
@@ -938,28 +952,31 @@
         </div>
 
         <div class="nav-links" id="menu-links">
-            <a href="#about" data-i18n="nav.about">Sobre mí</a>
-            <a href="#professional-work" data-i18n="nav.projects">Proyectos</a>
-            <a href="#skills" data-i18n="nav.skills">Habilidades</a>
+            <a href="#about">Sobre mí</a>
+            <a href="#professional-work">Proyectos</a>
+            <a href="#services">Servicios</a>
+            <a href="#faq">FAQ</a>
+            <a href="#skills">Habilidades</a>
             <a href="https://github.com/agusquartz" target="_blank" rel="me noopener">GitHub</a>
+            <a class="nav-contact" href="#contact">Contactar</a>
         </div>
 
         <div class="language-switcher" id="languageSwitcher">
-            <button class="language-button" id="languageButton" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="languageMenu" aria-label="Cambiar idioma" data-i18n-aria-label="language.aria">
+            <button class="language-button" id="languageButton" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="languageMenu"  aria-label="Cambiar idioma">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/></svg>
                 <span class="language-code-current" id="languageCode">ES</span>
             </button>
             <div class="language-menu" id="languageMenu" aria-label="Selector de idioma">
-                <button class="language-option" type="button" data-locale="es" lang="es" aria-current="true"><span>Español</span><span class="language-option-code">ES</span></button>
-                <button class="language-option" type="button" data-locale="en" lang="en"><span>English</span><span class="language-option-code">EN</span></button>
-                <button class="language-option" type="button" data-locale="pt" lang="pt-BR"><span>Português</span><span class="language-option-code">PT</span></button>
-                <button class="language-option" type="button" data-locale="zh-Hant" lang="zh-Hant"><span>繁體中文</span><span class="language-option-code">繁中</span></button>
-                <button class="language-option" type="button" data-locale="ru" lang="ru"><span>Русский</span><span class="language-option-code">RU</span></button>
-                <button class="language-option" type="button" data-locale="de" lang="de"><span>Deutsch</span><span class="language-option-code">DE</span></button>
+                <a class="language-option" href="/" lang="es" aria-current="page"><span>Español</span><span class="language-option-code">ES</span></a>
+                <a class="language-option" href="/en/" lang="en"><span>English</span><span class="language-option-code">EN</span></a>
+                <a class="language-option" href="/pt/" lang="pt-BR"><span>Português</span><span class="language-option-code">PT</span></a>
+                <a class="language-option" href="/zh-hant/" lang="zh-Hant"><span>繁體中文</span><span class="language-option-code">繁中</span></a>
+                <a class="language-option" href="/ru/" lang="ru"><span>Русский</span><span class="language-option-code">RU</span></a>
+                <a class="language-option" href="/de/" lang="de"><span>Deutsch</span><span class="language-option-code">DE</span></a>
             </div>
         </div>
 
-        <button class="mobile-toggle" id="btn-menu" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-links" data-i18n-aria-label="menu.open">
+        <button class="mobile-toggle" id="btn-menu" aria-expanded="false" aria-controls="menu-links"  aria-label="Abrir menú">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="4" y1="12" x2="20" y2="12"></line>
                 <line x1="4" y1="6" x2="20" y2="6"></line>
@@ -973,14 +990,14 @@
 
 <section class="hero" aria-labelledby="hero-title">
     <div>
-        <div class="eyebrow" data-i18n="hero.eyebrow">Software Developer · Backend &amp; Systems</div>
+        <div class="eyebrow">Desarrollador de software</div>
         <h1 id="hero-title"><span class="gradient-text">Agustin Argüello</span></h1>
         <p class="hero-text">
-            <span data-i18n="hero.copy">Desarrollador de software enfocado en sistemas backend, APIs, infraestructura y aplicaciones prácticas. Trabajo principalmente con Rust y también desarrollo backend empresarial con Java y Spring Boot, con especial atención a la arquitectura, las integraciones seguras y el despliegue de aplicaciones.</span>
+            <span>Desarrollo software para ayudar a comercios y empresas a organizar su operación y resolver necesidades concretas.</span>
         </p>
 
         <div class="hero-actions">
-            <a class="button primary" href="#professional-work" data-i18n="hero.projects">Ver proyectos</a>
+            <a class="button primary" href="#professional-work">Ver proyectos</a>
             <a class="button" href="https://github.com/agusquartz" target="_blank" rel="me noopener">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.03c3.15-.38 6.5-1.4 6.5-7a5.2 5.2 0 0 0-1.5-3.8 4.8 4.8 0 0 0 .1-3.7s-1.2-.4-3.9 1.4a13.3 13.3 0 0 0-7 0c-2.7-1.8-3.9-1.4-3.9-1.4a4.8 4.8 0 0 0 .1 3.7 5.2 5.2 0 0 0-1.5 3.8c0 5.6 3.3 6.6 6.5 7a4.8 4.8 0 0 0-1 3.03V22"/><path d="M9 20c-5 1.5-5-2.5-7-3"/></svg>
                 GitHub
@@ -988,84 +1005,102 @@
         </div>
     </div>
 
-    <aside class="hero-card" aria-label="Áreas de desarrollo" data-i18n-aria-label="hero.card.aria">
-        <p class="hero-card-eyebrow" data-i18n="hero.card.eyebrow">Áreas de desarrollo</p>
-        <h2 data-i18n="hero.card.title">Backend, aplicaciones e infraestructura.</h2>
-        <p class="hero-card-copy" data-i18n="hero.card.copy">Desarrollo servicios, APIs y aplicaciones, desde la lógica de negocio y las bases de datos hasta las integraciones y el despliegue.</p>
-        <div class="hero-card-tags" aria-label="Áreas" data-i18n-aria-label="hero.card.tagsAria">
-            <span data-i18n="hero.card.backend">Backend &amp; APIs</span>
-            <span data-i18n="hero.card.webDesktop">Web &amp; Desktop</span>
-            <span data-i18n="hero.card.databases">Databases</span>
-            <span data-i18n="hero.card.infrastructure">Infrastructure</span>
+    <aside class="hero-card"  aria-label="Áreas de desarrollo">
+        <h2>Áreas de desarrollo</h2>
+        <div class="hero-card-grid">
+            <div class="hero-card-area"><h3>Desarrollo de software</h3><p>Frontend, backend, APIs y aplicaciones.</p></div>
+            <div class="hero-card-area"><h3>Datos y arquitectura</h3><p>Diseño de sistemas, bases de datos y su gestión.</p></div>
+            <div class="hero-card-area"><h3>Infraestructura y despliegue</h3><p>Servidores, Linux, cloud, DevOps y puesta en producción.</p></div>
+            <div class="hero-card-area"><h3>Análisis técnico</h3><p>Investigación, evaluación de opciones e integraciones.</p></div>
         </div>
     </aside>
 </section>
 
 <section class="projects-section" id="professional-work" aria-labelledby="professional-title">
-    <h2 class="section-title" id="professional-title" data-i18n="professional.title">Trabajo profesional</h2>
+    <h2 class="section-title" id="professional-title">Trabajo profesional</h2>
 
     <div class="projects-grid">
         <article class="project-card featured-project professional-card">
             <div class="featured-project-main">
-                <div class="featured-project-kicker" data-i18n="professional.sysman.eyebrow">Software profesional · desde 2024</div>
-                <span class="professional-status" data-i18n="professional.sysman.status">En uso real</span>
+                <div class="featured-project-kicker">Software profesional · desde 2024</div>
+                <span class="professional-status">En uso real</span>
                 <h3>SYSMAN</h3>
-                <p class="project-subtitle" data-i18n="professional.sysman.subtitle">ERP cloud y aplicación de escritorio</p>
-                <p data-i18n="professional.sysman.description">Sistema empresarial en la nube y escritorio para ventas, inventario, caja y sucursales. Lo desarrollé desde cero y actualmente lo utilizan negocios reales.</p>
-                <p class="project-role" data-i18n="professional.sysman.role">Mi responsabilidad: arquitectura, frontend, backend, base de datos, integraciones y despliegue.</p>
+                <p class="project-subtitle">ERP cloud y aplicación de escritorio</p>
+                <p>SYSMAN reúne ventas, productos, cobros, caja y sucursales, con operación multimoneda. Está en uso real desde 2024 y evoluciona junto a comerciantes. El equipo observa cómo se utiliza cada versión y evalúa sus comentarios y sugerencias para orientar las mejoras del producto. La aplicación de escritorio funciona en Windows, macOS y Linux; Linux es la plataforma preferida.</p>
+                <p class="project-role">Desarrollé SYSMAN de principio a fin: arquitectura, frontend, backend, base de datos, integraciones y despliegue. Su diseño single-tenant permite que cada empresa opere de forma independiente.</p>
                 <div class="project-tags"><span>Rust</span><span>Axum</span><span>Tokio</span><span>PostgreSQL</span><span>Next.js</span><span>Tauri</span><span>Linux</span></div>
                 <div class="project-actions">
-                    <a class="project-link" href="https://eostech.dev/#sysman" target="_blank" rel="noopener" data-i18n="professional.sysman.link">Conocer el producto en EOSTECH ↗</a>
-                    <span class="project-source" data-i18n="professional.sysman.source">Privado · producto comercial</span>
+                    <a class="project-link" href="https://eostech.dev/#sysman" target="_blank" rel="noopener">Conocer SYSMAN en EOSTECH ↗</a>
+                    <span class="project-source">Privado · producto comercial</span>
                 </div>
             </div>
         </article>
 
         <article class="project-card eostech-card">
-            <div class="featured-project-kicker" data-i18n="professional.eostech.eyebrow">Sitio web corporativo</div>
+            <div class="featured-project-kicker">Sitio web corporativo</div>
             <div class="eostech-heading">
-                <img class="eostech-icon" src="./assets/projects/eostech/favicon.svg" alt="" loading="lazy" width="38" height="38">
+                <img class="eostech-icon" src="/assets/projects/eostech/favicon.svg" alt="" loading="lazy" width="38" height="38">
                 <h3>EOSTECH</h3>
             </div>
-            <p data-i18n="professional.eostech.description">Sitio web corporativo para presentar los productos, servicios y soluciones tecnológicas de EOSTECH, con navegación clara y contenido disponible en seis idiomas.</p>
-            <div class="project-tags"><span data-i18n="professional.eostech.frontend">Frontend</span><span data-i18n="professional.eostech.web">Desarrollo web</span><span data-i18n="professional.eostech.multilingual">Multilenguaje</span></div>
-            <div class="project-actions"><a class="project-link" href="https://eostech.dev/" target="_blank" rel="noopener" data-i18n="professional.eostech.link">Visitar sitio web ↗</a></div>
+            <p>Sitio web corporativo para presentar los productos, servicios y soluciones tecnológicas de EOSTECH, con navegación clara y contenido disponible en seis idiomas.</p>
+            <div class="project-tags"><span>Frontend</span><span>Desarrollo web</span><span>Multilenguaje</span></div>
+            <div class="project-actions"><a class="project-link" href="https://eostech.dev/" target="_blank" rel="noopener">Visitar sitio web ↗</a></div>
         </article>
     </div>
 
     <article class="project-card featured-project java-erp-card">
         <div class="featured-project-main">
-            <div class="featured-project-kicker" data-i18n="professional.printing.eyebrow">Proyecto de software independiente</div>
-            <span class="professional-status" data-i18n="professional.printing.status">Pruebas y refinamiento</span>
-            <h3 data-i18n="professional.printing.title">3D Printing ERP</h3>
-            <p class="project-subtitle" data-i18n="professional.printing.subtitle">ERP multitenant para empresas de impresión 3D</p>
-            <p data-i18n="professional.printing.description">ERP multitenant para empresas de impresión 3D. Gestiona inventario, compras, ventas, usuarios y operaciones comerciales, con flujos transaccionales, controles de seguridad y operación aislada por tenant.</p>
+            <div class="featured-project-kicker">Proyecto de software independiente</div>
+            <span class="professional-status">Pruebas y refinamiento</span>
+            <h3>3D Printing ERP</h3>
+            <p class="project-subtitle">ERP multitenant para empresas de impresión 3D</p>
+            <p>ERP multitenant para empresas de impresión 3D. Gestiona inventario, compras, ventas, usuarios y operaciones comerciales, con flujos transaccionales, controles de seguridad y operación aislada por tenant.</p>
             <div class="project-tags"><span>Java 21</span><span>Spring Boot</span><span>PostgreSQL</span><span>Hibernate</span><span>Liquibase</span><span>Redis</span></div>
             <div class="project-actions">
-                <span class="project-period" data-i18n="professional.printing.period">2026 – Presente</span>
-                <span class="project-source" data-i18n="professional.printing.source">Código privado</span>
+                <span class="project-period">2026 – Presente</span>
+                <span class="project-source">Código privado</span>
             </div>
         </div>
         <div class="featured-project-facts" aria-label="3D Printing ERP highlights">
-            <div class="featured-project-fact"><strong data-i18n="professional.printing.architectureLabel">Arquitectura multitenant</strong><span data-i18n="professional.printing.architecture">Servicios Spring Boot, API Gateway, Eureka y un módulo compartido.</span></div>
-            <div class="featured-project-fact"><strong data-i18n="professional.printing.securityLabel">Seguridad por tenant</strong><span data-i18n="professional.printing.security">JWT, RBAC y aislamiento por tenant.</span></div>
-            <div class="featured-project-fact"><strong data-i18n="professional.printing.persistenceLabel">Persistencia transaccional</strong><span data-i18n="professional.printing.persistence">Compras, ventas, movimientos de inventario y migraciones de base de datos.</span></div>
+            <div class="featured-project-fact"><strong>Arquitectura multitenant</strong><span>Servicios Spring Boot, API Gateway, Eureka y un módulo compartido.</span></div>
+            <div class="featured-project-fact"><strong>Seguridad por tenant</strong><span>JWT, RBAC y aislamiento por tenant.</span></div>
+            <div class="featured-project-fact"><strong>Persistencia transaccional</strong><span>Compras, ventas, movimientos de inventario y migraciones de base de datos.</span></div>
         </div>
     </article>
 </section>
 
+<section class="projects-section" id="services" aria-labelledby="services-title">
+    <h2 class="section-title" id="services-title">Servicios</h2>
+    <p class="service-platforms">Desarrollo a medida para empresas y comercios, desde una necesidad puntual hasta un sistema completo.</p>
+    <div class="services-grid">
+        <article class="project-card service-card">
+            <h3>Software a medida</h3>
+            <p>Puedes contratar un sistema completo, un módulo o una funcionalidad puntual, según el alcance que necesites.</p>
+        </article>
+        <article class="project-card service-card">
+            <h3>Arquitectura y desarrollo</h3>
+            <p>Diseño de arquitectura, frontend, backend, bases de datos e integraciones, de acuerdo con los requisitos del proyecto.</p>
+        </article>
+        <article class="project-card service-card">
+            <h3>Despliegue y continuidad</h3>
+            <p>Infraestructura, despliegue y, si lo necesitas, soporte, mantenimiento y alojamiento mensual.</p>
+        </article>
+    </div>
+    <p class="service-platforms">Trabajo para web, escritorio (Windows, macOS y Linux) y móviles (iOS y Android); las plataformas se definen para cada proyecto.</p>
+</section>
+
 <section class="projects-section" id="projects">
-    <h2 class="section-title" data-i18n="projects.title">Open source y otros proyectos</h2>
+    <h2 class="section-title">Open source y otros proyectos</h2>
 
     <div class="project-group">
-    <h3 class="project-group-title" data-i18n="projects.softwareTitle">Software Projects</h3>
+    <h3 class="project-group-title">Proyectos de software</h3>
     <div class="projects-grid">
 
         <article class="project-card featured-project">
             <div class="featured-project-main">
-                <div class="featured-project-kicker" data-i18n="projects.image.eyebrow">Proyecto open source destacado</div>
+                <div class="featured-project-kicker">Proyecto open source destacado</div>
                 <h3>Image Service</h3>
-                <p data-i18n="projects.image.copy">Servicio open source de procesamiento, optimización y almacenamiento de imágenes desarrollado con Rust y Axum. Valida y convierte imágenes a WebP, las almacena localmente o en servicios compatibles con S3, y las entrega directamente a las aplicaciones cliente mediante HTTP GET.</p>
+                <p>Servicio open source en Rust con endpoints HTTP que abstrae autenticación, procesamiento, control de concurrencia, almacenamiento y obtención de imágenes. SYSMAN lo utiliza en producción. Puedo desplegarlo en la infraestructura que necesites o integrarlo en otro sistema.</p>
                 <div class="project-tags">
                     <span>Rust</span>
                     <span>Axum</span>
@@ -1075,79 +1110,79 @@
                     <span>S3</span>
                 </div>
                 <div class="project-actions">
-                    <a class="project-link" href="https://github.com/agusquartz/image_service" target="_blank" rel="noopener" data-i18n="projects.image.link">Ver repositorio ↗</a>
-                    <a class="project-link" href="https://github.com/agusquartz/image_service/tree/main/docs" target="_blank" rel="noopener" data-i18n="projects.image.docs">Leer documentación ↗</a>
+                    <a class="project-link" href="https://github.com/agusquartz/image_service" target="_blank" rel="noopener">Ver repositorio ↗</a>
+                    <a class="project-link" href="https://github.com/agusquartz/image_service/tree/main/docs" target="_blank" rel="noopener">Leer documentación ↗</a>
                 </div>
             </div>
             <div class="featured-project-facts" aria-label="Image Service highlights">
-                <div class="featured-project-fact"><strong data-i18n="projects.image.uploadLabel">Procesamiento y validación</strong><span data-i18n="projects.image.upload">Validación de archivos, límites de decodificación, control de concurrencia y optimización WebP.</span></div>
-                <div class="featured-project-fact"><strong data-i18n="projects.image.architectureLabel">Arquitectura modular</strong><span data-i18n="projects.image.architecture">Separación entre API HTTP, procesamiento, almacenamiento y entrega de imágenes.</span></div>
-                <div class="featured-project-fact"><strong data-i18n="projects.image.storageLabel">Almacenamiento y entrega</strong><span data-i18n="projects.image.storage">Almacenamiento local o compatible con S3 mediante OpenDAL, lectura HTTP directa y documentación para configuración autoalojada.</span></div>
+                <div class="featured-project-fact"><strong>Procesamiento y validación</strong><span>Validación de archivos, límites de decodificación, concurrencia controlada y optimización WebP. El tamaño procesable depende de la configuración y los recursos del servidor.</span></div>
+                <div class="featured-project-fact"><strong>Arquitectura modular</strong><span>Separación entre API HTTP, procesamiento, almacenamiento y entrega de imágenes.</span></div>
+                <div class="featured-project-fact"><strong>Almacenamiento y entrega</strong><span>Almacenamiento local o compatible con S3 mediante OpenDAL, lectura HTTP directa y documentación para configuración autoalojada.</span></div>
             </div>
         </article>
 
         <article class="project-card">
             <h3>rust-postgres-pool</h3>
-            <p data-i18n="projects.pool.copy">Ejemplo de gestión asíncrona de conexiones PostgreSQL con Rust, Tokio y deadpool-postgres. Explora pooling de conexiones, transacciones, configuración y manejo de errores.</p>
+            <p>Ejemplo de gestión asíncrona de conexiones PostgreSQL con Rust, Tokio y deadpool-postgres. Explora pooling de conexiones, transacciones, configuración y manejo de errores.</p>
             <div class="project-tags"><span>Rust</span><span>Tokio</span><span>PostgreSQL</span></div>
-            <div class="project-actions"><a class="project-link" href="https://github.com/agusquartz/rust-postgres-pool" target="_blank" rel="noopener" data-i18n="projects.pool.link">Ver repositorio ↗</a></div>
+            <div class="project-actions"><a class="project-link" href="https://github.com/agusquartz/rust-postgres-pool" target="_blank" rel="noopener">Ver repositorio ↗</a></div>
         </article>
 
         <article class="project-card">
             <h3>http-two-cookies</h3>
-            <p data-i18n="projects.cookies.copy">Ejemplo de servidor HTTP en Rust que explora autenticación JWT y protección CSRF utilizando un enfoque de dos cookies con Axum y Tokio.</p>
+            <p>Ejemplo de servidor HTTP en Rust que explora autenticación JWT y protección CSRF utilizando un enfoque de dos cookies con Axum y Tokio.</p>
             <div class="project-tags"><span>Rust</span><span>Axum</span><span>JWT</span><span>CSRF</span></div>
-            <div class="project-actions"><a class="project-link" href="https://github.com/agusquartz/http-two-cookies" target="_blank" rel="noopener" data-i18n="projects.cookies.link">Ver repositorio ↗</a></div>
+            <div class="project-actions"><a class="project-link" href="https://github.com/agusquartz/http-two-cookies" target="_blank" rel="noopener">Ver repositorio ↗</a></div>
         </article>
 
         <article class="project-card">
             <h3>Academic Progress</h3>
             <p>
-                <span data-i18n="projects.academic.copy">Herramienta para seguir el avance académico, consultar correlativas y organizar materias en una malla curricular.</span>
+                <span>Herramienta para seguir el avance académico, consultar correlativas y organizar materias en una malla curricular.</span>
             </p>
             <div class="project-tags">
                 <span>JavaScript</span>
-                <span data-i18n="projects.academic.education">Educación</span>
-                <span data-i18n="projects.academic.planning">Planificación</span>
+                <span>Educación</span>
+                <span>Planificación</span>
             </div>
             <div class="project-actions">
-                <a class="project-link" href="./academic-progress/" data-i18n="projects.academic.open">Abrir Academic Progress</a>
-                <a class="project-link" href="./academic-progress/curriculum-builder/" data-i18n="projects.academic.create">Crear malla</a>
+                <a class="project-link" href="/academic-progress/">Abrir Academic Progress</a>
+                <a class="project-link" href="/academic-progress/curriculum-builder/">Crear malla</a>
             </div>
         </article>
     </div>
     </div>
 
     <div class="project-group">
-    <h3 class="project-group-title" data-i18n="projects.academicTitle">Academic &amp; Experimental Projects</h3>
+    <h3 class="project-group-title">Proyectos académicos y experimentales</h3>
     <div class="projects-grid">
         <article class="project-card">
             <h3>Simon Says ASM</h3>
             <p>
-                <span data-i18n="projects.simon.copy">Juego de memoria en Assembly 8086 con mouse, pantallas, niveles de dificultad e interrupciones BIOS/DOS.</span>
+                <span>Juego de memoria en Assembly 8086 con mouse, pantallas, niveles de dificultad e interrupciones BIOS/DOS.</span>
             </p>
             <div class="project-tags">
                 <span>Assembly 8086</span>
                 <span>emu8086</span>
-                <span data-i18n="projects.simon.game">Juego</span>
+                <span>Juego</span>
             </div>
             <div class="project-actions">
-                <a class="project-link" href="./simon-says-asm/" data-i18n="projects.simon.open">Abrir proyecto</a>
+                <a class="project-link" href="/simon-says-asm/">Abrir proyecto</a>
             </div>
         </article>
 
         <article class="project-card">
             <h3>Huffman</h3>
             <p>
-                <span data-i18n="projects.huffman.copy">Material interactivo sobre compresión sin pérdida, árboles de Huffman, frecuencias y codificación de bits.</span>
+                <span>Material interactivo sobre compresión sin pérdida, árboles de Huffman, frecuencias y codificación de bits.</span>
             </p>
             <div class="project-tags">
                 <span>C</span>
-                <span data-i18n="projects.huffman.algorithms">Algoritmos</span>
-                <span data-i18n="projects.huffman.compression">Compresión</span>
+                <span>Algoritmos</span>
+                <span>Compresión</span>
             </div>
             <div class="project-actions">
-                <a class="project-link" href="./HUFFMAN/" data-i18n="projects.huffman.open">Abrir Huffman</a>
+                <a class="project-link" href="/HUFFMAN/">Abrir Huffman</a>
             </div>
         </article>
     </div>
@@ -1155,10 +1190,10 @@
 </section>
 
 <section class="skills-section" id="skills">
-    <h2 class="section-title" data-i18n="skills.title">Habilidades Técnicas</h2>
+    <h2 class="section-title">Habilidades Técnicas</h2>
     <div class="skills-cards-container">
         <div class="skill-card">
-            <h3 data-i18n="skills.backend">Backend</h3>
+            <h3>Backend</h3>
             <div class="skills-grid">
                 <div class="skill-item"><i class="devicon-rust-plain"></i><span>Rust</span></div>
                 <div class="skill-item"><span class="skill-mark">Ax</span><span>Axum</span></div>
@@ -1170,7 +1205,7 @@
             </div>
         </div>
         <div class="skill-card">
-            <h3 data-i18n="skills.storage">Databases &amp; Storage</h3>
+            <h3>Bases de datos y almacenamiento</h3>
             <div class="skills-grid">
                 <div class="skill-item"><i class="devicon-postgresql-plain"></i><span>PostgreSQL</span></div>
                 <div class="skill-item"><i class="devicon-microsoftsqlserver-plain"></i><span>SQL Server</span></div>
@@ -1180,7 +1215,7 @@
             </div>
         </div>
         <div class="skill-card">
-            <h3 data-i18n="skills.webDesktop">Web &amp; Desktop</h3>
+            <h3>Web y escritorio</h3>
             <div class="skills-grid">
                 <div class="skill-item"><i class="devicon-javascript-plain"></i><span>JavaScript</span></div>
                 <div class="skill-item"><i class="devicon-typescript-plain"></i><span>TypeScript</span></div>
@@ -1191,7 +1226,7 @@
             </div>
         </div>
         <div class="skill-card">
-            <h3 data-i18n="skills.infrastructure">Infrastructure &amp; Tools</h3>
+            <h3>Infraestructura y herramientas</h3>
             <div class="skills-grid">
                 <div class="skill-item"><i class="devicon-linux-plain"></i><span>Linux</span></div>
                 <div class="skill-item"><i class="devicon-docker-plain"></i><span>Docker</span></div>
@@ -1205,41 +1240,66 @@
     </div>
 </section>
 
+<section class="projects-section faq-section" id="faq" aria-labelledby="faq-title">
+    <h2 class="section-title" id="faq-title">Preguntas frecuentes</h2>
+    <div class="faq-grid">
+        <details class="faq-item"><summary>¿Cuánto cuesta un proyecto?</summary><p>No tengo precios fijos. Cada presupuesto se define según el proyecto y su alcance.</p></details>
+        <details class="faq-item"><summary>¿Cuánto suele tardar un proyecto?</summary><p>El plazo se estima al definir los requisitos y el alcance. La propuesta establece las etapas y entregas previstas.</p></details>
+        <details class="faq-item"><summary>¿Estás disponible para nuevos proyectos?</summary><p>La disponibilidad puede variar. Escríbeme con una breve descripción de lo que necesitas para consultar fechas.</p></details>
+        <details class="faq-item"><summary>¿Trabajas de forma remota?</summary><p>Sí. Trabajo de forma remota durante todo el proyecto.</p></details>
+        <details class="faq-item"><summary>¿Hay reuniones presenciales?</summary><p>En proyectos de gran alcance, podemos coordinar encuentros presenciales cuando el trabajo lo requiera. Puedo viajar dentro de Paraguay y, si un proyecto grande lo necesita, también al exterior. Si prefieres reunirte conmigo en persona, estoy en Encarnación, Paraguay.</p></details>
+        <details class="faq-item"><summary>¿Cómo se organizan los pagos y los cambios de requisitos?</summary><p>Trabajo principalmente por hitos. Si cambian los requisitos, reviso el nuevo alcance y preparo una propuesta actualizada. El trabajo pendiente que no dependa del cambio puede continuar mientras lo analizo; si lo pendiente sí cambia, pauso esa parte y reviso la propuesta lo antes posible.</p></details>
+        <details class="faq-item"><summary>¿Quién conserva los derechos del código?</summary><p>Las condiciones sobre el código desarrollado para el cliente y los componentes reutilizables se acuerdan según las necesidades y la sensibilidad de cada proyecto.</p></details>
+        <details class="faq-item"><summary>¿Ofreces soporte después del lanzamiento?</summary><p>Sí. Podemos acordar soporte o mantenimiento con pagos recurrentes mensuales o anuales. También puedo desplegar y alojar el sistema; la cuota incluye el alojamiento y el mantenimiento acordados.</p></details>
+        <details class="faq-item"><summary>¿Puedes firmar un acuerdo de confidencialidad?</summary><p>Sí. Puedo firmar un acuerdo de confidencialidad antes de que compartas detalles sensibles del proyecto.</p></details>
+        <details class="faq-item"><summary>¿Cómo tienes en cuenta la accesibilidad?</summary><p>La accesibilidad se evalúa al definir los requisitos, considerando quiénes usarán el sistema y en qué contexto.</p></details>
+    </div>
+</section>
+
 <section class="about-section" id="about">
-    <h2 class="section-title" data-i18n="about.title">Sobre mí y contacto</h2>
+    <h2 class="section-title">Sobre mí y contacto</h2>
 
     <div class="about-card">
         <div>
-            <p data-i18n-html="about.first">Soy <span class="about-highlight">Agustin Argüello</span>, desarrollador de software enfocado en sistemas backend, arquitectura de aplicaciones e infraestructura.</p>
+            <p>Soy <span class="about-highlight">Agustin Argüello</span>, desarrollador de software enfocado en sistemas backend, arquitectura de aplicaciones e infraestructura.</p>
             <br>
-            <p data-i18n="about.second">Trabajo principalmente con Rust, desarrollando APIs, servicios y herramientas de software. También construyo aplicaciones web y de escritorio, integro diferentes tecnologías y trabajo con bases de datos relacionales.</p>
+            <p>Trabajo principalmente con Rust, desarrollando APIs, servicios y herramientas de software. También construyo aplicaciones web y de escritorio, integro diferentes tecnologías y trabajo con bases de datos relacionales.</p>
             <br>
-            <p data-i18n="about.third">He desarrollado productos empresariales de extremo a extremo, desde su arquitectura y lógica de negocio hasta el frontend, la infraestructura y su puesta en producción. Creo software mantenible que resuelve problemas reales y puede evolucionar con sus usuarios.</p>
+            <p>He desarrollado productos empresariales de extremo a extremo, desde su arquitectura y lógica de negocio hasta el frontend, la infraestructura y su puesta en producción. Creo software mantenible que resuelve problemas reales y puede evolucionar con sus usuarios.</p>
         </div>
 
-        <div class="contact-box">
+        <div class="contact-box" id="contact">
             <div class="contact-item">
-                <span class="contact-label" data-i18n="contact.emailLabel">Correo electrónico</span>
+                <span class="contact-label">Correo electrónico</span>
                 <a class="contact-email" href="mailto:agusquartz@gmail.com">agusquartz@gmail.com</a>
-                <button class="contact-copy" type="button" id="copyEmail" data-i18n="contact.copy">Copiar</button>
+                <button class="contact-copy" type="button" id="copyEmail">Copiar</button>
+                <span class="visually-hidden" id="copyEmailStatus" role="status" aria-live="polite"></span>
             </div>
             <div class="contact-item">
-                <span class="contact-label">GitHub</span>
-                <a class="button primary" href="https://github.com/agusquartz" target="_blank" rel="me noopener">@agusquartz</a>
-            </div>
-            <div class="contact-item">
-                <span class="contact-label" data-i18n="contact.phoneLabel">Teléfono</span>
+                <span class="contact-label">Teléfono</span>
                 <a class="contact-email" href="tel:+595974551760">+595 974 551 760</a>
-                <div class="contact-actions">
-                    <a class="button" href="https://wa.me/595974551760" target="_blank" rel="noopener">WhatsApp</a>
-                    <a class="button" href="https://t.me/agusquartz" target="_blank" rel="noopener">Telegram</a>
-                </div>
+                <button class="contact-copy" type="button" id="copyPhone">Copiar</button>
+                <span class="visually-hidden" id="copyPhoneStatus" role="status" aria-live="polite"></span>
+            </div>
+            <div class="contact-socials">
+                <a class="contact-social-link" href="https://github.com/agusquartz" target="_blank" rel="me noopener" aria-label="GitHub" title="GitHub">
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.56.1.76-.24.76-.54v-2.1c-3.1.67-3.76-1.32-3.76-1.32-.5-1.28-1.23-1.62-1.23-1.62-1.01-.69.08-.68.08-.68 1.12.08 1.71 1.15 1.71 1.15 1 1.7 2.63 1.21 3.27.93.1-.72.39-1.21.71-1.49-2.48-.28-5.09-1.24-5.09-5.51 0-1.22.44-2.22 1.15-3-.12-.28-.5-1.42.11-2.96 0 0 .94-.3 3.05 1.15a10.6 10.6 0 0 1 5.55 0c2.12-1.45 3.05-1.15 3.05-1.15.61 1.54.23 2.68.12 2.96.71.78 1.14 1.78 1.14 3 0 4.28-2.61 5.22-5.1 5.5.4.35.76 1.02.76 2.06v3.08c0 .3.2.65.77.54A11.1 11.1 0 0 0 12 .9Z"/></svg>
+                    <span>GitHub</span>
+                </a>
+                <a class="contact-social-link" href="https://t.me/agusquartz" target="_blank" rel="noopener" aria-label="Telegram" title="Telegram">
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.94 4.66 18.7 19.94c-.24 1.08-.88 1.35-1.78.84l-4.92-3.63-2.37 2.28c-.26.26-.48.48-.98.48l.35-5.01 9.12-8.24c.4-.35-.09-.55-.62-.2L6.23 13.58l-4.84-1.51c-1.05-.33-1.07-1.05.22-1.56L20.55 3.1c.87-.32 1.63.21 1.39 1.56Z"/></svg>
+                    <span>Telegram</span>
+                </a>
+                <a class="contact-social-link" href="https://wa.me/595974551760" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp">
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m15.271 13.21c.578.185 1.078.416 1.543.7l-.031-.018c.529.235.986.51 1.403.833l-.015-.011c.02.061.032.13.032.203 0 .011 0 .021-.001.032v-.001c-.015.429-.11.832-.271 1.199l.008-.021c-.231.463-.616.82-1.087 1.01l-.014.005c-.459.243-1.001.393-1.576.411h-.006c-1.1-.146-2.094-.484-2.988-.982l.043.022c-1.022-.468-1.895-1.083-2.636-1.829l-.001-.001c-.824-.857-1.579-1.795-2.248-2.794l-.047-.074c-.636-.829-1.041-1.866-1.1-2.995l-.001-.013v-.124c.032-.975.468-1.843 1.144-2.447l.003-.003c.207-.206.491-.335.805-.341h.001c.101.003.198.011.292.025l-.013-.002c.087.013.188.021.292.023h.003c.019-.002.04-.003.062-.003.13 0 .251.039.352.105l-.002-.001c.107.118.189.261.238.418l.002.008q.124.31.512 1.364c.135.314.267.701.373 1.099l.014.063c-.076.361-.268.668-.533.889l-.003.002q-.535.566-.535.72c.004.088.034.168.081.234l-.001-.001c.405.829.936 1.533 1.576 2.119l.005.005c.675.609 1.446 1.132 2.282 1.54l.059.026c.097.063.213.103.339.109h.002q.233 0 .838-.752t.804-.752zm-3.147 8.216h.022c1.357 0 2.647-.285 3.814-.799l-.061.024c2.356-.994 4.193-2.831 5.163-5.124l.024-.063c.49-1.113.775-2.411.775-3.775s-.285-2.662-.799-3.837l.024.062c-.994-2.356-2.831-4.193-5.124-5.163l-.063-.024c-1.113-.49-2.411-.775-3.775-.775s-2.662.285-3.837.799l.062-.024c-2.356.994-4.193 2.831-5.163 5.124l-.024.063c-.49 1.117-.775 2.419-.775 3.787 0 2.141.698 4.12 1.879 5.72l-.019-.026-1.225 3.613 3.752-1.194c1.49 1.01 3.327 1.612 5.305 1.612h.047zm0-21.426h.033c1.628 0 3.176.342 4.575.959l-.073-.029c2.825 1.197 5.028 3.4 6.196 6.149l.029.076c.588 1.337.93 2.896.93 4.535s-.342 3.198-.959 4.609l.029-.074c-1.197 2.825-3.4 5.028-6.149 6.196l-.076.029c-1.327.588-2.875.93-4.503.93-.011 0-.023 0-.034 0h.002c-.016 0-.034 0-.053 0-2.059 0-3.992-.541-5.664-1.488l.057.03-6.465 2.078 2.109-6.279c-1.051-1.714-1.674-3.789-1.674-6.01 0-1.646.342-3.212.959-4.631l-.029.075c1.197-2.825 3.4-5.028 6.149-6.196l.076-.029c1.327-.588 2.875-.93 4.503-.93h.033-.002z"/></svg>
+                    <span>WhatsApp</span>
+                </a>
             </div>
         </div>
     </div>
 </section>
 
-<a href="#" class="back-to-top" aria-label="Volver al inicio" data-i18n-aria-label="backToTop">
+<a href="#" class="back-to-top"  aria-label="Volver al inicio">
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="m18 15-6-6-6 6"/>
     </svg>
@@ -1250,124 +1310,44 @@
     const menuLinks = document.getElementById('menu-links');
     const languageSwitcher = document.getElementById('languageSwitcher');
     const languageButton = document.getElementById('languageButton');
-    const languageCode = document.getElementById('languageCode');
     const copyEmailButton = document.getElementById('copyEmail');
-    const localeCodes = { es: 'ES', en: 'EN', pt: 'PT', 'zh-Hant': '繁中', ru: 'RU', de: 'DE' };
-    const documentLocales = { es: 'es', en: 'en', pt: 'pt-BR', 'zh-Hant': 'zh-Hant', ru: 'ru', de: 'de' };
-
-    function readTranslation(messages, path) {
-        return path.split('.').reduce((value, part) => value && value[part], messages);
-    }
-
-    function applyTranslations(messages, locale) {
-        window.currentMessages = messages;
-        document.querySelectorAll('[data-i18n]').forEach(element => {
-            const value = readTranslation(messages, element.dataset.i18n);
-            if (typeof value === 'string') element.textContent = value;
-        });
-
-        document.querySelectorAll('[data-i18n-html]').forEach(element => {
-            const value = readTranslation(messages, element.dataset.i18nHtml);
-            if (typeof value === 'string') element.innerHTML = value;
-        });
-
-        document.querySelectorAll('[data-i18n-aria-label]').forEach(element => {
-            const value = readTranslation(messages, element.dataset.i18nAriaLabel);
-            if (typeof value === 'string') element.setAttribute('aria-label', value);
-        });
-
-        document.querySelectorAll('[data-i18n-alt]').forEach(element => {
-            const value = readTranslation(messages, element.dataset.i18nAlt);
-            if (typeof value === 'string') element.setAttribute('alt', value);
-        });
-
-        const title = readTranslation(messages, 'meta.title');
-        if (typeof title === 'string') document.title = title;
-        document.documentElement.lang = documentLocales[locale] || locale;
-        languageCode.textContent = localeCodes[locale] || locale.toUpperCase();
-        document.querySelectorAll('.language-option').forEach(option => {
-            option.setAttribute('aria-current', String(option.dataset.locale === locale));
-        });
-    }
-
-    async function setLanguage(locale, { persist = true } = {}) {
-        try {
-            const response = await fetch(`./locales/${locale}.json?rev=6`);
-            if (!response.ok) throw new Error(`Could not load locale: ${locale}`);
-            const messages = await response.json();
-            applyTranslations(messages, locale);
-            if (persist) localStorage.setItem('portfolio-locale', locale);
-        } catch (error) {
-            console.error('Language selection failed.', error);
-        }
-    }
-
-    function closeLanguageMenu() {
-        languageSwitcher.classList.remove('open');
-        languageButton.setAttribute('aria-expanded', 'false');
-    }
-
+    const copyPhoneButton = document.getElementById('copyPhone');
+    const copyEmailStatus = document.getElementById('copyEmailStatus');
+    const copyPhoneStatus = document.getElementById('copyPhoneStatus');
     btnMenu.addEventListener('click', () => {
-        const isOpen = menuLinks.classList.toggle('active');
-        btnMenu.setAttribute('aria-expanded', String(isOpen));
+      const isOpen = menuLinks.classList.toggle('active');
+      btnMenu.setAttribute('aria-expanded', String(isOpen));
     });
-
-    document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', () => {
-            menuLinks.classList.remove('active');
-            btnMenu.setAttribute('aria-expanded', 'false');
-        });
-    });
-
+    document.querySelectorAll('.nav-links a').forEach(link => link.addEventListener('click', () => {
+      menuLinks.classList.remove('active'); btnMenu.setAttribute('aria-expanded', 'false');
+    }));
     languageButton.addEventListener('click', () => {
-        const isOpen = languageSwitcher.classList.toggle('open');
-        languageButton.setAttribute('aria-expanded', String(isOpen));
+      const isOpen = languageSwitcher.classList.toggle('open');
+      languageButton.setAttribute('aria-expanded', String(isOpen));
     });
-
-    document.querySelectorAll('.language-option').forEach(option => {
-        option.addEventListener('click', () => {
-            setLanguage(option.dataset.locale);
-            closeLanguageMenu();
-        });
-    });
-
-    document.addEventListener('click', event => {
-        if (!languageSwitcher.contains(event.target)) closeLanguageMenu();
-    });
-
+    function closeLanguageMenu() { languageSwitcher.classList.remove('open'); languageButton.setAttribute('aria-expanded', 'false'); }
+    document.addEventListener('click', event => { if (!languageSwitcher.contains(event.target)) closeLanguageMenu(); });
     document.addEventListener('keydown', event => {
-        if (event.key === 'Escape') {
-            closeLanguageMenu();
-            menuLinks.classList.remove('active');
-            btnMenu.setAttribute('aria-expanded', 'false');
-        }
+      if (event.key === 'Escape') { closeLanguageMenu(); menuLinks.classList.remove('active'); btnMenu.setAttribute('aria-expanded', 'false'); }
     });
-
     copyEmailButton.addEventListener('click', async () => {
-        try {
-            await navigator.clipboard.writeText('agusquartz@gmail.com');
-            copyEmailButton.textContent = readTranslation(window.currentMessages || {}, 'contact.copied') || 'Copied';
-        } catch (error) {
-            window.location.href = 'mailto:agusquartz@gmail.com';
-        }
+      try {
+        await navigator.clipboard.writeText('agusquartz@gmail.com');
+        copyEmailButton.textContent = 'Copiado';
+        copyEmailStatus.textContent = copyEmailButton.textContent;
+      }
+      catch { window.location.href = 'mailto:agusquartz@gmail.com'; }
     });
-
-    function getInitialLocale() {
-        const saved = localStorage.getItem('portfolio-locale');
-        if (saved && localeCodes[saved]) return { locale: saved, persist: false };
-        const preferred = navigator.languages || [navigator.language];
-        for (const language of preferred) {
-            const normalized = String(language || '').toLowerCase();
-            if (normalized.startsWith('zh')) return { locale: 'zh-Hant', persist: false };
-            const locale = normalized.split('-')[0];
-            if (localeCodes[locale]) return { locale, persist: false };
-        }
-        return { locale: 'en', persist: false };
-    }
-
-    const initialLocale = getInitialLocale();
-    setLanguage(initialLocale.locale, initialLocale);
-</script>
+    copyPhoneButton.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText('+595 974 551 760');
+        copyPhoneButton.textContent = 'Copiado';
+        copyPhoneStatus.textContent = copyPhoneButton.textContent;
+      } catch {
+        copyPhoneStatus.textContent = 'No se pudo copiar el número';
+      }
+    });
+  </script>
 
 </body>
 </html>
